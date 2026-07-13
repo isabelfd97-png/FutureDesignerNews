@@ -63,6 +63,7 @@ TEMPLATE = r"""<!DOCTYPE html>
 <html lang="es">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>The Future Designer</title>
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Archivo+Black&family=Space+Grotesk:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap');
@@ -573,6 +574,90 @@ TEMPLATE = r"""<!DOCTYPE html>
   footer.site-footer .footer-meta { font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 1px; text-transform: uppercase; color: rgba(255,255,255,.35); margin-top: 22px; padding-top: 18px; border-top: 1px solid rgba(255,255,255,.15); }
 
   ::selection { background: var(--accent); color: #fff; }
+
+  /* ---- Historial: tabla con scroll horizontal en móvil ---- */
+  .hist-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+
+  /* ================= RESPONSIVE ================= */
+  @media (max-width: 900px) {
+    .wrap { padding: 0 18px; }
+    header.masthead { padding: 40px 18px 0; }
+    .ticker { margin: 0 -18px; }
+    nav.sections { margin: 0 -18px; padding: 0 22px; }
+    .frontpage-top { gap: 16px; }
+  }
+
+  @media (max-width: 760px) {
+    h1.title { font-size: 46px; letter-spacing: -1.5px; margin: 18px 0 8px; }
+    .subtitle { font-size: 12.5px; margin-bottom: 26px; }
+
+    nav.sections a { padding: 12px 14px; font-size: 11px; }
+    nav.sections .hist-link { padding: 0 14px; }
+    .streak-nav { padding: 0 12px; }
+    .streak-tooltip { left: auto; right: -10px; }
+
+    .frontpage-top { grid-template-columns: 1fr; }
+    .fp-col-title { font-size: 12px; }
+    .hero-carousel { height: auto; min-height: 0; }
+    .hc-slide { position: relative; }
+    .hc-slide .fp-hero .fp-img, .hc-slide .fp-hero .fp-noimg { height: 200px; }
+    .hc-slide .fp-hero .fp-body { overflow: visible; }
+    .fp-hero h2 { font-size: 26px; }
+    .fp-hero p { font-size: 13.5px; }
+    .fp-hero.no-media .fp-body { padding: 26px 22px; gap: 10px; }
+    .fp-hero.no-media h2 { font-size: 30px; }
+    .fp-hero.no-media p { font-size: 14px; }
+    .hc-arrow { display: none; }
+
+    .fp-secondary-col { min-height: 0; }
+    .fp-card.fp-wide { flex-direction: column; }
+    .fp-card.fp-wide .fp-img, .fp-card.fp-wide .fp-noimg {
+      width: 100%; height: 150px; min-height: 0; border-right: none; border-bottom: 2px solid var(--ink);
+    }
+
+    .rail .card { flex: 0 0 78vw; }
+    .grid { grid-template-columns: 1fr; }
+
+    .section-hero { flex-direction: column; align-items: flex-start; gap: 10px; }
+    .section-hero h2 { font-size: 26px; }
+
+    .art-title { font-size: 30px; }
+    .art-body p, .art-body ul { font-size: 15px; }
+    .overlay-inner { padding: 60px 18px 80px; }
+
+    .ency-layout { flex-direction: column; gap: 8px; }
+    .ency-index {
+      position: static; flex-direction: row; flex-wrap: wrap; max-height: none;
+      justify-content: flex-start; gap: 2px 8px; padding: 10px 0; border-bottom: 1px solid #e5e5e5; margin-bottom: 10px;
+      transform: none; top: auto; right: auto; background: transparent;
+    }
+
+    table.hist { min-width: 520px; }
+
+    .spotlight, .ticker-modal { padding-top: 8vh; }
+  }
+
+  @media (max-width: 480px) {
+    .wrap { padding: 0 14px; }
+    header.masthead { padding: 32px 14px 0; }
+    .ticker { margin: 0 -14px; }
+    nav.sections { margin: 0 -14px; padding: 0 18px; }
+
+    h1.title { font-size: 34px; }
+    .subtitle { font-size: 11.5px; }
+
+    nav.sections .hist-link:not(.icon-only) { padding: 0 10px; font-size: 9.5px; }
+    .streak-nav { padding: 0 8px; }
+    .streak-nav span { display: none; } /* solo la llama, sin el número de días */
+
+    .fp-hero h2 { font-size: 22px; }
+    .fp-hero.no-media h2 { font-size: 24px; }
+    .art-title { font-size: 25px; }
+    .section-hero h2 { font-size: 22px; }
+
+    .rail .card { flex: 0 0 86vw; }
+    .ticker-badge { left: 10px; }
+  }
 </style>
 </head>
 <body>
@@ -1345,10 +1430,12 @@ function renderHistorial() {
   const main = document.getElementById('main');
   main.innerHTML = `
     <div class="section-hero"><div><h2>Historial</h2><p>Todo lo que has ido añadiendo, con fecha. Manda a la papelera lo que ya no te interese, y desde ahí restáuralo o bórralo del todo.</p></div></div>
-    <table class="hist">
-      <thead><tr><th>Título</th><th>Sección</th><th>Fecha</th><th></th></tr></thead>
-      <tbody id="hist-body"></tbody>
-    </table>
+    <div class="hist-scroll">
+      <table class="hist">
+        <thead><tr><th>Título</th><th>Sección</th><th>Fecha</th><th></th></tr></thead>
+        <tbody id="hist-body"></tbody>
+      </table>
+    </div>
   `;
   const body = document.getElementById('hist-body');
   body.innerHTML = list.map(a => {
