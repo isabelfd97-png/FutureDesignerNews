@@ -64,9 +64,10 @@
     margin: 0 -24px;
     border-top: 2px solid var(--accent); border-bottom: 2px solid var(--accent);
     background: rgba(255, 90, 31, 0.06);
-    overflow: hidden; white-space: nowrap; position: relative; cursor: pointer;
+    white-space: nowrap; position: relative; cursor: pointer;
   }
   .ticker:hover { background: rgba(255, 90, 31, 0.12); }
+  .ticker-scroll { overflow: hidden; }
   .ticker-track { display: inline-block; padding: 8px 0; animation: scrollTicker 34s linear infinite; }
   .ticker:hover .ticker-track { animation-play-state: paused; }
   .ticker span.item { font-family: 'Space Mono', monospace; font-size: 12px; letter-spacing: .5px; padding: 0 22px; color: var(--muted); }
@@ -74,6 +75,23 @@
   .ticker span.item.empty-msg { color: var(--ink); font-weight: 700; }
   .ticker.empty-state .ticker-track { animation: none; padding: 8px 22px; }
   @keyframes scrollTicker { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+  .ticker-badge {
+    position: absolute; top: -30px; left: 18px; width: 76px; height: 76px;
+    z-index: 3; pointer-events: none; display: flex; align-items: center; justify-content: center;
+    animation: burstWiggle 2.6s ease-in-out infinite;
+  }
+  .ticker-badge svg.burst { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
+  .ticker-badge span {
+    position: relative; transform: rotate(5deg);
+    font-family: 'Space Mono', monospace; font-size: 10.5px; font-weight: 700;
+    letter-spacing: .5px; text-transform: uppercase; color: #fff; text-align: center; line-height: 1.15;
+  }
+  @keyframes burstWiggle {
+    0%, 100% { transform: rotate(-9deg); }
+    50% { transform: rotate(-3deg); }
+  }
+  .ticker.empty-state .ticker-badge { display: none; }
 
   /* ---- Modal de artículos sin valorar (teleprompter) ---- */
   .ticker-modal {
@@ -258,8 +276,10 @@
   .subnav-pill {
     font-family: 'Space Mono', monospace; font-size: 10.5px; letter-spacing: 1px; text-transform: uppercase;
     font-weight: 700; border: 2px solid var(--ink); padding: 5px 11px; text-decoration: none; color: var(--ink);
+    background: var(--bg); cursor: pointer; -webkit-appearance: none; appearance: none;
   }
   .subnav-pill:hover { color: var(--accent); border-color: var(--accent); }
+  .subnav-pill.active { background: var(--ink); color: var(--bg); border-color: var(--ink); }
 
   /* ---- Rail (horizontal scroll) ---- */
   .rail { display: flex; gap: 16px; overflow-x: auto; padding: 6px 4px 18px; margin-top: 4px; scroll-behavior: smooth; }
@@ -504,7 +524,7 @@
     <h1 class="title" id="masthead-title"></h1>
     <div class="subtitle" id="subtitle"></div>
   </div>
-  <div class="ticker" id="ticker"><div class="ticker-track" id="ticker-track"></div></div>
+  <div class="ticker" id="ticker"><div class="ticker-badge" id="ticker-badge"></div><div class="ticker-scroll"><div class="ticker-track" id="ticker-track"></div></div></div>
   <nav class="sections" id="section-nav"></nav>
 </header>
 
@@ -615,6 +635,12 @@ function unratedArticles() {
 function renderTicker() {
   const wrap = document.getElementById('ticker');
   const track = document.getElementById('ticker-track');
+  const badge = document.getElementById('ticker-badge');
+  if (badge && !badge.dataset.filled) {
+    const pts = "50,4 62.6,19.5 82.5,17.5 80.5,37.4 96,50 80.5,62.6 82.5,82.5 62.6,80.5 50,96 37.4,80.5 17.5,82.5 19.5,62.6 4,50 19.5,37.4 17.5,17.5 37.4,19.5";
+    badge.innerHTML = `<svg class="burst" viewBox="0 0 100 100"><polygon points="${pts}" fill="var(--accent)" stroke="none"/></svg><span>¡Nuevo!</span>`;
+    badge.dataset.filled = '1';
+  }
   if (ARTICLES.length === 0) { wrap.style.display = 'none'; return; }
   wrap.style.display = '';
   const items = unratedArticles();
@@ -1062,14 +1088,14 @@ function bottomSectionsHtml(leftover) {
 function heroEmptyStateHtml() {
   return `<div class="fp-empty-hero">
     <div class="fp-empty-icon">${ICONS.star}</div>
-    <p>Aún no tienes ningún artículo con 5 estrellas.<br>Valora tus favoritos para que aparezcan aquí arriba.</p>
+    <p>Aún no tienes artículos destacados.<br>Valora con 3★ o más para que entren en el ranking.</p>
   </div>`;
 }
 
 function secondaryEmptyStateHtml() {
   return `<div class="fp-empty-hero">
     <div class="fp-empty-icon">${ICONS.star}</div>
-    <p>Todavía no hay artículos con 4 o 3 estrellas.</p>
+    <p>Todavía no hay más artículos en el ranking.</p>
   </div>`;
 }
 
@@ -1091,6 +1117,21 @@ function setupRailArrows(id) {
 }
 
 
+/* ---------- ranking con decaimiento: puntuación + antigüedad ---------- */
+const RANK_HALF_LIFE_DAYS = 14; // cada 14 días, el "peso" de la puntuación se reduce a la mitad
+
+function ageDaysOf(a) {
+  const t = Date.parse(a.date_added);
+  if (isNaN(t)) return 0;
+  return Math.max(0, (Date.now() - t) / 86400000);
+}
+
+function articleScore(a, ratings) {
+  const r = ratings[a.id] || 0;
+  if (r <= 0) return 0;
+  return r * Math.pow(2, -ageDaysOf(a) / RANK_HALF_LIFE_DAYS);
+}
+
 /* ---------- pages ---------- */
 function renderPortada() {
   renderNav('');
@@ -1105,13 +1146,21 @@ function renderPortada() {
 
   const ratings = getRatings();
   const rateOf = a => ratings[a.id] || 0;
-  const hero = list.filter(a => rateOf(a) === 5).sort((x, y) => (y.date_added || '').localeCompare(x.date_added || ''));
-  const secondary = list.filter(a => rateOf(a) === 4 || rateOf(a) === 3).sort((x, y) => {
-    const rx = rateOf(x), ry = rateOf(y);
-    if (ry !== rx) return ry - rx;
-    return (y.date_added || '').localeCompare(x.date_added || '');
-  });
-  const leftover = list.filter(a => rateOf(a) <= 2);
+
+  const HERO_SLOTS = 3;
+  const SECONDARY_SLOTS = 6;
+
+  // solo compiten por el ranking los artículos valorados con 3★ o más;
+  // el resto (1★, 2★ o sin valorar) siempre va a las secciones de abajo
+  const ranked = list.filter(a => rateOf(a) >= 3)
+    .map(a => ({ a, score: articleScore(a, ratings) }))
+    .sort((x, y) => y.score - x.score || (y.a.date_added || '').localeCompare(x.a.date_added || ''))
+    .map(x => x.a);
+
+  const hero = ranked.slice(0, HERO_SLOTS);
+  const secondary = ranked.slice(HERO_SLOTS, HERO_SLOTS + SECONDARY_SLOTS);
+  const overflow = ranked.slice(HERO_SLOTS + SECONDARY_SLOTS);
+  const leftover = list.filter(a => rateOf(a) <= 2).concat(overflow);
 
   const hasHero = hero.length > 0;
   const hasSecondary = secondary.length > 0;
@@ -1138,6 +1187,8 @@ function railHtml(items) {
   return `<div class="rail">${items.map(cardHtml).join('')}</div>`;
 }
 
+const sectionState = { slug: null, list: [], subsections: [], hasOtros: false, activeSub: null };
+
 function renderSection(slug) {
   const sec = bySlug(slug);
   renderNav(slug);
@@ -1147,9 +1198,11 @@ function renderSection(slug) {
   const subsections = [...new Set(list.map(a => a.subsection).filter(Boolean))].sort();
   const hasOtros = list.some(a => !a.subsection);
 
-  const subnavHtml = subsections.length
-    ? `<div class="subnav">${subsections.map((s,i) => `<a href="#subsec-${i}" class="subnav-pill">${s}</a>`).join('')}${hasOtros ? `<a href="#subsec-otros" class="subnav-pill">Otros</a>` : ''}</div>`
-    : '';
+  sectionState.slug = slug;
+  sectionState.list = list;
+  sectionState.subsections = subsections;
+  sectionState.hasOtros = hasOtros;
+  sectionState.activeSub = null; // null = "Todas"
 
   if (list.length === 0) {
     main.innerHTML = `
@@ -1159,27 +1212,67 @@ function renderSection(slug) {
     return;
   }
 
-  let html = '';
-  const groups = subsections.length ? subsections : [null];
-  groups.forEach((sub, i) => {
-    const items = list.filter(a => (a.subsection || null) === sub).sort((x,y)=>(y.date_added||'').localeCompare(x.date_added||''));
-    if (items.length === 0) return;
-    if (sub) html += `<div class="subsection-title" id="subsec-${i}">${sub}</div>`;
-    html += railHtml(items);
-  });
-  if (subsections.length) {
-    const rest = list.filter(a => !a.subsection).sort((x,y)=>(y.date_added||'').localeCompare(x.date_added||''));
-    if (rest.length) html += `<div class="subsection-title" id="subsec-otros">Otros</div>${railHtml(rest)}`;
-  }
-
   main.innerHTML = `
     <div class="section-hero">
       <div class="icon">${ICONS[sec.icon]}</div>
       <div><h2>${sec.name}</h2><p>${sec.desc}</p></div>
     </div>
-    ${subnavHtml}
-    <div id="sections-out">${html}</div>
+    <div id="subnav-out"></div>
+    <div id="sections-out"></div>
   `;
+  paintSectionSubnav();
+  paintSectionBody();
+}
+
+function paintSectionSubnav() {
+  const wrap = document.getElementById('subnav-out');
+  if (!wrap) return;
+  const { subsections, hasOtros, activeSub } = sectionState;
+  if (!subsections.length) { wrap.innerHTML = ''; return; }
+  const pillHtml = (label, subVal, isActive) =>
+    `<button class="subnav-pill ${isActive ? 'active' : ''}" data-sub="${subVal}">${label}</button>`;
+  wrap.innerHTML = `<div class="subnav">
+    ${pillHtml('Todas', '', activeSub === null)}
+    ${subsections.map(s => pillHtml(s, s, activeSub === s)).join('')}
+    ${hasOtros ? pillHtml('Otros', '__otros__', activeSub === '__otros__') : ''}
+  </div>`;
+  wrap.querySelectorAll('[data-sub]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      sectionState.activeSub = btn.dataset.sub === '' ? null : btn.dataset.sub;
+      paintSectionSubnav();
+      paintSectionBody();
+    });
+  });
+}
+
+function paintSectionBody() {
+  const wrap = document.getElementById('sections-out');
+  if (!wrap) return;
+  const { list, subsections, activeSub } = sectionState;
+  const byDate = (x, y) => (y.date_added || '').localeCompare(x.date_added || '');
+  let html = '';
+
+  if (activeSub === null) {
+    const groups = subsections.length ? subsections : [null];
+    groups.forEach(sub => {
+      const items = list.filter(a => (a.subsection || null) === sub).sort(byDate);
+      if (items.length === 0) return;
+      if (sub) html += `<div class="subsection-title">${sub}</div>`;
+      html += railHtml(items);
+    });
+    if (subsections.length) {
+      const rest = list.filter(a => !a.subsection).sort(byDate);
+      if (rest.length) html += `<div class="subsection-title">Otros</div>${railHtml(rest)}`;
+    }
+  } else if (activeSub === '__otros__') {
+    const items = list.filter(a => !a.subsection).sort(byDate);
+    html = items.length ? railHtml(items) : `<div class="empty">No hay artículos aquí.</div>`;
+  } else {
+    const items = list.filter(a => a.subsection === activeSub).sort(byDate);
+    html = items.length ? railHtml(items) : `<div class="empty">No hay artículos aquí.</div>`;
+  }
+
+  wrap.innerHTML = html;
 }
 
 function renderHistorial() {
