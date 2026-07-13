@@ -1,0 +1,431 @@
+[
+  {
+    "id": "aprendizaje-por-refuerzo-basico",
+    "title": "Cómo funciona el aprendizaje por refuerzo",
+    "url": "https://example.com/rl-basics",
+    "section": "ia-claude",
+    "subsection": "Fundamentos de ML",
+    "summary": "Introducción a los conceptos básicos del aprendizaje por refuerzo: agente, entorno, recompensa y política. Explica por qué es distinto al aprendizaje supervisado y por qué importa para diseñar producto con IA.",
+    "key_points": [
+      "El agente aprende por prueba y error, maximizando una recompensa acumulada",
+      "La política define qué acción tomar en cada estado",
+      "El trade-off exploración vs explotación es central",
+      "Es la base de sistemas que se adaptan al comportamiento del usuario en tiempo real"
+    ],
+    "content_md": "## De qué va\n\nEl aprendizaje por refuerzo (RL) es una familia de algoritmos donde un **agente** aprende a tomar decisiones interactuando con un **entorno**, recibiendo una **recompensa** por cada acción. A diferencia del aprendizaje supervisado, no hay un dataset de respuestas correctas: el agente aprende por prueba y error.\n\n## Por qué le importa a un product designer\n\n- Los sistemas de recomendación y personalización usan variantes de RL para adaptarse al comportamiento real del usuario, no solo a datos históricos.\n- Entender el trade-off entre *exploración* (probar cosas nuevas) y *explotación* (usar lo que ya funciona) ayuda a diseñar mejores experiencias de onboarding y experimentación.\n- La 'función de recompensa' es, en el fondo, una decisión de producto: qué comportamiento queremos incentivar.\n\n## Ideas clave\n\n- El agente aprende por prueba y error, maximizando una recompensa acumulada.\n- La política define qué acción tomar en cada estado.\n- El trade-off exploración vs explotación es central.\n- Es la base de sistemas que se adaptan al comportamiento del usuario en tiempo real.\n",
+    "date_added": "2026-07-12"
+  },
+  {
+    "id": "meta-abre-astryx-su-design-system-interno-y-ya-funciona-en-figma-make",
+    "title": "Meta abre Astryx, su design system interno, y ya funciona en Figma Make",
+    "url": "https://www.linkedin.com/posts/achyut-khanpara_designsystems-figmamake-uxdesign-share-7480456616299917312-4U0C/",
+    "section": "figma-freebies",
+    "subsection": "Figma Make",
+    "summary": "Meta ha hecho open source su design system interno (usado en más de 13.000 apps) y alguien lo ha probado dentro de Figma Make: se instala con un simple prompt, genera output real aunque aún en beta, y se puede personalizar sin tocar código. Lo más interesante no son los componentes, sino que viene con CLI + servidor MCP para que los agentes de IA lo lean directamente.",
+    "key_points": [
+      "Astryx es el design system interno de Meta, usado en 13.000+ apps durante 8 años, ahora open source",
+      "Se instala en Figma Make con un prompt que tira del paquete público de npm, sin setup manual",
+      "Aún en beta: genera resultados reales pero con algún error mid-generación, no es un one-shot limpio",
+      "Se puede pedir a Figma Make que personalice colores, spacing y comportamiento por lenguaje natural",
+      "Lo relevante no es el kit de componentes: Astryx incluye CLI + servidor MCP para que agentes de IA lo lean directamente, no solo desarrolladores"
+    ],
+    "content_md": "## De qué va\nMeta ha abierto el código de Astryx, su design system interno usado en más de 13.000 apps durante 8 años. Achyut Khanpara probó si funciona dentro de Figma Make: basta con pedirle que instale los paquetes `@astryxdesign/core` y `@astryxdesign/theme-neutral` desde npm y que construya una pantalla con sus componentes, sin instalación manual. Funciona, pero todavía en beta: hay que esperar algún error intermedio antes de que el resultado se asiente.\n\n## Por qué le importa a un product designer\nMás allá de los componentes, lo interesante es que Astryx sale de fábrica con un CLI y un servidor MCP pensados para que agentes de IA lo lean directamente, no solo desarrolladores. Es una pista de hacia dónde van los design systems: no solo documentados para humanos, sino estructurados para que la IA los use como fuente de verdad al generar UI.\n\n## Ideas clave\n- Astryx es el design system interno de Meta (13.000+ apps, 8 años), ahora open source.\n- Se instala en Figma Make con un prompt, tirando del paquete público de npm.\n- Aún en beta: genera output real pero con algún error mid-generación.\n- Se puede personalizar (colores, spacing, comportamiento) por lenguaje natural, sin tocar código.\n- Lo importante no es el kit de componentes, es el CLI + MCP: diseñado para que los agentes de IA lo consuman directamente.",
+    "images": [],
+    "glossary": [
+      {
+        "term": "CLI (Command Line Interface)",
+        "definition": "Una forma de controlar un programa escribiendo comandos de texto en vez de hacer clic en botones — es la 'interfaz' que usan desarrolladores (y ahora agentes de IA) para instalar y manejar herramientas como Astryx. Piénsalo como el equivalente en código a un menú de opciones, pero escrito."
+      },
+      {
+        "term": "Servidor MCP (Model Context Protocol)",
+        "definition": "Un protocolo que permite que un agente de IA se conecte directamente a una herramienta o base de datos y la use, en vez de que un humano tenga que ir explicándole cómo hacerlo cada vez. Piénsalo como un 'enchufe universal' entre la IA y el software que ya existe — es lo que permite que Figma Make 'entienda' Astryx sin que nadie le enseñe manualmente."
+      },
+      {
+        "term": "npm (registro de paquetes)",
+        "definition": "Un catálogo público enorme donde desarrolladores publican piezas de código reutilizable ('paquetes'), como Astryx, para que cualquiera pueda instalarlas con un comando en vez de construirlas desde cero. Es parecido a una librería de plugins, pero para código."
+      }
+    ],
+    "date_added": "2026-07-12"
+  },
+  {
+    "id": "claude-agents-que-son-y-como-crear-uno",
+    "title": "Claude Agents: qué son y cómo crear uno",
+    "url": "https://yummy-design-sprint.notion.site/Claude-Agents-What-are-they-how-to-create-one-38e6279147098049a74ae0de250a51a1",
+    "section": "ia-claude",
+    "subsection": "Agentes de IA",
+    "summary": "Guía en lenguaje llano de Yummy Labs sobre qué es realmente un 'agente' de IA, pensada para diseñadores. La idea central: un agente no es una cosa técnica, es un trabajo que diseñas — le das un objetivo, unas herramientas y unos límites, y es Claude quien decide los pasos. Incluye ocho agentes concretos que puede construir un diseñador y un ejemplo completo, paso a paso, de un 'design reviewer'.",
+    "key_points": [
+      "La diferencia entre task, workflow y agente está en quién decide los pasos: tú, tú (pero programado), o Claude",
+      "Las 'herramientas' (tools) son las manos y ojos del agente: qué puede leer, buscar, escribir o ejecutar — dárselas es una decisión de diseño, no un detalle técnico",
+      "Diseñar un buen agente es como hacer el onboarding de un rol: un objetivo claro, pocas herramientas bien descritas, acceso a su propio resultado para autocorregirse, y límites que le impidan actuar sin control",
+      "Un agente compensa cuando los pasos no se pueden mapear de antemano Y el resultado es verificable; si ya sabes los pasos, un workflow es más simple y predecible",
+      "Cuando un agente vive en el proyecto compartido del equipo (no en el chat de una persona), los criterios de revisión dejan de vivir solo en la cabeza de una persona senior y se vuelven un estándar compartido, versionado y aplicado igual a todo el mundo"
+    ],
+    "content_md": "## De qué va\nUna guía de Yummy Labs pensada específicamente para diseñadores, sin dar por hecho ningún conocimiento técnico. La idea que explica todo el tema: un agente no es necesariamente algo técnico, es un trabajo que tú diseñas. Le das a Claude un objetivo, las herramientas para alcanzarlo y los límites para no salirse de madre, y él decide los pasos.\n\n## La diferencia entre task, workflow y agente\nLa línea honesta que separa los tres es quién decide los pasos:\n\n- **Task** — tú piensas los pasos, Claude hace uno. Ejemplo: \"reescribe este texto de estado vacío\".\n- **Workflow** — tú programas la secuencia de pasos, Claude rellena cada uno. Ejemplo: \"agrupa estas notas, luego mapéalas, luego resume\".\n- **Agente** — tú das el objetivo, Claude decide los pasos. Ejemplo: \"revisa esta pantalla contra nuestro design system y señala qué se desvía\".\n\n¿Chatear con Claude es \"usar un agente\"? Normalmente no, eso es una task. Se convierte en agente en el momento en que entra en bucle: usa herramientas, lee sus propios resultados y decide qué hacer a continuación hacia el objetivo que le diste.\n\n## Qué son realmente las 'herramientas' (tools)\nLas herramientas son las manos y ojos del agente: lo que puede mirar y hacer.\n\n- **Integradas en Claude Code**: leer un archivo, buscar dentro de archivos, encontrar archivos por patrón, modificar un archivo, ejecutar un comando (por ejemplo, hacer una captura de pantalla o correr tests).\n- **Conectadas por MCP**: leer un frame de Figma o sus variables, leer y actualizar una página de Notion, redactar un email, consultar una base de datos.\n- **Personalizadas**: cualquier función que definas tú, como crear un ticket o publicar en un CMS.\n\nQué herramientas le das a un agente es una decisión de diseño: un agente revisor recibe herramientas de solo lectura y nunca la de escribir, así puede mirar pero nunca tocar.\n\n## Cómo diseñar un buen agente\nTrátalo como el onboarding de un rol, no como escribir un prompt:\n\n- **Un solo trabajo por agente.** Objetivo y límites claros; objetivo vago, agente vago.\n- **Pocas herramientas, bien elegidas y bien descritas.** Más herramientas no es mejor.\n- **Dale acceso a su propia verdad de campo**: que pueda leer su propio resultado (una captura, un test, un diff) para autocorregirse.\n- **Acótalo y dale un límite de parada**, por ejemplo un número máximo de intentos.\n- **Que sea transparente**: que muestre su plan, para que se entienda por qué hizo lo que hizo.\n\n## Cuándo compensa un agente (y cuándo no)\nUsa un agente cuando los pasos no se pueden mapear de antemano Y el resultado es verificable, y cuando merece la pena el coste extra de tiempo y tokens. Usa algo más simple —una task o un workflow— cuando ya sabes los pasos o cuando la velocidad y la predictibilidad importan más. La regla de Anthropic: busca lo más simple que funcione, y añade autonomía solo cuando mejora claramente el resultado.\n\n## Las desventajas reales\nLos agentes son más lentos y caros (exploran, y explorar gasta tokens), menos predecibles (el mismo input puede dar resultados distintos en cada ejecución) y los errores se acumulan en cada paso del bucle. Mitigaciones: mantenerlos de solo lectura cuando se pueda, poner a una persona en los puntos de control, probar en un entorno seguro y añadir límites de parada.\n\n## Ocho agentes que puede construir un diseñador\nCada uno funciona porque la tarea necesita criterio, pero el resultado es verificable:\n\n1. **Revisor de diseño** — compara una pantalla construida contra el design system y la referencia.\n2. **Auditor de accesibilidad** — revisa contraste, tamaño de zonas táctiles, orden de foco, texto alternativo.\n3. **Sintetizador de research** — convierte notas de entrevistas en temas y patrones.\n4. **Revisor de copy y voz** — detecta microcopy que se sale de la guía de voz.\n5. **Auditor de uso de componentes** — encuentra valores sueltos que deberían usar el sistema.\n6. **Análisis competitivo** — dado un flujo, recopila cómo lo resuelven otros y resume patrones.\n7. **Agente que construye pantallas** — construye una pantalla desde una spec y la va comparando y corrigiendo hasta que encaja (con una persona supervisando, porque edita archivos).\n8. **Auditor de flujo** — recorre un prototipo contra una spec escrita y señala estados que faltan: vacío, cargando, error, éxito.\n\n## Ejemplo completo: el revisor de diseño, cableado de principio a fin\nHay dos tipos de herramientas que le das a este agente. El primer cajón es su núcleo, integrado en Claude Code y sin tocar internet: leer archivos, buscar en el código, encontrar archivos, ejecutar comandos (capturas, diffs, tests de accesibilidad). El segundo cajón son los conectores (MCP), la parte que suele resultar confusa: Figma le deja comparar contra el frame real; Notion le deja leer una spec o escribir sus hallazgos; Linear/Jira le deja crear un ticket por cada problema; Slack le deja avisar al canal del equipo. Un conector se convierte en herramienta disponible en el momento en que lo activas en Ajustes.\n\nEl flujo típico: le describes el trabajo a Claude como si hicieras un brief a alguien nuevo en el equipo (qué herramientas tiene, cuál no —normalmente 'escribir'—, y qué cuenta como 'bien'), Claude guarda ese agente como un archivo dentro del proyecto, y luego lo invocas por su nombre cada vez que quieras que revise una pantalla. La misma base se puede reescribir para distintos trabajos con una frase extra y el conector correspondiente: comparar contra Figma, registrar en una base de Notion, crear tickets en Linear, avisar por Slack, o sumar una auditoría de accesibilidad.\n\n## Por qué le importa a un product designer\nCuando un agente vive en el proyecto compartido del equipo, y no en el historial de chat de una persona, los criterios de revisión dejan de vivir solo en la cabeza del diseñador senior: quedan escritos, versionados y se aplican igual a todo el mundo. Escala el criterio de una persona en vez de depender de que esté en la sala, conecta diseño, producto e ingeniería (que viven en apps distintas) y elimina el cuello de botella de esperar a que la única persona que conoce el sistema tenga hueco. El aviso honesto: un agente conecta el trabajo, no sustituye la conversación — usado mal, cada uno se aísla con su propia IA en vez de hablar más.",
+    "images": [],
+    "glossary": [
+      {
+        "term": "Subagente",
+        "definition": "Un agente con un único trabajo, guardado como un pequeño archivo dentro de la carpeta oculta `.claude/agents/` de tu proyecto. No hace falta crearlo a mano: le describes el trabajo a Claude (qué herramientas tiene, qué no, qué cuenta como 'bien hecho') y él escribe el archivo. Una vez creado, lo invocas por su nombre cada vez que lo necesites, como llamar a un compañero especializado."
+      },
+      {
+        "term": "Conector MCP",
+        "definition": "La forma en que un agente se conecta a una herramienta real que ya usas — Figma, Notion, Linear, Slack — en vez de quedarse solo con lo que hay en el proyecto. Solo se convierte en algo que el agente puede usar cuando tú lo activas explícitamente en Ajustes; a partir de ahí se le entrega igual que cualquier otra herramienta."
+      },
+      {
+        "term": "Guardrails (límites del agente)",
+        "definition": "Las reglas que acotan lo que un agente puede hacer mientras trabaja solo — por ejemplo, darle acceso de solo lectura para que pueda revisar pero nunca modificar archivos, o ponerle un número máximo de intentos para que no se quede dando vueltas indefinidamente."
+      },
+      {
+        "term": "Claude Agent SDK",
+        "definition": "La vía para desarrolladores: el mismo concepto de agente, pero convertido en código para que funcione de forma fiable dentro de un producto y para otras personas, no solo para ti en una conversación. Es la ruta que tomaría tu equipo de ingeniería si quisiera llevar uno de estos agentes más allá de tu propio uso."
+      }
+    ],
+    "date_added": "2026-07-12"
+  },
+  {
+    "id": "donde-va-realmente-tu-contexto-de-diseno-en-claude",
+    "title": "Dónde va realmente tu contexto de diseño en Claude",
+    "url": "https://yummy-design-sprint.notion.site/Where-your-design-context-actually-belongs-in-Claude-35962791470980be91fac4fc3c977fa1",
+    "section": "ia-claude",
+    "subsection": "Claude para diseñadores",
+    "summary": "Guía práctica de Yummy Labs sobre las tres capas donde puedes meter contexto de diseño en Claude —Custom Instructions, Project Knowledge y Skills— y por qué confundirlas hace que se te llene el contexto de cosas que no hacen falta. Explica cómo carga cada capa, qué poner en cada una, y aclara de una vez el bombo de los archivos .md tipo DESIGN.md.",
+    "key_points": [
+      "Custom Instructions se carga en TODOS los mensajes siempre: solo debe llevar lo que dirías en cualquier reunión sin importar el tema (máx. 400 palabras)",
+      "Project Knowledge (archivos subidos) se carga entero si el proyecto es pequeño, o se busca por RAG si el proyecto es grande — hay que limpiar lo que no se use",
+      "Las Skills solo cargan su nombre y descripción al arrancar (30-50 tokens), y el contenido completo solo se carga cuando Claude decide que es relevante para lo que pides",
+      "La regla para decidir dónde va algo: si lo usarías también en tu próximo proyecto, es una Skill; si es específico de este proyecto, es Project Knowledge",
+      "Un archivo .md (como corrections.md) no sustituye tu design system real (Figma, código, tokens) — es un documento de briefing para Claude, no una cuarta fuente de verdad"
+    ],
+    "content_md": "## De qué va\nUna guía práctica sobre dónde meter el contexto de diseño en Claude, basada en la documentación oficial de Anthropic. Antes de responder a nada, Claude ya está leyendo tres cosas: tus Custom Instructions, los archivos que has subido al proyecto, y qué Skills podrían ser relevantes. Cada una carga de forma distinta, y entender esa diferencia es lo que separa una configuración que funciona de una que malgasta tu ventana de contexto.\n\n## Las tres capas, en corto\n- **Custom Instructions** se cargan en cada mensaje, siempre. Siempre activas, siempre consumiendo tokens.\n- **Project Knowledge** (archivos subidos) se carga entero en proyectos pequeños, o se busca por RAG en proyectos grandes.\n- **Skills** solo cargan su nombre y descripción al arrancar (30-50 tokens cada una). El contenido completo se carga solo cuando Claude decide que hace falta.\n\n## Custom Instructions\nEs el texto que Claude lee al principio de cada conversación de un Proyecto, antes incluso de ver tu mensaje. Aquí va lo que Claude nunca debería olvidar, sin importar qué le pidas — cada palabra aquí cuesta tokens en cada turno.\n\nEjemplos buenos: \"Soy product designer de nivel medio construyendo un dashboard B2B para iOS y web\", \"Usa siempre una grid de 8px, zona táctil mínima 44x44px\", \"Cuando pida un componente, incluye estados hover, focus y disabled\", \"Nunca sugieras Inter, Roboto ni fuentes de sistema\".\n\nLo que NO va aquí: tu lista completa de tokens (eso es Project Knowledge), documentación larga de procesos (eso es una Skill), instrucciones específicas de una tarea puntual (eso va en el propio chat). Regla general: si lo dirías en cualquier reunión sin importar el tema, va aquí. Si solo aplica a ciertas tareas, no. Extensión recomendada: 200-400 palabras, algunos incluso dicen que no pases de 500.\n\n## Project Knowledge\nSon los archivos que subes a la base de conocimiento de un Proyecto (PDFs, imágenes, JSON, markdown, código), disponibles en todas las conversaciones de ese Proyecto.\n\nAquí está la parte que más gente entiende mal: en proyectos pequeños (pocos archivos, muy por debajo del límite de contexto), Claude carga tus archivos directamente en cada mensaje, todo el rato. En proyectos grandes (cerca del límite), Claude cambia automáticamente a modo RAG: en vez de cargarlo todo, busca y trae solo las piezas relevantes para cada pregunta.\n\nQué subir aquí: un `design-tokens.json` con los valores reales de ESTE proyecto (no uno genérico), el brand guide del cliente en PDF, 3-5 capturas de la dirección visual que buscas, y sobre todo un `corrections.md` — cada vez que corriges a Claude (\"las cards son de 16px de radio, no 12px\"), lo apuntas ahí y Claude deja de repetir el mismo error en la siguiente sesión. Es, según la guía, de lo más rentable que puedes hacer.\n\nQué NO subir: archivos de proyectos ya terminados, un PDF de 40 páginas de documentación completa del design system (mejor un resumen enfocado), cosas que usas en TODOS tus proyectos (eso es una Skill, no hace falta copiarlo en cada Proyecto), o archivos enormes \"por si acaso\".\n\n## Skills\nSon conjuntos de instrucciones portátiles que te acompañan a todos los sitios: en todos tus Proyectos, en chats normales, en Claude Code. Es tu criterio empaquetado para que Claude lo use donde haga falta.\n\nLa parte clave de cómo cargan se llama *progressive disclosure*: al arrancar, Claude solo lee el nombre y una descripción corta de cada Skill (unos 30-50 tokens). Cuando le pides algo relevante, compara tu petición contra esas descripciones y carga el contenido completo solo de las Skills que aplican. Las que no hacen falta se quedan sin usar, con coste cero. Es justo lo contrario de Project Knowledge en proyectos pequeños, donde todo se carga siempre.\n\nEjemplos: una Skill de \"UI Designer\" con tu filosofía de spacing y tus mínimos de contraste; una Skill de \"UX Copywriter\" con tus reglas de microcopy; una Skill de marca por cliente (nómbrala por el cliente, no \"brand.md\", para que Claude active la correcta); una Skill de accesibilidad con tus estándares WCAG.\n\nQué NO poner en una Skill: valores de tokens específicos de un proyecto (eso es Project Knowledge), una única Skill gigante que lo cubra todo (Anthropic recomienda varias Skills enfocadas en vez de una mega-Skill), material de referencia de un solo uso, o contenido que cambia en cada proyecto. La pregunta que resuelve la duda: ¿usarías esta regla también en tu próximo proyecto? Si sí, es una Skill. Si no, es Project Knowledge.\n\n## ¿Y los archivos .md tipo DESIGN.md?\nUn .md es simplemente texto plano con formato sencillo (# para títulos, - para listas). No es código, no es una base de datos, no es una herramienta de diseño. Claude lo procesa más barato y más rápido que un PDF con la misma información, y además está más estructurado, así que encuentra secciones concretas de forma más fiable.\n\nDónde ayuda: un `corrections.md` (probablemente el archivo más rentable que puedes crear), un `design-rules.md` con tu escala de spacing y el razonamiento de cuándo usar cada valor (no solo el número, también el porqué), o un `brand-brief.md` con la versión condensada de una marca para un proyecto concreto.\n\nDónde NO ayuda: si intentas que sustituya tu design system real (que vive en Figma, en código, en tu librería de componentes) — si mantienes el .md Y tus variables de Figma Y tus tokens de código, has creado tres fuentes de verdad que van a desincronizarse. Tampoco ayuda si el archivo se vuelve gigante (si tu DESIGN.md tiene 500+ líneas, probablemente está haciendo demasiado — lo ideal son 100-200 líneas), ni si el contenido cambia constantemente (mejor conectar Claude a Figma vía MCP para acceso en vivo: el .md es una foto fija, MCP es una conexión viva). El error más habitual: tratar un DESIGN.md como si FUERA el design system, cuando en realidad es solo el briefing que le das a Claude.\n\n## Coste real en tokens\nLa ventana de contexto de Claude en los planes de pago es de 200.000 tokens. Unas Custom Instructions de 300 palabras cuestan ~400 tokens (0,2%), un `design-tokens.json` unos 1.000-3.000 tokens, un `corrections.md` unos 500-1.000, y una Skill sin activar prácticamente nada (30-50 tokens). Una configuración bien organizada suele usar solo un 3-8% del contexto, dejando el resto libre para el trabajo real.\n\n## Ideas clave\n- Custom Instructions carga en cada mensaje, siempre — solo lo verdaderamente universal, bajo 400 palabras.\n- Project Knowledge se carga entero en proyectos pequeños o se busca por RAG en proyectos grandes; limpia lo que no uses.\n- Skills solo cargan nombre + descripción hasta que son relevantes; mejor varias Skills enfocadas que una mega-Skill.\n- La pregunta test: ¿lo usarías en tu próximo proyecto? Skill. ¿Es de este proyecto? Project Knowledge.\n- Un .md es un documento de briefing para Claude, no un reemplazo de tu design system real.",
+    "images": [],
+    "glossary": [
+      {
+        "term": "Ventana de contexto (context window)",
+        "definition": "La cantidad total de texto que Claude puede \"tener en la cabeza\" a la vez en una conversación, medida en tokens (200.000 en los planes de pago). Todo lo que subes, escribes o Claude carga automáticamente compite por ese mismo espacio limitado — por eso importa tanto qué metes ahí y cómo carga cada cosa."
+      },
+      {
+        "term": "RAG (Retrieval-Augmented Generation)",
+        "definition": "Una técnica en la que, en vez de cargar todos tus archivos en cada mensaje, el sistema busca solo las partes relevantes para tu pregunta concreta y las trae al contexto. Es lo que activa Claude automáticamente cuando un Proyecto tiene demasiados archivos para caber todos a la vez."
+      },
+      {
+        "term": "Custom Instructions",
+        "definition": "El bloque de texto que Claude lee al principio de cada conversación dentro de un Proyecto, antes de ver tu mensaje. Es tu contexto \"siempre activo\": quién eres, qué construyes, tus reglas que nunca cambian — pensado para ser corto porque se paga en tokens en cada turno."
+      },
+      {
+        "term": "Progressive disclosure (de una Skill)",
+        "definition": "La forma en que carga una Skill: al principio Claude solo ve su nombre y una frase descriptiva (casi gratis en tokens); solo si tu petición encaja con esa descripción, Claude carga el contenido completo de la Skill. Es lo que permite tener muchas Skills guardadas sin que cuesten nada hasta que realmente se usan."
+      }
+    ],
+    "date_added": "2026-07-12"
+  },
+  {
+    "id": "los-disenadores-gastan-los-limites-de-uso-de-claude-mas-rapido-que-nad",
+    "title": "Los diseñadores gastan los límites de uso de Claude más rápido que nadie: por qué y cómo arreglarlo",
+    "url": "https://yummy-design-sprint.notion.site/Designers-hit-Claude-s-usage-limits-faster-than-anyone-Here-s-why-and-exactly-how-to-fix-it-33562791470980b78c4bc906178bc83f",
+    "section": "ia-claude",
+    "subsection": "Claude para diseñadores",
+    "summary": "Guía de Yummy Labs sobre por qué el trabajo de diseño agota los límites de uso de Claude más rápido que casi cualquier otro tipo de trabajo, y qué hacer al respecto. El problema de fondo: cada mensaje reprocesa TODA la conversación anterior, así que el mensaje 30 cuesta como los 30 mensajes juntos. Repasa los patrones típicos de un diseñador que disparan el gasto (iterar visualmente, MCP de Figma, seleccionar la página entera, usar Opus por defecto) y cómo arreglar cada uno.",
+    "key_points": [
+      "Cada mensaje reprocesa toda la conversación anterior: el mensaje 30 cuesta como si reenviaras los 30 mensajes de golpe, por eso pedir 'un poco más grande' cinco veces seguidas dispara el gasto",
+      "Hay dos variables distintas: el coste por token (qué modelo usas, Opus cuesta 5x más que Sonnet) y el consumo real (tus hábitos: subir un PDF entero, dejar que Claude escriba de más, alargar una conversación 30 mensajes)",
+      "Seleccionar la página entera en Figma MCP en vez de solo el componente puede costar 200.000+ tokens frente a 2.000-10.000 — una diferencia de 20 a 100 veces",
+      "Cada conector MCP que tienes activo carga su definición en TODOS los mensajes, aunque no lo uses ese turno: 4 herramientas conectadas pueden suponer ~7.000 tokens de sobrecoste por mensaje",
+      "Se puede crear una Skill que 'entrene' a Claude para ser consciente de los tokens (o para acertar a la primera en tareas que repites), en vez de depender de corregirlo en cada conversación"
+    ],
+    "content_md": "## De qué va\nUna guía de Yummy Labs sobre por qué los diseñadores queman los límites de uso de Claude más rápido que casi cualquier otro perfil, y qué hacer para arreglarlo sin dejar de trabajar bien.\n\n## El problema de fondo\nCada mensaje que envías a Claude reprocesa TODA la conversación anterior. El mensaje número 30 cuesta como si volvieras a enviar del 1 al 30 juntos. Por eso pedir \"hazlo un poco más grande\" cinco veces seguidas, cada una en su propio mensaje, es tan caro: cada ronda relee todo lo anterior.\n\n## Las dos cosas que gastan tu límite\n- **Coste por token**: lo que cuesta cada token contra tu límite, según el modelo. La misma conversación en Opus cuesta 5 veces más que en Sonnet.\n- **Consumo (burn)**: cuántos tokens gastas por tus propios hábitos — subir un PDF entero cuando podrías pegar el markdown, dejar que Claude escriba 500 palabras cuando necesitabas una frase, o mantener una conversación 30 mensajes cuando deberías haber empezado una nueva en el mensaje 10.\n\nEl coste es el multiplicador, el consumo es el volumen. Reducir uno se nota; reducir los dos hace que dejes de tocar el límite.\n\n## Los planes, en cifras\nTodos comparten el mismo cupo entre claude.ai, Claude Code, la app de escritorio y Cowork — una sesión intensa de Claude Code por la mañana deja menos mensajes disponibles en el chat por la tarde.\n\n- **Free**: ~40 mensajes cortos al día — para probarlo, no para trabajar en serio.\n- **Pro (20$/mes)**: ~44.000 tokens por ventana de 5 horas — bien para aprender, ajustado para diseño pesado.\n- **Max5 (100$/mes)**: ~88.000 tokens — cómodo para trabajo diario de diseño.\n- **Max20 (200$/mes)**: ~220.000 tokens — usuarios intensivos, varios proyectos a la vez.\n\n## Por qué los diseñadores gastan tan rápido\n- **La iteración visual en bucle**: \"hazlo más grande\" → \"mejor más pequeño\" → \"¿lo centras?\" → \"el color no cuadra\". Cada una de estas peticiones minúsculas reprocesa toda la conversación; en el mensaje 10 ya estás pagando por reenviar los 9 anteriores cada vez.\n- **El impuesto de las herramientas MCP**: cada conector que tienes activo carga su definición en cada mensaje, lo uses o no. Sin herramientas: 0 tokens de más. Solo Figma MCP: ~4.000 tokens (~10% del cupo Pro antes de escribir nada). 4 herramientas conectadas: ~7.000 tokens (~16%). Una instalación pesada (5+ herramientas): hasta 55.000 tokens, capaz de superar todo tu cupo.\n- **El error de selección en Figma**: seleccionar toda la página en vez de solo el componente en el que trabajas. Un componente suelto: 2.000-10.000 tokens. La página entera: 200.000+ tokens. Una diferencia de 20 a 100 veces.\n- **El modelo equivocado para la tarea**: usar Opus para retoques de copy cuando Sonnet resuelve el 98% de las tareas de diseño con un 80% menos de coste.\n\n## Diez situaciones típicas que queman el límite\nLa guía repasa diez escenarios concretos —iterar visualmente, construir un componente con retoques pequeños, usar Figma MCP, subir los mismos archivos una y otra vez, compartir mockups para revisión, pedir feedback de diseño, investigar y hacer brainstorming, tener conectores MCP siempre activos, usar el modelo equivocado, y dejar el extended thinking siempre encendido— y para cada uno da la versión cara y la versión barata de hacerlo.\n\n## ¿Se puede entrenar a Claude para ser eficiente en tokens? Sí, con una Skill\nSe puede crear un archivo SKILL.md que le indique a Claude que sea consciente de los tokens: por ejemplo, que constriña sus respuestas, que pida confirmación antes de generar mucho texto, o que use el modelo adecuado por defecto. Una Skill es un archivo de instrucciones que Claude lee y sigue automáticamente, así que \"entrenas\" un comportamiento una vez en vez de repetirlo en cada conversación. Y no es solo para eficiencia: crear Skills para las cosas que repites constantemente hace que Claude acierte a la primera en vez de necesitar cinco rondas de correcciones.\n\n## La parte incómoda: los prompts vagos también gastan\nUsar Claude mucho puede volvernos perezosos al escribir, y un prompt perezoso sale caro: si no das las specs por adelantado (padding, fuentes, colores, spacing), Claude tiene que adivinar, tú corriges, y cada corrección reprocesa todo lo anterior. El arreglo es pensar antes de escribir, no después.\n\n## La chuleta rápida\nAntes de empezar una sesión: ¿tienes Sonnet seleccionado (no Opus)?, ¿extended thinking apagado para tareas simples?, ¿solo los conectores MCP que necesitas activos?, ¿el contenido reutilizable ya está en Project Knowledge? Durante el trabajo: junta el feedback y mándalo en un solo mensaje, da las specs por adelantado, constriñe la respuesta (\"máximo 3 puntos\"), recorta las imágenes sin piedad. Empieza una conversación nueva al terminar una tarea, cada 15-20 mensajes, o al cambiar a un tema no relacionado.\n\n## Ideas clave\n- Cada mensaje reprocesa toda la conversación: cuanto más larga, más caro cada turno nuevo.\n- El coste depende del modelo (Opus vs Sonnet) y el consumo depende de tus hábitos (qué subes, cuánto dejas escribir a Claude, cuándo empiezas de cero).\n- Seleccionar solo el componente en Figma MCP en vez de la página entera puede ahorrar hasta 100 veces los tokens.\n- Los conectores MCP activos cobran un peaje en cada mensaje aunque no los uses ese turno — desconecta los que no necesites.\n- Una Skill puede 'entrenar' a Claude a ser eficiente o a acertar a la primera en tareas repetitivas, sin tener que repetir instrucciones cada vez.",
+    "images": [],
+    "glossary": [
+      {
+        "term": "Rate limit / ventana de uso",
+        "definition": "El cupo de tokens que tienes disponible dentro de una ventana de tiempo (por ejemplo, 5 horas), según tu plan. Se comparte entre todas las formas de usar Claude —chat, Claude Code, la app de escritorio, Cowork— así que gastarlo en un sitio deja menos disponible en los demás."
+      },
+      {
+        "term": "Extended thinking",
+        "definition": "Un modo en el que Claude 'piensa' de forma más extendida antes de responder, útil para tareas complejas, pero que cuesta bastantes tokens de más (unos 32.000 por petición) incluso en tareas sencillas donde no hace falta. Apagarlo para preguntas simples ahorra buena parte del cupo."
+      },
+      {
+        "term": "Modelo (Opus vs Sonnet)",
+        "definition": "Las distintas 'versiones' de Claude que puedes elegir para una conversación. Opus es más potente pero cuesta unas 5 veces más tokens que Sonnet por el mismo trabajo; para la mayoría de tareas de diseño, Sonnet da un resultado prácticamente igual de bueno a una fracción del coste."
+      },
+      {
+        "term": "Skill (archivo SKILL.md)",
+        "definition": "Un archivo de instrucciones que Claude lee y aplica automáticamente sin que tengas que repetirlas cada vez — por ejemplo, para que sea más breve por defecto, o para que resuelva bien una tarea que sueles pedirle. Es la forma de 'enseñarle' un comportamiento de una vez, en lugar de corregirlo conversación tras conversación."
+      }
+    ],
+    "date_added": "2026-07-12"
+  },
+  {
+    "id": "diccionario-de-ia-para-disenadores",
+    "title": "Diccionario de IA para diseñadores",
+    "url": "https://yummy-design-sprint.notion.site/AI-Design-Dictionary-326627914709808eb562c22421ba2088",
+    "section": "terminologia-tecnica",
+    "subsection": "Diccionario de referencia",
+    "summary": "Un diccionario de 63 términos técnicos de IA y desarrollo, escrito por una diseñadora para diseñadoras, organizado en tres niveles: los básicos de la primera semana, lo que aparece al profundizar un poco, y lo que solo hace falta si te metes de lleno. Cada término trae la traducción a lenguaje de diseño y por qué importa para trabajar con IA. Todos sus términos se guardan directamente en la Enciclopedia, sin tener que darles like uno a uno.",
+    "key_points": [
+      "63 términos organizados en tres niveles: 'Empieza aquí' (los que se usan en la primera semana), 'Nivel 2' (los que aparecen en tutoriales y con ingeniería) y 'Términos avanzados' (infraestructura y conceptos de IA más profundos)",
+      "Cada término se explica con su traducción a lenguaje de diseño: por ejemplo, Git es 'como el historial de versiones de Figma, pero mucho más potente'",
+      "Cubre desde lo más básico (CLI, Terminal, API) hasta conceptos de IA (RAG, embeddings, fine-tuning, alucinaciones) y de despliegue (dominio, DNS, hosting)",
+      "Pensado como referencia para volver cuando te encuentres una palabra que no conoces, no para memorizar de golpe",
+      "Todo este diccionario se ha guardado directamente en la Enciclopedia del sitio, sin necesidad de darle like término a término"
+    ],
+    "content_md": "## De qué va\nUn diccionario de términos de IA pensado específicamente para diseñadoras, escrito por una diseñadora. No es para memorizar: cada término explica cuándo te lo vas a encontrar y por qué importa para tu forma de trabajar con IA.\n\n## Cómo está organizado\n- **Empieza aquí** — los términos que te vas a encontrar en tu primera semana trabajando con herramientas de IA: CLI, Terminal, API, MCP, prompt engineering, ventana de contexto, alucinaciones, LLM, GPT, Markdown, JSON, Artifacts, system prompt.\n- **Nivel 2** — lo que va apareciendo según profundizas: entorno de desarrollo, npm, Git, GitHub, frameworks, frontend vs backend, despliegue, variables de entorno, tokens, agéntico, modelo, multimodal, SVG, debug, y más.\n- **Términos avanzados** — infraestructura y conceptos con los que puedes llegar lejos sin conocerlos, pero que acabas encontrando si sigues profundizando: fork, branch, RAG, fine-tuning, embeddings, servidor, dominio, DNS, SSL, Skills y Proyectos de Claude.\n\n## Por qué le importa a un product designer\nCada entrada trae la 'traducción a lenguaje de diseño': por ejemplo, un repositorio de GitHub se explica como 'el historial de versiones de Figma, pero rastreando también la carpeta de assets y las notas de desarrollo'. Esa capa de traducción es lo que hace que términos que suenan intimidantes dejen de serlo, y es justo el tipo de vocabulario que ayuda a hablar con ingeniería sin sentir que falta contexto.\n\nTodos los términos de este diccionario se han incorporado directamente a la sección Enciclopedia del sitio (no hace falta darles like uno a uno, como con el resto de artículos) — piénsalo como el diccionario de cabecera al que puedes volver en cualquier momento.\n\n## Ideas clave\n- El diccionario cubre 63 términos en tres niveles de profundidad, de lo esencial a lo avanzado.\n- Cada término incluye cuándo lo verás, su traducción a lenguaje de diseño, y por qué importa para tu flujo de trabajo con IA.\n- No hace falta memorizarlo: es una referencia para volver cuando te encuentres una palabra nueva.\n- Todos sus términos ya están en la Enciclopedia del sitio de forma automática.",
+    "images": [],
+    "glossary": [
+      {
+        "term": "CLI (Command Line Interface)",
+        "definition": "Una forma de controlar el ordenador escribiendo comandos en vez de haciendo clic. Es donde viven Claude Code y los servidores MCP — no hace falta dominarla, pero conocer lo básico abre puertas."
+      },
+      {
+        "term": "Terminal",
+        "definition": "La aplicación donde escribes comandos de CLI (Terminal en Mac, PowerShell en Windows). Es como abrir un archivo de Figma en blanco: no pasa nada hasta que tú haces algo."
+      },
+      {
+        "term": "API (Application Programming Interface)",
+        "definition": "La forma en que dos programas se hablan entre sí: uno pide algo, el otro lo devuelve. Un servidor MCP es, en el fondo, Claude hablando con tus otras apps a través de sus APIs."
+      },
+      {
+        "term": "MCP (Model Context Protocol)",
+        "definition": "La conexión que deja a Claude ver e interactuar directamente con herramientas como Figma o Notion, en vez de que tengas que describírselas con palabras. Es lo que hace que un flujo de diseño-a-código funcione de verdad."
+      },
+      {
+        "term": "Prompt engineering",
+        "definition": "La habilidad de escribir instrucciones claras y específicas para que Claude haga justo lo que quieres — como escribir un buen brief de diseño: uno vago da resultados vagos."
+      },
+      {
+        "term": "Context window (ventana de contexto)",
+        "definition": "Cuánta información puede 'ver' Claude a la vez: la conversación, los archivos, las instrucciones. Si Claude empieza a 'olvidar' cosas de antes, has llenado la ventana de contexto."
+      },
+      {
+        "term": "Hallucination (alucinación)",
+        "definition": "Cuando la IA afirma algo completamente falso con total seguridad. Conviene verificar siempre los datos que de verdad importan, sobre todo en documentación o afirmaciones técnicas."
+      },
+      {
+        "term": "LLM (Large Language Model)",
+        "definition": "La familia de IA que hace funcionar a Claude, ChatGPT y similares, entrenada con muchísimo texto para entender y generar lenguaje. Se les da bien el lenguaje, no tanto las matemáticas o los datos en tiempo real."
+      },
+      {
+        "term": "GPT (Generative Pre-trained Transformer)",
+        "definition": "Un modelo concreto creado por OpenAI, no un término genérico para toda la IA (aunque se use así coloquialmente). Claude NO es un GPT: es un modelo distinto, de Anthropic."
+      },
+      {
+        "term": "Markdown",
+        "definition": "Una forma sencilla de dar formato a texto con símbolos (# para títulos, ** para negrita, - para listas). Claude lo domina de forma nativa, y es también el formato de los archivos SKILL.md."
+      },
+      {
+        "term": "JSON (JavaScript Object Notation)",
+        "definition": "Un formato de datos estructurado, con etiquetas y valores entre llaves. Los design tokens, las respuestas de una API o los archivos de configuración suelen venir en este formato."
+      },
+      {
+        "term": "Artifacts",
+        "definition": "Los resultados interactivos que Claude puede crear —webs, código, documentos— que aparecen en un panel aparte y se pueden probar en vivo. Es la diferencia entre que Claude te describa algo y que te lo enseñe funcionando."
+      },
+      {
+        "term": "System prompt",
+        "definition": "Instrucciones ocultas que definen cómo se comporta Claude antes incluso de que empieces a escribir. Es como un brief de diseño que está siempre activo — en Proyectos y en las Skills, básicamente defines el tuyo."
+      },
+      {
+        "term": "IDE (Integrated Development Environment)",
+        "definition": "Un editor de texto sofisticado para escribir código (VS Code, Cursor). Es el Figma de los desarrolladores: no es solo un lienzo, tiene capas, extensiones y propiedades."
+      },
+      {
+        "term": "npm (Node Package Manager)",
+        "definition": "Una herramienta que descarga e instala paquetes de código ya escritos por otros, para no construir todo desde cero — como instalar un plugin de Figma, pero para proyectos de código."
+      },
+      {
+        "term": "Node.js",
+        "definition": "Una forma de ejecutar JavaScript fuera del navegador. Muchos servidores MCP y herramientas de IA están construidos con él, así que tenerlo instalado suele ser un requisito previo."
+      },
+      {
+        "term": "Git",
+        "definition": "Un sistema que registra cada cambio hecho en el código, para poder volver atrás, colaborar sin pisarse el trabajo y ver quién cambió qué. Es como el historial de versiones de Figma, pero mucho más potente."
+      },
+      {
+        "term": "GitHub",
+        "definition": "Una web donde se guardan y comparten repositorios de Git — como Google Drive para código, con funciones de colaboración. La mayoría de servidores MCP y herramientas de IA viven ahí."
+      },
+      {
+        "term": "Repository / Repo",
+        "definition": "La carpeta de un proyecto con todo su historial de cambios, normalmente alojada en GitHub. 'Clonar el repo' significa simplemente descargarlo a tu ordenador."
+      },
+      {
+        "term": "Clone",
+        "definition": "Descargar una copia de un repositorio de GitHub a tu ordenador — como duplicar un archivo de la Comunidad de Figma a tu propia cuenta."
+      },
+      {
+        "term": "Localhost",
+        "definition": "Tu propio ordenador actuando como servidor temporal y privado. Cuando pruebas algo que Claude ha construido, primero corre en local, antes de publicarse en ningún sitio."
+      },
+      {
+        "term": "Framework (React, Next.js, Vue...)",
+        "definition": "Una base de código ya construida que los desarrolladores usan para no empezar de cero — como una plantilla de design system con patrones comunes ya montados. Claude suele generar código en React."
+      },
+      {
+        "term": "Frontend vs Backend",
+        "definition": "Frontend es lo que ve e interactúa el usuario (la interfaz); backend es lo invisible: servidores, bases de datos, lógica. Como diseñadora con IA trabajas sobre todo en frontend, pero entender la diferencia ayuda a hablar con ingeniería."
+      },
+      {
+        "term": "Deployment (despliegue)",
+        "definition": "El proceso de sacar código de tu ordenador y ponerlo en internet para que otros lo vean — el equivalente a publicar un prototipo de Figma en vez de dejarlo en borradores."
+      },
+      {
+        "term": "Vercel / Netlify",
+        "definition": "Plataformas que facilitan el despliegue: conectas tu código y ellas se encargan de ponerlo online. Es el botón de 'publicar' de Framer o Webflow, pero para sitios hechos a medida en código."
+      },
+      {
+        "term": "Environment variables (variables de entorno)",
+        "definition": "Ajustes secretos guardados fuera del código, como claves de API o contraseñas, para que no queden visibles en los archivos."
+      },
+      {
+        "term": ".env file",
+        "definition": "El archivo especial, normalmente oculto, donde se guardan las variables de entorno. Nunca se sube a GitHub ni se comparte públicamente."
+      },
+      {
+        "term": "Tokens (contexto de IA)",
+        "definition": "Las unidades con las que Claude mide el texto (aprox. 1 token = 0,75 palabras). Las conversaciones más largas gastan más tokens — importa sobre todo si usas la API o tienes límites de uso ajustados."
+      },
+      {
+        "term": "Agentic (agéntico)",
+        "definition": "Cuando la IA puede actuar por su cuenta, no solo responder: navegar, hacer clic, ejecutar código, completar tareas de varios pasos. Es la diferencia entre que alguien te describa un cambio y que lo haga por ti."
+      },
+      {
+        "term": "Dependencies (dependencias)",
+        "definition": "Otros paquetes de código que necesita tu proyecto para funcionar — como los componentes vinculados a una librería de Figma: si la quitas, algo se rompe."
+      },
+      {
+        "term": "Build",
+        "definition": "Convertir el código fuente en algo que realmente se pueda ejecutar, como paso previo al despliegue — el equivalente a exportar un diseño de Figma en el formato correcto para desarrollo."
+      },
+      {
+        "term": "Claude Code vs Claude Desktop",
+        "definition": "Dos formas distintas de usar Claude. Claude Desktop es la app de chat normal; Claude Code vive en la terminal y puede ejecutar comandos, editar archivos y construir proyectos de forma más autónoma."
+      },
+      {
+        "term": "Computer use",
+        "definition": "Una capacidad de Claude para ver y controlar tu pantalla —hacer clic, rellenar formularios, navegar por apps— como un asistente remoto. Abre la puerta a automatizar tareas repetitivas en cualquier aplicación, no solo en las que tienen API."
+      },
+      {
+        "term": "Model (modelo de IA)",
+        "definition": "El sistema de IA entrenado que da las respuestas. Claude es un modelo; sus distintas versiones (Opus, Sonnet) tienen capacidades y velocidad distintas, como productos dentro de la misma familia."
+      },
+      {
+        "term": "Multimodal",
+        "definition": "IA que entiende varios tipos de entrada —texto, imágenes, audio— no solo texto. Para una diseñadora es enorme: puedes compartir capturas y mockups directamente en vez de describirlo todo con palabras."
+      },
+      {
+        "term": "SVG (Scalable Vector Graphics)",
+        "definition": "Un formato de imagen vectorial escrito en código en vez de píxeles, que escala perfectamente a cualquier tamaño. Claude puede generar SVGs —iconos, ilustraciones— directamente."
+      },
+      {
+        "term": "CSS variables",
+        "definition": "Valores reutilizables definidos una vez y usados en todo el CSS — el equivalente exacto en código a los design tokens o las variables de Figma."
+      },
+      {
+        "term": "Debug (depurar)",
+        "definition": "Encontrar y arreglar errores en el código. Cuando el código que genera Claude no funciona, tendrás que depurarlo — y Claude también puede ayudarte a hacerlo si le pegas el error."
+      },
+      {
+        "term": "Syntax (sintaxis)",
+        "definition": "Las reglas gramaticales de un lenguaje de programación. Si Claude genera código y no funciona, puede deberse a un error de sintaxis."
+      },
+      {
+        "term": "Boilerplate",
+        "definition": "Código de arranque estándar que hace falta en todo proyecto de cierto tipo — como una plantilla de Figma con tu design system ya montado, para no partir de un archivo en blanco cada vez."
+      },
+      {
+        "term": "Stack",
+        "definition": "La combinación de tecnologías usada para construir algo (lenguajes, frameworks, herramientas). Decirle a Claude tu stack ('React con Tailwind') ayuda a que genere el código adecuado."
+      },
+      {
+        "term": "Temperature (temperatura)",
+        "definition": "Un ajuste que controla lo creativa o predecible que es una respuesta de IA: baja temperatura, más predecible; alta, más variada. Es como el nivel de libertad creativa que le das a un brief."
+      },
+      {
+        "term": "Fork",
+        "definition": "Crear tu propia copia de un repositorio ajeno que sigue conectada al original, para modificarla sin afectar al original — como duplicar un archivo de la Comunidad de Figma manteniendo el enlace de origen."
+      },
+      {
+        "term": "Branch (rama)",
+        "definition": "Una versión paralela del código donde puedes hacer cambios sin tocar la versión principal, y fusionarla después — como una rama de Figma para explorar una idea sin tocar el archivo principal."
+      },
+      {
+        "term": "Commit",
+        "definition": "Guardar una instantánea de los cambios de código con un mensaje que describe qué hiciste — como dejar una nota de versión en el historial de Figma."
+      },
+      {
+        "term": "Push / Pull",
+        "definition": "Push es enviar tus cambios guardados a GitHub; pull es descargar los cambios más recientes de GitHub a tu ordenador."
+      },
+      {
+        "term": "Config / Configuration file (archivo de configuración)",
+        "definition": "Un archivo con los ajustes de cómo debe comportarse una herramienta o proyecto, normalmente en JSON o YAML — el panel de ajustes de Figma, pero guardado en un archivo."
+      },
+      {
+        "term": "YAML",
+        "definition": "Un formato de archivos de configuración parecido al JSON pero basado en sangrado en vez de llaves, a menudo más fácil de leer."
+      },
+      {
+        "term": "RAG (Retrieval Augmented Generation)",
+        "definition": "Una técnica en la que la IA busca información relevante en una base de datos antes de responder, en vez de fiarse solo de lo que aprendió en el entrenamiento — como una biblioteca de referencia que la IA puede consultar antes de contestar."
+      },
+      {
+        "term": "Fine-tuning (ajuste fino)",
+        "definition": "Entrenar un modelo ya existente con datos adicionales para especializarlo en una tarea concreta, como una formación extra después del entrenamiento base. Es caro y avanzado; para la mayoría, un buen prompting basta."
+      },
+      {
+        "term": "Embeddings",
+        "definition": "Una forma de convertir texto (o imágenes) en números que capturan su significado, para que cosas parecidas tengan números parecidos y se puedan buscar por significado, no solo por coincidencia exacta."
+      },
+      {
+        "term": "Vector database (base de datos vectorial)",
+        "definition": "Una base de datos optimizada para guardar y buscar embeddings, encontrando los resultados 'más parecidos' en vez de coincidencias exactas — la infraestructura detrás de la búsqueda semántica."
+      },
+      {
+        "term": "Inference (inferencia)",
+        "definition": "El momento en que un modelo de IA realmente genera una respuesta, usando lo que aprendió durante el entrenamiento. Cuando le mandas un mensaje a Claude y responde, eso es inferencia."
+      },
+      {
+        "term": "Server (servidor)",
+        "definition": "Un ordenador que da servicio a otros ordenadores: ejecuta software, guarda datos y responde peticiones. Cuando visitas una web, tu navegador le pide la página a un servidor."
+      },
+      {
+        "term": "Cloud (la nube)",
+        "definition": "Ordenadores y servicios que corren en internet en vez de en tu máquina — 'en la nube' significa 'en los servidores de otro', como guardar archivos en Google Drive en vez de en tu disco duro."
+      },
+      {
+        "term": "Docker / Container",
+        "definition": "Una forma de empaquetar una aplicación con todo lo que necesita para funcionar igual en cualquier ordenador. Algunos servidores MCP corren dentro de un contenedor Docker."
+      },
+      {
+        "term": "Hosting (alojamiento)",
+        "definition": "El servicio que mantiene tu web o aplicación funcionando en un servidor para que la gente pueda acceder a ella — como preguntarte dónde vive tu portfolio (¿Framer? ¿Webflow?)."
+      },
+      {
+        "term": "Domain (dominio)",
+        "definition": "La dirección legible de una web, como yummy-labs.com, en vez de una serie de números. Se compra a un registrador de dominios."
+      },
+      {
+        "term": "DNS (Domain Name System)",
+        "definition": "El sistema que traduce nombres de dominio en las direcciones numéricas que entienden los ordenadores — la guía telefónica de internet."
+      },
+      {
+        "term": "SSL / HTTPS",
+        "definition": "La capa de seguridad que cifra los datos entre tu navegador y una web. El candado y el 'https://' en la URL significan que está activa."
+      },
+      {
+        "term": "Skills (Claude)",
+        "definition": "Instrucciones personalizadas que le das a Claude en un archivo SKILL.md estructurado, para que se comporte de una forma concreta en tareas específicas — un brief creativo detallado que está siempre activo."
+      },
+      {
+        "term": "Projects (Claude)",
+        "definition": "Espacios de trabajo en Claude donde puedes fijar instrucciones personalizadas, subir archivos de referencia y mantener contexto a través de conversaciones — como la estructura de equipos de Figma, pero para contexto de IA."
+      },
+      {
+        "term": "Compile (compilar)",
+        "definition": "Convertir el código fuente en un formato que el ordenador pueda ejecutar, un paso previo necesario en algunos lenguajes — como exportar un diseño de Figma a los assets finales de producción."
+      }
+    ],
+    "date_added": "2026-07-12",
+    "dictionary": true
+  }
+]
