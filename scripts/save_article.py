@@ -39,7 +39,7 @@ import unicodedata
 import urllib.request
 from datetime import date
 
-VALID_SECTIONS = {"figma-freebies", "ia-claude", "terminologia-tecnica", "hablar-con-ingenieros"}
+VALID_SECTIONS = {"design-2-0", "claude", "figma", "engineering", "ai"}
 USER_AGENT = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0 Safari/537.36"
 
 
