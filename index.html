@@ -25,10 +25,11 @@
   }
   a { color: inherit; }
   .wrap { max-width: 1160px; margin: 0 auto; padding: 0 24px; }
+  main.wrap { padding-top: 34px; }
   .mono { font-family: 'Space Mono', monospace; }
 
   /* ---- Masthead ---- */
-  header.masthead { padding: 48px 24px 0; border-bottom: 4px solid var(--ink); position: relative; }
+  header.masthead { padding: 30px 24px 0; border-bottom: 4px solid var(--ink); position: relative; }
   .top-bar { display: flex; align-items: center; justify-content: center; gap: 12px; }
 
   .live {
@@ -47,15 +48,15 @@
 
   h1.title {
     font-family: 'Archivo Black', 'Space Grotesk', sans-serif;
-    font-weight: 400; font-size: 74px; letter-spacing: -2px;
-    margin: 22px 0 10px; text-align: center; text-transform: uppercase; line-height: .92;
+    font-weight: 400; font-size: 62px; letter-spacing: -2px;
+    margin: 14px 0 6px; text-align: center; text-transform: uppercase; line-height: .92;
   }
   h1.title span { display: inline-block; opacity: 0; transform: translateY(18px) rotate(-1deg); animation: riseIn .55s cubic-bezier(.2,.8,.2,1) forwards; }
   h1.title span:nth-child(odd) { color: var(--accent); }
   @keyframes riseIn { to { opacity: 1; transform: translateY(0) rotate(0); } }
 
   .subtitle {
-    color: var(--ink); font-size: 14px; text-align: center; margin-bottom: 40px;
+    color: var(--ink); font-size: 13px; text-align: center; margin-bottom: 18px;
     font-weight: 500;
   }
   .subtitle .phrase { color: var(--muted); font-style: italic; font-weight: 400; }
@@ -69,7 +70,7 @@
   }
   .ticker:hover { background: rgba(255, 90, 31, 0.12); }
   .ticker-scroll { overflow: hidden; }
-  .ticker-track { display: inline-block; padding: 8px 0; animation: scrollTicker 34s linear infinite; }
+  .ticker-track { display: inline-block; padding: 8px 0; animation: scrollTicker 64s linear infinite; }
   .ticker:hover .ticker-track { animation-play-state: paused; }
   .ticker span.item { font-family: 'Space Mono', monospace; font-size: 12px; letter-spacing: .5px; padding: 0 22px; color: var(--muted); }
   .ticker span.item b { color: var(--ink); font-weight: 700; }
@@ -124,7 +125,7 @@
   /* ---- Nav ---- */
   nav.sections {
     margin: 0 -24px;
-    padding: 0 36px;
+    padding: 0 24px;
     display: flex; align-items: stretch;
     flex-wrap: nowrap;
   }
@@ -204,6 +205,25 @@
   .like-btn svg { width: 16px; height: 16px; }
   .like-btn:hover { border-color: var(--accent); color: var(--accent); }
   .like-btn.liked { background: var(--accent); border-color: var(--accent); color: #fff; }
+  /* ---- Nota propia (artículo) ---- */
+  .art-note { margin-top: 32px; padding: 18px 20px; background: rgba(255,90,31,0.05); border: 2px dashed var(--accent); }
+  .art-note h4 { display: flex; align-items: center; gap: 8px; margin: 0 0 6px; font-family: 'Space Mono', monospace; font-size: 11px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--accent); }
+  .art-note h4 svg { width: 14px; height: 14px; }
+  .note-hint { margin: 0 0 10px; font-size: 12.5px; color: var(--muted); line-height: 1.5; }
+  .art-note textarea {
+    width: 100%; min-height: 84px; resize: vertical; border: 2px solid var(--ink); background: var(--bg);
+    font-family: 'Space Grotesk', sans-serif; font-size: 14.5px; line-height: 1.5; color: var(--ink);
+    padding: 10px 12px; outline: none;
+  }
+  .art-note textarea:focus { border-color: var(--accent); }
+  .note-status { font-family: 'Space Mono', monospace; font-size: 10.5px; color: var(--accent); height: 14px; margin-top: 6px; }
+
+  /* ---- Artículos relacionados ---- */
+  .art-related { margin-top: 40px; padding-top: 18px; border-top: 3px solid var(--ink); }
+  .art-related h4 { display: flex; align-items: center; gap: 8px; margin: 0 0 10px; font-family: 'Space Mono', monospace; font-size: 11px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--accent); }
+  .art-related h4 svg { width: 14px; height: 14px; }
+  .art-related .rail { padding-bottom: 4px; }
+
   .dict-badge {
     flex: none; display: flex; align-items: center; gap: 5px; font-family: 'Space Mono', monospace;
     font-size: 9.5px; letter-spacing: .5px; text-transform: uppercase; color: var(--accent);
@@ -211,6 +231,16 @@
   .dict-badge svg { width: 14px; height: 14px; }
 
   /* ---- Enciclopedia ---- */
+  .ency-toolbar { display: flex; align-items: center; gap: 16px; margin-top: 18px; }
+  .ency-toolbar .ency-search-row { flex: 1; margin: 0; }
+  .review-btn {
+    display: flex; align-items: center; gap: 8px; flex: none; background: var(--ink); color: #fff; border: 2px solid var(--ink);
+    font-family: 'Space Mono', monospace; font-size: 11px; font-weight: 700; letter-spacing: .8px; text-transform: uppercase;
+    padding: 10px 16px; cursor: pointer;
+  }
+  .review-btn svg { width: 15px; height: 15px; }
+  .review-btn:hover { background: var(--accent); border-color: var(--accent); }
+
   .ency-search-row { display: flex; align-items: center; gap: 10px; border-bottom: 2px solid var(--ink); padding: 10px 0; margin: 18px 0 6px; }
   .ency-search-row svg { width: 16px; height: 16px; color: var(--muted); flex: none; }
   .ency-search-row input { flex: 1; border: none; outline: none; background: transparent; font-family: 'Space Grotesk', sans-serif; font-size: 15px; color: var(--ink); }
@@ -237,6 +267,35 @@
   .ency-index a { color: var(--muted); text-decoration: none; padding: 2px 4px; text-align: center; }
   .ency-index a:hover { color: var(--ink); }
   .ency-index a.active { color: var(--accent); }
+
+  /* ---- Flashcards de repaso ---- */
+  .flash-panel { max-width: 460px; }
+  .flash-modal-body { padding: 26px 22px 22px; display: flex; flex-direction: column; align-items: center; gap: 18px; }
+  .flash-progress { font-family: 'Space Mono', monospace; font-size: 11px; letter-spacing: 1px; color: var(--muted); align-self: flex-start; }
+  .flash-card {
+    width: 100%; min-height: 200px; border: 2px solid var(--ink); background: var(--bg);
+    display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center;
+    padding: 30px 22px; cursor: pointer; gap: 14px;
+  }
+  .flash-card.revealed { cursor: default; border-color: var(--accent); }
+  .flash-term { font-family: 'Archivo Black', sans-serif; font-weight: 400; font-size: 24px; text-transform: uppercase; letter-spacing: -.5px; line-height: 1.15; }
+  .flash-tap { font-family: 'Space Mono', monospace; font-size: 11px; letter-spacing: .5px; color: var(--muted); text-transform: uppercase; }
+  .flash-def { margin: 0; font-size: 14.5px; line-height: 1.6; color: var(--ink); }
+  .flash-card .src { font-family: 'Space Mono', monospace; font-size: 10.5px; text-transform: uppercase; letter-spacing: .5px; color: var(--accent); text-decoration: none; }
+  .flash-card .src:hover { text-decoration: underline; }
+  .flash-actions { display: flex; gap: 12px; width: 100%; }
+  .flash-actions button {
+    flex: 1; border: 2px solid var(--ink); background: var(--bg); padding: 12px; cursor: pointer;
+    font-family: 'Space Mono', monospace; font-size: 11.5px; font-weight: 700; letter-spacing: .5px; text-transform: uppercase;
+    display: flex; align-items: center; justify-content: center; gap: 6px;
+  }
+  .flash-actions button svg { width: 14px; height: 14px; }
+  .flash-no:hover { background: #eee; }
+  .flash-yes { background: var(--ink); color: #fff; }
+  .flash-yes:hover { background: var(--accent); border-color: var(--accent); }
+  .flash-done { display: flex; flex-direction: column; align-items: center; gap: 14px; text-align: center; padding: 10px 0 6px; }
+  .flash-done svg { width: 34px; height: 34px; color: var(--accent); }
+  .flash-done p { margin: 0; font-size: 15px; }
 
   @media (max-width: 760px) {
     .ency-index { position: fixed; right: 6px; top: 50%; transform: translateY(-50%); background: rgba(255,255,255,.92); padding: 4px 2px; z-index: 10; }
@@ -266,6 +325,20 @@
   .section-hero h2 { font-family: 'Archivo Black', sans-serif; font-weight: 400; font-size: 32px; margin: 0; text-transform: uppercase; letter-spacing: -1px; }
   .section-hero p { margin: 4px 0 0; color: var(--muted); font-size: 13.5px; }
 
+  /* ---- Panel de progreso (Historial) ---- */
+  .progress-panel { margin: 24px 0 8px; border: 2px solid var(--ink); }
+  .stat-row { display: flex; }
+  .stat-block { flex: 1; padding: 18px 16px; text-align: center; border-right: 2px solid var(--ink); }
+  .stat-block:last-child { border-right: none; }
+  .stat-num { font-family: 'Archivo Black', sans-serif; font-weight: 400; font-size: 30px; color: var(--accent); line-height: 1; }
+  .stat-label { font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 1px; text-transform: uppercase; color: var(--muted); margin-top: 6px; }
+  .stat-bars { border-top: 2px solid var(--ink); padding: 16px 18px; display: flex; flex-direction: column; gap: 10px; }
+  .stat-bar-row { display: flex; align-items: center; gap: 10px; }
+  .stat-bar-label { flex: 0 0 150px; font-family: 'Space Mono', monospace; font-size: 10.5px; letter-spacing: .5px; text-transform: uppercase; color: var(--ink); }
+  .stat-bar-track { flex: 1; height: 8px; background: #eee; }
+  .stat-bar-fill { height: 100%; background: var(--accent); }
+  .stat-bar-count { flex: none; font-family: 'Space Mono', monospace; font-size: 11px; color: var(--muted); width: 20px; text-align: right; }
+
   .subsection-title {
     font-family: 'Space Mono', monospace; font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: #fff;
     background: var(--accent); display: inline-block; padding: 4px 10px; font-weight: 700; margin: 28px 0 0;
@@ -289,61 +362,124 @@
   .rail::-webkit-scrollbar-track { background: transparent; }
   .rail::-webkit-scrollbar-thumb { background: var(--ink); }
 
-  /* ---- Front page (portada) ---- */
-  .frontpage-top { display: grid; grid-template-columns: 1.7fr 1fr; gap: 22px; margin-top: 6px; align-items: start; }
-  .frontpage-top.single-col { grid-template-columns: 1fr; }
-
-  /* ---- Títulos de columna (portada) ---- */
-  .fp-col { display: flex; flex-direction: column; min-height: 0; }
-  .fp-col-title {
+  /* ---- Front page: tabloide, cronología pura ---- */
+  .front-label {
     font-family: 'Space Mono', monospace; font-size: 10.5px; letter-spacing: 2px; text-transform: uppercase; color: #fff;
-    background: var(--accent); display: inline-block; padding: 4px 10px; font-weight: 700; margin-bottom: 14px; width: fit-content;
+    background: var(--ink); display: inline-block; padding: 4px 10px; font-weight: 700; margin: 26px 0 12px; width: fit-content;
+  }
+  .front-divider { display: flex; align-items: center; gap: 12px; margin: 34px 0 4px; }
+  .front-divider::before, .front-divider::after { content: ''; flex: 1; height: 3px; background: var(--ink); }
+  .front-divider::before { max-width: 28px; }
+  .front-divider .front-label { margin: 0; flex: none; }
+
+  /* ---- Fila superior: titular manda, últimas entradas es columna pequeña ---- */
+  .front-top { display: grid; grid-template-columns: 2.3fr 1fr; gap: 26px; align-items: start; margin-top: 4px; }
+  .front-top.no-lead { display: block; }
+  .front-lead .fp-hero .fp-img { height: 320px; }
+  .front-lead .fp-hero .fp-body { padding: 20px 22px; gap: 8px; }
+  .front-lead .fp-hero h2 { font-size: 36px; }
+  .front-lead .fp-hero p { font-size: 15px; }
+  .front-briefs-col .front-label { margin-top: 0; }
+
+  /* ---- Controles del carrusel de 5★ (debajo del titular) ---- */
+  .lead-controls { display: flex; align-items: center; justify-content: center; gap: 16px; margin-top: 14px; }
+  .lead-arrow {
+    border: 2px solid var(--ink); background: var(--bg); width: 30px; height: 30px; flex: none;
+    display: flex; align-items: center; justify-content: center; cursor: pointer; color: var(--ink);
+  }
+  .lead-arrow svg { width: 13px; height: 13px; }
+  .lead-arrow.left svg { transform: scaleX(-1); }
+  .lead-arrow:hover { background: var(--accent); border-color: var(--accent); color: #fff; }
+  .lead-dots { display: flex; gap: 8px; }
+  .lead-dot {
+    width: 9px; height: 9px; border-radius: 50%; background: #ddd; border: 2px solid var(--ink);
+    padding: 0; cursor: pointer;
+  }
+  .lead-dot.on { background: var(--accent); border-color: var(--accent); }
+
+  /* ---- Titular sin imagen: icono de sección, sin bloque gris ---- */
+  .lead-icon { width: 52px; height: 52px; color: var(--ink); margin-bottom: 4px; image-rendering: pixelated; }
+  .lead-icon svg { width: 100%; height: 100%; shape-rendering: crispEdges; }
+
+  /* ---- Apuntes (los 2 siguientes más recientes), en fila debajo ---- */
+  .front-picks { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; margin-top: 14px; }
+  .picks-subsection:first-of-type .subsection-title { margin-top: 20px; }
+  .front-pick {
+    display: flex; gap: 0; text-decoration: none; color: var(--ink); height: 96px;
+    border: 2px solid var(--ink); position: relative; transition: border-color .15s ease;
+  }
+  .front-pick:hover { border-color: var(--accent); }
+  .front-pick:hover h3 { color: var(--accent); }
+  .front-pick .fp-img, .front-pick .fp-noimg { width: 96px; flex: none; border-right: 2px solid var(--ink); object-fit: cover; height: 100%; }
+  .front-pick .fp-noimg { display: flex; align-items: center; justify-content: center; background: #f2f2f2; }
+  .front-pick .fp-noimg svg { width: 26px; height: 26px; color: var(--ink); opacity: .5; }
+  .front-pick .pick-body { padding: 10px 14px; display: flex; flex-direction: column; justify-content: center; gap: 5px; min-width: 0; }
+  .front-pick .pick-tag { font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: .6px; text-transform: uppercase; color: var(--accent); font-weight: 700; }
+  .front-pick h3 {
+    margin: 0; font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 14.5px; line-height: 1.28;
+    display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; transition: color .15s ease;
   }
 
-  /* ---- Hero carousel (5 estrellas) ---- */
-  .hero-carousel { position: relative; height: 520px; }
-  .hc-slide {
-    height: 100%; opacity: 0; transform: translateY(8px);
-    transition: opacity .38s ease, transform .38s ease;
+  /* ---- Empty state de "Últimas entradas" ---- */
+  .briefs-empty {
+    border: 2px dashed var(--ink); padding: 26px 18px; text-align: center;
+    display: flex; flex-direction: column; align-items: center; gap: 10px; min-height: 180px; justify-content: center;
   }
-  .hc-slide.in { opacity: 1; transform: translateY(0); }
-  .hc-slide.out { opacity: 0; transform: translateY(-8px); transition: opacity .2s ease, transform .2s ease; }
-  .hc-slide .fp-hero { height: 100%; display: flex; flex-direction: column; }
-  .hc-slide .fp-hero .fp-img, .hc-slide .fp-hero .fp-noimg { height: 260px; flex: none; }
-  .hc-slide .fp-hero .fp-body { flex: 1; min-height: 0; overflow: hidden; }
-  .hc-slide .fp-hero h2 { display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
-  .hc-slide .fp-hero p { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
-  .hc-arrow {
-    position: absolute; top: 50%; transform: translateY(-50%); width: 38px; height: 38px;
-    border: 2px solid var(--ink); background: var(--bg); display: flex; align-items: center; justify-content: center;
-    cursor: pointer; color: var(--ink); z-index: 2;
-  }
-  .hc-arrow:hover { background: var(--accent); border-color: var(--accent); color: #fff; }
-  .hc-arrow svg { width: 15px; height: 15px; }
-  .hc-arrow.left { left: -18px; }
-  .hc-arrow.left svg { transform: scaleX(-1); }
-  .hc-arrow.right { right: -18px; }
-  .hc-dots { position: absolute; bottom: 14px; left: 50%; transform: translateX(-50%); display: flex; gap: 6px; z-index: 2; }
-  .hc-dot { width: 7px; height: 7px; border-radius: 50%; background: rgba(255,255,255,.6); border: 1px solid var(--ink); padding: 0; }
-  .hc-dot.on { background: var(--accent); border-color: var(--accent); }
+  .briefs-empty-icon { width: 26px; height: 26px; color: var(--accent); opacity: .55; }
+  .briefs-empty-icon svg { width: 100%; height: 100%; }
+  .briefs-empty p { margin: 0; font-size: 13px; line-height: 1.5; font-weight: 700; color: var(--ink); }
+  .briefs-empty .briefs-empty-sub { font-weight: 400; color: var(--muted); font-size: 12px; }
 
-  /* ---- 4 y 3 estrellas: columna derecha ---- */
-  .fp-secondary-col { display: flex; flex-direction: column; min-height: 520px; }
-  .fp-secondary-list { display: flex; flex-direction: column; gap: 14px; }
-  .fp-card.fp-wide { display: flex; align-items: stretch; flex: none; position: relative; }
-  .fp-card.fp-wide .fp-img, .fp-card.fp-wide .fp-noimg { width: 130px; flex: none; border-bottom: none; border-right: 2px solid var(--ink); min-height: 130px; }
-  .fp-card.fp-wide .fp-noimg svg { width: 32px; }
-  .fp-card.fp-wide .fp-body { display: flex; flex-direction: column; flex: 1 1 auto; min-width: 0; padding: 14px 16px; gap: 7px; justify-content: center; }
-  .fp-card.fp-wide h3 { margin: 0; font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 15px; line-height: 1.3; }
-  .fp-card.fp-wide p { margin: 0; font-size: 12px; line-height: 1.45; color: var(--muted); }
-  .fp-card.fp-wide .tag-row { display: flex; align-items: center; gap: 8px; }
-  .fp-pagination { flex: none; display: flex; align-items: center; justify-content: center; gap: 14px; margin-top: 12px; }
-  .pg-btn { border: 2px solid var(--ink); background: var(--bg); width: 30px; height: 30px; display: flex; align-items: center; justify-content: center; cursor: pointer; color: var(--ink); }
-  .pg-btn svg { width: 13px; height: 13px; }
-  .pg-btn.left svg { transform: scaleX(-1); }
-  .pg-btn:hover:not(:disabled) { background: var(--accent); border-color: var(--accent); color: #fff; }
-  .pg-btn:disabled { opacity: .3; cursor: default; }
-  .pg-count { font-family: 'Space Mono', monospace; font-size: 11px; color: var(--muted); }
+  /* ---- Breves: columna angosta, título en varias líneas ---- */
+  .front-briefs { border-top: 3px solid var(--ink); }
+  .brief-row {
+    display: flex; flex-direction: column; align-items: flex-start; gap: 7px; padding: 13px 2px; border-bottom: 1px solid #ddd;
+    text-decoration: none; color: var(--ink);
+  }
+  .brief-row:hover { background: rgba(255,90,31,0.06); }
+  .brief-row:hover .brief-title { color: var(--accent); }
+  .brief-stamp {
+    flex: none; font-family: 'Space Mono', monospace; font-size: 9px; font-weight: 700; letter-spacing: .8px; text-transform: uppercase;
+    border: 2px solid var(--ink); padding: 4px 8px; background: var(--bg); transform: rotate(-3deg);
+    transition: background .18s ease, color .18s ease, border-color .18s ease;
+  }
+  .brief-row:nth-child(3n+2) .brief-stamp { transform: rotate(2deg); }
+  .brief-row:nth-child(3n) .brief-stamp { transform: rotate(-1.5deg); }
+  .brief-row:hover .brief-stamp {
+    background: var(--accent); border-color: var(--accent); color: #fff;
+    animation: stampWiggle .45s ease;
+  }
+  @keyframes stampWiggle {
+    0% { transform: rotate(-3deg) scale(1); }
+    35% { transform: rotate(-9deg) scale(1.1); }
+    65% { transform: rotate(6deg) scale(1.1); }
+    100% { transform: rotate(-2deg) scale(1.05); }
+  }
+  .brief-title {
+    width: 100%; font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 14px; line-height: 1.32;
+    display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; transition: color .15s ease;
+  }
+  .brief-meta { display: flex; align-items: center; gap: 10px; }
+  .brief-date { font-size: 10.5px; color: var(--muted); }
+
+  /* ---- Paginación de "Últimas entradas" ---- */
+  .brief-pagination { display: flex; align-items: center; justify-content: center; gap: 10px; margin-top: 14px; }
+  .brief-pg-arrow {
+    border: 2px solid var(--ink); background: var(--bg); width: 26px; height: 26px; flex: none;
+    display: flex; align-items: center; justify-content: center; cursor: pointer; color: var(--ink);
+  }
+  .brief-pg-arrow svg { width: 11px; height: 11px; }
+  .brief-pg-arrow.left svg { transform: scaleX(-1); }
+  .brief-pg-arrow:hover:not(:disabled) { background: var(--accent); border-color: var(--accent); color: #fff; }
+  .brief-pg-arrow:disabled { opacity: .3; cursor: default; }
+  .brief-pg-nums { display: flex; gap: 6px; }
+  .brief-pg-num {
+    border: 2px solid var(--ink); background: var(--bg); width: 26px; height: 26px; flex: none;
+    display: flex; align-items: center; justify-content: center; cursor: pointer; color: var(--ink);
+    font-family: 'Space Mono', monospace; font-size: 11px; font-weight: 700;
+  }
+  .brief-pg-num:hover { border-color: var(--accent); color: var(--accent); }
+  .brief-pg-num.active { background: var(--ink); border-color: var(--ink); color: #fff; }
 
   /* ---- Mini rating badge (miniaturas) ---- */
   .mini-rating { display: flex; align-items: center; gap: 3px; font-family: 'Space Mono', monospace; font-size: 11px; font-weight: 700; }
@@ -356,33 +492,16 @@
   .mini-rating.inline svg { color: var(--accent); }
   .mini-rating.inline.muted, .mini-rating.inline.muted svg { color: var(--muted); }
 
-  /* ---- Empty states de portada ---- */
-  .fp-empty-hero {
-    height: 520px; border: 2px dashed var(--ink); display: flex; flex-direction: column; align-items: center; justify-content: center;
-    gap: 14px; text-align: center; padding: 40px; color: var(--muted);
-  }
-  .fp-empty-hero .fp-empty-icon { width: 38px; height: 38px; opacity: .35; }
-  .fp-empty-hero .fp-empty-icon svg { width: 100%; height: 100%; }
-  .fp-empty-hero p { margin: 0; font-size: 14px; line-height: 1.6; }
-  .fp-empty-row { padding: 22px 0; color: var(--muted); font-style: italic; font-size: 13.5px; }
-
-  /* ---- Divisoria + secciones por categoría (2/1/sin valorar) ---- */
-  .fp-divider { border: none; border-top: 3px solid var(--ink); margin: 40px 0 0; }
-  .tier-section { margin-top: 36px; }
-  .rail-wrap { position: relative; display: flex; align-items: center; gap: 6px; }
-  .rail-wrap .rail { flex: 1; }
-  .rail-arrow {
-    flex: none; width: 30px; height: 30px; border: 2px solid var(--ink); background: var(--bg);
-    display: flex; align-items: center; justify-content: center; cursor: pointer; color: var(--ink);
-  }
-  .rail-arrow svg { width: 13px; height: 13px; }
-  .rail-arrow.left svg { transform: scaleX(-1); }
-  .rail-arrow:hover { background: var(--accent); border-color: var(--accent); color: #fff; }
-  .rail-arrow.hidden { visibility: hidden; }
-
   @media (max-width: 760px) {
-    .frontpage-top { grid-template-columns: 1fr; }
-    .hc-arrow { display: none; }
+    .front-top { grid-template-columns: 1fr; }
+    .front-lead .fp-hero .fp-img { height: 180px; }
+    .front-lead .fp-hero h2 { font-size: 23px; }
+    .front-picks { grid-template-columns: 1fr; }
+    .front-pick { height: 76px; }
+    .front-pick .fp-img, .front-pick .fp-noimg { width: 64px; }
+    .brief-title { font-size: 14px; }
+    .brief-meta { gap: 8px; }
+    .brief-date { display: none; }
   }
 
   .fp-card {
@@ -447,6 +566,8 @@
   .overlay .close-btn { position: fixed; top: 20px; right: 24px; width: 36px; height: 36px; border: 2px solid var(--ink); background: var(--bg); display: flex; align-items: center; justify-content: center; cursor: pointer; z-index: 41; }
   .overlay .close-btn:hover { background: var(--accent); border-color: var(--accent); color: #fff; }
   .overlay .close-btn svg { width: 16px; height: 16px; }
+  .art-icon { width: 46px; height: 46px; color: var(--ink); margin-bottom: 10px; }
+  .art-icon svg { width: 100%; height: 100%; shape-rendering: crispEdges; }
   .art-tag { font-family: 'Space Mono', monospace; font-size: 10.5px; letter-spacing: 1.4px; text-transform: uppercase; color: var(--accent); font-weight: 700; }
   .art-title { font-family: 'Archivo Black', sans-serif; font-weight: 400; font-size: 42px; line-height: 1.05; margin: 10px 0 6px; letter-spacing: -1px; opacity: 0; transform: translateY(10px); animation: riseIn .5s ease forwards .1s; }
   .art-meta { font-family: 'Space Mono', monospace; font-size: 11.5px; color: var(--muted); border-bottom: 1px solid #ddd; padding-bottom: 18px; margin-bottom: 20px; }
@@ -523,7 +644,6 @@
     header.masthead { padding: 40px 18px 0; }
     .ticker { margin: 0 -18px; }
     nav.sections { margin: 0 -18px; padding: 0 22px; }
-    .frontpage-top { gap: 16px; }
   }
 
   @media (max-width: 760px) {
@@ -535,24 +655,11 @@
     .streak-nav { padding: 0 12px; }
     .streak-tooltip { left: auto; right: -10px; }
 
-    .frontpage-top { grid-template-columns: 1fr; }
-    .fp-col-title { font-size: 12px; }
-    .hero-carousel { height: auto; min-height: 0; }
-    .hc-slide { position: relative; }
-    .hc-slide .fp-hero .fp-img, .hc-slide .fp-hero .fp-noimg { height: 200px; }
-    .hc-slide .fp-hero .fp-body { overflow: visible; }
     .fp-hero h2 { font-size: 26px; }
     .fp-hero p { font-size: 13.5px; }
     .fp-hero.no-media .fp-body { padding: 26px 22px; gap: 10px; }
     .fp-hero.no-media h2 { font-size: 30px; }
     .fp-hero.no-media p { font-size: 14px; }
-    .hc-arrow { display: none; }
-
-    .fp-secondary-col { min-height: 0; }
-    .fp-card.fp-wide { flex-direction: column; }
-    .fp-card.fp-wide .fp-img, .fp-card.fp-wide .fp-noimg {
-      width: 100%; height: 150px; min-height: 0; border-right: none; border-bottom: 2px solid var(--ink);
-    }
 
     .rail .card { flex: 0 0 78vw; }
     .grid { grid-template-columns: 1fr; }
@@ -564,6 +671,7 @@
     .art-body p, .art-body ul { font-size: 15px; }
     .overlay-inner { padding: 60px 18px 80px; }
 
+    .ency-toolbar { flex-direction: column; align-items: stretch; gap: 10px; }
     .ency-layout { flex-direction: column; gap: 8px; }
     .ency-index {
       position: static; flex-direction: row; flex-wrap: wrap; max-height: none;
@@ -572,12 +680,17 @@
     }
 
     table.hist { min-width: 520px; }
+    .stat-row { flex-wrap: wrap; }
+    .stat-block { flex: 1 1 33%; padding: 14px 8px; }
+    .stat-num { font-size: 24px; }
+    .stat-bar-label { flex-basis: 100px; font-size: 9.5px; }
 
     .spotlight, .ticker-modal { padding-top: 8vh; }
   }
 
   @media (max-width: 480px) {
     .wrap { padding: 0 14px; }
+    main.wrap { padding-top: 24px; }
     header.masthead { padding: 32px 14px 0; }
     .ticker { margin: 0 -14px; }
     nav.sections { margin: 0 -14px; padding: 0 18px; }
@@ -640,6 +753,16 @@
   </div>
 </div>
 
+<div class="ticker-modal" id="flash-modal">
+  <div class="ticker-modal-panel flash-panel">
+    <div class="ticker-modal-header">
+      <h3>Repasar términos</h3>
+      <button class="close-btn-sm" id="flash-modal-close"></button>
+    </div>
+    <div class="flash-modal-body" id="flash-modal-body"></div>
+  </div>
+</div>
+
 <div class="spotlight" id="spotlight">
   <div class="spotlight-panel">
     <div class="spotlight-input-row">
@@ -653,7 +776,8 @@
 <script>
 const ARTICLES = [{"id": "aprendizaje-por-refuerzo-basico", "title": "Cómo funciona el aprendizaje por refuerzo", "url": "https://example.com/rl-basics", "section": "ia-claude", "subsection": "Fundamentos de ML", "summary": "Introducción a los conceptos básicos del aprendizaje por refuerzo: agente, entorno, recompensa y política. Explica por qué es distinto al aprendizaje supervisado y por qué importa para diseñar producto con IA.", "key_points": ["El agente aprende por prueba y error, maximizando una recompensa acumulada", "La política define qué acción tomar en cada estado", "El trade-off exploración vs explotación es central", "Es la base de sistemas que se adaptan al comportamiento del usuario en tiempo real"], "content_md": "## De qué va\n\nEl aprendizaje por refuerzo (RL) es una familia de algoritmos donde un **agente** aprende a tomar decisiones interactuando con un **entorno**, recibiendo una **recompensa** por cada acción. A diferencia del aprendizaje supervisado, no hay un dataset de respuestas correctas: el agente aprende por prueba y error.\n\n## Por qué le importa a un product designer\n\n- Los sistemas de recomendación y personalización usan variantes de RL para adaptarse al comportamiento real del usuario, no solo a datos históricos.\n- Entender el trade-off entre *exploración* (probar cosas nuevas) y *explotación* (usar lo que ya funciona) ayuda a diseñar mejores experiencias de onboarding y experimentación.\n- La 'función de recompensa' es, en el fondo, una decisión de producto: qué comportamiento queremos incentivar.\n\n## Ideas clave\n\n- El agente aprende por prueba y error, maximizando una recompensa acumulada.\n- La política define qué acción tomar en cada estado.\n- El trade-off exploración vs explotación es central.\n- Es la base de sistemas que se adaptan al comportamiento del usuario en tiempo real.\n", "date_added": "2026-07-12"}, {"id": "meta-abre-astryx-su-design-system-interno-y-ya-funciona-en-figma-make", "title": "Meta abre Astryx, su design system interno, y ya funciona en Figma Make", "url": "https://www.linkedin.com/posts/achyut-khanpara_designsystems-figmamake-uxdesign-share-7480456616299917312-4U0C/", "section": "figma-freebies", "subsection": "Figma Make", "summary": "Meta ha hecho open source su design system interno (usado en más de 13.000 apps) y alguien lo ha probado dentro de Figma Make: se instala con un simple prompt, genera output real aunque aún en beta, y se puede personalizar sin tocar código. Lo más interesante no son los componentes, sino que viene con CLI + servidor MCP para que los agentes de IA lo lean directamente.", "key_points": ["Astryx es el design system interno de Meta, usado en 13.000+ apps durante 8 años, ahora open source", "Se instala en Figma Make con un prompt que tira del paquete público de npm, sin setup manual", "Aún en beta: genera resultados reales pero con algún error mid-generación, no es un one-shot limpio", "Se puede pedir a Figma Make que personalice colores, spacing y comportamiento por lenguaje natural", "Lo relevante no es el kit de componentes: Astryx incluye CLI + servidor MCP para que agentes de IA lo lean directamente, no solo desarrolladores"], "content_md": "## De qué va\nMeta ha abierto el código de Astryx, su design system interno usado en más de 13.000 apps durante 8 años. Achyut Khanpara probó si funciona dentro de Figma Make: basta con pedirle que instale los paquetes `@astryxdesign/core` y `@astryxdesign/theme-neutral` desde npm y que construya una pantalla con sus componentes, sin instalación manual. Funciona, pero todavía en beta: hay que esperar algún error intermedio antes de que el resultado se asiente.\n\n## Por qué le importa a un product designer\nMás allá de los componentes, lo interesante es que Astryx sale de fábrica con un CLI y un servidor MCP pensados para que agentes de IA lo lean directamente, no solo desarrolladores. Es una pista de hacia dónde van los design systems: no solo documentados para humanos, sino estructurados para que la IA los use como fuente de verdad al generar UI.\n\n## Ideas clave\n- Astryx es el design system interno de Meta (13.000+ apps, 8 años), ahora open source.\n- Se instala en Figma Make con un prompt, tirando del paquete público de npm.\n- Aún en beta: genera output real pero con algún error mid-generación.\n- Se puede personalizar (colores, spacing, comportamiento) por lenguaje natural, sin tocar código.\n- Lo importante no es el kit de componentes, es el CLI + MCP: diseñado para que los agentes de IA lo consuman directamente.", "images": [], "glossary": [{"term": "CLI (Command Line Interface)", "definition": "Una forma de controlar un programa escribiendo comandos de texto en vez de hacer clic en botones — es la 'interfaz' que usan desarrolladores (y ahora agentes de IA) para instalar y manejar herramientas como Astryx. Piénsalo como el equivalente en código a un menú de opciones, pero escrito."}, {"term": "Servidor MCP (Model Context Protocol)", "definition": "Un protocolo que permite que un agente de IA se conecte directamente a una herramienta o base de datos y la use, en vez de que un humano tenga que ir explicándole cómo hacerlo cada vez. Piénsalo como un 'enchufe universal' entre la IA y el software que ya existe — es lo que permite que Figma Make 'entienda' Astryx sin que nadie le enseñe manualmente."}, {"term": "npm (registro de paquetes)", "definition": "Un catálogo público enorme donde desarrolladores publican piezas de código reutilizable ('paquetes'), como Astryx, para que cualquiera pueda instalarlas con un comando en vez de construirlas desde cero. Es parecido a una librería de plugins, pero para código."}], "date_added": "2026-07-12"}, {"id": "claude-agents-que-son-y-como-crear-uno", "title": "Claude Agents: qué son y cómo crear uno", "url": "https://yummy-design-sprint.notion.site/Claude-Agents-What-are-they-how-to-create-one-38e6279147098049a74ae0de250a51a1", "section": "ia-claude", "subsection": "Agentes de IA", "summary": "Guía en lenguaje llano de Yummy Labs sobre qué es realmente un 'agente' de IA, pensada para diseñadores. La idea central: un agente no es una cosa técnica, es un trabajo que diseñas — le das un objetivo, unas herramientas y unos límites, y es Claude quien decide los pasos. Incluye ocho agentes concretos que puede construir un diseñador y un ejemplo completo, paso a paso, de un 'design reviewer'.", "key_points": ["La diferencia entre task, workflow y agente está en quién decide los pasos: tú, tú (pero programado), o Claude", "Las 'herramientas' (tools) son las manos y ojos del agente: qué puede leer, buscar, escribir o ejecutar — dárselas es una decisión de diseño, no un detalle técnico", "Diseñar un buen agente es como hacer el onboarding de un rol: un objetivo claro, pocas herramientas bien descritas, acceso a su propio resultado para autocorregirse, y límites que le impidan actuar sin control", "Un agente compensa cuando los pasos no se pueden mapear de antemano Y el resultado es verificable; si ya sabes los pasos, un workflow es más simple y predecible", "Cuando un agente vive en el proyecto compartido del equipo (no en el chat de una persona), los criterios de revisión dejan de vivir solo en la cabeza de una persona senior y se vuelven un estándar compartido, versionado y aplicado igual a todo el mundo"], "content_md": "## De qué va\nUna guía de Yummy Labs pensada específicamente para diseñadores, sin dar por hecho ningún conocimiento técnico. La idea que explica todo el tema: un agente no es necesariamente algo técnico, es un trabajo que tú diseñas. Le das a Claude un objetivo, las herramientas para alcanzarlo y los límites para no salirse de madre, y él decide los pasos.\n\n## La diferencia entre task, workflow y agente\nLa línea honesta que separa los tres es quién decide los pasos:\n\n- **Task** — tú piensas los pasos, Claude hace uno. Ejemplo: \"reescribe este texto de estado vacío\".\n- **Workflow** — tú programas la secuencia de pasos, Claude rellena cada uno. Ejemplo: \"agrupa estas notas, luego mapéalas, luego resume\".\n- **Agente** — tú das el objetivo, Claude decide los pasos. Ejemplo: \"revisa esta pantalla contra nuestro design system y señala qué se desvía\".\n\n¿Chatear con Claude es \"usar un agente\"? Normalmente no, eso es una task. Se convierte en agente en el momento en que entra en bucle: usa herramientas, lee sus propios resultados y decide qué hacer a continuación hacia el objetivo que le diste.\n\n## Qué son realmente las 'herramientas' (tools)\nLas herramientas son las manos y ojos del agente: lo que puede mirar y hacer.\n\n- **Integradas en Claude Code**: leer un archivo, buscar dentro de archivos, encontrar archivos por patrón, modificar un archivo, ejecutar un comando (por ejemplo, hacer una captura de pantalla o correr tests).\n- **Conectadas por MCP**: leer un frame de Figma o sus variables, leer y actualizar una página de Notion, redactar un email, consultar una base de datos.\n- **Personalizadas**: cualquier función que definas tú, como crear un ticket o publicar en un CMS.\n\nQué herramientas le das a un agente es una decisión de diseño: un agente revisor recibe herramientas de solo lectura y nunca la de escribir, así puede mirar pero nunca tocar.\n\n## Cómo diseñar un buen agente\nTrátalo como el onboarding de un rol, no como escribir un prompt:\n\n- **Un solo trabajo por agente.** Objetivo y límites claros; objetivo vago, agente vago.\n- **Pocas herramientas, bien elegidas y bien descritas.** Más herramientas no es mejor.\n- **Dale acceso a su propia verdad de campo**: que pueda leer su propio resultado (una captura, un test, un diff) para autocorregirse.\n- **Acótalo y dale un límite de parada**, por ejemplo un número máximo de intentos.\n- **Que sea transparente**: que muestre su plan, para que se entienda por qué hizo lo que hizo.\n\n## Cuándo compensa un agente (y cuándo no)\nUsa un agente cuando los pasos no se pueden mapear de antemano Y el resultado es verificable, y cuando merece la pena el coste extra de tiempo y tokens. Usa algo más simple —una task o un workflow— cuando ya sabes los pasos o cuando la velocidad y la predictibilidad importan más. La regla de Anthropic: busca lo más simple que funcione, y añade autonomía solo cuando mejora claramente el resultado.\n\n## Las desventajas reales\nLos agentes son más lentos y caros (exploran, y explorar gasta tokens), menos predecibles (el mismo input puede dar resultados distintos en cada ejecución) y los errores se acumulan en cada paso del bucle. Mitigaciones: mantenerlos de solo lectura cuando se pueda, poner a una persona en los puntos de control, probar en un entorno seguro y añadir límites de parada.\n\n## Ocho agentes que puede construir un diseñador\nCada uno funciona porque la tarea necesita criterio, pero el resultado es verificable:\n\n1. **Revisor de diseño** — compara una pantalla construida contra el design system y la referencia.\n2. **Auditor de accesibilidad** — revisa contraste, tamaño de zonas táctiles, orden de foco, texto alternativo.\n3. **Sintetizador de research** — convierte notas de entrevistas en temas y patrones.\n4. **Revisor de copy y voz** — detecta microcopy que se sale de la guía de voz.\n5. **Auditor de uso de componentes** — encuentra valores sueltos que deberían usar el sistema.\n6. **Análisis competitivo** — dado un flujo, recopila cómo lo resuelven otros y resume patrones.\n7. **Agente que construye pantallas** — construye una pantalla desde una spec y la va comparando y corrigiendo hasta que encaja (con una persona supervisando, porque edita archivos).\n8. **Auditor de flujo** — recorre un prototipo contra una spec escrita y señala estados que faltan: vacío, cargando, error, éxito.\n\n## Ejemplo completo: el revisor de diseño, cableado de principio a fin\nHay dos tipos de herramientas que le das a este agente. El primer cajón es su núcleo, integrado en Claude Code y sin tocar internet: leer archivos, buscar en el código, encontrar archivos, ejecutar comandos (capturas, diffs, tests de accesibilidad). El segundo cajón son los conectores (MCP), la parte que suele resultar confusa: Figma le deja comparar contra el frame real; Notion le deja leer una spec o escribir sus hallazgos; Linear/Jira le deja crear un ticket por cada problema; Slack le deja avisar al canal del equipo. Un conector se convierte en herramienta disponible en el momento en que lo activas en Ajustes.\n\nEl flujo típico: le describes el trabajo a Claude como si hicieras un brief a alguien nuevo en el equipo (qué herramientas tiene, cuál no —normalmente 'escribir'—, y qué cuenta como 'bien'), Claude guarda ese agente como un archivo dentro del proyecto, y luego lo invocas por su nombre cada vez que quieras que revise una pantalla. La misma base se puede reescribir para distintos trabajos con una frase extra y el conector correspondiente: comparar contra Figma, registrar en una base de Notion, crear tickets en Linear, avisar por Slack, o sumar una auditoría de accesibilidad.\n\n## Por qué le importa a un product designer\nCuando un agente vive en el proyecto compartido del equipo, y no en el historial de chat de una persona, los criterios de revisión dejan de vivir solo en la cabeza del diseñador senior: quedan escritos, versionados y se aplican igual a todo el mundo. Escala el criterio de una persona en vez de depender de que esté en la sala, conecta diseño, producto e ingeniería (que viven en apps distintas) y elimina el cuello de botella de esperar a que la única persona que conoce el sistema tenga hueco. El aviso honesto: un agente conecta el trabajo, no sustituye la conversación — usado mal, cada uno se aísla con su propia IA en vez de hablar más.", "images": [], "glossary": [{"term": "Subagente", "definition": "Un agente con un único trabajo, guardado como un pequeño archivo dentro de la carpeta oculta `.claude/agents/` de tu proyecto. No hace falta crearlo a mano: le describes el trabajo a Claude (qué herramientas tiene, qué no, qué cuenta como 'bien hecho') y él escribe el archivo. Una vez creado, lo invocas por su nombre cada vez que lo necesites, como llamar a un compañero especializado."}, {"term": "Conector MCP", "definition": "La forma en que un agente se conecta a una herramienta real que ya usas — Figma, Notion, Linear, Slack — en vez de quedarse solo con lo que hay en el proyecto. Solo se convierte en algo que el agente puede usar cuando tú lo activas explícitamente en Ajustes; a partir de ahí se le entrega igual que cualquier otra herramienta."}, {"term": "Guardrails (límites del agente)", "definition": "Las reglas que acotan lo que un agente puede hacer mientras trabaja solo — por ejemplo, darle acceso de solo lectura para que pueda revisar pero nunca modificar archivos, o ponerle un número máximo de intentos para que no se quede dando vueltas indefinidamente."}, {"term": "Claude Agent SDK", "definition": "La vía para desarrolladores: el mismo concepto de agente, pero convertido en código para que funcione de forma fiable dentro de un producto y para otras personas, no solo para ti en una conversación. Es la ruta que tomaría tu equipo de ingeniería si quisiera llevar uno de estos agentes más allá de tu propio uso."}], "date_added": "2026-07-12"}, {"id": "donde-va-realmente-tu-contexto-de-diseno-en-claude", "title": "Dónde va realmente tu contexto de diseño en Claude", "url": "https://yummy-design-sprint.notion.site/Where-your-design-context-actually-belongs-in-Claude-35962791470980be91fac4fc3c977fa1", "section": "ia-claude", "subsection": "Claude para diseñadores", "summary": "Guía práctica de Yummy Labs sobre las tres capas donde puedes meter contexto de diseño en Claude —Custom Instructions, Project Knowledge y Skills— y por qué confundirlas hace que se te llene el contexto de cosas que no hacen falta. Explica cómo carga cada capa, qué poner en cada una, y aclara de una vez el bombo de los archivos .md tipo DESIGN.md.", "key_points": ["Custom Instructions se carga en TODOS los mensajes siempre: solo debe llevar lo que dirías en cualquier reunión sin importar el tema (máx. 400 palabras)", "Project Knowledge (archivos subidos) se carga entero si el proyecto es pequeño, o se busca por RAG si el proyecto es grande — hay que limpiar lo que no se use", "Las Skills solo cargan su nombre y descripción al arrancar (30-50 tokens), y el contenido completo solo se carga cuando Claude decide que es relevante para lo que pides", "La regla para decidir dónde va algo: si lo usarías también en tu próximo proyecto, es una Skill; si es específico de este proyecto, es Project Knowledge", "Un archivo .md (como corrections.md) no sustituye tu design system real (Figma, código, tokens) — es un documento de briefing para Claude, no una cuarta fuente de verdad"], "content_md": "## De qué va\nUna guía práctica sobre dónde meter el contexto de diseño en Claude, basada en la documentación oficial de Anthropic. Antes de responder a nada, Claude ya está leyendo tres cosas: tus Custom Instructions, los archivos que has subido al proyecto, y qué Skills podrían ser relevantes. Cada una carga de forma distinta, y entender esa diferencia es lo que separa una configuración que funciona de una que malgasta tu ventana de contexto.\n\n## Las tres capas, en corto\n- **Custom Instructions** se cargan en cada mensaje, siempre. Siempre activas, siempre consumiendo tokens.\n- **Project Knowledge** (archivos subidos) se carga entero en proyectos pequeños, o se busca por RAG en proyectos grandes.\n- **Skills** solo cargan su nombre y descripción al arrancar (30-50 tokens cada una). El contenido completo se carga solo cuando Claude decide que hace falta.\n\n## Custom Instructions\nEs el texto que Claude lee al principio de cada conversación de un Proyecto, antes incluso de ver tu mensaje. Aquí va lo que Claude nunca debería olvidar, sin importar qué le pidas — cada palabra aquí cuesta tokens en cada turno.\n\nEjemplos buenos: \"Soy product designer de nivel medio construyendo un dashboard B2B para iOS y web\", \"Usa siempre una grid de 8px, zona táctil mínima 44x44px\", \"Cuando pida un componente, incluye estados hover, focus y disabled\", \"Nunca sugieras Inter, Roboto ni fuentes de sistema\".\n\nLo que NO va aquí: tu lista completa de tokens (eso es Project Knowledge), documentación larga de procesos (eso es una Skill), instrucciones específicas de una tarea puntual (eso va en el propio chat). Regla general: si lo dirías en cualquier reunión sin importar el tema, va aquí. Si solo aplica a ciertas tareas, no. Extensión recomendada: 200-400 palabras, algunos incluso dicen que no pases de 500.\n\n## Project Knowledge\nSon los archivos que subes a la base de conocimiento de un Proyecto (PDFs, imágenes, JSON, markdown, código), disponibles en todas las conversaciones de ese Proyecto.\n\nAquí está la parte que más gente entiende mal: en proyectos pequeños (pocos archivos, muy por debajo del límite de contexto), Claude carga tus archivos directamente en cada mensaje, todo el rato. En proyectos grandes (cerca del límite), Claude cambia automáticamente a modo RAG: en vez de cargarlo todo, busca y trae solo las piezas relevantes para cada pregunta.\n\nQué subir aquí: un `design-tokens.json` con los valores reales de ESTE proyecto (no uno genérico), el brand guide del cliente en PDF, 3-5 capturas de la dirección visual que buscas, y sobre todo un `corrections.md` — cada vez que corriges a Claude (\"las cards son de 16px de radio, no 12px\"), lo apuntas ahí y Claude deja de repetir el mismo error en la siguiente sesión. Es, según la guía, de lo más rentable que puedes hacer.\n\nQué NO subir: archivos de proyectos ya terminados, un PDF de 40 páginas de documentación completa del design system (mejor un resumen enfocado), cosas que usas en TODOS tus proyectos (eso es una Skill, no hace falta copiarlo en cada Proyecto), o archivos enormes \"por si acaso\".\n\n## Skills\nSon conjuntos de instrucciones portátiles que te acompañan a todos los sitios: en todos tus Proyectos, en chats normales, en Claude Code. Es tu criterio empaquetado para que Claude lo use donde haga falta.\n\nLa parte clave de cómo cargan se llama *progressive disclosure*: al arrancar, Claude solo lee el nombre y una descripción corta de cada Skill (unos 30-50 tokens). Cuando le pides algo relevante, compara tu petición contra esas descripciones y carga el contenido completo solo de las Skills que aplican. Las que no hacen falta se quedan sin usar, con coste cero. Es justo lo contrario de Project Knowledge en proyectos pequeños, donde todo se carga siempre.\n\nEjemplos: una Skill de \"UI Designer\" con tu filosofía de spacing y tus mínimos de contraste; una Skill de \"UX Copywriter\" con tus reglas de microcopy; una Skill de marca por cliente (nómbrala por el cliente, no \"brand.md\", para que Claude active la correcta); una Skill de accesibilidad con tus estándares WCAG.\n\nQué NO poner en una Skill: valores de tokens específicos de un proyecto (eso es Project Knowledge), una única Skill gigante que lo cubra todo (Anthropic recomienda varias Skills enfocadas en vez de una mega-Skill), material de referencia de un solo uso, o contenido que cambia en cada proyecto. La pregunta que resuelve la duda: ¿usarías esta regla también en tu próximo proyecto? Si sí, es una Skill. Si no, es Project Knowledge.\n\n## ¿Y los archivos .md tipo DESIGN.md?\nUn .md es simplemente texto plano con formato sencillo (# para títulos, - para listas). No es código, no es una base de datos, no es una herramienta de diseño. Claude lo procesa más barato y más rápido que un PDF con la misma información, y además está más estructurado, así que encuentra secciones concretas de forma más fiable.\n\nDónde ayuda: un `corrections.md` (probablemente el archivo más rentable que puedes crear), un `design-rules.md` con tu escala de spacing y el razonamiento de cuándo usar cada valor (no solo el número, también el porqué), o un `brand-brief.md` con la versión condensada de una marca para un proyecto concreto.\n\nDónde NO ayuda: si intentas que sustituya tu design system real (que vive en Figma, en código, en tu librería de componentes) — si mantienes el .md Y tus variables de Figma Y tus tokens de código, has creado tres fuentes de verdad que van a desincronizarse. Tampoco ayuda si el archivo se vuelve gigante (si tu DESIGN.md tiene 500+ líneas, probablemente está haciendo demasiado — lo ideal son 100-200 líneas), ni si el contenido cambia constantemente (mejor conectar Claude a Figma vía MCP para acceso en vivo: el .md es una foto fija, MCP es una conexión viva). El error más habitual: tratar un DESIGN.md como si FUERA el design system, cuando en realidad es solo el briefing que le das a Claude.\n\n## Coste real en tokens\nLa ventana de contexto de Claude en los planes de pago es de 200.000 tokens. Unas Custom Instructions de 300 palabras cuestan ~400 tokens (0,2%), un `design-tokens.json` unos 1.000-3.000 tokens, un `corrections.md` unos 500-1.000, y una Skill sin activar prácticamente nada (30-50 tokens). Una configuración bien organizada suele usar solo un 3-8% del contexto, dejando el resto libre para el trabajo real.\n\n## Ideas clave\n- Custom Instructions carga en cada mensaje, siempre — solo lo verdaderamente universal, bajo 400 palabras.\n- Project Knowledge se carga entero en proyectos pequeños o se busca por RAG en proyectos grandes; limpia lo que no uses.\n- Skills solo cargan nombre + descripción hasta que son relevantes; mejor varias Skills enfocadas que una mega-Skill.\n- La pregunta test: ¿lo usarías en tu próximo proyecto? Skill. ¿Es de este proyecto? Project Knowledge.\n- Un .md es un documento de briefing para Claude, no un reemplazo de tu design system real.", "images": [], "glossary": [{"term": "Ventana de contexto (context window)", "definition": "La cantidad total de texto que Claude puede \"tener en la cabeza\" a la vez en una conversación, medida en tokens (200.000 en los planes de pago). Todo lo que subes, escribes o Claude carga automáticamente compite por ese mismo espacio limitado — por eso importa tanto qué metes ahí y cómo carga cada cosa."}, {"term": "RAG (Retrieval-Augmented Generation)", "definition": "Una técnica en la que, en vez de cargar todos tus archivos en cada mensaje, el sistema busca solo las partes relevantes para tu pregunta concreta y las trae al contexto. Es lo que activa Claude automáticamente cuando un Proyecto tiene demasiados archivos para caber todos a la vez."}, {"term": "Custom Instructions", "definition": "El bloque de texto que Claude lee al principio de cada conversación dentro de un Proyecto, antes de ver tu mensaje. Es tu contexto \"siempre activo\": quién eres, qué construyes, tus reglas que nunca cambian — pensado para ser corto porque se paga en tokens en cada turno."}, {"term": "Progressive disclosure (de una Skill)", "definition": "La forma en que carga una Skill: al principio Claude solo ve su nombre y una frase descriptiva (casi gratis en tokens); solo si tu petición encaja con esa descripción, Claude carga el contenido completo de la Skill. Es lo que permite tener muchas Skills guardadas sin que cuesten nada hasta que realmente se usan."}], "date_added": "2026-07-12"}, {"id": "los-disenadores-gastan-los-limites-de-uso-de-claude-mas-rapido-que-nad", "title": "Los diseñadores gastan los límites de uso de Claude más rápido que nadie: por qué y cómo arreglarlo", "url": "https://yummy-design-sprint.notion.site/Designers-hit-Claude-s-usage-limits-faster-than-anyone-Here-s-why-and-exactly-how-to-fix-it-33562791470980b78c4bc906178bc83f", "section": "ia-claude", "subsection": "Claude para diseñadores", "summary": "Guía de Yummy Labs sobre por qué el trabajo de diseño agota los límites de uso de Claude más rápido que casi cualquier otro tipo de trabajo, y qué hacer al respecto. El problema de fondo: cada mensaje reprocesa TODA la conversación anterior, así que el mensaje 30 cuesta como los 30 mensajes juntos. Repasa los patrones típicos de un diseñador que disparan el gasto (iterar visualmente, MCP de Figma, seleccionar la página entera, usar Opus por defecto) y cómo arreglar cada uno.", "key_points": ["Cada mensaje reprocesa toda la conversación anterior: el mensaje 30 cuesta como si reenviaras los 30 mensajes de golpe, por eso pedir 'un poco más grande' cinco veces seguidas dispara el gasto", "Hay dos variables distintas: el coste por token (qué modelo usas, Opus cuesta 5x más que Sonnet) y el consumo real (tus hábitos: subir un PDF entero, dejar que Claude escriba de más, alargar una conversación 30 mensajes)", "Seleccionar la página entera en Figma MCP en vez de solo el componente puede costar 200.000+ tokens frente a 2.000-10.000 — una diferencia de 20 a 100 veces", "Cada conector MCP que tienes activo carga su definición en TODOS los mensajes, aunque no lo uses ese turno: 4 herramientas conectadas pueden suponer ~7.000 tokens de sobrecoste por mensaje", "Se puede crear una Skill que 'entrene' a Claude para ser consciente de los tokens (o para acertar a la primera en tareas que repites), en vez de depender de corregirlo en cada conversación"], "content_md": "## De qué va\nUna guía de Yummy Labs sobre por qué los diseñadores queman los límites de uso de Claude más rápido que casi cualquier otro perfil, y qué hacer para arreglarlo sin dejar de trabajar bien.\n\n## El problema de fondo\nCada mensaje que envías a Claude reprocesa TODA la conversación anterior. El mensaje número 30 cuesta como si volvieras a enviar del 1 al 30 juntos. Por eso pedir \"hazlo un poco más grande\" cinco veces seguidas, cada una en su propio mensaje, es tan caro: cada ronda relee todo lo anterior.\n\n## Las dos cosas que gastan tu límite\n- **Coste por token**: lo que cuesta cada token contra tu límite, según el modelo. La misma conversación en Opus cuesta 5 veces más que en Sonnet.\n- **Consumo (burn)**: cuántos tokens gastas por tus propios hábitos — subir un PDF entero cuando podrías pegar el markdown, dejar que Claude escriba 500 palabras cuando necesitabas una frase, o mantener una conversación 30 mensajes cuando deberías haber empezado una nueva en el mensaje 10.\n\nEl coste es el multiplicador, el consumo es el volumen. Reducir uno se nota; reducir los dos hace que dejes de tocar el límite.\n\n## Los planes, en cifras\nTodos comparten el mismo cupo entre claude.ai, Claude Code, la app de escritorio y Cowork — una sesión intensa de Claude Code por la mañana deja menos mensajes disponibles en el chat por la tarde.\n\n- **Free**: ~40 mensajes cortos al día — para probarlo, no para trabajar en serio.\n- **Pro (20$/mes)**: ~44.000 tokens por ventana de 5 horas — bien para aprender, ajustado para diseño pesado.\n- **Max5 (100$/mes)**: ~88.000 tokens — cómodo para trabajo diario de diseño.\n- **Max20 (200$/mes)**: ~220.000 tokens — usuarios intensivos, varios proyectos a la vez.\n\n## Por qué los diseñadores gastan tan rápido\n- **La iteración visual en bucle**: \"hazlo más grande\" → \"mejor más pequeño\" → \"¿lo centras?\" → \"el color no cuadra\". Cada una de estas peticiones minúsculas reprocesa toda la conversación; en el mensaje 10 ya estás pagando por reenviar los 9 anteriores cada vez.\n- **El impuesto de las herramientas MCP**: cada conector que tienes activo carga su definición en cada mensaje, lo uses o no. Sin herramientas: 0 tokens de más. Solo Figma MCP: ~4.000 tokens (~10% del cupo Pro antes de escribir nada). 4 herramientas conectadas: ~7.000 tokens (~16%). Una instalación pesada (5+ herramientas): hasta 55.000 tokens, capaz de superar todo tu cupo.\n- **El error de selección en Figma**: seleccionar toda la página en vez de solo el componente en el que trabajas. Un componente suelto: 2.000-10.000 tokens. La página entera: 200.000+ tokens. Una diferencia de 20 a 100 veces.\n- **El modelo equivocado para la tarea**: usar Opus para retoques de copy cuando Sonnet resuelve el 98% de las tareas de diseño con un 80% menos de coste.\n\n## Diez situaciones típicas que queman el límite\nLa guía repasa diez escenarios concretos —iterar visualmente, construir un componente con retoques pequeños, usar Figma MCP, subir los mismos archivos una y otra vez, compartir mockups para revisión, pedir feedback de diseño, investigar y hacer brainstorming, tener conectores MCP siempre activos, usar el modelo equivocado, y dejar el extended thinking siempre encendido— y para cada uno da la versión cara y la versión barata de hacerlo.\n\n## ¿Se puede entrenar a Claude para ser eficiente en tokens? Sí, con una Skill\nSe puede crear un archivo SKILL.md que le indique a Claude que sea consciente de los tokens: por ejemplo, que constriña sus respuestas, que pida confirmación antes de generar mucho texto, o que use el modelo adecuado por defecto. Una Skill es un archivo de instrucciones que Claude lee y sigue automáticamente, así que \"entrenas\" un comportamiento una vez en vez de repetirlo en cada conversación. Y no es solo para eficiencia: crear Skills para las cosas que repites constantemente hace que Claude acierte a la primera en vez de necesitar cinco rondas de correcciones.\n\n## La parte incómoda: los prompts vagos también gastan\nUsar Claude mucho puede volvernos perezosos al escribir, y un prompt perezoso sale caro: si no das las specs por adelantado (padding, fuentes, colores, spacing), Claude tiene que adivinar, tú corriges, y cada corrección reprocesa todo lo anterior. El arreglo es pensar antes de escribir, no después.\n\n## La chuleta rápida\nAntes de empezar una sesión: ¿tienes Sonnet seleccionado (no Opus)?, ¿extended thinking apagado para tareas simples?, ¿solo los conectores MCP que necesitas activos?, ¿el contenido reutilizable ya está en Project Knowledge? Durante el trabajo: junta el feedback y mándalo en un solo mensaje, da las specs por adelantado, constriñe la respuesta (\"máximo 3 puntos\"), recorta las imágenes sin piedad. Empieza una conversación nueva al terminar una tarea, cada 15-20 mensajes, o al cambiar a un tema no relacionado.\n\n## Ideas clave\n- Cada mensaje reprocesa toda la conversación: cuanto más larga, más caro cada turno nuevo.\n- El coste depende del modelo (Opus vs Sonnet) y el consumo depende de tus hábitos (qué subes, cuánto dejas escribir a Claude, cuándo empiezas de cero).\n- Seleccionar solo el componente en Figma MCP en vez de la página entera puede ahorrar hasta 100 veces los tokens.\n- Los conectores MCP activos cobran un peaje en cada mensaje aunque no los uses ese turno — desconecta los que no necesites.\n- Una Skill puede 'entrenar' a Claude a ser eficiente o a acertar a la primera en tareas repetitivas, sin tener que repetir instrucciones cada vez.", "images": [], "glossary": [{"term": "Rate limit / ventana de uso", "definition": "El cupo de tokens que tienes disponible dentro de una ventana de tiempo (por ejemplo, 5 horas), según tu plan. Se comparte entre todas las formas de usar Claude —chat, Claude Code, la app de escritorio, Cowork— así que gastarlo en un sitio deja menos disponible en los demás."}, {"term": "Extended thinking", "definition": "Un modo en el que Claude 'piensa' de forma más extendida antes de responder, útil para tareas complejas, pero que cuesta bastantes tokens de más (unos 32.000 por petición) incluso en tareas sencillas donde no hace falta. Apagarlo para preguntas simples ahorra buena parte del cupo."}, {"term": "Modelo (Opus vs Sonnet)", "definition": "Las distintas 'versiones' de Claude que puedes elegir para una conversación. Opus es más potente pero cuesta unas 5 veces más tokens que Sonnet por el mismo trabajo; para la mayoría de tareas de diseño, Sonnet da un resultado prácticamente igual de bueno a una fracción del coste."}, {"term": "Skill (archivo SKILL.md)", "definition": "Un archivo de instrucciones que Claude lee y aplica automáticamente sin que tengas que repetirlas cada vez — por ejemplo, para que sea más breve por defecto, o para que resuelva bien una tarea que sueles pedirle. Es la forma de 'enseñarle' un comportamiento de una vez, en lugar de corregirlo conversación tras conversación."}], "date_added": "2026-07-12"}, {"id": "diccionario-de-ia-para-disenadores", "title": "Diccionario de IA para diseñadores", "url": "https://yummy-design-sprint.notion.site/AI-Design-Dictionary-326627914709808eb562c22421ba2088", "section": "terminologia-tecnica", "subsection": "Diccionario de referencia", "summary": "Un diccionario de 63 términos técnicos de IA y desarrollo, escrito por una diseñadora para diseñadoras, organizado en tres niveles: los básicos de la primera semana, lo que aparece al profundizar un poco, y lo que solo hace falta si te metes de lleno. Cada término trae la traducción a lenguaje de diseño y por qué importa para trabajar con IA. Todos sus términos se guardan directamente en la Enciclopedia, sin tener que darles like uno a uno.", "key_points": ["63 términos organizados en tres niveles: 'Empieza aquí' (los que se usan en la primera semana), 'Nivel 2' (los que aparecen en tutoriales y con ingeniería) y 'Términos avanzados' (infraestructura y conceptos de IA más profundos)", "Cada término se explica con su traducción a lenguaje de diseño: por ejemplo, Git es 'como el historial de versiones de Figma, pero mucho más potente'", "Cubre desde lo más básico (CLI, Terminal, API) hasta conceptos de IA (RAG, embeddings, fine-tuning, alucinaciones) y de despliegue (dominio, DNS, hosting)", "Pensado como referencia para volver cuando te encuentres una palabra que no conoces, no para memorizar de golpe", "Todo este diccionario se ha guardado directamente en la Enciclopedia del sitio, sin necesidad de darle like término a término"], "content_md": "## De qué va\nUn diccionario de términos de IA pensado específicamente para diseñadoras, escrito por una diseñadora. No es para memorizar: cada término explica cuándo te lo vas a encontrar y por qué importa para tu forma de trabajar con IA.\n\n## Cómo está organizado\n- **Empieza aquí** — los términos que te vas a encontrar en tu primera semana trabajando con herramientas de IA: CLI, Terminal, API, MCP, prompt engineering, ventana de contexto, alucinaciones, LLM, GPT, Markdown, JSON, Artifacts, system prompt.\n- **Nivel 2** — lo que va apareciendo según profundizas: entorno de desarrollo, npm, Git, GitHub, frameworks, frontend vs backend, despliegue, variables de entorno, tokens, agéntico, modelo, multimodal, SVG, debug, y más.\n- **Términos avanzados** — infraestructura y conceptos con los que puedes llegar lejos sin conocerlos, pero que acabas encontrando si sigues profundizando: fork, branch, RAG, fine-tuning, embeddings, servidor, dominio, DNS, SSL, Skills y Proyectos de Claude.\n\n## Por qué le importa a un product designer\nCada entrada trae la 'traducción a lenguaje de diseño': por ejemplo, un repositorio de GitHub se explica como 'el historial de versiones de Figma, pero rastreando también la carpeta de assets y las notas de desarrollo'. Esa capa de traducción es lo que hace que términos que suenan intimidantes dejen de serlo, y es justo el tipo de vocabulario que ayuda a hablar con ingeniería sin sentir que falta contexto.\n\nTodos los términos de este diccionario se han incorporado directamente a la sección Enciclopedia del sitio (no hace falta darles like uno a uno, como con el resto de artículos) — piénsalo como el diccionario de cabecera al que puedes volver en cualquier momento.\n\n## Ideas clave\n- El diccionario cubre 63 términos en tres niveles de profundidad, de lo esencial a lo avanzado.\n- Cada término incluye cuándo lo verás, su traducción a lenguaje de diseño, y por qué importa para tu flujo de trabajo con IA.\n- No hace falta memorizarlo: es una referencia para volver cuando te encuentres una palabra nueva.\n- Todos sus términos ya están en la Enciclopedia del sitio de forma automática.", "images": [], "glossary": [{"term": "CLI (Command Line Interface)", "definition": "Una forma de controlar el ordenador escribiendo comandos en vez de haciendo clic. Es donde viven Claude Code y los servidores MCP — no hace falta dominarla, pero conocer lo básico abre puertas."}, {"term": "Terminal", "definition": "La aplicación donde escribes comandos de CLI (Terminal en Mac, PowerShell en Windows). Es como abrir un archivo de Figma en blanco: no pasa nada hasta que tú haces algo."}, {"term": "API (Application Programming Interface)", "definition": "La forma en que dos programas se hablan entre sí: uno pide algo, el otro lo devuelve. Un servidor MCP es, en el fondo, Claude hablando con tus otras apps a través de sus APIs."}, {"term": "MCP (Model Context Protocol)", "definition": "La conexión que deja a Claude ver e interactuar directamente con herramientas como Figma o Notion, en vez de que tengas que describírselas con palabras. Es lo que hace que un flujo de diseño-a-código funcione de verdad."}, {"term": "Prompt engineering", "definition": "La habilidad de escribir instrucciones claras y específicas para que Claude haga justo lo que quieres — como escribir un buen brief de diseño: uno vago da resultados vagos."}, {"term": "Context window (ventana de contexto)", "definition": "Cuánta información puede 'ver' Claude a la vez: la conversación, los archivos, las instrucciones. Si Claude empieza a 'olvidar' cosas de antes, has llenado la ventana de contexto."}, {"term": "Hallucination (alucinación)", "definition": "Cuando la IA afirma algo completamente falso con total seguridad. Conviene verificar siempre los datos que de verdad importan, sobre todo en documentación o afirmaciones técnicas."}, {"term": "LLM (Large Language Model)", "definition": "La familia de IA que hace funcionar a Claude, ChatGPT y similares, entrenada con muchísimo texto para entender y generar lenguaje. Se les da bien el lenguaje, no tanto las matemáticas o los datos en tiempo real."}, {"term": "GPT (Generative Pre-trained Transformer)", "definition": "Un modelo concreto creado por OpenAI, no un término genérico para toda la IA (aunque se use así coloquialmente). Claude NO es un GPT: es un modelo distinto, de Anthropic."}, {"term": "Markdown", "definition": "Una forma sencilla de dar formato a texto con símbolos (# para títulos, ** para negrita, - para listas). Claude lo domina de forma nativa, y es también el formato de los archivos SKILL.md."}, {"term": "JSON (JavaScript Object Notation)", "definition": "Un formato de datos estructurado, con etiquetas y valores entre llaves. Los design tokens, las respuestas de una API o los archivos de configuración suelen venir en este formato."}, {"term": "Artifacts", "definition": "Los resultados interactivos que Claude puede crear —webs, código, documentos— que aparecen en un panel aparte y se pueden probar en vivo. Es la diferencia entre que Claude te describa algo y que te lo enseñe funcionando."}, {"term": "System prompt", "definition": "Instrucciones ocultas que definen cómo se comporta Claude antes incluso de que empieces a escribir. Es como un brief de diseño que está siempre activo — en Proyectos y en las Skills, básicamente defines el tuyo."}, {"term": "IDE (Integrated Development Environment)", "definition": "Un editor de texto sofisticado para escribir código (VS Code, Cursor). Es el Figma de los desarrolladores: no es solo un lienzo, tiene capas, extensiones y propiedades."}, {"term": "npm (Node Package Manager)", "definition": "Una herramienta que descarga e instala paquetes de código ya escritos por otros, para no construir todo desde cero — como instalar un plugin de Figma, pero para proyectos de código."}, {"term": "Node.js", "definition": "Una forma de ejecutar JavaScript fuera del navegador. Muchos servidores MCP y herramientas de IA están construidos con él, así que tenerlo instalado suele ser un requisito previo."}, {"term": "Git", "definition": "Un sistema que registra cada cambio hecho en el código, para poder volver atrás, colaborar sin pisarse el trabajo y ver quién cambió qué. Es como el historial de versiones de Figma, pero mucho más potente."}, {"term": "GitHub", "definition": "Una web donde se guardan y comparten repositorios de Git — como Google Drive para código, con funciones de colaboración. La mayoría de servidores MCP y herramientas de IA viven ahí."}, {"term": "Repository / Repo", "definition": "La carpeta de un proyecto con todo su historial de cambios, normalmente alojada en GitHub. 'Clonar el repo' significa simplemente descargarlo a tu ordenador."}, {"term": "Clone", "definition": "Descargar una copia de un repositorio de GitHub a tu ordenador — como duplicar un archivo de la Comunidad de Figma a tu propia cuenta."}, {"term": "Localhost", "definition": "Tu propio ordenador actuando como servidor temporal y privado. Cuando pruebas algo que Claude ha construido, primero corre en local, antes de publicarse en ningún sitio."}, {"term": "Framework (React, Next.js, Vue...)", "definition": "Una base de código ya construida que los desarrolladores usan para no empezar de cero — como una plantilla de design system con patrones comunes ya montados. Claude suele generar código en React."}, {"term": "Frontend vs Backend", "definition": "Frontend es lo que ve e interactúa el usuario (la interfaz); backend es lo invisible: servidores, bases de datos, lógica. Como diseñadora con IA trabajas sobre todo en frontend, pero entender la diferencia ayuda a hablar con ingeniería."}, {"term": "Deployment (despliegue)", "definition": "El proceso de sacar código de tu ordenador y ponerlo en internet para que otros lo vean — el equivalente a publicar un prototipo de Figma en vez de dejarlo en borradores."}, {"term": "Vercel / Netlify", "definition": "Plataformas que facilitan el despliegue: conectas tu código y ellas se encargan de ponerlo online. Es el botón de 'publicar' de Framer o Webflow, pero para sitios hechos a medida en código."}, {"term": "Environment variables (variables de entorno)", "definition": "Ajustes secretos guardados fuera del código, como claves de API o contraseñas, para que no queden visibles en los archivos."}, {"term": ".env file", "definition": "El archivo especial, normalmente oculto, donde se guardan las variables de entorno. Nunca se sube a GitHub ni se comparte públicamente."}, {"term": "Tokens (contexto de IA)", "definition": "Las unidades con las que Claude mide el texto (aprox. 1 token = 0,75 palabras). Las conversaciones más largas gastan más tokens — importa sobre todo si usas la API o tienes límites de uso ajustados."}, {"term": "Agentic (agéntico)", "definition": "Cuando la IA puede actuar por su cuenta, no solo responder: navegar, hacer clic, ejecutar código, completar tareas de varios pasos. Es la diferencia entre que alguien te describa un cambio y que lo haga por ti."}, {"term": "Dependencies (dependencias)", "definition": "Otros paquetes de código que necesita tu proyecto para funcionar — como los componentes vinculados a una librería de Figma: si la quitas, algo se rompe."}, {"term": "Build", "definition": "Convertir el código fuente en algo que realmente se pueda ejecutar, como paso previo al despliegue — el equivalente a exportar un diseño de Figma en el formato correcto para desarrollo."}, {"term": "Claude Code vs Claude Desktop", "definition": "Dos formas distintas de usar Claude. Claude Desktop es la app de chat normal; Claude Code vive en la terminal y puede ejecutar comandos, editar archivos y construir proyectos de forma más autónoma."}, {"term": "Computer use", "definition": "Una capacidad de Claude para ver y controlar tu pantalla —hacer clic, rellenar formularios, navegar por apps— como un asistente remoto. Abre la puerta a automatizar tareas repetitivas en cualquier aplicación, no solo en las que tienen API."}, {"term": "Model (modelo de IA)", "definition": "El sistema de IA entrenado que da las respuestas. Claude es un modelo; sus distintas versiones (Opus, Sonnet) tienen capacidades y velocidad distintas, como productos dentro de la misma familia."}, {"term": "Multimodal", "definition": "IA que entiende varios tipos de entrada —texto, imágenes, audio— no solo texto. Para una diseñadora es enorme: puedes compartir capturas y mockups directamente en vez de describirlo todo con palabras."}, {"term": "SVG (Scalable Vector Graphics)", "definition": "Un formato de imagen vectorial escrito en código en vez de píxeles, que escala perfectamente a cualquier tamaño. Claude puede generar SVGs —iconos, ilustraciones— directamente."}, {"term": "CSS variables", "definition": "Valores reutilizables definidos una vez y usados en todo el CSS — el equivalente exacto en código a los design tokens o las variables de Figma."}, {"term": "Debug (depurar)", "definition": "Encontrar y arreglar errores en el código. Cuando el código que genera Claude no funciona, tendrás que depurarlo — y Claude también puede ayudarte a hacerlo si le pegas el error."}, {"term": "Syntax (sintaxis)", "definition": "Las reglas gramaticales de un lenguaje de programación. Si Claude genera código y no funciona, puede deberse a un error de sintaxis."}, {"term": "Boilerplate", "definition": "Código de arranque estándar que hace falta en todo proyecto de cierto tipo — como una plantilla de Figma con tu design system ya montado, para no partir de un archivo en blanco cada vez."}, {"term": "Stack", "definition": "La combinación de tecnologías usada para construir algo (lenguajes, frameworks, herramientas). Decirle a Claude tu stack ('React con Tailwind') ayuda a que genere el código adecuado."}, {"term": "Temperature (temperatura)", "definition": "Un ajuste que controla lo creativa o predecible que es una respuesta de IA: baja temperatura, más predecible; alta, más variada. Es como el nivel de libertad creativa que le das a un brief."}, {"term": "Fork", "definition": "Crear tu propia copia de un repositorio ajeno que sigue conectada al original, para modificarla sin afectar al original — como duplicar un archivo de la Comunidad de Figma manteniendo el enlace de origen."}, {"term": "Branch (rama)", "definition": "Una versión paralela del código donde puedes hacer cambios sin tocar la versión principal, y fusionarla después — como una rama de Figma para explorar una idea sin tocar el archivo principal."}, {"term": "Commit", "definition": "Guardar una instantánea de los cambios de código con un mensaje que describe qué hiciste — como dejar una nota de versión en el historial de Figma."}, {"term": "Push / Pull", "definition": "Push es enviar tus cambios guardados a GitHub; pull es descargar los cambios más recientes de GitHub a tu ordenador."}, {"term": "Config / Configuration file (archivo de configuración)", "definition": "Un archivo con los ajustes de cómo debe comportarse una herramienta o proyecto, normalmente en JSON o YAML — el panel de ajustes de Figma, pero guardado en un archivo."}, {"term": "YAML", "definition": "Un formato de archivos de configuración parecido al JSON pero basado en sangrado en vez de llaves, a menudo más fácil de leer."}, {"term": "RAG (Retrieval Augmented Generation)", "definition": "Una técnica en la que la IA busca información relevante en una base de datos antes de responder, en vez de fiarse solo de lo que aprendió en el entrenamiento — como una biblioteca de referencia que la IA puede consultar antes de contestar."}, {"term": "Fine-tuning (ajuste fino)", "definition": "Entrenar un modelo ya existente con datos adicionales para especializarlo en una tarea concreta, como una formación extra después del entrenamiento base. Es caro y avanzado; para la mayoría, un buen prompting basta."}, {"term": "Embeddings", "definition": "Una forma de convertir texto (o imágenes) en números que capturan su significado, para que cosas parecidas tengan números parecidos y se puedan buscar por significado, no solo por coincidencia exacta."}, {"term": "Vector database (base de datos vectorial)", "definition": "Una base de datos optimizada para guardar y buscar embeddings, encontrando los resultados 'más parecidos' en vez de coincidencias exactas — la infraestructura detrás de la búsqueda semántica."}, {"term": "Inference (inferencia)", "definition": "El momento en que un modelo de IA realmente genera una respuesta, usando lo que aprendió durante el entrenamiento. Cuando le mandas un mensaje a Claude y responde, eso es inferencia."}, {"term": "Server (servidor)", "definition": "Un ordenador que da servicio a otros ordenadores: ejecuta software, guarda datos y responde peticiones. Cuando visitas una web, tu navegador le pide la página a un servidor."}, {"term": "Cloud (la nube)", "definition": "Ordenadores y servicios que corren en internet en vez de en tu máquina — 'en la nube' significa 'en los servidores de otro', como guardar archivos en Google Drive en vez de en tu disco duro."}, {"term": "Docker / Container", "definition": "Una forma de empaquetar una aplicación con todo lo que necesita para funcionar igual en cualquier ordenador. Algunos servidores MCP corren dentro de un contenedor Docker."}, {"term": "Hosting (alojamiento)", "definition": "El servicio que mantiene tu web o aplicación funcionando en un servidor para que la gente pueda acceder a ella — como preguntarte dónde vive tu portfolio (¿Framer? ¿Webflow?)."}, {"term": "Domain (dominio)", "definition": "La dirección legible de una web, como yummy-labs.com, en vez de una serie de números. Se compra a un registrador de dominios."}, {"term": "DNS (Domain Name System)", "definition": "El sistema que traduce nombres de dominio en las direcciones numéricas que entienden los ordenadores — la guía telefónica de internet."}, {"term": "SSL / HTTPS", "definition": "La capa de seguridad que cifra los datos entre tu navegador y una web. El candado y el 'https://' en la URL significan que está activa."}, {"term": "Skills (Claude)", "definition": "Instrucciones personalizadas que le das a Claude en un archivo SKILL.md estructurado, para que se comporte de una forma concreta en tareas específicas — un brief creativo detallado que está siempre activo."}, {"term": "Projects (Claude)", "definition": "Espacios de trabajo en Claude donde puedes fijar instrucciones personalizadas, subir archivos de referencia y mantener contexto a través de conversaciones — como la estructura de equipos de Figma, pero para contexto de IA."}, {"term": "Compile (compilar)", "definition": "Convertir el código fuente en un formato que el ordenador pueda ejecutar, un paso previo necesario en algunos lenguajes — como exportar un diseño de Figma a los assets finales de producción."}], "date_added": "2026-07-12", "dictionary": true}, {"id": "5-trucos-para-que-claude-code-no-te-de-un-diseno-web-generico", "title": "5 trucos para que Claude Code no te dé un diseño web genérico", "url": "https://uxplanet.org/5-tips-to-prevent-generic-web-design-in-claude-code-7cc044760453", "section": "ia-claude", "subsection": "Prompting avanzado", "summary": "Nick Babich explica cómo evitar que Claude Code genere webs con \"cara de IA\": la clave está en montar bien el CLAUDE.md antes de pedirle nada, no en el prompt del momento.", "key_points": ["Invoca la skill 'frontend-design' de Claude en tu CLAUDE.md antes de cualquier código, y en cada sesión — Claude no la usa sola por defecto.", "Dale referencias visuales reales (screenshots de Behance/Dribbble o de tu propia marca) en una carpeta del proyecto: 1 referencia funciona mejor que varias.", "Usa el 'screenshot loop': pide a Claude que capture pantalla de lo que genera, lo compare con tus referencias y corrija mismatches, mínimo dos rondas — así se acerca de verdad al resultado que quieres.", "Escribe una sección de 'Anti-Generic Design Guardrails' en el CLAUDE.md: prohíbe explícitamente los defaults típicos (colores de Tailwind sin personalizar, una sola tipografía, shadow-md, transition-all...) porque son justo lo que delata un diseño hecho por IA.", "Dale también sus assets de marca (logo, paleta, tono de voz) en una carpeta aparte, referenciada en el CLAUDE.md o mencionada directamente en el prompt."], "content_md": "## De qué va\nEl artículo parte de un experimento simple: pedirle a Claude Code una landing page con un prompt suelto da un resultado funcional pero con \"cara de plantilla genérica\". El autor, Nick Babich, propone que el problema no es el modelo sino la falta de contexto — y da 5 ajustes concretos, todos centrados en el archivo `CLAUDE.md` (el archivo de instrucciones que Claude lee al empezar a trabajar en un proyecto), para que el resultado se acerque a un diseño con personalidad real.\n\n## Por qué le importa a un product designer\nEsto es justo el tipo de \"prompting de sistema\" que marca la diferencia entre usar Claude como generador de plantillas o como un colaborador que respeta tu criterio visual. Si alguna vez generas UI con Claude Code (o ves a un ingeniero hacerlo y quieres opinar sobre el resultado), estas guardrails son literalmente una versión en texto de lo que tú ya defines en un design system: paleta propia, tipografía con jerarquía, estados de interacción obligatorios, nada de sombras y grises por defecto.\n\n## Ideas clave\n- El CLAUDE.md es el equivalente a un brief de marca: cuanto más específico, menos \"IA genérica\" sale.\n- La skill 'frontend-design' hay que pedirla explícitamente — no se activa sola.\n- El screenshot loop (generar → capturar → comparar con referencia → corregir, mínimo 2 rondas) es la técnica que más mejora el resultado final, más que el prompt inicial.\n- Las \"Anti-Generic Design Guardrails\" son básicamente una lista de anti-patrones de Tailwind/React que cualquier diseñador reconocería como \"lo de siempre\": bg-white + shadow-md + rounded-lg.", "images": [], "glossary": [{"term": "CLAUDE.md", "definition": "Un archivo de texto que pones en la carpeta de tu proyecto y que Claude lee automáticamente al empezar a trabajar en él. Es como el brief que le darías a alguien nuevo en el equipo: objetivos, stack técnico, y reglas que quieres que respete siempre."}, {"term": "Skill (de Claude)", "definition": "Un paquete de instrucciones específicas que le enseña a Claude a hacer bien una tarea concreta (como diseñar frontend). Se activa a demanda — hay que pedírsela, no se usa sola por defecto. Piénsalo como un 'modo experto' que puedes encender."}, {"term": "Tailwind CSS", "definition": "Un sistema de utilidades para escribir estilos en código (en vez de un archivo CSS aparte, se aplican clases cortas directamente en el HTML/JSX, como 'bg-white' o 'shadow-md'). Muy usado en desarrollo web moderno; su problema es que, sin personalizar, todo el mundo acaba con la misma pinta 'de fábrica'."}, {"term": "JSX", "definition": "La forma de escribir código en React que mezcla HTML y lógica de programación en el mismo archivo. Es lo que ves si abres el código de una interfaz hecha con React: se parece a HTML pero dentro de JavaScript."}, {"term": "Design tokens", "definition": "Los valores base de un sistema de diseño (colores, tipografías, espaciados) guardados como variables con nombre propio, en vez de usar valores sueltos. Es el mismo concepto que los 'styles' o 'variables' que ya usas en Figma, pero aplicado directamente en el código."}], "date_added": "2026-07-13", "dictionary": false}];
 const SECTIONS = [{"slug": "figma-freebies", "name": "Figma & Freebies", "desc": "Tips, plugins, plantillas y recursos gratuitos para sacarle más partido a Figma.", "icon": "layers"}, {"slug": "ia-claude", "name": "IA & Claude", "desc": "Novedades de IA en general y de Claude en particular: modelos, features, casos de uso.", "icon": "chip"}, {"slug": "terminologia-tecnica", "name": "Terminología Técnica", "desc": "Conceptos y palabras técnicas explicados en claro, para no perderte en una conversación de IA o de código.", "icon": "book"}, {"slug": "hablar-con-ingenieros", "name": "Hablar con Ingenieros", "desc": "Cómo colaborar mejor con developers: procesos, cultura, expectativas y lenguaje común.", "icon": "chat-code"}];
-const ICONS = {"chip": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.4\"><rect x=\"7\" y=\"7\" width=\"10\" height=\"10\" rx=\"1\"/><path d=\"M9 7V3M12 7V3M15 7V3M9 21v-4M12 21v-4M15 21v-4M7 9H3M7 12H3M7 15H3M21 9h-4M21 12h-4M21 15h-4\"/></svg>", "layers": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.4\" stroke-linejoin=\"round\"><path d=\"M12 2 3 7l9 5 9-5-9-5Z\"/><path d=\"M3 12l9 5 9-5\"/><path d=\"M3 17l9 5 9-5\"/></svg>", "chat-code": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.4\"><path d=\"M21 15a2 2 0 0 1-2 2H8l-4 4V5a2 2 0 0 1 2-2h13a2 2 0 0 1 2 2v10Z\"/><path d=\"M9 10 7 12l2 2M15 10l2 2-2 2\"/></svg>", "eye": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.4\"><path d=\"M1 12s4-7 11-7 11 7 11 7-4 7-11 7-11-7-11-7Z\"/><circle cx=\"12\" cy=\"12\" r=\"3\"/></svg>", "chart": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.4\"><path d=\"M4 20V10M11 20V4M18 20v-7\"/><path d=\"M2 20h20\"/></svg>", "wrench": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.4\"><path d=\"M14.7 6.3a4 4 0 0 1-5.4 5.4L4 17l3 3 5.3-5.3a4 4 0 0 1 5.4-5.4L21 6l-3-3-3.3 3.3Z\"/></svg>", "flame": "<svg viewBox=\"0 0 24 24\" fill=\"currentColor\" stroke=\"none\"><path d=\"M12 2c1 3-2 4-2 7a3 3 0 0 0 6 0c0-1-0.5-2-1-2 2 0 4 2 4 5.5A7 7 0 1 1 8 12.5C8 9 9 6 12 2Z\"/></svg>", "trash": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.4\"><path d=\"M3 6h18M8 6V4a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1v2m2 0-1 14a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1L5 6h14Z\"/></svg>", "close": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.6\"><path d=\"M4 4l16 16M20 4 4 20\"/></svg>", "arrow": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.6\"><path d=\"M5 12h14M13 6l6 6-6 6\"/></svg>", "history": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"><circle cx=\"12\" cy=\"12\" r=\"9\"/><path d=\"M12 7.5v5l3.2 1.9\"/></svg>", "search": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.6\"><circle cx=\"11\" cy=\"11\" r=\"7\"/><path d=\"M21 21l-4.3-4.3\"/></svg>", "restore": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.4\"><path d=\"M3 12a9 9 0 1 0 3-6.7\"/><path d=\"M3 4v5h5\"/></svg>", "book": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.4\"><path d=\"M4 4.5A2.5 2.5 0 0 1 6.5 2H20v17H6.5A2.5 2.5 0 0 0 4 21.5v-17Z\"/><path d=\"M4 19.5A2.5 2.5 0 0 1 6.5 17H20\"/></svg>", "heart": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.5\"><path d=\"M12 20.5s-7.5-4.6-10-9.3C.4 7.9 2 4.5 5.4 4c2-.3 3.8.6 4.9 2.3.8 1.2 1.7 1.2 2.5 0C13.8 4.6 15.6 3.7 17.6 4c3.4.5 5 3.9 3.4 7.2-2.5 4.7-9 9.3-9 9.3Z\"/></svg>", "heart-filled": "<svg viewBox=\"0 0 24 24\" fill=\"currentColor\" stroke=\"none\"><path d=\"M12 20.5s-7.5-4.6-10-9.3C.4 7.9 2 4.5 5.4 4c2-.3 3.8.6 4.9 2.3.8 1.2 1.7 1.2 2.5 0C13.8 4.6 15.6 3.7 17.6 4c3.4.5 5 3.9 3.4 7.2-2.5 4.7-9 9.3-9 9.3Z\"/></svg>", "star": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.4\" stroke-linejoin=\"round\"><path d=\"M12 2.5l2.9 6.2 6.6.7-5 4.6 1.4 6.6L12 17.9l-5.9 3.7 1.4-6.6-5-4.6 6.6-.7L12 2.5Z\"/></svg>", "star-filled": "<svg viewBox=\"0 0 24 24\" fill=\"currentColor\" stroke=\"none\"><path d=\"M12 2.5l2.9 6.2 6.6.7-5 4.6 1.4 6.6L12 17.9l-5.9 3.7 1.4-6.6-5-4.6 6.6-.7L12 2.5Z\"/></svg>"};
+const ICONS = {"close": "<svg viewBox=\"0 0 12 12\" fill=\"currentColor\" shape-rendering=\"crispEdges\"><rect x=\"0\" y=\"0\" width=\"1\" height=\"1\"/><rect x=\"1\" y=\"0\" width=\"1\" height=\"1\"/><rect x=\"10\" y=\"0\" width=\"1\" height=\"1\"/><rect x=\"11\" y=\"0\" width=\"1\" height=\"1\"/><rect x=\"0\" y=\"1\" width=\"1\" height=\"1\"/><rect x=\"1\" y=\"1\" width=\"1\" height=\"1\"/><rect x=\"2\" y=\"1\" width=\"1\" height=\"1\"/><rect x=\"9\" y=\"1\" width=\"1\" height=\"1\"/><rect x=\"10\" y=\"1\" width=\"1\" height=\"1\"/><rect x=\"11\" y=\"1\" width=\"1\" height=\"1\"/><rect x=\"1\" y=\"2\" width=\"1\" height=\"1\"/><rect x=\"2\" y=\"2\" width=\"1\" height=\"1\"/><rect x=\"3\" y=\"2\" width=\"1\" height=\"1\"/><rect x=\"8\" y=\"2\" width=\"1\" height=\"1\"/><rect x=\"9\" y=\"2\" width=\"1\" height=\"1\"/><rect x=\"10\" y=\"2\" width=\"1\" height=\"1\"/><rect x=\"2\" y=\"3\" width=\"1\" height=\"1\"/><rect x=\"3\" y=\"3\" width=\"1\" height=\"1\"/><rect x=\"4\" y=\"3\" width=\"1\" height=\"1\"/><rect x=\"7\" y=\"3\" width=\"1\" height=\"1\"/><rect x=\"8\" y=\"3\" width=\"1\" height=\"1\"/><rect x=\"9\" y=\"3\" width=\"1\" height=\"1\"/><rect x=\"3\" y=\"4\" width=\"1\" height=\"1\"/><rect x=\"4\" y=\"4\" width=\"1\" height=\"1\"/><rect x=\"5\" y=\"4\" width=\"1\" height=\"1\"/><rect x=\"6\" y=\"4\" width=\"1\" height=\"1\"/><rect x=\"7\" y=\"4\" width=\"1\" height=\"1\"/><rect x=\"8\" y=\"4\" width=\"1\" height=\"1\"/><rect x=\"4\" y=\"5\" width=\"1\" height=\"1\"/><rect x=\"5\" y=\"5\" width=\"1\" height=\"1\"/><rect x=\"6\" y=\"5\" width=\"1\" height=\"1\"/><rect x=\"7\" y=\"5\" width=\"1\" height=\"1\"/><rect x=\"4\" y=\"6\" width=\"1\" height=\"1\"/><rect x=\"5\" y=\"6\" width=\"1\" height=\"1\"/><rect x=\"6\" y=\"6\" width=\"1\" height=\"1\"/><rect x=\"7\" y=\"6\" width=\"1\" height=\"1\"/><rect x=\"3\" y=\"7\" width=\"1\" height=\"1\"/><rect x=\"4\" y=\"7\" width=\"1\" height=\"1\"/><rect x=\"5\" y=\"7\" width=\"1\" height=\"1\"/><rect x=\"6\" y=\"7\" width=\"1\" height=\"1\"/><rect x=\"7\" y=\"7\" width=\"1\" height=\"1\"/><rect x=\"8\" y=\"7\" width=\"1\" height=\"1\"/><rect x=\"2\" y=\"8\" width=\"1\" height=\"1\"/><rect x=\"3\" y=\"8\" width=\"1\" height=\"1\"/><rect x=\"4\" y=\"8\" width=\"1\" height=\"1\"/><rect x=\"7\" y=\"8\" width=\"1\" height=\"1\"/><rect x=\"8\" y=\"8\" width=\"1\" height=\"1\"/><rect x=\"9\" y=\"8\" width=\"1\" height=\"1\"/><rect x=\"1\" y=\"9\" width=\"1\" height=\"1\"/><rect x=\"2\" y=\"9\" width=\"1\" height=\"1\"/><rect x=\"3\" y=\"9\" width=\"1\" height=\"1\"/><rect x=\"8\" y=\"9\" width=\"1\" height=\"1\"/><rect x=\"9\" y=\"9\" width=\"1\" height=\"1\"/><rect x=\"10\" y=\"9\" width=\"1\" height=\"1\"/><rect x=\"0\" y=\"10\" width=\"1\" height=\"1\"/><rect x=\"1\" y=\"10\" width=\"1\" height=\"1\"/><rect x=\"2\" y=\"10\" width=\"1\" height=\"1\"/><rect x=\"9\" y=\"10\" width=\"1\" height=\"1\"/><rect x=\"10\" y=\"10\" width=\"1\" height=\"1\"/><rect x=\"11\" y=\"10\" width=\"1\" height=\"1\"/><rect x=\"0\" y=\"11\" width=\"1\" height=\"1\"/><rect x=\"1\" y=\"11\" width=\"1\" height=\"1\"/><rect x=\"10\" y=\"11\" width=\"1\" height=\"1\"/><rect x=\"11\" y=\"11\" width=\"1\" height=\"1\"/></svg>", "check": "<svg viewBox=\"0 0 12 12\" fill=\"currentColor\" shape-rendering=\"crispEdges\"><rect x=\"11\" y=\"2\" width=\"1\" height=\"1\"/><rect x=\"10\" y=\"3\" width=\"1\" height=\"1\"/><rect x=\"11\" y=\"3\" width=\"1\" height=\"1\"/><rect x=\"9\" y=\"4\" width=\"1\" height=\"1\"/><rect x=\"10\" y=\"4\" width=\"1\" height=\"1\"/><rect x=\"0\" y=\"5\" width=\"1\" height=\"1\"/><rect x=\"8\" y=\"5\" width=\"1\" height=\"1\"/><rect x=\"9\" y=\"5\" width=\"1\" height=\"1\"/><rect x=\"0\" y=\"6\" width=\"1\" height=\"1\"/><rect x=\"1\" y=\"6\" width=\"1\" height=\"1\"/><rect x=\"7\" y=\"6\" width=\"1\" height=\"1\"/><rect x=\"8\" y=\"6\" width=\"1\" height=\"1\"/><rect x=\"1\" y=\"7\" width=\"1\" height=\"1\"/><rect x=\"2\" y=\"7\" width=\"1\" height=\"1\"/><rect x=\"6\" y=\"7\" width=\"1\" height=\"1\"/><rect x=\"7\" y=\"7\" width=\"1\" height=\"1\"/><rect x=\"2\" y=\"8\" width=\"1\" height=\"1\"/><rect x=\"3\" y=\"8\" width=\"1\" height=\"1\"/><rect x=\"5\" y=\"8\" width=\"1\" height=\"1\"/><rect x=\"6\" y=\"8\" width=\"1\" height=\"1\"/><rect x=\"3\" y=\"9\" width=\"1\" height=\"1\"/><rect x=\"4\" y=\"9\" width=\"1\" height=\"1\"/><rect x=\"5\" y=\"9\" width=\"1\" height=\"1\"/><rect x=\"4\" y=\"10\" width=\"1\" height=\"1\"/></svg>", "trash": "<svg viewBox=\"0 0 12 12\" fill=\"currentColor\" shape-rendering=\"crispEdges\"><rect x=\"3\" y=\"0\" width=\"1\" height=\"1\"/><rect x=\"4\" y=\"0\" width=\"1\" height=\"1\"/><rect x=\"5\" y=\"0\" width=\"1\" height=\"1\"/><rect x=\"6\" y=\"0\" width=\"1\" height=\"1\"/><rect x=\"7\" y=\"0\" width=\"1\" height=\"1\"/><rect x=\"8\" y=\"0\" width=\"1\" height=\"1\"/><rect x=\"2\" y=\"1\" width=\"1\" height=\"1\"/><rect x=\"9\" y=\"1\" width=\"1\" height=\"1\"/><rect x=\"1\" y=\"2\" width=\"1\" height=\"1\"/><rect x=\"2\" y=\"2\" width=\"1\" height=\"1\"/><rect x=\"3\" y=\"2\" width=\"1\" height=\"1\"/><rect x=\"4\" y=\"2\" width=\"1\" height=\"1\"/><rect x=\"5\" y=\"2\" width=\"1\" height=\"1\"/><rect x=\"6\" y=\"2\" width=\"1\" height=\"1\"/><rect x=\"7\" y=\"2\" width=\"1\" height=\"1\"/><rect x=\"8\" y=\"2\" width=\"1\" height=\"1\"/><rect x=\"9\" y=\"2\" width=\"1\" height=\"1\"/><rect x=\"10\" y=\"2\" width=\"1\" height=\"1\"/><rect x=\"2\" y=\"3\" width=\"1\" height=\"1\"/><rect x=\"4\" y=\"3\" width=\"1\" height=\"1\"/><rect x=\"5\" y=\"3\" width=\"1\" height=\"1\"/><rect x=\"6\" y=\"3\" width=\"1\" height=\"1\"/><rect x=\"7\" y=\"3\" width=\"1\" height=\"1\"/><rect x=\"9\" y=\"3\" width=\"1\" height=\"1\"/><rect x=\"2\" y=\"4\" width=\"1\" height=\"1\"/><rect x=\"4\" y=\"4\" width=\"1\" height=\"1\"/><rect x=\"5\" y=\"4\" width=\"1\" height=\"1\"/><rect x=\"6\" y=\"4\" width=\"1\" height=\"1\"/><rect x=\"7\" y=\"4\" width=\"1\" height=\"1\"/><rect x=\"9\" y=\"4\" width=\"1\" height=\"1\"/><rect x=\"2\" y=\"5\" width=\"1\" height=\"1\"/><rect x=\"4\" y=\"5\" width=\"1\" height=\"1\"/><rect x=\"5\" y=\"5\" width=\"1\" height=\"1\"/><rect x=\"6\" y=\"5\" width=\"1\" height=\"1\"/><rect x=\"7\" y=\"5\" width=\"1\" height=\"1\"/><rect x=\"9\" y=\"5\" width=\"1\" height=\"1\"/><rect x=\"2\" y=\"6\" width=\"1\" height=\"1\"/><rect x=\"4\" y=\"6\" width=\"1\" height=\"1\"/><rect x=\"5\" y=\"6\" width=\"1\" height=\"1\"/><rect x=\"6\" y=\"6\" width=\"1\" height=\"1\"/><rect x=\"7\" y=\"6\" width=\"1\" height=\"1\"/><rect x=\"9\" y=\"6\" width=\"1\" height=\"1\"/><rect x=\"2\" y=\"7\" width=\"1\" height=\"1\"/><rect x=\"4\" y=\"7\" width=\"1\" height=\"1\"/><rect x=\"5\" y=\"7\" width=\"1\" height=\"1\"/><rect x=\"6\" y=\"7\" width=\"1\" height=\"1\"/><rect x=\"7\" y=\"7\" width=\"1\" height=\"1\"/><rect x=\"9\" y=\"7\" width=\"1\" height=\"1\"/><rect x=\"2\" y=\"8\" width=\"1\" height=\"1\"/><rect x=\"4\" y=\"8\" width=\"1\" height=\"1\"/><rect x=\"5\" y=\"8\" width=\"1\" height=\"1\"/><rect x=\"6\" y=\"8\" width=\"1\" height=\"1\"/><rect x=\"7\" y=\"8\" width=\"1\" height=\"1\"/><rect x=\"9\" y=\"8\" width=\"1\" height=\"1\"/><rect x=\"2\" y=\"9\" width=\"1\" height=\"1\"/><rect x=\"4\" y=\"9\" width=\"1\" height=\"1\"/><rect x=\"5\" y=\"9\" width=\"1\" height=\"1\"/><rect x=\"6\" y=\"9\" width=\"1\" height=\"1\"/><rect x=\"7\" y=\"9\" width=\"1\" height=\"1\"/><rect x=\"9\" y=\"9\" width=\"1\" height=\"1\"/><rect x=\"2\" y=\"10\" width=\"1\" height=\"1\"/><rect x=\"9\" y=\"10\" width=\"1\" height=\"1\"/><rect x=\"3\" y=\"11\" width=\"1\" height=\"1\"/><rect x=\"4\" y=\"11\" width=\"1\" height=\"1\"/><rect x=\"5\" y=\"11\" width=\"1\" height=\"1\"/><rect x=\"6\" y=\"11\" width=\"1\" height=\"1\"/><rect x=\"7\" y=\"11\" width=\"1\" height=\"1\"/><rect x=\"8\" y=\"11\" width=\"1\" height=\"1\"/></svg>", "restore": "<svg viewBox=\"0 0 12 12\" fill=\"currentColor\" shape-rendering=\"crispEdges\"><rect x=\"4\" y=\"2\" width=\"1\" height=\"1\"/><rect x=\"5\" y=\"2\" width=\"1\" height=\"1\"/><rect x=\"6\" y=\"2\" width=\"1\" height=\"1\"/><rect x=\"7\" y=\"2\" width=\"1\" height=\"1\"/><rect x=\"9\" y=\"2\" width=\"1\" height=\"1\"/><rect x=\"10\" y=\"2\" width=\"1\" height=\"1\"/><rect x=\"3\" y=\"3\" width=\"1\" height=\"1\"/><rect x=\"8\" y=\"3\" width=\"1\" height=\"1\"/><rect x=\"10\" y=\"3\" width=\"1\" height=\"1\"/><rect x=\"2\" y=\"4\" width=\"1\" height=\"1\"/><rect x=\"9\" y=\"4\" width=\"1\" height=\"1\"/><rect x=\"2\" y=\"5\" width=\"1\" height=\"1\"/><rect x=\"2\" y=\"6\" width=\"1\" height=\"1\"/><rect x=\"2\" y=\"7\" width=\"1\" height=\"1\"/><rect x=\"3\" y=\"8\" width=\"1\" height=\"1\"/><rect x=\"4\" y=\"9\" width=\"1\" height=\"1\"/><rect x=\"5\" y=\"9\" width=\"1\" height=\"1\"/><rect x=\"6\" y=\"9\" width=\"1\" height=\"1\"/><rect x=\"7\" y=\"9\" width=\"1\" height=\"1\"/></svg>", "star": "<svg viewBox=\"0 0 12 12\" fill=\"currentColor\" shape-rendering=\"crispEdges\"><rect x=\"5\" y=\"0\" width=\"1\" height=\"1\"/><rect x=\"4\" y=\"1\" width=\"1\" height=\"1\"/><rect x=\"5\" y=\"1\" width=\"1\" height=\"1\"/><rect x=\"6\" y=\"1\" width=\"1\" height=\"1\"/><rect x=\"4\" y=\"2\" width=\"1\" height=\"1\"/><rect x=\"6\" y=\"2\" width=\"1\" height=\"1\"/><rect x=\"1\" y=\"4\" width=\"1\" height=\"1\"/><rect x=\"2\" y=\"4\" width=\"1\" height=\"1\"/><rect x=\"8\" y=\"4\" width=\"1\" height=\"1\"/><rect x=\"9\" y=\"4\" width=\"1\" height=\"1\"/><rect x=\"0\" y=\"5\" width=\"1\" height=\"1\"/><rect x=\"1\" y=\"5\" width=\"1\" height=\"1\"/><rect x=\"9\" y=\"5\" width=\"1\" height=\"1\"/><rect x=\"10\" y=\"5\" width=\"1\" height=\"1\"/><rect x=\"1\" y=\"6\" width=\"1\" height=\"1\"/><rect x=\"2\" y=\"6\" width=\"1\" height=\"1\"/><rect x=\"8\" y=\"6\" width=\"1\" height=\"1\"/><rect x=\"9\" y=\"6\" width=\"1\" height=\"1\"/><rect x=\"4\" y=\"8\" width=\"1\" height=\"1\"/><rect x=\"6\" y=\"8\" width=\"1\" height=\"1\"/><rect x=\"4\" y=\"9\" width=\"1\" height=\"1\"/><rect x=\"5\" y=\"9\" width=\"1\" height=\"1\"/><rect x=\"6\" y=\"9\" width=\"1\" height=\"1\"/><rect x=\"5\" y=\"10\" width=\"1\" height=\"1\"/></svg>", "star-filled": "<svg viewBox=\"0 0 12 12\" fill=\"currentColor\" shape-rendering=\"crispEdges\"><rect x=\"5\" y=\"0\" width=\"1\" height=\"1\"/><rect x=\"4\" y=\"1\" width=\"1\" height=\"1\"/><rect x=\"5\" y=\"1\" width=\"1\" height=\"1\"/><rect x=\"6\" y=\"1\" width=\"1\" height=\"1\"/><rect x=\"4\" y=\"2\" width=\"1\" height=\"1\"/><rect x=\"5\" y=\"2\" width=\"1\" height=\"1\"/><rect x=\"6\" y=\"2\" width=\"1\" height=\"1\"/><rect x=\"4\" y=\"3\" width=\"1\" height=\"1\"/><rect x=\"5\" y=\"3\" width=\"1\" height=\"1\"/><rect x=\"6\" y=\"3\" width=\"1\" height=\"1\"/><rect x=\"1\" y=\"4\" width=\"1\" height=\"1\"/><rect x=\"2\" y=\"4\" width=\"1\" height=\"1\"/><rect x=\"3\" y=\"4\" width=\"1\" height=\"1\"/><rect x=\"4\" y=\"4\" width=\"1\" height=\"1\"/><rect x=\"5\" y=\"4\" width=\"1\" height=\"1\"/><rect x=\"6\" y=\"4\" width=\"1\" height=\"1\"/><rect x=\"7\" y=\"4\" width=\"1\" height=\"1\"/><rect x=\"8\" y=\"4\" width=\"1\" height=\"1\"/><rect x=\"9\" y=\"4\" width=\"1\" height=\"1\"/><rect x=\"0\" y=\"5\" width=\"1\" height=\"1\"/><rect x=\"1\" y=\"5\" width=\"1\" height=\"1\"/><rect x=\"2\" y=\"5\" width=\"1\" height=\"1\"/><rect x=\"3\" y=\"5\" width=\"1\" height=\"1\"/><rect x=\"4\" y=\"5\" width=\"1\" height=\"1\"/><rect x=\"5\" y=\"5\" width=\"1\" height=\"1\"/><rect x=\"6\" y=\"5\" width=\"1\" height=\"1\"/><rect x=\"7\" y=\"5\" width=\"1\" height=\"1\"/><rect x=\"8\" y=\"5\" width=\"1\" height=\"1\"/><rect x=\"9\" y=\"5\" width=\"1\" height=\"1\"/><rect x=\"10\" y=\"5\" width=\"1\" height=\"1\"/><rect x=\"1\" y=\"6\" width=\"1\" height=\"1\"/><rect x=\"2\" y=\"6\" width=\"1\" height=\"1\"/><rect x=\"3\" y=\"6\" width=\"1\" height=\"1\"/><rect x=\"4\" y=\"6\" width=\"1\" height=\"1\"/><rect x=\"5\" y=\"6\" width=\"1\" height=\"1\"/><rect x=\"6\" y=\"6\" width=\"1\" height=\"1\"/><rect x=\"7\" y=\"6\" width=\"1\" height=\"1\"/><rect x=\"8\" y=\"6\" width=\"1\" height=\"1\"/><rect x=\"9\" y=\"6\" width=\"1\" height=\"1\"/><rect x=\"4\" y=\"7\" width=\"1\" height=\"1\"/><rect x=\"5\" y=\"7\" width=\"1\" height=\"1\"/><rect x=\"6\" y=\"7\" width=\"1\" height=\"1\"/><rect x=\"4\" y=\"8\" width=\"1\" height=\"1\"/><rect x=\"5\" y=\"8\" width=\"1\" height=\"1\"/><rect x=\"6\" y=\"8\" width=\"1\" height=\"1\"/><rect x=\"4\" y=\"9\" width=\"1\" height=\"1\"/><rect x=\"5\" y=\"9\" width=\"1\" height=\"1\"/><rect x=\"6\" y=\"9\" width=\"1\" height=\"1\"/><rect x=\"5\" y=\"10\" width=\"1\" height=\"1\"/></svg>", "edit": "<svg viewBox=\"0 0 12 12\" fill=\"currentColor\" shape-rendering=\"crispEdges\"><rect x=\"9\" y=\"0\" width=\"1\" height=\"1\"/><rect x=\"10\" y=\"0\" width=\"1\" height=\"1\"/><rect x=\"8\" y=\"1\" width=\"1\" height=\"1\"/><rect x=\"9\" y=\"1\" width=\"1\" height=\"1\"/><rect x=\"10\" y=\"1\" width=\"1\" height=\"1\"/><rect x=\"11\" y=\"1\" width=\"1\" height=\"1\"/><rect x=\"7\" y=\"2\" width=\"1\" height=\"1\"/><rect x=\"8\" y=\"2\" width=\"1\" height=\"1\"/><rect x=\"9\" y=\"2\" width=\"1\" height=\"1\"/><rect x=\"6\" y=\"3\" width=\"1\" height=\"1\"/><rect x=\"7\" y=\"3\" width=\"1\" height=\"1\"/><rect x=\"8\" y=\"3\" width=\"1\" height=\"1\"/><rect x=\"5\" y=\"4\" width=\"1\" height=\"1\"/><rect x=\"6\" y=\"4\" width=\"1\" height=\"1\"/><rect x=\"7\" y=\"4\" width=\"1\" height=\"1\"/><rect x=\"4\" y=\"5\" width=\"1\" height=\"1\"/><rect x=\"5\" y=\"5\" width=\"1\" height=\"1\"/><rect x=\"6\" y=\"5\" width=\"1\" height=\"1\"/><rect x=\"3\" y=\"6\" width=\"1\" height=\"1\"/><rect x=\"4\" y=\"6\" width=\"1\" height=\"1\"/><rect x=\"5\" y=\"6\" width=\"1\" height=\"1\"/><rect x=\"2\" y=\"7\" width=\"1\" height=\"1\"/><rect x=\"3\" y=\"7\" width=\"1\" height=\"1\"/><rect x=\"4\" y=\"7\" width=\"1\" height=\"1\"/><rect x=\"1\" y=\"8\" width=\"1\" height=\"1\"/><rect x=\"2\" y=\"8\" width=\"1\" height=\"1\"/><rect x=\"3\" y=\"8\" width=\"1\" height=\"1\"/><rect x=\"1\" y=\"9\" width=\"1\" height=\"1\"/><rect x=\"2\" y=\"9\" width=\"1\" height=\"1\"/><rect x=\"1\" y=\"10\" width=\"1\" height=\"1\"/><rect x=\"1\" y=\"11\" width=\"1\" height=\"1\"/><rect x=\"2\" y=\"11\" width=\"1\" height=\"1\"/></svg>", "link": "<svg viewBox=\"0 0 12 12\" fill=\"currentColor\" shape-rendering=\"crispEdges\"><rect x=\"4\" y=\"1\" width=\"1\" height=\"1\"/><rect x=\"2\" y=\"2\" width=\"1\" height=\"1\"/><rect x=\"3\" y=\"2\" width=\"1\" height=\"1\"/><rect x=\"4\" y=\"2\" width=\"1\" height=\"1\"/><rect x=\"5\" y=\"2\" width=\"1\" height=\"1\"/><rect x=\"6\" y=\"2\" width=\"1\" height=\"1\"/><rect x=\"2\" y=\"3\" width=\"1\" height=\"1\"/><rect x=\"6\" y=\"3\" width=\"1\" height=\"1\"/><rect x=\"1\" y=\"4\" width=\"1\" height=\"1\"/><rect x=\"2\" y=\"4\" width=\"1\" height=\"1\"/><rect x=\"6\" y=\"4\" width=\"1\" height=\"1\"/><rect x=\"2\" y=\"5\" width=\"1\" height=\"1\"/><rect x=\"6\" y=\"5\" width=\"1\" height=\"1\"/><rect x=\"8\" y=\"5\" width=\"1\" height=\"1\"/><rect x=\"2\" y=\"6\" width=\"1\" height=\"1\"/><rect x=\"3\" y=\"6\" width=\"1\" height=\"1\"/><rect x=\"4\" y=\"6\" width=\"1\" height=\"1\"/><rect x=\"5\" y=\"6\" width=\"1\" height=\"1\"/><rect x=\"6\" y=\"6\" width=\"1\" height=\"1\"/><rect x=\"7\" y=\"6\" width=\"1\" height=\"1\"/><rect x=\"8\" y=\"6\" width=\"1\" height=\"1\"/><rect x=\"9\" y=\"6\" width=\"1\" height=\"1\"/><rect x=\"10\" y=\"6\" width=\"1\" height=\"1\"/><rect x=\"6\" y=\"7\" width=\"1\" height=\"1\"/><rect x=\"10\" y=\"7\" width=\"1\" height=\"1\"/><rect x=\"5\" y=\"8\" width=\"1\" height=\"1\"/><rect x=\"6\" y=\"8\" width=\"1\" height=\"1\"/><rect x=\"10\" y=\"8\" width=\"1\" height=\"1\"/><rect x=\"6\" y=\"9\" width=\"1\" height=\"1\"/><rect x=\"10\" y=\"9\" width=\"1\" height=\"1\"/><rect x=\"6\" y=\"10\" width=\"1\" height=\"1\"/><rect x=\"7\" y=\"10\" width=\"1\" height=\"1\"/><rect x=\"8\" y=\"10\" width=\"1\" height=\"1\"/><rect x=\"9\" y=\"10\" width=\"1\" height=\"1\"/></svg>", "cards": "<svg viewBox=\"0 0 12 12\" fill=\"currentColor\" shape-rendering=\"crispEdges\"><rect x=\"4\" y=\"1\" width=\"1\" height=\"1\"/><rect x=\"5\" y=\"1\" width=\"1\" height=\"1\"/><rect x=\"6\" y=\"1\" width=\"1\" height=\"1\"/><rect x=\"7\" y=\"1\" width=\"1\" height=\"1\"/><rect x=\"8\" y=\"1\" width=\"1\" height=\"1\"/><rect x=\"9\" y=\"1\" width=\"1\" height=\"1\"/><rect x=\"10\" y=\"1\" width=\"1\" height=\"1\"/><rect x=\"4\" y=\"2\" width=\"1\" height=\"1\"/><rect x=\"10\" y=\"2\" width=\"1\" height=\"1\"/><rect x=\"4\" y=\"3\" width=\"1\" height=\"1\"/><rect x=\"10\" y=\"3\" width=\"1\" height=\"1\"/><rect x=\"1\" y=\"4\" width=\"1\" height=\"1\"/><rect x=\"2\" y=\"4\" width=\"1\" height=\"1\"/><rect x=\"3\" y=\"4\" width=\"1\" height=\"1\"/><rect x=\"4\" y=\"4\" width=\"1\" height=\"1\"/><rect x=\"5\" y=\"4\" width=\"1\" height=\"1\"/><rect x=\"6\" y=\"4\" width=\"1\" height=\"1\"/><rect x=\"7\" y=\"4\" width=\"1\" height=\"1\"/><rect x=\"10\" y=\"4\" width=\"1\" height=\"1\"/><rect x=\"1\" y=\"5\" width=\"1\" height=\"1\"/><rect x=\"4\" y=\"5\" width=\"1\" height=\"1\"/><rect x=\"7\" y=\"5\" width=\"1\" height=\"1\"/><rect x=\"10\" y=\"5\" width=\"1\" height=\"1\"/><rect x=\"1\" y=\"6\" width=\"1\" height=\"1\"/><rect x=\"4\" y=\"6\" width=\"1\" height=\"1\"/><rect x=\"7\" y=\"6\" width=\"1\" height=\"1\"/><rect x=\"10\" y=\"6\" width=\"1\" height=\"1\"/><rect x=\"1\" y=\"7\" width=\"1\" height=\"1\"/><rect x=\"4\" y=\"7\" width=\"1\" height=\"1\"/><rect x=\"5\" y=\"7\" width=\"1\" height=\"1\"/><rect x=\"6\" y=\"7\" width=\"1\" height=\"1\"/><rect x=\"7\" y=\"7\" width=\"1\" height=\"1\"/><rect x=\"8\" y=\"7\" width=\"1\" height=\"1\"/><rect x=\"9\" y=\"7\" width=\"1\" height=\"1\"/><rect x=\"10\" y=\"7\" width=\"1\" height=\"1\"/><rect x=\"1\" y=\"8\" width=\"1\" height=\"1\"/><rect x=\"7\" y=\"8\" width=\"1\" height=\"1\"/><rect x=\"1\" y=\"9\" width=\"1\" height=\"1\"/><rect x=\"7\" y=\"9\" width=\"1\" height=\"1\"/><rect x=\"1\" y=\"10\" width=\"1\" height=\"1\"/><rect x=\"2\" y=\"10\" width=\"1\" height=\"1\"/><rect x=\"3\" y=\"10\" width=\"1\" height=\"1\"/><rect x=\"4\" y=\"10\" width=\"1\" height=\"1\"/><rect x=\"5\" y=\"10\" width=\"1\" height=\"1\"/><rect x=\"6\" y=\"10\" width=\"1\" height=\"1\"/><rect x=\"7\" y=\"10\" width=\"1\" height=\"1\"/></svg>", "eye": "<svg viewBox=\"0 0 12 12\" fill=\"currentColor\" shape-rendering=\"crispEdges\"><rect x=\"4\" y=\"1\" width=\"1\" height=\"1\"/><rect x=\"5\" y=\"1\" width=\"1\" height=\"1\"/><rect x=\"6\" y=\"1\" width=\"1\" height=\"1\"/><rect x=\"7\" y=\"1\" width=\"1\" height=\"1\"/><rect x=\"2\" y=\"2\" width=\"1\" height=\"1\"/><rect x=\"3\" y=\"2\" width=\"1\" height=\"1\"/><rect x=\"8\" y=\"2\" width=\"1\" height=\"1\"/><rect x=\"9\" y=\"2\" width=\"1\" height=\"1\"/><rect x=\"1\" y=\"3\" width=\"1\" height=\"1\"/><rect x=\"10\" y=\"3\" width=\"1\" height=\"1\"/><rect x=\"0\" y=\"4\" width=\"1\" height=\"1\"/><rect x=\"5\" y=\"4\" width=\"1\" height=\"1\"/><rect x=\"6\" y=\"4\" width=\"1\" height=\"1\"/><rect x=\"11\" y=\"4\" width=\"1\" height=\"1\"/><rect x=\"0\" y=\"5\" width=\"1\" height=\"1\"/><rect x=\"4\" y=\"5\" width=\"1\" height=\"1\"/><rect x=\"5\" y=\"5\" width=\"1\" height=\"1\"/><rect x=\"6\" y=\"5\" width=\"1\" height=\"1\"/><rect x=\"7\" y=\"5\" width=\"1\" height=\"1\"/><rect x=\"11\" y=\"5\" width=\"1\" height=\"1\"/><rect x=\"0\" y=\"6\" width=\"1\" height=\"1\"/><rect x=\"4\" y=\"6\" width=\"1\" height=\"1\"/><rect x=\"5\" y=\"6\" width=\"1\" height=\"1\"/><rect x=\"6\" y=\"6\" width=\"1\" height=\"1\"/><rect x=\"7\" y=\"6\" width=\"1\" height=\"1\"/><rect x=\"11\" y=\"6\" width=\"1\" height=\"1\"/><rect x=\"0\" y=\"7\" width=\"1\" height=\"1\"/><rect x=\"5\" y=\"7\" width=\"1\" height=\"1\"/><rect x=\"6\" y=\"7\" width=\"1\" height=\"1\"/><rect x=\"11\" y=\"7\" width=\"1\" height=\"1\"/><rect x=\"1\" y=\"8\" width=\"1\" height=\"1\"/><rect x=\"10\" y=\"8\" width=\"1\" height=\"1\"/><rect x=\"2\" y=\"9\" width=\"1\" height=\"1\"/><rect x=\"3\" y=\"9\" width=\"1\" height=\"1\"/><rect x=\"8\" y=\"9\" width=\"1\" height=\"1\"/><rect x=\"9\" y=\"9\" width=\"1\" height=\"1\"/><rect x=\"4\" y=\"10\" width=\"1\" height=\"1\"/><rect x=\"5\" y=\"10\" width=\"1\" height=\"1\"/><rect x=\"6\" y=\"10\" width=\"1\" height=\"1\"/><rect x=\"7\" y=\"10\" width=\"1\" height=\"1\"/></svg>", "chart": "<svg viewBox=\"0 0 12 12\" fill=\"currentColor\" shape-rendering=\"crispEdges\"><rect x=\"9\" y=\"2\" width=\"1\" height=\"1\"/><rect x=\"10\" y=\"2\" width=\"1\" height=\"1\"/><rect x=\"11\" y=\"2\" width=\"1\" height=\"1\"/><rect x=\"9\" y=\"3\" width=\"1\" height=\"1\"/><rect x=\"10\" y=\"3\" width=\"1\" height=\"1\"/><rect x=\"11\" y=\"3\" width=\"1\" height=\"1\"/><rect x=\"9\" y=\"4\" width=\"1\" height=\"1\"/><rect x=\"10\" y=\"4\" width=\"1\" height=\"1\"/><rect x=\"11\" y=\"4\" width=\"1\" height=\"1\"/><rect x=\"5\" y=\"5\" width=\"1\" height=\"1\"/><rect x=\"6\" y=\"5\" width=\"1\" height=\"1\"/><rect x=\"7\" y=\"5\" width=\"1\" height=\"1\"/><rect x=\"9\" y=\"5\" width=\"1\" height=\"1\"/><rect x=\"10\" y=\"5\" width=\"1\" height=\"1\"/><rect x=\"11\" y=\"5\" width=\"1\" height=\"1\"/><rect x=\"5\" y=\"6\" width=\"1\" height=\"1\"/><rect x=\"6\" y=\"6\" width=\"1\" height=\"1\"/><rect x=\"7\" y=\"6\" width=\"1\" height=\"1\"/><rect x=\"9\" y=\"6\" width=\"1\" height=\"1\"/><rect x=\"10\" y=\"6\" width=\"1\" height=\"1\"/><rect x=\"11\" y=\"6\" width=\"1\" height=\"1\"/><rect x=\"5\" y=\"7\" width=\"1\" height=\"1\"/><rect x=\"6\" y=\"7\" width=\"1\" height=\"1\"/><rect x=\"7\" y=\"7\" width=\"1\" height=\"1\"/><rect x=\"9\" y=\"7\" width=\"1\" height=\"1\"/><rect x=\"10\" y=\"7\" width=\"1\" height=\"1\"/><rect x=\"11\" y=\"7\" width=\"1\" height=\"1\"/><rect x=\"1\" y=\"8\" width=\"1\" height=\"1\"/><rect x=\"2\" y=\"8\" width=\"1\" height=\"1\"/><rect x=\"3\" y=\"8\" width=\"1\" height=\"1\"/><rect x=\"5\" y=\"8\" width=\"1\" height=\"1\"/><rect x=\"6\" y=\"8\" width=\"1\" height=\"1\"/><rect x=\"7\" y=\"8\" width=\"1\" height=\"1\"/><rect x=\"9\" y=\"8\" width=\"1\" height=\"1\"/><rect x=\"10\" y=\"8\" width=\"1\" height=\"1\"/><rect x=\"11\" y=\"8\" width=\"1\" height=\"1\"/><rect x=\"1\" y=\"9\" width=\"1\" height=\"1\"/><rect x=\"2\" y=\"9\" width=\"1\" height=\"1\"/><rect x=\"3\" y=\"9\" width=\"1\" height=\"1\"/><rect x=\"5\" y=\"9\" width=\"1\" height=\"1\"/><rect x=\"6\" y=\"9\" width=\"1\" height=\"1\"/><rect x=\"7\" y=\"9\" width=\"1\" height=\"1\"/><rect x=\"9\" y=\"9\" width=\"1\" height=\"1\"/><rect x=\"10\" y=\"9\" width=\"1\" height=\"1\"/><rect x=\"11\" y=\"9\" width=\"1\" height=\"1\"/><rect x=\"1\" y=\"10\" width=\"1\" height=\"1\"/><rect x=\"2\" y=\"10\" width=\"1\" height=\"1\"/><rect x=\"3\" y=\"10\" width=\"1\" height=\"1\"/><rect x=\"5\" y=\"10\" width=\"1\" height=\"1\"/><rect x=\"6\" y=\"10\" width=\"1\" height=\"1\"/><rect x=\"7\" y=\"10\" width=\"1\" height=\"1\"/><rect x=\"9\" y=\"10\" width=\"1\" height=\"1\"/><rect x=\"10\" y=\"10\" width=\"1\" height=\"1\"/><rect x=\"11\" y=\"10\" width=\"1\" height=\"1\"/><rect x=\"0\" y=\"11\" width=\"1\" height=\"1\"/><rect x=\"1\" y=\"11\" width=\"1\" height=\"1\"/><rect x=\"2\" y=\"11\" width=\"1\" height=\"1\"/><rect x=\"3\" y=\"11\" width=\"1\" height=\"1\"/><rect x=\"4\" y=\"11\" width=\"1\" height=\"1\"/><rect x=\"5\" y=\"11\" width=\"1\" height=\"1\"/><rect x=\"6\" y=\"11\" width=\"1\" height=\"1\"/><rect x=\"7\" y=\"11\" width=\"1\" height=\"1\"/><rect x=\"8\" y=\"11\" width=\"1\" height=\"1\"/><rect x=\"9\" y=\"11\" width=\"1\" height=\"1\"/><rect x=\"10\" y=\"11\" width=\"1\" height=\"1\"/><rect x=\"11\" y=\"11\" width=\"1\" height=\"1\"/></svg>", "wrench": "<svg viewBox=\"0 0 12 12\" fill=\"currentColor\" shape-rendering=\"crispEdges\"><rect x=\"2\" y=\"1\" width=\"1\" height=\"1\"/><rect x=\"3\" y=\"1\" width=\"1\" height=\"1\"/><rect x=\"4\" y=\"1\" width=\"1\" height=\"1\"/><rect x=\"1\" y=\"2\" width=\"1\" height=\"1\"/><rect x=\"2\" y=\"2\" width=\"1\" height=\"1\"/><rect x=\"4\" y=\"2\" width=\"1\" height=\"1\"/><rect x=\"5\" y=\"2\" width=\"1\" height=\"1\"/><rect x=\"3\" y=\"3\" width=\"1\" height=\"1\"/><rect x=\"4\" y=\"3\" width=\"1\" height=\"1\"/><rect x=\"5\" y=\"3\" width=\"1\" height=\"1\"/><rect x=\"3\" y=\"4\" width=\"1\" height=\"1\"/><rect x=\"4\" y=\"4\" width=\"1\" height=\"1\"/><rect x=\"5\" y=\"4\" width=\"1\" height=\"1\"/><rect x=\"3\" y=\"5\" width=\"1\" height=\"1\"/><rect x=\"4\" y=\"5\" width=\"1\" height=\"1\"/><rect x=\"5\" y=\"5\" width=\"1\" height=\"1\"/><rect x=\"6\" y=\"5\" width=\"1\" height=\"1\"/><rect x=\"5\" y=\"6\" width=\"1\" height=\"1\"/><rect x=\"6\" y=\"6\" width=\"1\" height=\"1\"/><rect x=\"7\" y=\"6\" width=\"1\" height=\"1\"/><rect x=\"6\" y=\"7\" width=\"1\" height=\"1\"/><rect x=\"7\" y=\"7\" width=\"1\" height=\"1\"/><rect x=\"8\" y=\"7\" width=\"1\" height=\"1\"/><rect x=\"7\" y=\"8\" width=\"1\" height=\"1\"/><rect x=\"8\" y=\"8\" width=\"1\" height=\"1\"/><rect x=\"9\" y=\"8\" width=\"1\" height=\"1\"/><rect x=\"8\" y=\"9\" width=\"1\" height=\"1\"/><rect x=\"9\" y=\"9\" width=\"1\" height=\"1\"/><rect x=\"10\" y=\"9\" width=\"1\" height=\"1\"/><rect x=\"9\" y=\"10\" width=\"1\" height=\"1\"/><rect x=\"10\" y=\"10\" width=\"1\" height=\"1\"/><rect x=\"11\" y=\"10\" width=\"1\" height=\"1\"/><rect x=\"10\" y=\"11\" width=\"1\" height=\"1\"/></svg>", "px-robot": "<svg viewBox=\"0 0 12 12\" fill=\"currentColor\" shape-rendering=\"crispEdges\"><rect x=\"6\" y=\"0\" width=\"1\" height=\"1\"/><rect x=\"6\" y=\"1\" width=\"1\" height=\"1\"/></svg>", "px-chip": "<svg viewBox=\"0 0 12 12\" fill=\"currentColor\" shape-rendering=\"crispEdges\"></svg>", "px-book": "<svg viewBox=\"0 0 12 12\" fill=\"currentColor\" shape-rendering=\"crispEdges\"></svg>", "px-chat": "<svg viewBox=\"0 0 12 12\" fill=\"currentColor\" shape-rendering=\"crispEdges\"></svg>", "px-palette": "<svg viewBox=\"0 0 12 12\" fill=\"currentColor\" shape-rendering=\"crispEdges\"></svg>", "px-brain": "<svg viewBox=\"0 0 12 12\" fill=\"currentColor\" shape-rendering=\"crispEdges\"></svg>", "px-terminal": "<svg viewBox=\"0 0 12 12\" fill=\"currentColor\" shape-rendering=\"crispEdges\"></svg>", "layers": "<svg viewBox=\"0 0 16 16\" fill=\"currentColor\" shape-rendering=\"crispEdges\"><rect x=\"7\" y=\"2\" width=\"1\" height=\"1\"/><rect x=\"8\" y=\"2\" width=\"1\" height=\"1\"/><rect x=\"9\" y=\"2\" width=\"1\" height=\"1\"/><rect x=\"4\" y=\"3\" width=\"1\" height=\"1\"/><rect x=\"5\" y=\"3\" width=\"1\" height=\"1\"/><rect x=\"11\" y=\"3\" width=\"1\" height=\"1\"/><rect x=\"12\" y=\"3\" width=\"1\" height=\"1\"/><rect x=\"2\" y=\"4\" width=\"1\" height=\"1\"/><rect x=\"3\" y=\"4\" width=\"1\" height=\"1\"/><rect x=\"13\" y=\"4\" width=\"1\" height=\"1\"/><rect x=\"14\" y=\"4\" width=\"1\" height=\"1\"/><rect x=\"4\" y=\"5\" width=\"1\" height=\"1\"/><rect x=\"5\" y=\"5\" width=\"1\" height=\"1\"/><rect x=\"11\" y=\"5\" width=\"1\" height=\"1\"/><rect x=\"12\" y=\"5\" width=\"1\" height=\"1\"/><rect x=\"7\" y=\"6\" width=\"1\" height=\"1\"/><rect x=\"8\" y=\"6\" width=\"1\" height=\"1\"/><rect x=\"9\" y=\"6\" width=\"1\" height=\"1\"/><rect x=\"4\" y=\"7\" width=\"1\" height=\"1\"/><rect x=\"5\" y=\"7\" width=\"1\" height=\"1\"/><rect x=\"11\" y=\"7\" width=\"1\" height=\"1\"/><rect x=\"12\" y=\"7\" width=\"1\" height=\"1\"/><rect x=\"2\" y=\"8\" width=\"1\" height=\"1\"/><rect x=\"3\" y=\"8\" width=\"1\" height=\"1\"/><rect x=\"13\" y=\"8\" width=\"1\" height=\"1\"/><rect x=\"14\" y=\"8\" width=\"1\" height=\"1\"/><rect x=\"4\" y=\"9\" width=\"1\" height=\"1\"/><rect x=\"5\" y=\"9\" width=\"1\" height=\"1\"/><rect x=\"11\" y=\"9\" width=\"1\" height=\"1\"/><rect x=\"12\" y=\"9\" width=\"1\" height=\"1\"/><rect x=\"7\" y=\"10\" width=\"1\" height=\"1\"/><rect x=\"8\" y=\"10\" width=\"1\" height=\"1\"/><rect x=\"9\" y=\"10\" width=\"1\" height=\"1\"/><rect x=\"4\" y=\"11\" width=\"1\" height=\"1\"/><rect x=\"5\" y=\"11\" width=\"1\" height=\"1\"/><rect x=\"11\" y=\"11\" width=\"1\" height=\"1\"/><rect x=\"12\" y=\"11\" width=\"1\" height=\"1\"/><rect x=\"2\" y=\"12\" width=\"1\" height=\"1\"/><rect x=\"3\" y=\"12\" width=\"1\" height=\"1\"/><rect x=\"13\" y=\"12\" width=\"1\" height=\"1\"/><rect x=\"14\" y=\"12\" width=\"1\" height=\"1\"/><rect x=\"4\" y=\"13\" width=\"1\" height=\"1\"/><rect x=\"5\" y=\"13\" width=\"1\" height=\"1\"/><rect x=\"11\" y=\"13\" width=\"1\" height=\"1\"/><rect x=\"12\" y=\"13\" width=\"1\" height=\"1\"/><rect x=\"7\" y=\"14\" width=\"1\" height=\"1\"/><rect x=\"8\" y=\"14\" width=\"1\" height=\"1\"/><rect x=\"9\" y=\"14\" width=\"1\" height=\"1\"/></svg>", "px-star": "<svg viewBox=\"0 0 12 12\" fill=\"currentColor\" shape-rendering=\"crispEdges\"></svg>", "chip": "<svg viewBox=\"0 0 16 16\" fill=\"currentColor\" shape-rendering=\"crispEdges\"><rect x=\"4\" y=\"0\" width=\"1\" height=\"1\"/><rect x=\"8\" y=\"0\" width=\"1\" height=\"1\"/><rect x=\"12\" y=\"0\" width=\"1\" height=\"1\"/><rect x=\"4\" y=\"1\" width=\"1\" height=\"1\"/><rect x=\"8\" y=\"1\" width=\"1\" height=\"1\"/><rect x=\"12\" y=\"1\" width=\"1\" height=\"1\"/><rect x=\"4\" y=\"2\" width=\"1\" height=\"1\"/><rect x=\"8\" y=\"2\" width=\"1\" height=\"1\"/><rect x=\"12\" y=\"2\" width=\"1\" height=\"1\"/><rect x=\"3\" y=\"3\" width=\"1\" height=\"1\"/><rect x=\"4\" y=\"3\" width=\"1\" height=\"1\"/><rect x=\"5\" y=\"3\" width=\"1\" height=\"1\"/><rect x=\"6\" y=\"3\" width=\"1\" height=\"1\"/><rect x=\"7\" y=\"3\" width=\"1\" height=\"1\"/><rect x=\"8\" y=\"3\" width=\"1\" height=\"1\"/><rect x=\"9\" y=\"3\" width=\"1\" height=\"1\"/><rect x=\"10\" y=\"3\" width=\"1\" height=\"1\"/><rect x=\"11\" y=\"3\" width=\"1\" height=\"1\"/><rect x=\"12\" y=\"3\" width=\"1\" height=\"1\"/><rect x=\"0\" y=\"4\" width=\"1\" height=\"1\"/><rect x=\"1\" y=\"4\" width=\"1\" height=\"1\"/><rect x=\"2\" y=\"4\" width=\"1\" height=\"1\"/><rect x=\"3\" y=\"4\" width=\"1\" height=\"1\"/><rect x=\"4\" y=\"4\" width=\"1\" height=\"1\"/><rect x=\"5\" y=\"4\" width=\"1\" height=\"1\"/><rect x=\"6\" y=\"4\" width=\"1\" height=\"1\"/><rect x=\"7\" y=\"4\" width=\"1\" height=\"1\"/><rect x=\"8\" y=\"4\" width=\"1\" height=\"1\"/><rect x=\"9\" y=\"4\" width=\"1\" height=\"1\"/><rect x=\"10\" y=\"4\" width=\"1\" height=\"1\"/><rect x=\"11\" y=\"4\" width=\"1\" height=\"1\"/><rect x=\"12\" y=\"4\" width=\"1\" height=\"1\"/><rect x=\"13\" y=\"4\" width=\"1\" height=\"1\"/><rect x=\"14\" y=\"4\" width=\"1\" height=\"1\"/><rect x=\"15\" y=\"4\" width=\"1\" height=\"1\"/><rect x=\"3\" y=\"5\" width=\"1\" height=\"1\"/><rect x=\"4\" y=\"5\" width=\"1\" height=\"1\"/><rect x=\"11\" y=\"5\" width=\"1\" height=\"1\"/><rect x=\"12\" y=\"5\" width=\"1\" height=\"1\"/><rect x=\"3\" y=\"6\" width=\"1\" height=\"1\"/><rect x=\"4\" y=\"6\" width=\"1\" height=\"1\"/><rect x=\"6\" y=\"6\" width=\"1\" height=\"1\"/><rect x=\"7\" y=\"6\" width=\"1\" height=\"1\"/><rect x=\"8\" y=\"6\" width=\"1\" height=\"1\"/><rect x=\"9\" y=\"6\" width=\"1\" height=\"1\"/><rect x=\"11\" y=\"6\" width=\"1\" height=\"1\"/><rect x=\"12\" y=\"6\" width=\"1\" height=\"1\"/><rect x=\"3\" y=\"7\" width=\"1\" height=\"1\"/><rect x=\"4\" y=\"7\" width=\"1\" height=\"1\"/><rect x=\"6\" y=\"7\" width=\"1\" height=\"1\"/><rect x=\"7\" y=\"7\" width=\"1\" height=\"1\"/><rect x=\"8\" y=\"7\" width=\"1\" height=\"1\"/><rect x=\"9\" y=\"7\" width=\"1\" height=\"1\"/><rect x=\"11\" y=\"7\" width=\"1\" height=\"1\"/><rect x=\"12\" y=\"7\" width=\"1\" height=\"1\"/><rect x=\"0\" y=\"8\" width=\"1\" height=\"1\"/><rect x=\"1\" y=\"8\" width=\"1\" height=\"1\"/><rect x=\"2\" y=\"8\" width=\"1\" height=\"1\"/><rect x=\"3\" y=\"8\" width=\"1\" height=\"1\"/><rect x=\"4\" y=\"8\" width=\"1\" height=\"1\"/><rect x=\"6\" y=\"8\" width=\"1\" height=\"1\"/><rect x=\"7\" y=\"8\" width=\"1\" height=\"1\"/><rect x=\"8\" y=\"8\" width=\"1\" height=\"1\"/><rect x=\"9\" y=\"8\" width=\"1\" height=\"1\"/><rect x=\"11\" y=\"8\" width=\"1\" height=\"1\"/><rect x=\"12\" y=\"8\" width=\"1\" height=\"1\"/><rect x=\"13\" y=\"8\" width=\"1\" height=\"1\"/><rect x=\"14\" y=\"8\" width=\"1\" height=\"1\"/><rect x=\"15\" y=\"8\" width=\"1\" height=\"1\"/><rect x=\"3\" y=\"9\" width=\"1\" height=\"1\"/><rect x=\"4\" y=\"9\" width=\"1\" height=\"1\"/><rect x=\"6\" y=\"9\" width=\"1\" height=\"1\"/><rect x=\"7\" y=\"9\" width=\"1\" height=\"1\"/><rect x=\"8\" y=\"9\" width=\"1\" height=\"1\"/><rect x=\"9\" y=\"9\" width=\"1\" height=\"1\"/><rect x=\"11\" y=\"9\" width=\"1\" height=\"1\"/><rect x=\"12\" y=\"9\" width=\"1\" height=\"1\"/><rect x=\"3\" y=\"10\" width=\"1\" height=\"1\"/><rect x=\"4\" y=\"10\" width=\"1\" height=\"1\"/><rect x=\"11\" y=\"10\" width=\"1\" height=\"1\"/><rect x=\"12\" y=\"10\" width=\"1\" height=\"1\"/><rect x=\"3\" y=\"11\" width=\"1\" height=\"1\"/><rect x=\"4\" y=\"11\" width=\"1\" height=\"1\"/><rect x=\"5\" y=\"11\" width=\"1\" height=\"1\"/><rect x=\"6\" y=\"11\" width=\"1\" height=\"1\"/><rect x=\"7\" y=\"11\" width=\"1\" height=\"1\"/><rect x=\"8\" y=\"11\" width=\"1\" height=\"1\"/><rect x=\"9\" y=\"11\" width=\"1\" height=\"1\"/><rect x=\"10\" y=\"11\" width=\"1\" height=\"1\"/><rect x=\"11\" y=\"11\" width=\"1\" height=\"1\"/><rect x=\"12\" y=\"11\" width=\"1\" height=\"1\"/><rect x=\"0\" y=\"12\" width=\"1\" height=\"1\"/><rect x=\"1\" y=\"12\" width=\"1\" height=\"1\"/><rect x=\"2\" y=\"12\" width=\"1\" height=\"1\"/><rect x=\"3\" y=\"12\" width=\"1\" height=\"1\"/><rect x=\"4\" y=\"12\" width=\"1\" height=\"1\"/><rect x=\"5\" y=\"12\" width=\"1\" height=\"1\"/><rect x=\"6\" y=\"12\" width=\"1\" height=\"1\"/><rect x=\"7\" y=\"12\" width=\"1\" height=\"1\"/><rect x=\"8\" y=\"12\" width=\"1\" height=\"1\"/><rect x=\"9\" y=\"12\" width=\"1\" height=\"1\"/><rect x=\"10\" y=\"12\" width=\"1\" height=\"1\"/><rect x=\"11\" y=\"12\" width=\"1\" height=\"1\"/><rect x=\"12\" y=\"12\" width=\"1\" height=\"1\"/><rect x=\"13\" y=\"12\" width=\"1\" height=\"1\"/><rect x=\"14\" y=\"12\" width=\"1\" height=\"1\"/><rect x=\"15\" y=\"12\" width=\"1\" height=\"1\"/><rect x=\"4\" y=\"13\" width=\"1\" height=\"1\"/><rect x=\"8\" y=\"13\" width=\"1\" height=\"1\"/><rect x=\"12\" y=\"13\" width=\"1\" height=\"1\"/><rect x=\"4\" y=\"14\" width=\"1\" height=\"1\"/><rect x=\"8\" y=\"14\" width=\"1\" height=\"1\"/><rect x=\"12\" y=\"14\" width=\"1\" height=\"1\"/><rect x=\"4\" y=\"15\" width=\"1\" height=\"1\"/><rect x=\"8\" y=\"15\" width=\"1\" height=\"1\"/><rect x=\"12\" y=\"15\" width=\"1\" height=\"1\"/></svg>", "book": "<svg viewBox=\"0 0 16 16\" fill=\"currentColor\" shape-rendering=\"crispEdges\"><rect x=\"6\" y=\"0\" width=\"1\" height=\"1\"/><rect x=\"7\" y=\"0\" width=\"1\" height=\"1\"/><rect x=\"2\" y=\"1\" width=\"1\" height=\"1\"/><rect x=\"3\" y=\"1\" width=\"1\" height=\"1\"/><rect x=\"4\" y=\"1\" width=\"1\" height=\"1\"/><rect x=\"5\" y=\"1\" width=\"1\" height=\"1\"/><rect x=\"6\" y=\"1\" width=\"1\" height=\"1\"/><rect x=\"7\" y=\"1\" width=\"1\" height=\"1\"/><rect x=\"8\" y=\"1\" width=\"1\" height=\"1\"/><rect x=\"9\" y=\"1\" width=\"1\" height=\"1\"/><rect x=\"10\" y=\"1\" width=\"1\" height=\"1\"/><rect x=\"11\" y=\"1\" width=\"1\" height=\"1\"/><rect x=\"12\" y=\"1\" width=\"1\" height=\"1\"/><rect x=\"13\" y=\"1\" width=\"1\" height=\"1\"/><rect x=\"2\" y=\"2\" width=\"1\" height=\"1\"/><rect x=\"3\" y=\"2\" width=\"1\" height=\"1\"/><rect x=\"6\" y=\"2\" width=\"1\" height=\"1\"/><rect x=\"7\" y=\"2\" width=\"1\" height=\"1\"/><rect x=\"13\" y=\"2\" width=\"1\" height=\"1\"/><rect x=\"2\" y=\"3\" width=\"1\" height=\"1\"/><rect x=\"3\" y=\"3\" width=\"1\" height=\"1\"/><rect x=\"4\" y=\"3\" width=\"1\" height=\"1\"/><rect x=\"5\" y=\"3\" width=\"1\" height=\"1\"/><rect x=\"6\" y=\"3\" width=\"1\" height=\"1\"/><rect x=\"7\" y=\"3\" width=\"1\" height=\"1\"/><rect x=\"9\" y=\"3\" width=\"1\" height=\"1\"/><rect x=\"10\" y=\"3\" width=\"1\" height=\"1\"/><rect x=\"11\" y=\"3\" width=\"1\" height=\"1\"/><rect x=\"12\" y=\"3\" width=\"1\" height=\"1\"/><rect x=\"13\" y=\"3\" width=\"1\" height=\"1\"/><rect x=\"2\" y=\"4\" width=\"1\" height=\"1\"/><rect x=\"3\" y=\"4\" width=\"1\" height=\"1\"/><rect x=\"6\" y=\"4\" width=\"1\" height=\"1\"/><rect x=\"7\" y=\"4\" width=\"1\" height=\"1\"/><rect x=\"13\" y=\"4\" width=\"1\" height=\"1\"/><rect x=\"2\" y=\"5\" width=\"1\" height=\"1\"/><rect x=\"3\" y=\"5\" width=\"1\" height=\"1\"/><rect x=\"4\" y=\"5\" width=\"1\" height=\"1\"/><rect x=\"5\" y=\"5\" width=\"1\" height=\"1\"/><rect x=\"6\" y=\"5\" width=\"1\" height=\"1\"/><rect x=\"7\" y=\"5\" width=\"1\" height=\"1\"/><rect x=\"9\" y=\"5\" width=\"1\" height=\"1\"/><rect x=\"10\" y=\"5\" width=\"1\" height=\"1\"/><rect x=\"11\" y=\"5\" width=\"1\" height=\"1\"/><rect x=\"12\" y=\"5\" width=\"1\" height=\"1\"/><rect x=\"13\" y=\"5\" width=\"1\" height=\"1\"/><rect x=\"2\" y=\"6\" width=\"1\" height=\"1\"/><rect x=\"3\" y=\"6\" width=\"1\" height=\"1\"/><rect x=\"6\" y=\"6\" width=\"1\" height=\"1\"/><rect x=\"7\" y=\"6\" width=\"1\" height=\"1\"/><rect x=\"13\" y=\"6\" width=\"1\" height=\"1\"/><rect x=\"2\" y=\"7\" width=\"1\" height=\"1\"/><rect x=\"3\" y=\"7\" width=\"1\" height=\"1\"/><rect x=\"6\" y=\"7\" width=\"1\" height=\"1\"/><rect x=\"7\" y=\"7\" width=\"1\" height=\"1\"/><rect x=\"13\" y=\"7\" width=\"1\" height=\"1\"/><rect x=\"2\" y=\"8\" width=\"1\" height=\"1\"/><rect x=\"3\" y=\"8\" width=\"1\" height=\"1\"/><rect x=\"6\" y=\"8\" width=\"1\" height=\"1\"/><rect x=\"7\" y=\"8\" width=\"1\" height=\"1\"/><rect x=\"13\" y=\"8\" width=\"1\" height=\"1\"/><rect x=\"2\" y=\"9\" width=\"1\" height=\"1\"/><rect x=\"3\" y=\"9\" width=\"1\" height=\"1\"/><rect x=\"4\" y=\"9\" width=\"1\" height=\"1\"/><rect x=\"5\" y=\"9\" width=\"1\" height=\"1\"/><rect x=\"6\" y=\"9\" width=\"1\" height=\"1\"/><rect x=\"7\" y=\"9\" width=\"1\" height=\"1\"/><rect x=\"9\" y=\"9\" width=\"1\" height=\"1\"/><rect x=\"10\" y=\"9\" width=\"1\" height=\"1\"/><rect x=\"11\" y=\"9\" width=\"1\" height=\"1\"/><rect x=\"12\" y=\"9\" width=\"1\" height=\"1\"/><rect x=\"13\" y=\"9\" width=\"1\" height=\"1\"/><rect x=\"2\" y=\"10\" width=\"1\" height=\"1\"/><rect x=\"3\" y=\"10\" width=\"1\" height=\"1\"/><rect x=\"6\" y=\"10\" width=\"1\" height=\"1\"/><rect x=\"7\" y=\"10\" width=\"1\" height=\"1\"/><rect x=\"13\" y=\"10\" width=\"1\" height=\"1\"/><rect x=\"2\" y=\"11\" width=\"1\" height=\"1\"/><rect x=\"3\" y=\"11\" width=\"1\" height=\"1\"/><rect x=\"4\" y=\"11\" width=\"1\" height=\"1\"/><rect x=\"5\" y=\"11\" width=\"1\" height=\"1\"/><rect x=\"6\" y=\"11\" width=\"1\" height=\"1\"/><rect x=\"7\" y=\"11\" width=\"1\" height=\"1\"/><rect x=\"9\" y=\"11\" width=\"1\" height=\"1\"/><rect x=\"10\" y=\"11\" width=\"1\" height=\"1\"/><rect x=\"11\" y=\"11\" width=\"1\" height=\"1\"/><rect x=\"12\" y=\"11\" width=\"1\" height=\"1\"/><rect x=\"13\" y=\"11\" width=\"1\" height=\"1\"/><rect x=\"2\" y=\"12\" width=\"1\" height=\"1\"/><rect x=\"3\" y=\"12\" width=\"1\" height=\"1\"/><rect x=\"6\" y=\"12\" width=\"1\" height=\"1\"/><rect x=\"7\" y=\"12\" width=\"1\" height=\"1\"/><rect x=\"13\" y=\"12\" width=\"1\" height=\"1\"/><rect x=\"2\" y=\"13\" width=\"1\" height=\"1\"/><rect x=\"3\" y=\"13\" width=\"1\" height=\"1\"/><rect x=\"6\" y=\"13\" width=\"1\" height=\"1\"/><rect x=\"7\" y=\"13\" width=\"1\" height=\"1\"/><rect x=\"13\" y=\"13\" width=\"1\" height=\"1\"/><rect x=\"2\" y=\"14\" width=\"1\" height=\"1\"/><rect x=\"3\" y=\"14\" width=\"1\" height=\"1\"/><rect x=\"4\" y=\"14\" width=\"1\" height=\"1\"/><rect x=\"5\" y=\"14\" width=\"1\" height=\"1\"/><rect x=\"6\" y=\"14\" width=\"1\" height=\"1\"/><rect x=\"7\" y=\"14\" width=\"1\" height=\"1\"/><rect x=\"8\" y=\"14\" width=\"1\" height=\"1\"/><rect x=\"9\" y=\"14\" width=\"1\" height=\"1\"/><rect x=\"10\" y=\"14\" width=\"1\" height=\"1\"/><rect x=\"11\" y=\"14\" width=\"1\" height=\"1\"/><rect x=\"12\" y=\"14\" width=\"1\" height=\"1\"/><rect x=\"13\" y=\"14\" width=\"1\" height=\"1\"/></svg>", "chat-code": "<svg viewBox=\"0 0 16 16\" fill=\"currentColor\" shape-rendering=\"crispEdges\"><rect x=\"1\" y=\"1\" width=\"1\" height=\"1\"/><rect x=\"2\" y=\"1\" width=\"1\" height=\"1\"/><rect x=\"3\" y=\"1\" width=\"1\" height=\"1\"/><rect x=\"4\" y=\"1\" width=\"1\" height=\"1\"/><rect x=\"5\" y=\"1\" width=\"1\" height=\"1\"/><rect x=\"6\" y=\"1\" width=\"1\" height=\"1\"/><rect x=\"7\" y=\"1\" width=\"1\" height=\"1\"/><rect x=\"8\" y=\"1\" width=\"1\" height=\"1\"/><rect x=\"9\" y=\"1\" width=\"1\" height=\"1\"/><rect x=\"10\" y=\"1\" width=\"1\" height=\"1\"/><rect x=\"11\" y=\"1\" width=\"1\" height=\"1\"/><rect x=\"12\" y=\"1\" width=\"1\" height=\"1\"/><rect x=\"13\" y=\"1\" width=\"1\" height=\"1\"/><rect x=\"14\" y=\"1\" width=\"1\" height=\"1\"/><rect x=\"1\" y=\"2\" width=\"1\" height=\"1\"/><rect x=\"2\" y=\"2\" width=\"1\" height=\"1\"/><rect x=\"3\" y=\"2\" width=\"1\" height=\"1\"/><rect x=\"4\" y=\"2\" width=\"1\" height=\"1\"/><rect x=\"5\" y=\"2\" width=\"1\" height=\"1\"/><rect x=\"6\" y=\"2\" width=\"1\" height=\"1\"/><rect x=\"7\" y=\"2\" width=\"1\" height=\"1\"/><rect x=\"8\" y=\"2\" width=\"1\" height=\"1\"/><rect x=\"9\" y=\"2\" width=\"1\" height=\"1\"/><rect x=\"10\" y=\"2\" width=\"1\" height=\"1\"/><rect x=\"11\" y=\"2\" width=\"1\" height=\"1\"/><rect x=\"12\" y=\"2\" width=\"1\" height=\"1\"/><rect x=\"13\" y=\"2\" width=\"1\" height=\"1\"/><rect x=\"14\" y=\"2\" width=\"1\" height=\"1\"/><rect x=\"1\" y=\"3\" width=\"1\" height=\"1\"/><rect x=\"14\" y=\"3\" width=\"1\" height=\"1\"/><rect x=\"1\" y=\"4\" width=\"1\" height=\"1\"/><rect x=\"5\" y=\"4\" width=\"1\" height=\"1\"/><rect x=\"7\" y=\"4\" width=\"1\" height=\"1\"/><rect x=\"8\" y=\"4\" width=\"1\" height=\"1\"/><rect x=\"10\" y=\"4\" width=\"1\" height=\"1\"/><rect x=\"14\" y=\"4\" width=\"1\" height=\"1\"/><rect x=\"1\" y=\"5\" width=\"1\" height=\"1\"/><rect x=\"4\" y=\"5\" width=\"1\" height=\"1\"/><rect x=\"7\" y=\"5\" width=\"1\" height=\"1\"/><rect x=\"8\" y=\"5\" width=\"1\" height=\"1\"/><rect x=\"11\" y=\"5\" width=\"1\" height=\"1\"/><rect x=\"14\" y=\"5\" width=\"1\" height=\"1\"/><rect x=\"1\" y=\"6\" width=\"1\" height=\"1\"/><rect x=\"3\" y=\"6\" width=\"1\" height=\"1\"/><rect x=\"7\" y=\"6\" width=\"1\" height=\"1\"/><rect x=\"8\" y=\"6\" width=\"1\" height=\"1\"/><rect x=\"12\" y=\"6\" width=\"1\" height=\"1\"/><rect x=\"14\" y=\"6\" width=\"1\" height=\"1\"/><rect x=\"1\" y=\"7\" width=\"1\" height=\"1\"/><rect x=\"4\" y=\"7\" width=\"1\" height=\"1\"/><rect x=\"7\" y=\"7\" width=\"1\" height=\"1\"/><rect x=\"8\" y=\"7\" width=\"1\" height=\"1\"/><rect x=\"11\" y=\"7\" width=\"1\" height=\"1\"/><rect x=\"14\" y=\"7\" width=\"1\" height=\"1\"/><rect x=\"1\" y=\"8\" width=\"1\" height=\"1\"/><rect x=\"5\" y=\"8\" width=\"1\" height=\"1\"/><rect x=\"7\" y=\"8\" width=\"1\" height=\"1\"/><rect x=\"8\" y=\"8\" width=\"1\" height=\"1\"/><rect x=\"10\" y=\"8\" width=\"1\" height=\"1\"/><rect x=\"14\" y=\"8\" width=\"1\" height=\"1\"/><rect x=\"1\" y=\"9\" width=\"1\" height=\"1\"/><rect x=\"14\" y=\"9\" width=\"1\" height=\"1\"/><rect x=\"1\" y=\"10\" width=\"1\" height=\"1\"/><rect x=\"2\" y=\"10\" width=\"1\" height=\"1\"/><rect x=\"3\" y=\"10\" width=\"1\" height=\"1\"/><rect x=\"4\" y=\"10\" width=\"1\" height=\"1\"/><rect x=\"5\" y=\"10\" width=\"1\" height=\"1\"/><rect x=\"6\" y=\"10\" width=\"1\" height=\"1\"/><rect x=\"7\" y=\"10\" width=\"1\" height=\"1\"/><rect x=\"8\" y=\"10\" width=\"1\" height=\"1\"/><rect x=\"9\" y=\"10\" width=\"1\" height=\"1\"/><rect x=\"10\" y=\"10\" width=\"1\" height=\"1\"/><rect x=\"11\" y=\"10\" width=\"1\" height=\"1\"/><rect x=\"12\" y=\"10\" width=\"1\" height=\"1\"/><rect x=\"13\" y=\"10\" width=\"1\" height=\"1\"/><rect x=\"14\" y=\"10\" width=\"1\" height=\"1\"/><rect x=\"4\" y=\"12\" width=\"1\" height=\"1\"/><rect x=\"3\" y=\"13\" width=\"1\" height=\"1\"/><rect x=\"2\" y=\"14\" width=\"1\" height=\"1\"/></svg>", "search": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.6\"><circle cx=\"11\" cy=\"11\" r=\"7\"/><path d=\"M21 21l-4.3-4.3\"/></svg>", "arrow": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.6\"><path d=\"M5 12h14M13 6l6 6-6 6\"/></svg>", "history": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"><circle cx=\"12\" cy=\"12\" r=\"9\"/><path d=\"M12 7.5v5l3.2 1.9\"/></svg>", "heart": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.5\"><path d=\"M12 20.5s-7.5-4.6-10-9.3C.4 7.9 2 4.5 5.4 4c2-.3 3.8.6 4.9 2.3.8 1.2 1.7 1.2 2.5 0C13.8 4.6 15.6 3.7 17.6 4c3.4.5 5 3.9 3.4 7.2-2.5 4.7-9 9.3-9 9.3Z\"/></svg>", "heart-filled": "<svg viewBox=\"0 0 24 24\" fill=\"currentColor\" stroke=\"none\"><path d=\"M12 20.5s-7.5-4.6-10-9.3C.4 7.9 2 4.5 5.4 4c2-.3 3.8.6 4.9 2.3.8 1.2 1.7 1.2 2.5 0C13.8 4.6 15.6 3.7 17.6 4c3.4.5 5 3.9 3.4 7.2-2.5 4.7-9 9.3-9 9.3Z\"/></svg>", "flame": "<svg viewBox=\"0 0 24 24\" fill=\"currentColor\" stroke=\"none\"><path d=\"M12 2c1 3-2 4-2 7a3 3 0 0 0 6 0c0-1-0.5-2-1-2 2 0 4 2 4 5.5A7 7 0 1 1 8 12.5C8 9 9 6 12 2Z\"/></svg>", "wand": "<svg viewBox=\"0 0 12 12\" fill=\"currentColor\" shape-rendering=\"crispEdges\"><rect x=\"7\" y=\"2\" width=\"1\" height=\"1\"/><rect x=\"8\" y=\"2\" width=\"1\" height=\"1\"/><rect x=\"6\" y=\"3\" width=\"1\" height=\"1\"/><rect x=\"7\" y=\"3\" width=\"1\" height=\"1\"/><rect x=\"8\" y=\"3\" width=\"1\" height=\"1\"/><rect x=\"9\" y=\"3\" width=\"1\" height=\"1\"/><rect x=\"6\" y=\"4\" width=\"1\" height=\"1\"/><rect x=\"7\" y=\"4\" width=\"1\" height=\"1\"/><rect x=\"8\" y=\"4\" width=\"1\" height=\"1\"/><rect x=\"9\" y=\"4\" width=\"1\" height=\"1\"/><rect x=\"7\" y=\"5\" width=\"1\" height=\"1\"/><rect x=\"8\" y=\"5\" width=\"1\" height=\"1\"/><rect x=\"6\" y=\"6\" width=\"1\" height=\"1\"/><rect x=\"5\" y=\"7\" width=\"1\" height=\"1\"/><rect x=\"3\" y=\"8\" width=\"1\" height=\"1\"/><rect x=\"4\" y=\"8\" width=\"1\" height=\"1\"/><rect x=\"3\" y=\"9\" width=\"1\" height=\"1\"/><rect x=\"2\" y=\"10\" width=\"1\" height=\"1\"/><rect x=\"1\" y=\"11\" width=\"1\" height=\"1\"/></svg>"};
+const ARTICLE_ICONS = {"aprendizaje-por-refuerzo-basico": "<svg viewBox=\"0 0 16 16\" fill=\"currentColor\" shape-rendering=\"crispEdges\"><rect x=\"5\" y=\"2\" width=\"1\" height=\"1\"/><rect x=\"6\" y=\"2\" width=\"1\" height=\"1\"/><rect x=\"7\" y=\"2\" width=\"1\" height=\"1\"/><rect x=\"8\" y=\"2\" width=\"1\" height=\"1\"/><rect x=\"9\" y=\"2\" width=\"1\" height=\"1\"/><rect x=\"10\" y=\"2\" width=\"1\" height=\"1\"/><rect x=\"3\" y=\"3\" width=\"1\" height=\"1\"/><rect x=\"4\" y=\"3\" width=\"1\" height=\"1\"/><rect x=\"11\" y=\"3\" width=\"1\" height=\"1\"/><rect x=\"12\" y=\"3\" width=\"1\" height=\"1\"/><rect x=\"13\" y=\"3\" width=\"1\" height=\"1\"/><rect x=\"3\" y=\"4\" width=\"1\" height=\"1\"/><rect x=\"12\" y=\"4\" width=\"1\" height=\"1\"/><rect x=\"6\" y=\"5\" width=\"1\" height=\"1\"/><rect x=\"7\" y=\"5\" width=\"1\" height=\"1\"/><rect x=\"8\" y=\"5\" width=\"1\" height=\"1\"/><rect x=\"9\" y=\"5\" width=\"1\" height=\"1\"/><rect x=\"13\" y=\"5\" width=\"1\" height=\"1\"/><rect x=\"5\" y=\"6\" width=\"1\" height=\"1\"/><rect x=\"6\" y=\"6\" width=\"1\" height=\"1\"/><rect x=\"9\" y=\"6\" width=\"1\" height=\"1\"/><rect x=\"10\" y=\"6\" width=\"1\" height=\"1\"/><rect x=\"5\" y=\"7\" width=\"1\" height=\"1\"/><rect x=\"7\" y=\"7\" width=\"1\" height=\"1\"/><rect x=\"8\" y=\"7\" width=\"1\" height=\"1\"/><rect x=\"10\" y=\"7\" width=\"1\" height=\"1\"/><rect x=\"5\" y=\"8\" width=\"1\" height=\"1\"/><rect x=\"7\" y=\"8\" width=\"1\" height=\"1\"/><rect x=\"8\" y=\"8\" width=\"1\" height=\"1\"/><rect x=\"10\" y=\"8\" width=\"1\" height=\"1\"/><rect x=\"5\" y=\"9\" width=\"1\" height=\"1\"/><rect x=\"6\" y=\"9\" width=\"1\" height=\"1\"/><rect x=\"9\" y=\"9\" width=\"1\" height=\"1\"/><rect x=\"10\" y=\"9\" width=\"1\" height=\"1\"/><rect x=\"2\" y=\"10\" width=\"1\" height=\"1\"/><rect x=\"6\" y=\"10\" width=\"1\" height=\"1\"/><rect x=\"7\" y=\"10\" width=\"1\" height=\"1\"/><rect x=\"8\" y=\"10\" width=\"1\" height=\"1\"/><rect x=\"9\" y=\"10\" width=\"1\" height=\"1\"/><rect x=\"3\" y=\"11\" width=\"1\" height=\"1\"/><rect x=\"12\" y=\"11\" width=\"1\" height=\"1\"/><rect x=\"2\" y=\"12\" width=\"1\" height=\"1\"/><rect x=\"3\" y=\"12\" width=\"1\" height=\"1\"/><rect x=\"4\" y=\"12\" width=\"1\" height=\"1\"/><rect x=\"11\" y=\"12\" width=\"1\" height=\"1\"/><rect x=\"12\" y=\"12\" width=\"1\" height=\"1\"/><rect x=\"5\" y=\"13\" width=\"1\" height=\"1\"/><rect x=\"6\" y=\"13\" width=\"1\" height=\"1\"/><rect x=\"7\" y=\"13\" width=\"1\" height=\"1\"/><rect x=\"8\" y=\"13\" width=\"1\" height=\"1\"/><rect x=\"9\" y=\"13\" width=\"1\" height=\"1\"/><rect x=\"10\" y=\"13\" width=\"1\" height=\"1\"/></svg>", "meta-abre-astryx-su-design-system-interno-y-ya-funciona-en-figma-make": "<svg viewBox=\"0 0 16 16\" fill=\"currentColor\" shape-rendering=\"crispEdges\"><rect x=\"9\" y=\"0\" width=\"1\" height=\"1\"/><rect x=\"10\" y=\"0\" width=\"1\" height=\"1\"/><rect x=\"11\" y=\"0\" width=\"1\" height=\"1\"/><rect x=\"12\" y=\"0\" width=\"1\" height=\"1\"/><rect x=\"9\" y=\"1\" width=\"1\" height=\"1\"/><rect x=\"10\" y=\"1\" width=\"1\" height=\"1\"/><rect x=\"11\" y=\"1\" width=\"1\" height=\"1\"/><rect x=\"12\" y=\"1\" width=\"1\" height=\"1\"/><rect x=\"5\" y=\"2\" width=\"1\" height=\"1\"/><rect x=\"6\" y=\"2\" width=\"1\" height=\"1\"/><rect x=\"7\" y=\"2\" width=\"1\" height=\"1\"/><rect x=\"8\" y=\"2\" width=\"1\" height=\"1\"/><rect x=\"9\" y=\"2\" width=\"1\" height=\"1\"/><rect x=\"10\" y=\"2\" width=\"1\" height=\"1\"/><rect x=\"11\" y=\"2\" width=\"1\" height=\"1\"/><rect x=\"12\" y=\"2\" width=\"1\" height=\"1\"/><rect x=\"2\" y=\"3\" width=\"1\" height=\"1\"/><rect x=\"3\" y=\"3\" width=\"1\" height=\"1\"/><rect x=\"4\" y=\"3\" width=\"1\" height=\"1\"/><rect x=\"5\" y=\"3\" width=\"1\" height=\"1\"/><rect x=\"6\" y=\"3\" width=\"1\" height=\"1\"/><rect x=\"7\" y=\"3\" width=\"1\" height=\"1\"/><rect x=\"8\" y=\"3\" width=\"1\" height=\"1\"/><rect x=\"9\" y=\"3\" width=\"1\" height=\"1\"/><rect x=\"10\" y=\"3\" width=\"1\" height=\"1\"/><rect x=\"11\" y=\"3\" width=\"1\" height=\"1\"/><rect x=\"12\" y=\"3\" width=\"1\" height=\"1\"/><rect x=\"2\" y=\"4\" width=\"1\" height=\"1\"/><rect x=\"4\" y=\"4\" width=\"1\" height=\"1\"/><rect x=\"5\" y=\"4\" width=\"1\" height=\"1\"/><rect x=\"6\" y=\"4\" width=\"1\" height=\"1\"/><rect x=\"7\" y=\"4\" width=\"1\" height=\"1\"/><rect x=\"8\" y=\"4\" width=\"1\" height=\"1\"/><rect x=\"2\" y=\"5\" width=\"1\" height=\"1\"/><rect x=\"3\" y=\"5\" width=\"1\" height=\"1\"/><rect x=\"4\" y=\"5\" width=\"1\" height=\"1\"/><rect x=\"5\" y=\"5\" width=\"1\" height=\"1\"/><rect x=\"6\" y=\"5\" width=\"1\" height=\"1\"/><rect x=\"7\" y=\"5\" width=\"1\" height=\"1\"/><rect x=\"8\" y=\"5\" width=\"1\" height=\"1\"/><rect x=\"6\" y=\"6\" width=\"1\" height=\"1\"/><rect x=\"7\" y=\"6\" width=\"1\" height=\"1\"/><rect x=\"8\" y=\"6\" width=\"1\" height=\"1\"/><rect x=\"9\" y=\"6\" width=\"1\" height=\"1\"/><rect x=\"10\" y=\"6\" width=\"1\" height=\"1\"/><rect x=\"4\" y=\"7\" width=\"1\" height=\"1\"/><rect x=\"5\" y=\"7\" width=\"1\" height=\"1\"/><rect x=\"11\" y=\"7\" width=\"1\" height=\"1\"/><rect x=\"3\" y=\"8\" width=\"1\" height=\"1\"/><rect x=\"12\" y=\"8\" width=\"1\" height=\"1\"/><rect x=\"13\" y=\"8\" width=\"1\" height=\"1\"/><rect x=\"2\" y=\"9\" width=\"1\" height=\"1\"/><rect x=\"3\" y=\"9\" width=\"1\" height=\"1\"/><rect x=\"4\" y=\"9\" width=\"1\" height=\"1\"/><rect x=\"5\" y=\"9\" width=\"1\" height=\"1\"/><rect x=\"6\" y=\"9\" width=\"1\" height=\"1\"/><rect x=\"7\" y=\"9\" width=\"1\" height=\"1\"/><rect x=\"8\" y=\"9\" width=\"1\" height=\"1\"/><rect x=\"9\" y=\"9\" width=\"1\" height=\"1\"/><rect x=\"10\" y=\"9\" width=\"1\" height=\"1\"/><rect x=\"11\" y=\"9\" width=\"1\" height=\"1\"/><rect x=\"12\" y=\"9\" width=\"1\" height=\"1\"/><rect x=\"13\" y=\"9\" width=\"1\" height=\"1\"/><rect x=\"14\" y=\"9\" width=\"1\" height=\"1\"/><rect x=\"2\" y=\"10\" width=\"1\" height=\"1\"/><rect x=\"14\" y=\"10\" width=\"1\" height=\"1\"/><rect x=\"2\" y=\"11\" width=\"1\" height=\"1\"/><rect x=\"4\" y=\"11\" width=\"1\" height=\"1\"/><rect x=\"5\" y=\"11\" width=\"1\" height=\"1\"/><rect x=\"6\" y=\"11\" width=\"1\" height=\"1\"/><rect x=\"7\" y=\"11\" width=\"1\" height=\"1\"/><rect x=\"8\" y=\"11\" width=\"1\" height=\"1\"/><rect x=\"9\" y=\"11\" width=\"1\" height=\"1\"/><rect x=\"10\" y=\"11\" width=\"1\" height=\"1\"/><rect x=\"11\" y=\"11\" width=\"1\" height=\"1\"/><rect x=\"12\" y=\"11\" width=\"1\" height=\"1\"/><rect x=\"14\" y=\"11\" width=\"1\" height=\"1\"/><rect x=\"2\" y=\"12\" width=\"1\" height=\"1\"/><rect x=\"14\" y=\"12\" width=\"1\" height=\"1\"/><rect x=\"2\" y=\"13\" width=\"1\" height=\"1\"/><rect x=\"3\" y=\"13\" width=\"1\" height=\"1\"/><rect x=\"4\" y=\"13\" width=\"1\" height=\"1\"/><rect x=\"5\" y=\"13\" width=\"1\" height=\"1\"/><rect x=\"6\" y=\"13\" width=\"1\" height=\"1\"/><rect x=\"7\" y=\"13\" width=\"1\" height=\"1\"/><rect x=\"8\" y=\"13\" width=\"1\" height=\"1\"/><rect x=\"9\" y=\"13\" width=\"1\" height=\"1\"/><rect x=\"10\" y=\"13\" width=\"1\" height=\"1\"/><rect x=\"11\" y=\"13\" width=\"1\" height=\"1\"/><rect x=\"12\" y=\"13\" width=\"1\" height=\"1\"/><rect x=\"13\" y=\"13\" width=\"1\" height=\"1\"/><rect x=\"14\" y=\"13\" width=\"1\" height=\"1\"/></svg>", "claude-agents-que-son-y-como-crear-uno": "<svg viewBox=\"0 0 16 16\" fill=\"currentColor\" shape-rendering=\"crispEdges\"><rect x=\"4\" y=\"0\" width=\"1\" height=\"1\"/><rect x=\"4\" y=\"1\" width=\"1\" height=\"1\"/><rect x=\"0\" y=\"2\" width=\"1\" height=\"1\"/><rect x=\"1\" y=\"2\" width=\"1\" height=\"1\"/><rect x=\"2\" y=\"2\" width=\"1\" height=\"1\"/><rect x=\"3\" y=\"2\" width=\"1\" height=\"1\"/><rect x=\"4\" y=\"2\" width=\"1\" height=\"1\"/><rect x=\"5\" y=\"2\" width=\"1\" height=\"1\"/><rect x=\"6\" y=\"2\" width=\"1\" height=\"1\"/><rect x=\"7\" y=\"2\" width=\"1\" height=\"1\"/><rect x=\"8\" y=\"2\" width=\"1\" height=\"1\"/><rect x=\"0\" y=\"3\" width=\"1\" height=\"1\"/><rect x=\"8\" y=\"3\" width=\"1\" height=\"1\"/><rect x=\"0\" y=\"4\" width=\"1\" height=\"1\"/><rect x=\"2\" y=\"4\" width=\"1\" height=\"1\"/><rect x=\"3\" y=\"4\" width=\"1\" height=\"1\"/><rect x=\"5\" y=\"4\" width=\"1\" height=\"1\"/><rect x=\"6\" y=\"4\" width=\"1\" height=\"1\"/><rect x=\"8\" y=\"4\" width=\"1\" height=\"1\"/><rect x=\"0\" y=\"5\" width=\"1\" height=\"1\"/><rect x=\"2\" y=\"5\" width=\"1\" height=\"1\"/><rect x=\"3\" y=\"5\" width=\"1\" height=\"1\"/><rect x=\"5\" y=\"5\" width=\"1\" height=\"1\"/><rect x=\"6\" y=\"5\" width=\"1\" height=\"1\"/><rect x=\"8\" y=\"5\" width=\"1\" height=\"1\"/><rect x=\"0\" y=\"6\" width=\"1\" height=\"1\"/><rect x=\"2\" y=\"6\" width=\"1\" height=\"1\"/><rect x=\"3\" y=\"6\" width=\"1\" height=\"1\"/><rect x=\"5\" y=\"6\" width=\"1\" height=\"1\"/><rect x=\"6\" y=\"6\" width=\"1\" height=\"1\"/><rect x=\"8\" y=\"6\" width=\"1\" height=\"1\"/><rect x=\"0\" y=\"7\" width=\"1\" height=\"1\"/><rect x=\"8\" y=\"7\" width=\"1\" height=\"1\"/><rect x=\"0\" y=\"8\" width=\"1\" height=\"1\"/><rect x=\"2\" y=\"8\" width=\"1\" height=\"1\"/><rect x=\"3\" y=\"8\" width=\"1\" height=\"1\"/><rect x=\"4\" y=\"8\" width=\"1\" height=\"1\"/><rect x=\"5\" y=\"8\" width=\"1\" height=\"1\"/><rect x=\"6\" y=\"8\" width=\"1\" height=\"1\"/><rect x=\"8\" y=\"8\" width=\"1\" height=\"1\"/><rect x=\"12\" y=\"8\" width=\"1\" height=\"1\"/><rect x=\"0\" y=\"9\" width=\"1\" height=\"1\"/><rect x=\"1\" y=\"9\" width=\"1\" height=\"1\"/><rect x=\"2\" y=\"9\" width=\"1\" height=\"1\"/><rect x=\"3\" y=\"9\" width=\"1\" height=\"1\"/><rect x=\"4\" y=\"9\" width=\"1\" height=\"1\"/><rect x=\"5\" y=\"9\" width=\"1\" height=\"1\"/><rect x=\"6\" y=\"9\" width=\"1\" height=\"1\"/><rect x=\"7\" y=\"9\" width=\"1\" height=\"1\"/><rect x=\"8\" y=\"9\" width=\"1\" height=\"1\"/><rect x=\"10\" y=\"9\" width=\"1\" height=\"1\"/><rect x=\"11\" y=\"9\" width=\"1\" height=\"1\"/><rect x=\"12\" y=\"9\" width=\"1\" height=\"1\"/><rect x=\"13\" y=\"9\" width=\"1\" height=\"1\"/><rect x=\"14\" y=\"9\" width=\"1\" height=\"1\"/><rect x=\"9\" y=\"10\" width=\"1\" height=\"1\"/><rect x=\"10\" y=\"10\" width=\"1\" height=\"1\"/><rect x=\"11\" y=\"10\" width=\"1\" height=\"1\"/><rect x=\"12\" y=\"10\" width=\"1\" height=\"1\"/><rect x=\"13\" y=\"10\" width=\"1\" height=\"1\"/><rect x=\"14\" y=\"10\" width=\"1\" height=\"1\"/><rect x=\"15\" y=\"10\" width=\"1\" height=\"1\"/><rect x=\"9\" y=\"11\" width=\"1\" height=\"1\"/><rect x=\"10\" y=\"11\" width=\"1\" height=\"1\"/><rect x=\"14\" y=\"11\" width=\"1\" height=\"1\"/><rect x=\"15\" y=\"11\" width=\"1\" height=\"1\"/><rect x=\"8\" y=\"12\" width=\"1\" height=\"1\"/><rect x=\"9\" y=\"12\" width=\"1\" height=\"1\"/><rect x=\"10\" y=\"12\" width=\"1\" height=\"1\"/><rect x=\"14\" y=\"12\" width=\"1\" height=\"1\"/><rect x=\"15\" y=\"12\" width=\"1\" height=\"1\"/><rect x=\"9\" y=\"13\" width=\"1\" height=\"1\"/><rect x=\"10\" y=\"13\" width=\"1\" height=\"1\"/><rect x=\"14\" y=\"13\" width=\"1\" height=\"1\"/><rect x=\"15\" y=\"13\" width=\"1\" height=\"1\"/><rect x=\"9\" y=\"14\" width=\"1\" height=\"1\"/><rect x=\"10\" y=\"14\" width=\"1\" height=\"1\"/><rect x=\"11\" y=\"14\" width=\"1\" height=\"1\"/><rect x=\"12\" y=\"14\" width=\"1\" height=\"1\"/><rect x=\"13\" y=\"14\" width=\"1\" height=\"1\"/><rect x=\"14\" y=\"14\" width=\"1\" height=\"1\"/><rect x=\"15\" y=\"14\" width=\"1\" height=\"1\"/><rect x=\"10\" y=\"15\" width=\"1\" height=\"1\"/><rect x=\"11\" y=\"15\" width=\"1\" height=\"1\"/><rect x=\"12\" y=\"15\" width=\"1\" height=\"1\"/><rect x=\"13\" y=\"15\" width=\"1\" height=\"1\"/><rect x=\"14\" y=\"15\" width=\"1\" height=\"1\"/></svg>", "donde-va-realmente-tu-contexto-de-diseno-en-claude": "<svg viewBox=\"0 0 16 16\" fill=\"currentColor\" shape-rendering=\"crispEdges\"><rect x=\"2\" y=\"2\" width=\"1\" height=\"1\"/><rect x=\"3\" y=\"2\" width=\"1\" height=\"1\"/><rect x=\"4\" y=\"2\" width=\"1\" height=\"1\"/><rect x=\"5\" y=\"2\" width=\"1\" height=\"1\"/><rect x=\"6\" y=\"2\" width=\"1\" height=\"1\"/><rect x=\"7\" y=\"2\" width=\"1\" height=\"1\"/><rect x=\"8\" y=\"2\" width=\"1\" height=\"1\"/><rect x=\"9\" y=\"2\" width=\"1\" height=\"1\"/><rect x=\"10\" y=\"2\" width=\"1\" height=\"1\"/><rect x=\"11\" y=\"2\" width=\"1\" height=\"1\"/><rect x=\"12\" y=\"2\" width=\"1\" height=\"1\"/><rect x=\"13\" y=\"2\" width=\"1\" height=\"1\"/><rect x=\"2\" y=\"3\" width=\"1\" height=\"1\"/><rect x=\"4\" y=\"3\" width=\"1\" height=\"1\"/><rect x=\"5\" y=\"3\" width=\"1\" height=\"1\"/><rect x=\"11\" y=\"3\" width=\"1\" height=\"1\"/><rect x=\"13\" y=\"3\" width=\"1\" height=\"1\"/><rect x=\"2\" y=\"4\" width=\"1\" height=\"1\"/><rect x=\"13\" y=\"4\" width=\"1\" height=\"1\"/><rect x=\"2\" y=\"5\" width=\"1\" height=\"1\"/><rect x=\"3\" y=\"5\" width=\"1\" height=\"1\"/><rect x=\"4\" y=\"5\" width=\"1\" height=\"1\"/><rect x=\"5\" y=\"5\" width=\"1\" height=\"1\"/><rect x=\"6\" y=\"5\" width=\"1\" height=\"1\"/><rect x=\"7\" y=\"5\" width=\"1\" height=\"1\"/><rect x=\"8\" y=\"5\" width=\"1\" height=\"1\"/><rect x=\"9\" y=\"5\" width=\"1\" height=\"1\"/><rect x=\"10\" y=\"5\" width=\"1\" height=\"1\"/><rect x=\"11\" y=\"5\" width=\"1\" height=\"1\"/><rect x=\"12\" y=\"5\" width=\"1\" height=\"1\"/><rect x=\"13\" y=\"5\" width=\"1\" height=\"1\"/><rect x=\"2\" y=\"7\" width=\"1\" height=\"1\"/><rect x=\"3\" y=\"7\" width=\"1\" height=\"1\"/><rect x=\"4\" y=\"7\" width=\"1\" height=\"1\"/><rect x=\"5\" y=\"7\" width=\"1\" height=\"1\"/><rect x=\"6\" y=\"7\" width=\"1\" height=\"1\"/><rect x=\"7\" y=\"7\" width=\"1\" height=\"1\"/><rect x=\"8\" y=\"7\" width=\"1\" height=\"1\"/><rect x=\"9\" y=\"7\" width=\"1\" height=\"1\"/><rect x=\"10\" y=\"7\" width=\"1\" height=\"1\"/><rect x=\"11\" y=\"7\" width=\"1\" height=\"1\"/><rect x=\"12\" y=\"7\" width=\"1\" height=\"1\"/><rect x=\"13\" y=\"7\" width=\"1\" height=\"1\"/><rect x=\"2\" y=\"8\" width=\"1\" height=\"1\"/><rect x=\"4\" y=\"8\" width=\"1\" height=\"1\"/><rect x=\"5\" y=\"8\" width=\"1\" height=\"1\"/><rect x=\"11\" y=\"8\" width=\"1\" height=\"1\"/><rect x=\"13\" y=\"8\" width=\"1\" height=\"1\"/><rect x=\"2\" y=\"9\" width=\"1\" height=\"1\"/><rect x=\"13\" y=\"9\" width=\"1\" height=\"1\"/><rect x=\"2\" y=\"10\" width=\"1\" height=\"1\"/><rect x=\"3\" y=\"10\" width=\"1\" height=\"1\"/><rect x=\"4\" y=\"10\" width=\"1\" height=\"1\"/><rect x=\"5\" y=\"10\" width=\"1\" height=\"1\"/><rect x=\"6\" y=\"10\" width=\"1\" height=\"1\"/><rect x=\"7\" y=\"10\" width=\"1\" height=\"1\"/><rect x=\"8\" y=\"10\" width=\"1\" height=\"1\"/><rect x=\"9\" y=\"10\" width=\"1\" height=\"1\"/><rect x=\"10\" y=\"10\" width=\"1\" height=\"1\"/><rect x=\"11\" y=\"10\" width=\"1\" height=\"1\"/><rect x=\"12\" y=\"10\" width=\"1\" height=\"1\"/><rect x=\"13\" y=\"10\" width=\"1\" height=\"1\"/><rect x=\"2\" y=\"12\" width=\"1\" height=\"1\"/><rect x=\"3\" y=\"12\" width=\"1\" height=\"1\"/><rect x=\"4\" y=\"12\" width=\"1\" height=\"1\"/><rect x=\"5\" y=\"12\" width=\"1\" height=\"1\"/><rect x=\"6\" y=\"12\" width=\"1\" height=\"1\"/><rect x=\"7\" y=\"12\" width=\"1\" height=\"1\"/><rect x=\"8\" y=\"12\" width=\"1\" height=\"1\"/><rect x=\"9\" y=\"12\" width=\"1\" height=\"1\"/><rect x=\"10\" y=\"12\" width=\"1\" height=\"1\"/><rect x=\"11\" y=\"12\" width=\"1\" height=\"1\"/><rect x=\"12\" y=\"12\" width=\"1\" height=\"1\"/><rect x=\"13\" y=\"12\" width=\"1\" height=\"1\"/><rect x=\"2\" y=\"13\" width=\"1\" height=\"1\"/><rect x=\"4\" y=\"13\" width=\"1\" height=\"1\"/><rect x=\"5\" y=\"13\" width=\"1\" height=\"1\"/><rect x=\"11\" y=\"13\" width=\"1\" height=\"1\"/><rect x=\"13\" y=\"13\" width=\"1\" height=\"1\"/><rect x=\"2\" y=\"14\" width=\"1\" height=\"1\"/><rect x=\"13\" y=\"14\" width=\"1\" height=\"1\"/><rect x=\"2\" y=\"15\" width=\"1\" height=\"1\"/><rect x=\"3\" y=\"15\" width=\"1\" height=\"1\"/><rect x=\"4\" y=\"15\" width=\"1\" height=\"1\"/><rect x=\"5\" y=\"15\" width=\"1\" height=\"1\"/><rect x=\"6\" y=\"15\" width=\"1\" height=\"1\"/><rect x=\"7\" y=\"15\" width=\"1\" height=\"1\"/><rect x=\"8\" y=\"15\" width=\"1\" height=\"1\"/><rect x=\"9\" y=\"15\" width=\"1\" height=\"1\"/><rect x=\"10\" y=\"15\" width=\"1\" height=\"1\"/><rect x=\"11\" y=\"15\" width=\"1\" height=\"1\"/><rect x=\"12\" y=\"15\" width=\"1\" height=\"1\"/><rect x=\"13\" y=\"15\" width=\"1\" height=\"1\"/></svg>", "los-disenadores-gastan-los-limites-de-uso-de-claude-mas-rapido-que-nad": "<svg viewBox=\"0 0 16 16\" fill=\"currentColor\" shape-rendering=\"crispEdges\"><rect x=\"1\" y=\"4\" width=\"1\" height=\"1\"/><rect x=\"2\" y=\"4\" width=\"1\" height=\"1\"/><rect x=\"3\" y=\"4\" width=\"1\" height=\"1\"/><rect x=\"4\" y=\"4\" width=\"1\" height=\"1\"/><rect x=\"5\" y=\"4\" width=\"1\" height=\"1\"/><rect x=\"6\" y=\"4\" width=\"1\" height=\"1\"/><rect x=\"7\" y=\"4\" width=\"1\" height=\"1\"/><rect x=\"8\" y=\"4\" width=\"1\" height=\"1\"/><rect x=\"9\" y=\"4\" width=\"1\" height=\"1\"/><rect x=\"10\" y=\"4\" width=\"1\" height=\"1\"/><rect x=\"11\" y=\"4\" width=\"1\" height=\"1\"/><rect x=\"12\" y=\"4\" width=\"1\" height=\"1\"/><rect x=\"1\" y=\"5\" width=\"1\" height=\"1\"/><rect x=\"2\" y=\"5\" width=\"1\" height=\"1\"/><rect x=\"3\" y=\"5\" width=\"1\" height=\"1\"/><rect x=\"4\" y=\"5\" width=\"1\" height=\"1\"/><rect x=\"8\" y=\"5\" width=\"1\" height=\"1\"/><rect x=\"12\" y=\"5\" width=\"1\" height=\"1\"/><rect x=\"1\" y=\"6\" width=\"1\" height=\"1\"/><rect x=\"2\" y=\"6\" width=\"1\" height=\"1\"/><rect x=\"3\" y=\"6\" width=\"1\" height=\"1\"/><rect x=\"4\" y=\"6\" width=\"1\" height=\"1\"/><rect x=\"7\" y=\"6\" width=\"1\" height=\"1\"/><rect x=\"12\" y=\"6\" width=\"1\" height=\"1\"/><rect x=\"13\" y=\"6\" width=\"1\" height=\"1\"/><rect x=\"14\" y=\"6\" width=\"1\" height=\"1\"/><rect x=\"1\" y=\"7\" width=\"1\" height=\"1\"/><rect x=\"2\" y=\"7\" width=\"1\" height=\"1\"/><rect x=\"3\" y=\"7\" width=\"1\" height=\"1\"/><rect x=\"4\" y=\"7\" width=\"1\" height=\"1\"/><rect x=\"7\" y=\"7\" width=\"1\" height=\"1\"/><rect x=\"12\" y=\"7\" width=\"1\" height=\"1\"/><rect x=\"13\" y=\"7\" width=\"1\" height=\"1\"/><rect x=\"14\" y=\"7\" width=\"1\" height=\"1\"/><rect x=\"1\" y=\"8\" width=\"1\" height=\"1\"/><rect x=\"2\" y=\"8\" width=\"1\" height=\"1\"/><rect x=\"3\" y=\"8\" width=\"1\" height=\"1\"/><rect x=\"4\" y=\"8\" width=\"1\" height=\"1\"/><rect x=\"6\" y=\"8\" width=\"1\" height=\"1\"/><rect x=\"7\" y=\"8\" width=\"1\" height=\"1\"/><rect x=\"8\" y=\"8\" width=\"1\" height=\"1\"/><rect x=\"9\" y=\"8\" width=\"1\" height=\"1\"/><rect x=\"12\" y=\"8\" width=\"1\" height=\"1\"/><rect x=\"13\" y=\"8\" width=\"1\" height=\"1\"/><rect x=\"14\" y=\"8\" width=\"1\" height=\"1\"/><rect x=\"1\" y=\"9\" width=\"1\" height=\"1\"/><rect x=\"2\" y=\"9\" width=\"1\" height=\"1\"/><rect x=\"3\" y=\"9\" width=\"1\" height=\"1\"/><rect x=\"4\" y=\"9\" width=\"1\" height=\"1\"/><rect x=\"8\" y=\"9\" width=\"1\" height=\"1\"/><rect x=\"12\" y=\"9\" width=\"1\" height=\"1\"/><rect x=\"13\" y=\"9\" width=\"1\" height=\"1\"/><rect x=\"14\" y=\"9\" width=\"1\" height=\"1\"/><rect x=\"1\" y=\"10\" width=\"1\" height=\"1\"/><rect x=\"2\" y=\"10\" width=\"1\" height=\"1\"/><rect x=\"3\" y=\"10\" width=\"1\" height=\"1\"/><rect x=\"4\" y=\"10\" width=\"1\" height=\"1\"/><rect x=\"8\" y=\"10\" width=\"1\" height=\"1\"/><rect x=\"12\" y=\"10\" width=\"1\" height=\"1\"/><rect x=\"1\" y=\"11\" width=\"1\" height=\"1\"/><rect x=\"2\" y=\"11\" width=\"1\" height=\"1\"/><rect x=\"3\" y=\"11\" width=\"1\" height=\"1\"/><rect x=\"4\" y=\"11\" width=\"1\" height=\"1\"/><rect x=\"5\" y=\"11\" width=\"1\" height=\"1\"/><rect x=\"6\" y=\"11\" width=\"1\" height=\"1\"/><rect x=\"7\" y=\"11\" width=\"1\" height=\"1\"/><rect x=\"8\" y=\"11\" width=\"1\" height=\"1\"/><rect x=\"9\" y=\"11\" width=\"1\" height=\"1\"/><rect x=\"10\" y=\"11\" width=\"1\" height=\"1\"/><rect x=\"11\" y=\"11\" width=\"1\" height=\"1\"/><rect x=\"12\" y=\"11\" width=\"1\" height=\"1\"/></svg>", "diccionario-de-ia-para-disenadores": "<svg viewBox=\"0 0 16 16\" fill=\"currentColor\" shape-rendering=\"crispEdges\"><rect x=\"11\" y=\"0\" width=\"1\" height=\"1\"/><rect x=\"11\" y=\"1\" width=\"1\" height=\"1\"/><rect x=\"7\" y=\"2\" width=\"1\" height=\"1\"/><rect x=\"8\" y=\"2\" width=\"1\" height=\"1\"/><rect x=\"9\" y=\"2\" width=\"1\" height=\"1\"/><rect x=\"10\" y=\"2\" width=\"1\" height=\"1\"/><rect x=\"12\" y=\"2\" width=\"1\" height=\"1\"/><rect x=\"4\" y=\"3\" width=\"1\" height=\"1\"/><rect x=\"5\" y=\"3\" width=\"1\" height=\"1\"/><rect x=\"6\" y=\"3\" width=\"1\" height=\"1\"/><rect x=\"8\" y=\"3\" width=\"1\" height=\"1\"/><rect x=\"10\" y=\"3\" width=\"1\" height=\"1\"/><rect x=\"11\" y=\"3\" width=\"1\" height=\"1\"/><rect x=\"12\" y=\"3\" width=\"1\" height=\"1\"/><rect x=\"2\" y=\"4\" width=\"1\" height=\"1\"/><rect x=\"3\" y=\"4\" width=\"1\" height=\"1\"/><rect x=\"8\" y=\"4\" width=\"1\" height=\"1\"/><rect x=\"13\" y=\"4\" width=\"1\" height=\"1\"/><rect x=\"14\" y=\"4\" width=\"1\" height=\"1\"/><rect x=\"2\" y=\"5\" width=\"1\" height=\"1\"/><rect x=\"8\" y=\"5\" width=\"1\" height=\"1\"/><rect x=\"14\" y=\"5\" width=\"1\" height=\"1\"/><rect x=\"2\" y=\"6\" width=\"1\" height=\"1\"/><rect x=\"4\" y=\"6\" width=\"1\" height=\"1\"/><rect x=\"5\" y=\"6\" width=\"1\" height=\"1\"/><rect x=\"6\" y=\"6\" width=\"1\" height=\"1\"/><rect x=\"7\" y=\"6\" width=\"1\" height=\"1\"/><rect x=\"8\" y=\"6\" width=\"1\" height=\"1\"/><rect x=\"9\" y=\"6\" width=\"1\" height=\"1\"/><rect x=\"10\" y=\"6\" width=\"1\" height=\"1\"/><rect x=\"11\" y=\"6\" width=\"1\" height=\"1\"/><rect x=\"12\" y=\"6\" width=\"1\" height=\"1\"/><rect x=\"14\" y=\"6\" width=\"1\" height=\"1\"/><rect x=\"2\" y=\"7\" width=\"1\" height=\"1\"/><rect x=\"8\" y=\"7\" width=\"1\" height=\"1\"/><rect x=\"14\" y=\"7\" width=\"1\" height=\"1\"/><rect x=\"2\" y=\"8\" width=\"1\" height=\"1\"/><rect x=\"4\" y=\"8\" width=\"1\" height=\"1\"/><rect x=\"5\" y=\"8\" width=\"1\" height=\"1\"/><rect x=\"6\" y=\"8\" width=\"1\" height=\"1\"/><rect x=\"7\" y=\"8\" width=\"1\" height=\"1\"/><rect x=\"8\" y=\"8\" width=\"1\" height=\"1\"/><rect x=\"9\" y=\"8\" width=\"1\" height=\"1\"/><rect x=\"10\" y=\"8\" width=\"1\" height=\"1\"/><rect x=\"11\" y=\"8\" width=\"1\" height=\"1\"/><rect x=\"12\" y=\"8\" width=\"1\" height=\"1\"/><rect x=\"14\" y=\"8\" width=\"1\" height=\"1\"/><rect x=\"2\" y=\"9\" width=\"1\" height=\"1\"/><rect x=\"8\" y=\"9\" width=\"1\" height=\"1\"/><rect x=\"14\" y=\"9\" width=\"1\" height=\"1\"/><rect x=\"2\" y=\"10\" width=\"1\" height=\"1\"/><rect x=\"4\" y=\"10\" width=\"1\" height=\"1\"/><rect x=\"5\" y=\"10\" width=\"1\" height=\"1\"/><rect x=\"6\" y=\"10\" width=\"1\" height=\"1\"/><rect x=\"7\" y=\"10\" width=\"1\" height=\"1\"/><rect x=\"8\" y=\"10\" width=\"1\" height=\"1\"/><rect x=\"9\" y=\"10\" width=\"1\" height=\"1\"/><rect x=\"10\" y=\"10\" width=\"1\" height=\"1\"/><rect x=\"11\" y=\"10\" width=\"1\" height=\"1\"/><rect x=\"12\" y=\"10\" width=\"1\" height=\"1\"/><rect x=\"14\" y=\"10\" width=\"1\" height=\"1\"/><rect x=\"2\" y=\"11\" width=\"1\" height=\"1\"/><rect x=\"8\" y=\"11\" width=\"1\" height=\"1\"/><rect x=\"14\" y=\"11\" width=\"1\" height=\"1\"/><rect x=\"2\" y=\"12\" width=\"1\" height=\"1\"/><rect x=\"3\" y=\"12\" width=\"1\" height=\"1\"/><rect x=\"4\" y=\"12\" width=\"1\" height=\"1\"/><rect x=\"8\" y=\"12\" width=\"1\" height=\"1\"/><rect x=\"12\" y=\"12\" width=\"1\" height=\"1\"/><rect x=\"13\" y=\"12\" width=\"1\" height=\"1\"/><rect x=\"14\" y=\"12\" width=\"1\" height=\"1\"/><rect x=\"5\" y=\"13\" width=\"1\" height=\"1\"/><rect x=\"6\" y=\"13\" width=\"1\" height=\"1\"/><rect x=\"7\" y=\"13\" width=\"1\" height=\"1\"/><rect x=\"8\" y=\"13\" width=\"1\" height=\"1\"/><rect x=\"9\" y=\"13\" width=\"1\" height=\"1\"/><rect x=\"10\" y=\"13\" width=\"1\" height=\"1\"/><rect x=\"11\" y=\"13\" width=\"1\" height=\"1\"/></svg>", "5-trucos-para-que-claude-code-no-te-de-un-diseno-web-generico": "<svg viewBox=\"0 0 16 16\" fill=\"currentColor\" shape-rendering=\"crispEdges\"><rect x=\"0\" y=\"1\" width=\"1\" height=\"1\"/><rect x=\"1\" y=\"1\" width=\"1\" height=\"1\"/><rect x=\"2\" y=\"1\" width=\"1\" height=\"1\"/><rect x=\"3\" y=\"1\" width=\"1\" height=\"1\"/><rect x=\"4\" y=\"1\" width=\"1\" height=\"1\"/><rect x=\"5\" y=\"1\" width=\"1\" height=\"1\"/><rect x=\"6\" y=\"1\" width=\"1\" height=\"1\"/><rect x=\"7\" y=\"1\" width=\"1\" height=\"1\"/><rect x=\"8\" y=\"1\" width=\"1\" height=\"1\"/><rect x=\"9\" y=\"1\" width=\"1\" height=\"1\"/><rect x=\"10\" y=\"1\" width=\"1\" height=\"1\"/><rect x=\"11\" y=\"1\" width=\"1\" height=\"1\"/><rect x=\"12\" y=\"1\" width=\"1\" height=\"1\"/><rect x=\"13\" y=\"1\" width=\"1\" height=\"1\"/><rect x=\"14\" y=\"1\" width=\"1\" height=\"1\"/><rect x=\"15\" y=\"1\" width=\"1\" height=\"1\"/><rect x=\"0\" y=\"2\" width=\"1\" height=\"1\"/><rect x=\"2\" y=\"2\" width=\"1\" height=\"1\"/><rect x=\"4\" y=\"2\" width=\"1\" height=\"1\"/><rect x=\"6\" y=\"2\" width=\"1\" height=\"1\"/><rect x=\"9\" y=\"2\" width=\"1\" height=\"1\"/><rect x=\"10\" y=\"2\" width=\"1\" height=\"1\"/><rect x=\"11\" y=\"2\" width=\"1\" height=\"1\"/><rect x=\"12\" y=\"2\" width=\"1\" height=\"1\"/><rect x=\"13\" y=\"2\" width=\"1\" height=\"1\"/><rect x=\"15\" y=\"2\" width=\"1\" height=\"1\"/><rect x=\"0\" y=\"3\" width=\"1\" height=\"1\"/><rect x=\"15\" y=\"3\" width=\"1\" height=\"1\"/><rect x=\"0\" y=\"4\" width=\"1\" height=\"1\"/><rect x=\"1\" y=\"4\" width=\"1\" height=\"1\"/><rect x=\"2\" y=\"4\" width=\"1\" height=\"1\"/><rect x=\"3\" y=\"4\" width=\"1\" height=\"1\"/><rect x=\"4\" y=\"4\" width=\"1\" height=\"1\"/><rect x=\"5\" y=\"4\" width=\"1\" height=\"1\"/><rect x=\"6\" y=\"4\" width=\"1\" height=\"1\"/><rect x=\"7\" y=\"4\" width=\"1\" height=\"1\"/><rect x=\"8\" y=\"4\" width=\"1\" height=\"1\"/><rect x=\"9\" y=\"4\" width=\"1\" height=\"1\"/><rect x=\"10\" y=\"4\" width=\"1\" height=\"1\"/><rect x=\"11\" y=\"4\" width=\"1\" height=\"1\"/><rect x=\"12\" y=\"4\" width=\"1\" height=\"1\"/><rect x=\"13\" y=\"4\" width=\"1\" height=\"1\"/><rect x=\"14\" y=\"4\" width=\"1\" height=\"1\"/><rect x=\"15\" y=\"4\" width=\"1\" height=\"1\"/><rect x=\"0\" y=\"5\" width=\"1\" height=\"1\"/><rect x=\"15\" y=\"5\" width=\"1\" height=\"1\"/><rect x=\"0\" y=\"6\" width=\"1\" height=\"1\"/><rect x=\"7\" y=\"6\" width=\"1\" height=\"1\"/><rect x=\"8\" y=\"6\" width=\"1\" height=\"1\"/><rect x=\"15\" y=\"6\" width=\"1\" height=\"1\"/><rect x=\"0\" y=\"7\" width=\"1\" height=\"1\"/><rect x=\"7\" y=\"7\" width=\"1\" height=\"1\"/><rect x=\"8\" y=\"7\" width=\"1\" height=\"1\"/><rect x=\"15\" y=\"7\" width=\"1\" height=\"1\"/><rect x=\"0\" y=\"8\" width=\"1\" height=\"1\"/><rect x=\"5\" y=\"8\" width=\"1\" height=\"1\"/><rect x=\"6\" y=\"8\" width=\"1\" height=\"1\"/><rect x=\"7\" y=\"8\" width=\"1\" height=\"1\"/><rect x=\"8\" y=\"8\" width=\"1\" height=\"1\"/><rect x=\"9\" y=\"8\" width=\"1\" height=\"1\"/><rect x=\"10\" y=\"8\" width=\"1\" height=\"1\"/><rect x=\"15\" y=\"8\" width=\"1\" height=\"1\"/><rect x=\"0\" y=\"9\" width=\"1\" height=\"1\"/><rect x=\"4\" y=\"9\" width=\"1\" height=\"1\"/><rect x=\"5\" y=\"9\" width=\"1\" height=\"1\"/><rect x=\"6\" y=\"9\" width=\"1\" height=\"1\"/><rect x=\"7\" y=\"9\" width=\"1\" height=\"1\"/><rect x=\"8\" y=\"9\" width=\"1\" height=\"1\"/><rect x=\"9\" y=\"9\" width=\"1\" height=\"1\"/><rect x=\"10\" y=\"9\" width=\"1\" height=\"1\"/><rect x=\"11\" y=\"9\" width=\"1\" height=\"1\"/><rect x=\"15\" y=\"9\" width=\"1\" height=\"1\"/><rect x=\"0\" y=\"10\" width=\"1\" height=\"1\"/><rect x=\"5\" y=\"10\" width=\"1\" height=\"1\"/><rect x=\"6\" y=\"10\" width=\"1\" height=\"1\"/><rect x=\"7\" y=\"10\" width=\"1\" height=\"1\"/><rect x=\"8\" y=\"10\" width=\"1\" height=\"1\"/><rect x=\"9\" y=\"10\" width=\"1\" height=\"1\"/><rect x=\"10\" y=\"10\" width=\"1\" height=\"1\"/><rect x=\"15\" y=\"10\" width=\"1\" height=\"1\"/><rect x=\"0\" y=\"11\" width=\"1\" height=\"1\"/><rect x=\"7\" y=\"11\" width=\"1\" height=\"1\"/><rect x=\"8\" y=\"11\" width=\"1\" height=\"1\"/><rect x=\"15\" y=\"11\" width=\"1\" height=\"1\"/><rect x=\"0\" y=\"12\" width=\"1\" height=\"1\"/><rect x=\"7\" y=\"12\" width=\"1\" height=\"1\"/><rect x=\"8\" y=\"12\" width=\"1\" height=\"1\"/><rect x=\"15\" y=\"12\" width=\"1\" height=\"1\"/><rect x=\"0\" y=\"13\" width=\"1\" height=\"1\"/><rect x=\"1\" y=\"13\" width=\"1\" height=\"1\"/><rect x=\"2\" y=\"13\" width=\"1\" height=\"1\"/><rect x=\"3\" y=\"13\" width=\"1\" height=\"1\"/><rect x=\"4\" y=\"13\" width=\"1\" height=\"1\"/><rect x=\"5\" y=\"13\" width=\"1\" height=\"1\"/><rect x=\"6\" y=\"13\" width=\"1\" height=\"1\"/><rect x=\"7\" y=\"13\" width=\"1\" height=\"1\"/><rect x=\"8\" y=\"13\" width=\"1\" height=\"1\"/><rect x=\"9\" y=\"13\" width=\"1\" height=\"1\"/><rect x=\"10\" y=\"13\" width=\"1\" height=\"1\"/><rect x=\"11\" y=\"13\" width=\"1\" height=\"1\"/><rect x=\"12\" y=\"13\" width=\"1\" height=\"1\"/><rect x=\"13\" y=\"13\" width=\"1\" height=\"1\"/><rect x=\"14\" y=\"13\" width=\"1\" height=\"1\"/><rect x=\"15\" y=\"13\" width=\"1\" height=\"1\"/></svg>"};
 
 function bySlug(slug) { return SECTIONS.find(s => s.slug === slug); }
 
@@ -802,6 +926,66 @@ function wireRating(articleId) {
       renderTicker();
     });
   });
+}
+
+/* ---------- notas propias por artículo ---------- */
+function getArticleNotes() { try { return JSON.parse(localStorage.getItem('articleNotes') || '{}'); } catch(e) { return {}; } }
+function setArticleNote(id, text) {
+  const notes = getArticleNotes();
+  if (!text || !text.trim()) { delete notes[id]; } else { notes[id] = text; }
+  localStorage.setItem('articleNotes', JSON.stringify(notes));
+}
+
+function noteHtml(a) {
+  const val = getArticleNotes()[a.id] || '';
+  return `<div class="art-note">
+    <h4>${ICONS.edit} Tu nota</h4>
+    <p class="note-hint">Escribe en tus palabras qué te llevas de esto, o cómo lo aplicarías. Se guarda solo, en tu navegador.</p>
+    <textarea id="art-note-input" placeholder="Ej: esto me sirve para justificar el rediseño del onboarding...">${val}</textarea>
+    <div class="note-status" id="art-note-status"></div>
+  </div>`;
+}
+
+function wireNote(articleId) {
+  const input = document.getElementById('art-note-input');
+  const status = document.getElementById('art-note-status');
+  if (!input) return;
+  let t = null;
+  input.addEventListener('input', () => {
+    clearTimeout(t);
+    status.textContent = '';
+    t = setTimeout(() => {
+      setArticleNote(articleId, input.value);
+      status.textContent = 'Guardado ✓';
+      clearTimeout(window.__noteStatusTimer);
+      window.__noteStatusTimer = setTimeout(() => { status.textContent = ''; }, 1800);
+    }, 500);
+  });
+}
+
+/* ---------- artículos relacionados ---------- */
+function relatedArticles(a) {
+  const pool = visibleArticles().filter(x => x.id !== a.id);
+  const myTerms = new Set((a.glossary || []).map(g => g.term.toLowerCase()));
+  const scored = pool.map(x => {
+    let score = 0;
+    if (a.subsection && x.subsection === a.subsection) score += 2;
+    else if (x.section === a.section) score += 1;
+    const shared = (x.glossary || []).some(g => myTerms.has(g.term.toLowerCase()));
+    if (shared) score += 2;
+    return { x, score };
+  }).filter(s => s.score > 0);
+  scored.sort((p, q) => q.score - p.score || (q.x.date_added || '').localeCompare(p.x.date_added || ''));
+  return scored.slice(0, 3).map(s => s.x);
+}
+
+function relatedHtml(a) {
+  const rel = relatedArticles(a);
+  if (!rel.length) return '';
+  return `<div class="art-related">
+    <h4>${ICONS.link} Relacionados</h4>
+    <div class="rail">${rel.map(cardHtml).join('')}</div>
+  </div>`;
 }
 
 /* ---------- modal del teleprompter: artículos nuevos sin valorar ---------- */
@@ -1004,223 +1188,182 @@ function cardHtml(a) {
   </a>`;
 }
 
-/* ---------- front page (editorial layout) ---------- */
-function fpCardOpen(a) {
+/* ---------- front page (tabloide, cronología pura) ---------- */
+/* ---------- icono pixel-art del titular, elegido según el contenido ---------- */
+const LEAD_ICON_RULES = [
+  ['px-terminal', /\bcli\b|terminal|comando|consola|\bscript\b/i],
+  ['px-chip', /\bapi\b|\bmcp\b|servidor|protocolo|integraci[oó]n/i],
+  ['px-book', /diccionario|t[eé]rmino|glosario|definici[oó]n|concepto/i],
+  ['px-chat', /ingenier[oa]s?|developer|desarrollador|colaborar|comunicaci[oó]n/i],
+  ['px-palette', /figma|dise[ñn]o|design|plugin|plantilla|\bui\b|\bux\b/i],
+  ['px-robot', /claude|\bia\b|\bai\b|agente|modelo|\bllm\b|inteligencia artificial/i],
+  ['px-brain', /aprend|estudio|repaso/i],
+];
+const LEAD_ICON_BY_SECTION = {
+  'figma-freebies': 'px-palette',
+  'ia-claude': 'px-robot',
+  'terminologia-tecnica': 'px-book',
+  'hablar-con-ingenieros': 'px-chat',
+};
+function pixelIconFor(a) {
+  const text = `${a.title} ${a.summary} ${a.subsection || ''}`;
+  const hit = LEAD_ICON_RULES.find(([, re]) => re.test(text));
+  if (hit) return hit[0];
+  return LEAD_ICON_BY_SECTION[a.section] || 'px-star';
+}
+
+/* Cada artículo tiene su propia ilustración pixel-art (ARTICLE_ICONS). Si un artículo
+   nuevo todavía no tiene la suya dibujada a mano, cae al icono por palabra clave/sección. */
+function articleIconSvg(a) {
+  return ARTICLE_ICONS[a.id] || ICONS[pixelIconFor(a)];
+}
+
+function leadHtml(a) {
   const sec = bySlug(a.section);
-  return `<span class="tag">${sec ? sec.name : a.section}${a.subsection ? ' · ' + a.subsection : ''}</span>`;
-}
-
-function fpMediaHtml(a, sec) {
-  if (a.images && a.images.length) return `<img class="fp-img" src="${a.images[0]}" alt="" loading="lazy">`;
-  return `<div class="fp-noimg">${sec ? ICONS[sec.icon] : ''}</div>`;
-}
-
-function fpHeroHtml(a) {
-  const img = (a.images && a.images.length) ? `<img class="fp-img" src="${a.images[0]}" alt="" loading="lazy">` : '';
-  return `<a class="fp-card fp-hero ${img ? '' : 'no-media'}" href="#/articulo/${a.id}">
+  const hasImg = a.images && a.images.length;
+  const img = hasImg ? `<img class="fp-img" src="${a.images[0]}" alt="" loading="lazy">` : '';
+  return `<a class="fp-card fp-hero ${hasImg ? '' : 'no-media'}" href="#/articulo/${a.id}">
     ${ratingBadgeHtml(a, 'overlay')}
     ${img}
     <div class="fp-body">
-      ${fpCardOpen(a)}
-      <h2>${truncate(a.title, 85)}</h2>
-      <p>${truncate(a.summary, 135)}</p>
+      ${!hasImg ? `<div class="lead-icon">${articleIconSvg(a)}</div>` : ''}
+      <span class="tag">${sec ? sec.name : a.section}${a.subsection ? ' · ' + a.subsection : ''}</span>
+      <h2>${truncate(a.title, 100)}</h2>
+      <p>${truncate(a.summary, 160)}</p>
       <div class="date mono">${a.date_added || '—'}</div>
     </div>
   </a>`;
 }
 
-function fpWideHtml(a) {
+/* ---------- artículo principal: carrusel de los 5★ ---------- */
+const leadState = { items: [], index: 0, timer: null };
+
+function renderLead(items) {
+  leadState.items = items;
+  leadState.index = 0;
+  paintLead();
+  resetLeadTimer();
+}
+
+function paintLead() {
+  const wrap = document.getElementById('front-lead-out');
+  if (!wrap || !leadState.items.length) return;
+  const a = leadState.items[leadState.index];
+  const multi = leadState.items.length > 1;
+  const dots = multi ? leadState.items.map((_, i) => `<button class="lead-dot ${i === leadState.index ? 'on' : ''}" data-dot="${i}"></button>`).join('') : '';
+  wrap.innerHTML = `
+    ${leadHtml(a)}
+    ${multi ? `
+      <div class="lead-controls">
+        <button class="lead-arrow left" id="lead-prev" title="Anterior">${ICONS.arrow}</button>
+        <div class="lead-dots">${dots}</div>
+        <button class="lead-arrow right" id="lead-next" title="Siguiente">${ICONS.arrow}</button>
+      </div>
+    ` : ''}
+  `;
+  if (multi) {
+    document.getElementById('lead-prev').addEventListener('click', () => leadStep(-1));
+    document.getElementById('lead-next').addEventListener('click', () => leadStep(1));
+    wrap.querySelectorAll('[data-dot]').forEach(d => d.addEventListener('click', () => {
+      leadState.index = Number(d.dataset.dot); paintLead(); resetLeadTimer();
+    }));
+    wrap.addEventListener('mouseenter', () => clearInterval(leadState.timer));
+    wrap.addEventListener('mouseleave', resetLeadTimer);
+  }
+}
+
+function leadStep(dir) {
+  leadState.index = (leadState.index + dir + leadState.items.length) % leadState.items.length;
+  paintLead();
+  resetLeadTimer();
+}
+
+function resetLeadTimer() {
+  clearInterval(leadState.timer);
+  if (leadState.items.length > 1) leadState.timer = setInterval(() => leadStep(1), 10000);
+}
+
+function frontPickHtml(a) {
   const sec = bySlug(a.section);
-  const img = fpMediaHtml(a, sec);
-  return `<a class="fp-card fp-wide" href="#/articulo/${a.id}">
+  const img = (a.images && a.images.length) ? `<img class="fp-img" src="${a.images[0]}" alt="" loading="lazy">` : `<div class="fp-noimg">${articleIconSvg(a)}</div>`;
+  return `<a class="front-pick" href="#/articulo/${a.id}">
     ${img}
-    <div class="fp-body">
-      <div class="tag-row"><span class="tag">${sec ? sec.name : a.section}</span>${ratingBadgeHtml(a, 'inline')}</div>
-      <h3>${truncate(a.title, 58)}</h3>
-      <p>${truncate(a.summary, 100)}</p>
+    <div class="pick-body">
+      <span class="pick-tag">${sec ? sec.name : a.section}</span>
+      <h3>${truncate(a.title, 70)}</h3>
     </div>
   </a>`;
 }
 
-/* ---------- hero carousel (5 estrellas) ---------- */
-const heroState = { items: [], index: 0, timer: null };
-
-function renderHeroCarousel(items) {
-  heroState.items = items;
-  heroState.index = 0;
-  paintHero(true);
-  resetHeroTimer();
-  const wrap = document.getElementById('hero-carousel');
-  if (wrap) {
-    wrap.addEventListener('mouseenter', () => clearInterval(heroState.timer));
-    wrap.addEventListener('mouseleave', resetHeroTimer);
-  }
-}
-
-function paintHero(instant) {
-  const wrap = document.getElementById('hero-carousel');
-  if (!wrap) return;
-  const existing = wrap.querySelector('.hc-slide');
-
-  const doRender = () => {
-    const a = heroState.items[heroState.index];
-    const multi = heroState.items.length > 1;
-    const dots = multi ? heroState.items.map((_, i) => `<span class="hc-dot ${i === heroState.index ? 'on' : ''}"></span>`).join('') : '';
-    wrap.innerHTML = `
-      <div class="hc-slide">${fpHeroHtml(a)}</div>
-      ${multi ? `
-        <button class="hc-arrow left" id="hc-prev" title="Anterior">${ICONS.arrow}</button>
-        <button class="hc-arrow right" id="hc-next" title="Siguiente">${ICONS.arrow}</button>
-        <div class="hc-dots">${dots}</div>
-      ` : ''}
-    `;
-    requestAnimationFrame(() => {
-      requestAnimationFrame(() => {
-        const s = wrap.querySelector('.hc-slide');
-        if (s) s.classList.add('in');
-      });
-    });
-    if (multi) {
-      document.getElementById('hc-prev').addEventListener('click', () => heroStep(-1));
-      document.getElementById('hc-next').addEventListener('click', () => heroStep(1));
-    }
-  };
-
-  if (existing && !instant) {
-    existing.classList.remove('in');
-    existing.classList.add('out');
-    setTimeout(doRender, 200);
-  } else {
-    doRender();
-  }
-}
-
-function heroStep(dir) {
-  heroState.index = (heroState.index + dir + heroState.items.length) % heroState.items.length;
-  paintHero();
-  resetHeroTimer();
-}
-
-function resetHeroTimer() {
-  clearInterval(heroState.timer);
-  if (heroState.items.length > 1) {
-    heroState.timer = setInterval(() => heroStep(1), 10000);
-  }
-}
-
-/* ---------- 4 estrellas: columna secundaria paginada ---------- */
-const secState = { items: [], page: 0, pageSize: 3 };
-
-function renderSecondaryColumn(items) {
-  secState.items = items;
-  secState.page = 0;
-  paintSecondary();
-}
-
-function paintSecondary() {
-  const wrap = document.getElementById('fp-secondary-out');
-  if (!wrap) return;
-  const { items, page, pageSize } = secState;
-  const totalPages = Math.ceil(items.length / pageSize);
-  const start = page * pageSize;
-  const pageItems = items.slice(start, start + pageSize);
-  wrap.innerHTML = `
-    <div class="fp-secondary-list">${pageItems.map(fpWideHtml).join('')}</div>
-    ${totalPages > 1 ? `
-      <div class="fp-pagination">
-        <button class="pg-btn left" id="sec-prev" ${page === 0 ? 'disabled' : ''}>${ICONS.arrow}</button>
-        <span class="pg-count">${page + 1} / ${totalPages}</span>
-        <button class="pg-btn" id="sec-next" ${page === totalPages - 1 ? 'disabled' : ''}>${ICONS.arrow}</button>
-      </div>
-    ` : ''}
-  `;
-  if (totalPages > 1) {
-    document.getElementById('sec-prev').addEventListener('click', () => { secState.page = Math.max(0, secState.page - 1); paintSecondary(); });
-    document.getElementById('sec-next').addEventListener('click', () => { secState.page = Math.min(totalPages - 1, secState.page + 1); paintSecondary(); });
-  }
-}
-
-/* ---------- 2 / 1 / sin valorar: agrupados por sección real, siempre visibles ---------- */
-function sectionRowHtml(sec, items) {
-  const railId = `rail-sec-${sec.slug}`;
-  const body = items.length
-    ? `<div class="rail-wrap">
-        <button class="rail-arrow left hidden" data-rail-prev="${railId}">${ICONS.arrow}</button>
-        <div class="rail" id="${railId}">${items.map(cardHtml).join('')}</div>
-        <button class="rail-arrow right hidden" data-rail-next="${railId}">${ICONS.arrow}</button>
-      </div>`
-    : `<div class="fp-empty-row">Todavía no hay artículos en ${sec.name}.</div>`;
-  return `<div class="tier-section">
-    <div class="subsection-title">${sec.name}</div>
-    ${body}
-  </div>`;
-}
-
-function bottomSectionsHtml(leftover) {
-  const ratings = getRatings();
-  let html = '<hr class="fp-divider">';
+function midRatedGroupsHtml(midRated) {
+  let html = '';
   SECTIONS.forEach(sec => {
-    const items = leftover.filter(a => a.section === sec.slug).sort((x, y) => {
-      const rx = ratings[x.id] || 0, ry = ratings[y.id] || 0;
-      if (ry !== rx) return ry - rx;
-      return (y.date_added || '').localeCompare(x.date_added || '');
-    });
-    html += sectionRowHtml(sec, items);
+    const items = midRated.filter(a => a.section === sec.slug);
+    if (!items.length) return;
+    html += `<div class="picks-subsection">
+      <div class="subsection-title">${sec.name}</div>
+      <div class="front-picks">${items.map(frontPickHtml).join('')}</div>
+    </div>`;
   });
   return html;
 }
 
-function heroEmptyStateHtml() {
-  return `<div class="fp-empty-hero">
-    <div class="fp-empty-icon">${ICONS.star}</div>
-    <p>Aún no tienes artículos destacados.<br>Valora con 3★ o más para que entren en el ranking.</p>
+function briefsEmptyStateHtml() {
+  return `<div class="briefs-empty">
+    <div class="briefs-empty-icon">${ICONS['wand']}</div>
+    <p>¡Estás al día! Ya has valorado todo lo que tienes guardado.</p>
+    <p class="briefs-empty-sub">Añade un artículo nuevo para que la portada vuelva a moverse.</p>
   </div>`;
 }
 
-function secondaryEmptyStateHtml() {
-  return `<div class="fp-empty-hero">
-    <div class="fp-empty-icon">${ICONS.star}</div>
-    <p>Todavía no hay más artículos en el ranking.</p>
-  </div>`;
+function briefRowHtml(a) {
+  const sec = bySlug(a.section);
+  return `<a class="brief-row" href="#/articulo/${a.id}">
+    <span class="brief-stamp">${sec ? sec.name : a.section}</span>
+    <span class="brief-title">${a.title}</span>
+    <span class="brief-meta">${ratingBadgeHtml(a, 'inline')}<span class="brief-date mono">${a.date_added || '—'}</span></span>
+  </a>`;
 }
 
-function setupRailArrows(id) {
-  const track = document.getElementById(id);
-  const prev = document.querySelector(`[data-rail-prev="${id}"]`);
-  const next = document.querySelector(`[data-rail-next="${id}"]`);
-  if (!track || !prev || !next) return;
-  function update() {
-    const overflow = track.scrollWidth > track.clientWidth + 2;
-    prev.classList.toggle('hidden', !overflow || track.scrollLeft <= 2);
-    next.classList.toggle('hidden', !overflow || track.scrollLeft >= track.scrollWidth - track.clientWidth - 2);
+/* ---------- "últimas entradas": paginado de 3 en 3 ---------- */
+const briefsState = { items: [], page: 0, pageSize: 3 };
+
+function renderBriefs(items) {
+  briefsState.items = items;
+  briefsState.page = 0;
+  paintBriefs();
+}
+
+function paintBriefs() {
+  const wrap = document.getElementById('front-briefs-out');
+  if (!wrap) return;
+  const { items, page, pageSize } = briefsState;
+  const totalPages = Math.ceil(items.length / pageSize);
+  const start = page * pageSize;
+  const pageItems = items.slice(start, start + pageSize);
+  wrap.innerHTML = `
+    <div class="front-briefs">${pageItems.map(briefRowHtml).join('')}</div>
+    ${totalPages > 1 ? `
+      <div class="brief-pagination">
+        <button class="brief-pg-arrow left" id="briefs-prev" ${page === 0 ? 'disabled' : ''}>${ICONS.arrow}</button>
+        <div class="brief-pg-nums">${Array.from({ length: totalPages }, (_, i) =>
+          `<button class="brief-pg-num ${i === page ? 'active' : ''}" data-pg="${i}">${i + 1}</button>`
+        ).join('')}</div>
+        <button class="brief-pg-arrow right" id="briefs-next" ${page === totalPages - 1 ? 'disabled' : ''}>${ICONS.arrow}</button>
+      </div>
+    ` : ''}
+  `;
+  if (totalPages > 1) {
+    document.getElementById('briefs-prev').addEventListener('click', () => { briefsState.page = Math.max(0, briefsState.page - 1); paintBriefs(); });
+    document.getElementById('briefs-next').addEventListener('click', () => { briefsState.page = Math.min(totalPages - 1, briefsState.page + 1); paintBriefs(); });
+    wrap.querySelectorAll('[data-pg]').forEach(btn => btn.addEventListener('click', () => { briefsState.page = Number(btn.dataset.pg); paintBriefs(); }));
   }
-  prev.addEventListener('click', () => track.scrollBy({ left: -320, behavior: 'smooth' }));
-  next.addEventListener('click', () => track.scrollBy({ left: 320, behavior: 'smooth' }));
-  track.addEventListener('scroll', update);
-  window.addEventListener('resize', update);
-  update();
-}
-
-
-/* ---------- ranking con decaimiento: puntuación + antigüedad ---------- */
-const RANK_HALF_LIFE_DAYS = 14; // cada 14 días, el "peso" de la puntuación se reduce a la mitad
-
-function ageDaysOf(a) {
-  const t = Date.parse(a.date_added);
-  if (isNaN(t)) return 0;
-  return Math.max(0, (Date.now() - t) / 86400000);
-}
-
-function articleScore(a, ratings) {
-  const r = ratings[a.id] || 0;
-  if (r <= 0) return 0;
-  return r * Math.pow(2, -ageDaysOf(a) / RANK_HALF_LIFE_DAYS);
 }
 
 /* ---------- pages ---------- */
 function renderPortada() {
   renderNav('');
-  clearInterval(heroState.timer);
+  clearInterval(leadState.timer);
   const list = visibleArticles();
   const main = document.getElementById('main');
 
@@ -1231,41 +1374,33 @@ function renderPortada() {
 
   const ratings = getRatings();
   const rateOf = a => ratings[a.id] || 0;
+  const byDateDesc = (x, y) => (y.date_added || '').localeCompare(x.date_added || '');
 
-  const HERO_SLOTS = 3;
-  const SECONDARY_SLOTS = 6;
+  // artículo principal: tus 5★, en carrusel si hay varias
+  const fiveStars = list.filter(a => rateOf(a) === 5).sort(byDateDesc);
+  // últimas entradas: todo lo que aún no has valorado
+  const unrated = list.filter(a => rateOf(a) === 0).sort(byDateDesc);
+  // más artículos: lo valorado con menos de 5★
+  const midRated = list.filter(a => { const r = rateOf(a); return r > 0 && r < 5; }).sort(byDateDesc);
 
-  // solo compiten por el ranking los artículos valorados con 3★ o más;
-  // el resto (1★, 2★ o sin valorar) siempre va a las secciones de abajo
-  const ranked = list.filter(a => rateOf(a) >= 3)
-    .map(a => ({ a, score: articleScore(a, ratings) }))
-    .sort((x, y) => y.score - x.score || (y.a.date_added || '').localeCompare(x.a.date_added || ''))
-    .map(x => x.a);
+  const hasLead = fiveStars.length > 0;
 
-  const hero = ranked.slice(0, HERO_SLOTS);
-  const secondary = ranked.slice(HERO_SLOTS, HERO_SLOTS + SECONDARY_SLOTS);
-  const overflow = ranked.slice(HERO_SLOTS + SECONDARY_SLOTS);
-  const leftover = list.filter(a => rateOf(a) <= 2).concat(overflow);
+  main.innerHTML = `
+    <div class="front-top ${hasLead ? '' : 'no-lead'}">
+      ${hasLead ? `<div class="front-lead" id="front-lead-out"></div>` : ''}
+      <div class="front-briefs-col">
+        <div class="front-label">Últimas entradas</div>
+        ${unrated.length ? `<div id="front-briefs-out"></div>` : briefsEmptyStateHtml()}
+      </div>
+    </div>
+    ${midRated.length ? `
+      <div class="front-divider"><span class="front-label">Más artículos</span></div>
+      ${midRatedGroupsHtml(midRated)}
+    ` : ''}
+  `;
 
-  const hasHero = hero.length > 0;
-  const hasSecondary = secondary.length > 0;
-
-  const heroColHtml = `<div class="fp-col">
-    <div class="fp-col-title">Top artículos</div>
-    ${hasHero ? `<div class="hero-carousel" id="hero-carousel"></div>` : heroEmptyStateHtml()}
-  </div>`;
-  const secondaryColHtml = `<div class="fp-col">
-    <div class="fp-col-title">También destacados</div>
-    ${hasSecondary ? `<div class="fp-secondary-col"><div id="fp-secondary-out"></div></div>` : secondaryEmptyStateHtml()}
-  </div>`;
-
-  const topHtml = `<div class="frontpage-top">${heroColHtml}${secondaryColHtml}</div>`;
-
-  main.innerHTML = `${topHtml}${bottomSectionsHtml(leftover)}`;
-
-  if (hasHero) renderHeroCarousel(hero);
-  if (hasSecondary) renderSecondaryColumn(secondary);
-  SECTIONS.forEach(sec => { const id = `rail-sec-${sec.slug}`; if (document.getElementById(id)) setupRailArrows(id); });
+  if (hasLead) renderLead(fiveStars);
+  if (unrated.length) renderBriefs(unrated);
 }
 
 function railHtml(items) {
@@ -1360,6 +1495,29 @@ function paintSectionBody() {
   wrap.innerHTML = html;
 }
 
+function progressPanelHtml(list) {
+  const bySection = SECTIONS.map(sec => ({ sec, count: list.filter(a => a.section === sec.slug).length }));
+  const maxCount = Math.max(1, ...bySection.map(b => b.count));
+  const termCount = buildEncyTerms().length;
+  const streak = computeStreak();
+  return `<div class="progress-panel">
+    <div class="stat-row">
+      <div class="stat-block"><div class="stat-num">${list.length}</div><div class="stat-label">Artículos</div></div>
+      <div class="stat-block"><div class="stat-num">${termCount}</div><div class="stat-label">Términos</div></div>
+      <div class="stat-block"><div class="stat-num">${streak}</div><div class="stat-label">Racha</div></div>
+    </div>
+    <div class="stat-bars">
+      ${bySection.map(b => `
+        <div class="stat-bar-row">
+          <span class="stat-bar-label">${b.sec.name}</span>
+          <div class="stat-bar-track"><div class="stat-bar-fill" style="width:${Math.round(b.count / maxCount * 100)}%"></div></div>
+          <span class="stat-bar-count">${b.count}</span>
+        </div>
+      `).join('')}
+    </div>
+  </div>`;
+}
+
 function renderHistorial() {
   renderNav('historial');
   const hidden = getHidden();
@@ -1369,6 +1527,7 @@ function renderHistorial() {
   const main = document.getElementById('main');
   main.innerHTML = `
     <div class="section-hero"><div><h2>Historial</h2><p>Todo lo que has ido añadiendo, con fecha. Manda a la papelera lo que ya no te interese, y desde ahí restáuralo o bórralo del todo.</p></div></div>
+    ${progressPanelHtml(list)}
     <div class="hist-scroll">
       <table class="hist">
         <thead><tr><th>Título</th><th>Sección</th><th>Fecha</th><th></th></tr></thead>
@@ -1460,13 +1619,16 @@ function renderArticleOverlay(id) {
   if (!a) { overlay.classList.remove('open'); return; }
   const sec = bySlug(a.section);
   inner.innerHTML = `
+    <div class="art-icon">${articleIconSvg(a)}</div>
     <div class="art-tag">${sec ? sec.name : a.section}${a.subsection ? ' · ' + a.subsection : ''}</div>
     <h1 class="art-title">${a.title}</h1>
     <div class="art-meta mono">Añadido el ${a.date_added || '—'}</div>
     ${ratingHtml(a)}
     <div class="art-body">${mdToHtml(a.content_md || a.summary)}</div>
     ${glossaryHtml(a)}
+    ${noteHtml(a)}
     <div class="art-original"><a href="${a.url}" target="_blank" rel="noopener">Leer el artículo original ${ICONS.arrow}</a></div>
+    ${relatedHtml(a)}
   `;
   inner.querySelectorAll('[data-term-key]').forEach(btn => btn.addEventListener('click', () => {
     const nowLiked = toggleLikedTerm(btn.dataset.termKey);
@@ -1474,8 +1636,86 @@ function renderArticleOverlay(id) {
     btn.innerHTML = nowLiked ? ICONS['heart-filled'] : ICONS.heart;
   }));
   wireRating(a.id);
+  wireNote(a.id);
   overlay.classList.add('open');
   window.scrollTo(0,0);
+}
+
+/* ---------- repaso espaciado (sistema Leitner, 5 cajas) ---------- */
+const SRS_BOX_DAYS = { 1: 1, 2: 3, 3: 7, 4: 14, 5: 30 };
+function getSRS() { try { return JSON.parse(localStorage.getItem('termSRS') || '{}'); } catch(e) { return {}; } }
+function setSRS(obj) { localStorage.setItem('termSRS', JSON.stringify(obj)); }
+function todayISO() { return new Date().toISOString().slice(0,10); }
+
+function termsDue(terms) {
+  const srs = getSRS();
+  return terms.filter(t => {
+    const s = srs[t.key];
+    return !s || s.due <= todayISO();
+  });
+}
+
+function reviewTerm(key, knewIt) {
+  const srs = getSRS();
+  const cur = srs[key] || { box: 0, due: todayISO() };
+  const box = knewIt ? Math.min(5, cur.box + 1) : 1;
+  const due = new Date();
+  due.setDate(due.getDate() + SRS_BOX_DAYS[box]);
+  srs[key] = { box, due: due.toISOString().slice(0,10) };
+  setSRS(srs);
+}
+
+/* ---------- modal de flashcards ---------- */
+const flashState = { queue: [], index: 0, revealed: false };
+
+function openFlashModal(allTerms) {
+  flashState.queue = termsDue(allTerms);
+  flashState.index = 0;
+  flashState.revealed = false;
+  document.getElementById('flash-modal').classList.add('open');
+  paintFlashCard();
+}
+function closeFlashModal() {
+  document.getElementById('flash-modal').classList.remove('open');
+  renderEnciclopedia(); // refresca el contador de "Repasar (N)"
+}
+
+function paintFlashCard() {
+  const wrap = document.getElementById('flash-modal-body');
+  const { queue, index, revealed } = flashState;
+  if (index >= queue.length) {
+    wrap.innerHTML = `<div class="flash-done">
+      ${ICONS['star-filled']}
+      <p>${queue.length ? '¡Repaso completo!' : 'Estás al día — no hay términos pendientes de repaso.'}</p>
+      <button class="review-btn" id="flash-close-btn">Cerrar</button>
+    </div>`;
+    document.getElementById('flash-close-btn').addEventListener('click', closeFlashModal);
+    return;
+  }
+  const t = queue[index];
+  wrap.innerHTML = `
+    <div class="flash-progress">${index + 1} / ${queue.length}</div>
+    <div class="flash-card ${revealed ? 'revealed' : ''}" id="flash-card">
+      <div class="flash-term">${t.term}</div>
+      ${revealed ? `
+        <p class="flash-def">${t.definition}</p>
+        <a class="src" data-open="${t.articleId}">De: ${t.articleTitle}</a>
+      ` : `<div class="flash-tap">Toca para ver la definición</div>`}
+    </div>
+    ${revealed ? `
+      <div class="flash-actions">
+        <button class="flash-no" id="flash-no">No me acordaba</button>
+        <button class="flash-yes" id="flash-yes">${ICONS.check} Lo sabía</button>
+      </div>
+    ` : ''}
+  `;
+  if (!revealed) {
+    document.getElementById('flash-card').addEventListener('click', () => { flashState.revealed = true; paintFlashCard(); });
+  } else {
+    document.getElementById('flash-no').addEventListener('click', () => { reviewTerm(t.key, false); flashState.index++; flashState.revealed = false; paintFlashCard(); });
+    document.getElementById('flash-yes').addEventListener('click', () => { reviewTerm(t.key, true); flashState.index++; flashState.revealed = false; paintFlashCard(); });
+    wrap.querySelector('[data-open]').addEventListener('click', e => { e.stopPropagation(); location.hash = '#/articulo/' + t.articleId; });
+  }
 }
 
 function encyLetterOf(term) {
@@ -1483,18 +1723,23 @@ function encyLetterOf(term) {
   return /[A-Z]/.test(l) ? l : '#';
 }
 
-function renderEnciclopedia() {
-  renderNav('enciclopedia');
-  const main = document.getElementById('main');
+function buildEncyTerms() {
   const liked = getLikedTerms();
   const terms = [];
   ARTICLES.forEach(a => {
     (a.glossary || []).forEach((g, idx) => {
       const key = termKey(a.id, idx);
-      if (a.dictionary || liked.includes(key)) terms.push({ ...g, articleId: a.id, articleTitle: a.title });
+      if (a.dictionary || liked.includes(key)) terms.push({ ...g, key, articleId: a.id, articleTitle: a.title });
     });
   });
   terms.sort((x, y) => x.term.localeCompare(y.term, 'es', { sensitivity: 'base' }));
+  return terms;
+}
+
+function renderEnciclopedia() {
+  renderNav('enciclopedia');
+  const main = document.getElementById('main');
+  const terms = buildEncyTerms();
 
   main.innerHTML = `
     <div class="section-hero"><div><h2>Enciclopedia</h2><p>Los términos que te ha interesado guardar, con su definición y de dónde salieron.</p></div></div>
@@ -1506,15 +1751,25 @@ function renderEnciclopedia() {
     return;
   }
 
+  const due = termsDue(terms);
   out.innerHTML = `
-    <div class="ency-search-row">${ICONS.search}<input type="text" id="ency-search" placeholder="Buscar en la Enciclopedia..." autocomplete="off"></div>
+    <div class="ency-toolbar">
+      <div class="ency-search-row">${ICONS.search}<input type="text" id="ency-search" placeholder="Buscar en la Enciclopedia..." autocomplete="off"></div>
+      <button class="review-btn" id="ency-review-btn">${ICONS.cards} Repasar${due.length ? ` (${due.length})` : ''}</button>
+    </div>
     <div class="ency-layout">
       <div class="ency-list" id="ency-list"></div>
       <div class="ency-index" id="ency-index"></div>
     </div>
   `;
   document.getElementById('ency-search').addEventListener('input', e => paintEncyList(terms, e.target.value));
+  document.getElementById('ency-review-btn').addEventListener('click', () => openFlashModal(terms));
   paintEncyList(terms, '');
+
+  if (window.__pendingReviewOpen) {
+    window.__pendingReviewOpen = false;
+    openFlashModal(terms);
+  }
 }
 
 function paintEncyList(terms, query) {
@@ -1582,6 +1837,12 @@ document.getElementById('ticker-modal-close').innerHTML = ICONS.close;
 document.getElementById('ticker-modal-close').addEventListener('click', closeTickerModal);
 document.getElementById('ticker-modal').addEventListener('click', e => { if (e.target.id === 'ticker-modal') closeTickerModal(); });
 document.addEventListener('keydown', e => { if (e.key === 'Escape' && document.getElementById('ticker-modal').classList.contains('open')) closeTickerModal(); });
+
+/* ---------- wiring del modal de flashcards ---------- */
+document.getElementById('flash-modal-close').innerHTML = ICONS.close;
+document.getElementById('flash-modal-close').addEventListener('click', closeFlashModal);
+document.getElementById('flash-modal').addEventListener('click', e => { if (e.target.id === 'flash-modal') closeFlashModal(); });
+document.addEventListener('keydown', e => { if (e.key === 'Escape' && document.getElementById('flash-modal').classList.contains('open')) closeFlashModal(); });
 
 /* ---------- spotlight search ---------- */
 document.getElementById('spotlight-icon').innerHTML = ICONS.search;

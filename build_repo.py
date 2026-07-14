@@ -34,30 +34,53 @@ SECTIONS = [
     },
 ]
 
-ICONS = {
-    "chip": '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="7" y="7" width="10" height="10" rx="1"/><path d="M9 7V3M12 7V3M15 7V3M9 21v-4M12 21v-4M15 21v-4M7 9H3M7 12H3M7 15H3M21 9h-4M21 12h-4M21 15h-4"/></svg>',
-    "layers": '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"><path d="M12 2 3 7l9 5 9-5-9-5Z"/><path d="M3 12l9 5 9-5"/><path d="M3 17l9 5 9-5"/></svg>',
-    "chat-code": '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M21 15a2 2 0 0 1-2 2H8l-4 4V5a2 2 0 0 1 2-2h13a2 2 0 0 1 2 2v10Z"/><path d="M9 10 7 12l2 2M15 10l2 2-2 2"/></svg>',
-    "eye": '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7-11-7-11-7Z"/><circle cx="12" cy="12" r="3"/></svg>',
-    "chart": '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M4 20V10M11 20V4M18 20v-7"/><path d="M2 20h20"/></svg>',
-    "wrench": '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M14.7 6.3a4 4 0 0 1-5.4 5.4L4 17l3 3 5.3-5.3a4 4 0 0 1 5.4-5.4L21 6l-3-3-3.3 3.3Z"/></svg>',
-    "flame": '<svg viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M12 2c1 3-2 4-2 7a3 3 0 0 0 6 0c0-1-0.5-2-1-2 2 0 4 2 4 5.5A7 7 0 1 1 8 12.5C8 9 9 6 12 2Z"/></svg>',
-    "trash": '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M3 6h18M8 6V4a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1v2m2 0-1 14a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1L5 6h14Z"/></svg>',
-    "close": '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 4l16 16M20 4 4 20"/></svg>',
-    "arrow": '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M5 12h14M13 6l6 6-6 6"/></svg>',
-    "history": '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7.5v5l3.2 1.9"/></svg>',
-    "search": '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>',
-    "restore": '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M3 12a9 9 0 1 0 3-6.7"/><path d="M3 4v5h5"/></svg>',
-    "book": '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M4 4.5A2.5 2.5 0 0 1 6.5 2H20v17H6.5A2.5 2.5 0 0 0 4 21.5v-17Z"/><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/></svg>',
-    "heart": '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 20.5s-7.5-4.6-10-9.3C.4 7.9 2 4.5 5.4 4c2-.3 3.8.6 4.9 2.3.8 1.2 1.7 1.2 2.5 0C13.8 4.6 15.6 3.7 17.6 4c3.4.5 5 3.9 3.4 7.2-2.5 4.7-9 9.3-9 9.3Z"/></svg>',
-    "heart-filled": '<svg viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M12 20.5s-7.5-4.6-10-9.3C.4 7.9 2 4.5 5.4 4c2-.3 3.8.6 4.9 2.3.8 1.2 1.7 1.2 2.5 0C13.8 4.6 15.6 3.7 17.6 4c3.4.5 5 3.9 3.4 7.2-2.5 4.7-9 9.3-9 9.3Z"/></svg>',
-    "star": '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"><path d="M12 2.5l2.9 6.2 6.6.7-5 4.6 1.4 6.6L12 17.9l-5.9 3.7 1.4-6.6-5-4.6 6.6-.7L12 2.5Z"/></svg>',
-    "star-filled": '<svg viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M12 2.5l2.9 6.2 6.6.7-5 4.6 1.4 6.6L12 17.9l-5.9 3.7 1.4-6.6-5-4.6 6.6-.7L12 2.5Z"/></svg>',
-}
+def pixel_svg(rows):
+    """Genera un icono pixel-art a partir de un patrón de '#'/'.'."""
+    size = len(rows)
+    cells = "".join(
+        f'<rect x="{x}" y="{y}" width="1" height="1"/>'
+        for y, row in enumerate(rows)
+        for x, ch in enumerate(row)
+        if ch == "#"
+    )
+    return f'<svg viewBox="0 0 {size} {size}" fill="currentColor" shape-rendering="crispEdges">{cells}</svg>'
+
+# Iconos funcionales pequeños (12x12) — usados en botones y controles.
+# search, arrow, heart, history y flame se quedan con iconografía de línea normal (ver más abajo).
+PIXEL12 = {'close': ['##........##', '###......###', '.###....###.', '..###..###..', '...######...', '....####....', '....####....', '...######...', '..###..###..', '.###....###.', '###......###', '##........##'], 'check': ['............', '............', '...........#', '..........##', '.........##.', '#.......##..', '##.....##...', '.##...##....', '..##.##.....', '...###......', '....#.......', '............'], 'trash': ['...######...', '..#......#..', '.##########.', '..#.####.#..', '..#.####.#..', '..#.####.#..', '..#.####.#..', '..#.####.#..', '..#.####.#..', '..#.####.#..', '..#......#..', '...######...'], 'restore': ['............', '............', '....####.##.', '...#....#.#.', '..#......#..', '..#.........', '..#.........', '..#.........', '...#........', '....####....', '............', '............'], 'star': ['.....#......', '....###.....', '....#.#.....', '............', '.##.....##..', '##.......##.', '.##.....##..', '............', '....#.#.....', '....###.....', '.....#......', '............'], 'star-filled': ['.....#......', '....###.....', '....###.....', '....###.....', '.#########..', '###########.', '.#########..', '....###.....', '....###.....', '....###.....', '.....#......', '............'], 'edit': ['.........##.', '........####', '.......###..', '......###...', '.....###....', '....###.....', '...###......', '..###.......', '.###........', '.##.........', '.#..........', '.##.........'], 'link': ['............', '....#.......', '..#####.....', '..#...#.....', '.##...#.....', '..#...#.#...', '..#########.', '......#...#.', '.....##...#.', '......#...#.', '......####..', '............'], 'cards': ['............', '....#######.', '....#.....#.', '....#.....#.', '.#######..#.', '.#..#..#..#.', '.#..#..#..#.', '.#..#######.', '.#.....#....', '.#.....#....', '.#######....', '............'], 'eye': ['............', '....####....', '..##....##..', '.#........#.', '#....##....#', '#...####...#', '#...####...#', '#....##....#', '.#........#.', '..##....##..', '....####....', '............'], 'chart': ['............', '............', '.........###', '.........###', '.........###', '.....###.###', '.....###.###', '.....###.###', '.###.###.###', '.###.###.###', '.###.###.###', '############'], 'wrench': ['............', '..###.......', '.##.##......', '...###......', '...###......', '...####.....', '.....###....', '......###...', '.......###..', '........###.', '.........###', '..........#.']}
+
+# Iconos pixel-art (12x12) — secciones, artículo principal. Estilo icono, no ilustración: formas simples y limpias.
+PIXEL16 = {'px-robot': ['......#.....', '......#.....', '..████████..', '..█......█..', '███......███', '███.█..█.███', '███.█..█.███', '..█......█..', '..█.████.█..', '..████████..', '............', '............'], 'px-chip': ['...█..█..█..', '...█..█..█..', '..████████..', '███......███', '..█.████.█..', '..█.█..█.█..', '███.█..█.███', '..█.████.█..', '..█......█..', '████████████', '...█..█..█..', '...█..█..█..'], 'px-book': ['............', '..████████..', '..█..██..█..', '..█..██..█..', '..████████..', '..█..██..█..', '..████████..', '..█..██..█..', '..████████..', '..█..██..█..', '..████████..', '............'], 'px-chat': ['............', '.██████████.', '.█........█.', '.█........█.', '.█.█.█.█.█.█.', '.█.█.█.█.█.█.', '.█........█.', '.██████████.', '...█........', '..█.........', '.█..........', '............'], 'px-palette': ['............', '............', '....████....', '...██..██...', '..█.█..█.█..', '..█.....██..', '.█......███.', '..█......█..', '..█.........', '...█........', '....████....', '............'], 'px-brain': ['............', '............', '....████....', '...█..█.█...', '..█...█..█..', '..█████..█..', '.█....█...█.', '..█...████..', '..█...█..█..', '...█..█.█...', '....████....', '............'], 'px-terminal': ['............', '............', '.██████████.', '.█........█.', '.█.█......█.', '.█..█.....█.', '.█...█....█.', '.█..█.....█.', '.█.█..███.█.', '.██████████.', '............', '............'], 'layers': ['............', '.....███....', '...██...██..', '.███.....███', '....█████...', '...██...██..', '.██.......██', '...██...██..', '....█████...', '.███.....███', '...██...██..', '.....███....'], 'px-star': ['............', '.....██.....', '.....██.....', '.....██.....', '.....██.....', '.██████████.', '.██████████.', '.....██.....', '.....██.....', '.....██.....', '.....██.....', '............']}
+# Iconos de sección (16x16), más densos/con más peso visual que los del artículo principal
+PIXEL16['layers'] = ['................', '................', '.......###......', '....##.....##...', '..##.........##.', '....##.....##...', '.......###......', '....##.....##...', '..##.........##.', '....##.....##...', '.......###......', '....##.....##...', '..##.........##.', '....##.....##...', '.......###......', '................']
+PIXEL16['chip'] = ['....#...#...#...', '....#...#...#...', '....#...#...#...', '...##########...', '################', '...##......##...', '...##.####.##...', '...##.####.##...', '#####.####.#####', '...##.####.##...', '...##......##...', '...##########...', '################', '....#...#...#...', '....#...#...#...', '....#...#...#...']
+PIXEL16['book'] = ['......##........', '..############..', '..##..##.....#..', '..######.#####..', '..##..##.....#..', '..######.#####..', '..##..##.....#..', '..##..##.....#..', '..##..##.....#..', '..######.#####..', '..##..##.....#..', '..######.#####..', '..##..##.....#..', '..##..##.....#..', '..############..', '................']
+PIXEL16['chat-code'] = ['................', '.##############.', '.##############.', '.#............#.', '.#...#.##.#...#.', '.#..#..##..#..#.', '.#.#...##...#.#.', '.#..#..##..#..#.', '.#...#.##.#...#.', '.#............#.', '.##############.', '................', '....#...........', '...#............', '..#.............', '................']
+
+ICONS = {}
+for _key, _rows in {**PIXEL12, **PIXEL16}.items():
+    ICONS[_key] = pixel_svg(_rows)
+
+# Iconografía de línea normal (no pixel art) para: buscar, flechas, corazón, historial, racha
+ICONS['search'] = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>'
+ICONS['arrow'] = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M5 12h14M13 6l6 6-6 6"/></svg>'
+ICONS['history'] = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7.5v5l3.2 1.9"/></svg>'
+ICONS['heart'] = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 20.5s-7.5-4.6-10-9.3C.4 7.9 2 4.5 5.4 4c2-.3 3.8.6 4.9 2.3.8 1.2 1.7 1.2 2.5 0C13.8 4.6 15.6 3.7 17.6 4c3.4.5 5 3.9 3.4 7.2-2.5 4.7-9 9.3-9 9.3Z"/></svg>'
+ICONS['heart-filled'] = '<svg viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M12 20.5s-7.5-4.6-10-9.3C.4 7.9 2 4.5 5.4 4c2-.3 3.8.6 4.9 2.3.8 1.2 1.7 1.2 2.5 0C13.8 4.6 15.6 3.7 17.6 4c3.4.5 5 3.9 3.4 7.2-2.5 4.7-9 9.3-9 9.3Z"/></svg>'
+ICONS['flame'] = '<svg viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M12 2c1 3-2 4-2 7a3 3 0 0 0 6 0c0-1-0.5-2-1-2 2 0 4 2 4 5.5A7 7 0 1 1 8 12.5C8 9 9 6 12 2Z"/></svg>'
+
+# Ilustración pixel-art única por artículo (16x16, más detallada), pensada para el tema concreto de cada uno.
+# Los artículos futuros sin entrada aquí caen al icono por keyword/sección (pixelIconFor en JS).
+ARTICLE_ICONS_ROWS = {'aprendizaje-por-refuerzo-basico': ['................', '................', '.....######.....', '...##......###..', '...#........#...', '......####...#..', '.....##..##.....', '.....#.##.#.....', '.....#.##.#.....', '.....##..##.....', '..#...####......', '...#........#...', '..###......##...', '.....######.....', '................', '................'], 'meta-abre-astryx-su-design-system-interno-y-ya-funciona-en-figma-make': ['.........####...', '.........####...', '.....########...', '..###########...', '..#.#####.......', '..#######.......', '......#####.....', '....##.....#....', '...#........##..', '..#############.', '..#...........#.', '..#.#########.#.', '..#...........#.', '..#############.', '................', '................'], 'claude-agents-que-son-y-como-crear-uno': ['....#...........', '....#...........', '#########.......', '#.......#.......', '#.##.##.#.......', '#.##.##.#.......', '#.##.##.#.......', '#.......#.......', '#.#####.#...#...', '#########.#####.', '.........#######', '.........##...##', '........###...##', '.........##...##', '.........#######', '..........#####.'], 'donde-va-realmente-tu-contexto-de-diseno-en-claude': ['................', '................', '..############..', '..#.##.....#.#..', '..#..........#..', '..############..', '................', '..############..', '..#.##.....#.#..', '..#..........#..', '..############..', '................', '..############..', '..#.##.....#.#..', '..#..........#..', '..############..'], 'los-disenadores-gastan-los-limites-de-uso-de-claude-mas-rapido-que-nad': ['................', '................', '................', '................', '.############...', '.####...#...#...', '.####..#....###.', '.####..#....###.', '.####.####..###.', '.####...#...###.', '.####...#...#...', '.############...', '................', '................', '................', '................'], 'diccionario-de-ia-para-disenadores': ['...........#....', '...........#....', '.......####.#...', '....###.#.###...', '..##....#....##.', '..#.....#.....#.', '..#.#########.#.', '..#.....#.....#.', '..#.#########.#.', '..#.....#.....#.', '..#.#########.#.', '..#.....#.....#.', '..###...#...###.', '.....#######....', '................', '................'], '5-trucos-para-que-claude-code-no-te-de-un-diseno-web-generico': ['................', '################', '#.#.#.#..#####.#', '#..............#', '################', '#..............#', '#......##......#', '#......##......#', '#....######....#', '#...########...#', '#....######....#', '#......##......#', '#......##......#', '################', '................', '................']}
+ARTICLE_ICONS = {aid: pixel_svg(rows) for aid, rows in ARTICLE_ICONS_ROWS.items()}
+
+# Icono de "varita mágica" para el empty state de Últimas entradas (todo revisado / limpio)
+ICONS['wand'] = pixel_svg(['............', '............', '.......##...', '......####..', '......####..', '.......##...', '......#.....', '.....#......', '...##.......', '...#........', '..#.........', '.#..........'])
 
 data_json = json.dumps(articles, ensure_ascii=False)
 sections_json = json.dumps(SECTIONS, ensure_ascii=False)
 icons_json = json.dumps(ICONS, ensure_ascii=False)
+article_icons_json = json.dumps(ARTICLE_ICONS, ensure_ascii=False)
 
 TEMPLATE = r"""<!DOCTYPE html>
 <html lang="es">
@@ -86,10 +109,11 @@ TEMPLATE = r"""<!DOCTYPE html>
   }
   a { color: inherit; }
   .wrap { max-width: 1160px; margin: 0 auto; padding: 0 24px; }
+  main.wrap { padding-top: 34px; }
   .mono { font-family: 'Space Mono', monospace; }
 
   /* ---- Masthead ---- */
-  header.masthead { padding: 48px 24px 0; border-bottom: 4px solid var(--ink); position: relative; }
+  header.masthead { padding: 30px 24px 0; border-bottom: 4px solid var(--ink); position: relative; }
   .top-bar { display: flex; align-items: center; justify-content: center; gap: 12px; }
 
   .live {
@@ -108,15 +132,15 @@ TEMPLATE = r"""<!DOCTYPE html>
 
   h1.title {
     font-family: 'Archivo Black', 'Space Grotesk', sans-serif;
-    font-weight: 400; font-size: 74px; letter-spacing: -2px;
-    margin: 22px 0 10px; text-align: center; text-transform: uppercase; line-height: .92;
+    font-weight: 400; font-size: 62px; letter-spacing: -2px;
+    margin: 14px 0 6px; text-align: center; text-transform: uppercase; line-height: .92;
   }
   h1.title span { display: inline-block; opacity: 0; transform: translateY(18px) rotate(-1deg); animation: riseIn .55s cubic-bezier(.2,.8,.2,1) forwards; }
   h1.title span:nth-child(odd) { color: var(--accent); }
   @keyframes riseIn { to { opacity: 1; transform: translateY(0) rotate(0); } }
 
   .subtitle {
-    color: var(--ink); font-size: 14px; text-align: center; margin-bottom: 40px;
+    color: var(--ink); font-size: 13px; text-align: center; margin-bottom: 18px;
     font-weight: 500;
   }
   .subtitle .phrase { color: var(--muted); font-style: italic; font-weight: 400; }
@@ -130,7 +154,7 @@ TEMPLATE = r"""<!DOCTYPE html>
   }
   .ticker:hover { background: rgba(255, 90, 31, 0.12); }
   .ticker-scroll { overflow: hidden; }
-  .ticker-track { display: inline-block; padding: 8px 0; animation: scrollTicker 34s linear infinite; }
+  .ticker-track { display: inline-block; padding: 8px 0; animation: scrollTicker 64s linear infinite; }
   .ticker:hover .ticker-track { animation-play-state: paused; }
   .ticker span.item { font-family: 'Space Mono', monospace; font-size: 12px; letter-spacing: .5px; padding: 0 22px; color: var(--muted); }
   .ticker span.item b { color: var(--ink); font-weight: 700; }
@@ -185,7 +209,7 @@ TEMPLATE = r"""<!DOCTYPE html>
   /* ---- Nav ---- */
   nav.sections {
     margin: 0 -24px;
-    padding: 0 36px;
+    padding: 0 24px;
     display: flex; align-items: stretch;
     flex-wrap: nowrap;
   }
@@ -265,6 +289,25 @@ TEMPLATE = r"""<!DOCTYPE html>
   .like-btn svg { width: 16px; height: 16px; }
   .like-btn:hover { border-color: var(--accent); color: var(--accent); }
   .like-btn.liked { background: var(--accent); border-color: var(--accent); color: #fff; }
+  /* ---- Nota propia (artículo) ---- */
+  .art-note { margin-top: 32px; padding: 18px 20px; background: rgba(255,90,31,0.05); border: 2px dashed var(--accent); }
+  .art-note h4 { display: flex; align-items: center; gap: 8px; margin: 0 0 6px; font-family: 'Space Mono', monospace; font-size: 11px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--accent); }
+  .art-note h4 svg { width: 14px; height: 14px; }
+  .note-hint { margin: 0 0 10px; font-size: 12.5px; color: var(--muted); line-height: 1.5; }
+  .art-note textarea {
+    width: 100%; min-height: 84px; resize: vertical; border: 2px solid var(--ink); background: var(--bg);
+    font-family: 'Space Grotesk', sans-serif; font-size: 14.5px; line-height: 1.5; color: var(--ink);
+    padding: 10px 12px; outline: none;
+  }
+  .art-note textarea:focus { border-color: var(--accent); }
+  .note-status { font-family: 'Space Mono', monospace; font-size: 10.5px; color: var(--accent); height: 14px; margin-top: 6px; }
+
+  /* ---- Artículos relacionados ---- */
+  .art-related { margin-top: 40px; padding-top: 18px; border-top: 3px solid var(--ink); }
+  .art-related h4 { display: flex; align-items: center; gap: 8px; margin: 0 0 10px; font-family: 'Space Mono', monospace; font-size: 11px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--accent); }
+  .art-related h4 svg { width: 14px; height: 14px; }
+  .art-related .rail { padding-bottom: 4px; }
+
   .dict-badge {
     flex: none; display: flex; align-items: center; gap: 5px; font-family: 'Space Mono', monospace;
     font-size: 9.5px; letter-spacing: .5px; text-transform: uppercase; color: var(--accent);
@@ -272,6 +315,16 @@ TEMPLATE = r"""<!DOCTYPE html>
   .dict-badge svg { width: 14px; height: 14px; }
 
   /* ---- Enciclopedia ---- */
+  .ency-toolbar { display: flex; align-items: center; gap: 16px; margin-top: 18px; }
+  .ency-toolbar .ency-search-row { flex: 1; margin: 0; }
+  .review-btn {
+    display: flex; align-items: center; gap: 8px; flex: none; background: var(--ink); color: #fff; border: 2px solid var(--ink);
+    font-family: 'Space Mono', monospace; font-size: 11px; font-weight: 700; letter-spacing: .8px; text-transform: uppercase;
+    padding: 10px 16px; cursor: pointer;
+  }
+  .review-btn svg { width: 15px; height: 15px; }
+  .review-btn:hover { background: var(--accent); border-color: var(--accent); }
+
   .ency-search-row { display: flex; align-items: center; gap: 10px; border-bottom: 2px solid var(--ink); padding: 10px 0; margin: 18px 0 6px; }
   .ency-search-row svg { width: 16px; height: 16px; color: var(--muted); flex: none; }
   .ency-search-row input { flex: 1; border: none; outline: none; background: transparent; font-family: 'Space Grotesk', sans-serif; font-size: 15px; color: var(--ink); }
@@ -298,6 +351,35 @@ TEMPLATE = r"""<!DOCTYPE html>
   .ency-index a { color: var(--muted); text-decoration: none; padding: 2px 4px; text-align: center; }
   .ency-index a:hover { color: var(--ink); }
   .ency-index a.active { color: var(--accent); }
+
+  /* ---- Flashcards de repaso ---- */
+  .flash-panel { max-width: 460px; }
+  .flash-modal-body { padding: 26px 22px 22px; display: flex; flex-direction: column; align-items: center; gap: 18px; }
+  .flash-progress { font-family: 'Space Mono', monospace; font-size: 11px; letter-spacing: 1px; color: var(--muted); align-self: flex-start; }
+  .flash-card {
+    width: 100%; min-height: 200px; border: 2px solid var(--ink); background: var(--bg);
+    display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center;
+    padding: 30px 22px; cursor: pointer; gap: 14px;
+  }
+  .flash-card.revealed { cursor: default; border-color: var(--accent); }
+  .flash-term { font-family: 'Archivo Black', sans-serif; font-weight: 400; font-size: 24px; text-transform: uppercase; letter-spacing: -.5px; line-height: 1.15; }
+  .flash-tap { font-family: 'Space Mono', monospace; font-size: 11px; letter-spacing: .5px; color: var(--muted); text-transform: uppercase; }
+  .flash-def { margin: 0; font-size: 14.5px; line-height: 1.6; color: var(--ink); }
+  .flash-card .src { font-family: 'Space Mono', monospace; font-size: 10.5px; text-transform: uppercase; letter-spacing: .5px; color: var(--accent); text-decoration: none; }
+  .flash-card .src:hover { text-decoration: underline; }
+  .flash-actions { display: flex; gap: 12px; width: 100%; }
+  .flash-actions button {
+    flex: 1; border: 2px solid var(--ink); background: var(--bg); padding: 12px; cursor: pointer;
+    font-family: 'Space Mono', monospace; font-size: 11.5px; font-weight: 700; letter-spacing: .5px; text-transform: uppercase;
+    display: flex; align-items: center; justify-content: center; gap: 6px;
+  }
+  .flash-actions button svg { width: 14px; height: 14px; }
+  .flash-no:hover { background: #eee; }
+  .flash-yes { background: var(--ink); color: #fff; }
+  .flash-yes:hover { background: var(--accent); border-color: var(--accent); }
+  .flash-done { display: flex; flex-direction: column; align-items: center; gap: 14px; text-align: center; padding: 10px 0 6px; }
+  .flash-done svg { width: 34px; height: 34px; color: var(--accent); }
+  .flash-done p { margin: 0; font-size: 15px; }
 
   @media (max-width: 760px) {
     .ency-index { position: fixed; right: 6px; top: 50%; transform: translateY(-50%); background: rgba(255,255,255,.92); padding: 4px 2px; z-index: 10; }
@@ -327,6 +409,20 @@ TEMPLATE = r"""<!DOCTYPE html>
   .section-hero h2 { font-family: 'Archivo Black', sans-serif; font-weight: 400; font-size: 32px; margin: 0; text-transform: uppercase; letter-spacing: -1px; }
   .section-hero p { margin: 4px 0 0; color: var(--muted); font-size: 13.5px; }
 
+  /* ---- Panel de progreso (Historial) ---- */
+  .progress-panel { margin: 24px 0 8px; border: 2px solid var(--ink); }
+  .stat-row { display: flex; }
+  .stat-block { flex: 1; padding: 18px 16px; text-align: center; border-right: 2px solid var(--ink); }
+  .stat-block:last-child { border-right: none; }
+  .stat-num { font-family: 'Archivo Black', sans-serif; font-weight: 400; font-size: 30px; color: var(--accent); line-height: 1; }
+  .stat-label { font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 1px; text-transform: uppercase; color: var(--muted); margin-top: 6px; }
+  .stat-bars { border-top: 2px solid var(--ink); padding: 16px 18px; display: flex; flex-direction: column; gap: 10px; }
+  .stat-bar-row { display: flex; align-items: center; gap: 10px; }
+  .stat-bar-label { flex: 0 0 150px; font-family: 'Space Mono', monospace; font-size: 10.5px; letter-spacing: .5px; text-transform: uppercase; color: var(--ink); }
+  .stat-bar-track { flex: 1; height: 8px; background: #eee; }
+  .stat-bar-fill { height: 100%; background: var(--accent); }
+  .stat-bar-count { flex: none; font-family: 'Space Mono', monospace; font-size: 11px; color: var(--muted); width: 20px; text-align: right; }
+
   .subsection-title {
     font-family: 'Space Mono', monospace; font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: #fff;
     background: var(--accent); display: inline-block; padding: 4px 10px; font-weight: 700; margin: 28px 0 0;
@@ -350,61 +446,124 @@ TEMPLATE = r"""<!DOCTYPE html>
   .rail::-webkit-scrollbar-track { background: transparent; }
   .rail::-webkit-scrollbar-thumb { background: var(--ink); }
 
-  /* ---- Front page (portada) ---- */
-  .frontpage-top { display: grid; grid-template-columns: 1.7fr 1fr; gap: 22px; margin-top: 6px; align-items: start; }
-  .frontpage-top.single-col { grid-template-columns: 1fr; }
-
-  /* ---- Títulos de columna (portada) ---- */
-  .fp-col { display: flex; flex-direction: column; min-height: 0; }
-  .fp-col-title {
+  /* ---- Front page: tabloide, cronología pura ---- */
+  .front-label {
     font-family: 'Space Mono', monospace; font-size: 10.5px; letter-spacing: 2px; text-transform: uppercase; color: #fff;
-    background: var(--accent); display: inline-block; padding: 4px 10px; font-weight: 700; margin-bottom: 14px; width: fit-content;
+    background: var(--ink); display: inline-block; padding: 4px 10px; font-weight: 700; margin: 26px 0 12px; width: fit-content;
+  }
+  .front-divider { display: flex; align-items: center; gap: 12px; margin: 34px 0 4px; }
+  .front-divider::before, .front-divider::after { content: ''; flex: 1; height: 3px; background: var(--ink); }
+  .front-divider::before { max-width: 28px; }
+  .front-divider .front-label { margin: 0; flex: none; }
+
+  /* ---- Fila superior: titular manda, últimas entradas es columna pequeña ---- */
+  .front-top { display: grid; grid-template-columns: 2.3fr 1fr; gap: 26px; align-items: start; margin-top: 4px; }
+  .front-top.no-lead { display: block; }
+  .front-lead .fp-hero .fp-img { height: 320px; }
+  .front-lead .fp-hero .fp-body { padding: 20px 22px; gap: 8px; }
+  .front-lead .fp-hero h2 { font-size: 36px; }
+  .front-lead .fp-hero p { font-size: 15px; }
+  .front-briefs-col .front-label { margin-top: 0; }
+
+  /* ---- Controles del carrusel de 5★ (debajo del titular) ---- */
+  .lead-controls { display: flex; align-items: center; justify-content: center; gap: 16px; margin-top: 14px; }
+  .lead-arrow {
+    border: 2px solid var(--ink); background: var(--bg); width: 30px; height: 30px; flex: none;
+    display: flex; align-items: center; justify-content: center; cursor: pointer; color: var(--ink);
+  }
+  .lead-arrow svg { width: 13px; height: 13px; }
+  .lead-arrow.left svg { transform: scaleX(-1); }
+  .lead-arrow:hover { background: var(--accent); border-color: var(--accent); color: #fff; }
+  .lead-dots { display: flex; gap: 8px; }
+  .lead-dot {
+    width: 9px; height: 9px; border-radius: 50%; background: #ddd; border: 2px solid var(--ink);
+    padding: 0; cursor: pointer;
+  }
+  .lead-dot.on { background: var(--accent); border-color: var(--accent); }
+
+  /* ---- Titular sin imagen: icono de sección, sin bloque gris ---- */
+  .lead-icon { width: 52px; height: 52px; color: var(--ink); margin-bottom: 4px; image-rendering: pixelated; }
+  .lead-icon svg { width: 100%; height: 100%; shape-rendering: crispEdges; }
+
+  /* ---- Apuntes (los 2 siguientes más recientes), en fila debajo ---- */
+  .front-picks { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; margin-top: 14px; }
+  .picks-subsection:first-of-type .subsection-title { margin-top: 20px; }
+  .front-pick {
+    display: flex; gap: 0; text-decoration: none; color: var(--ink); height: 96px;
+    border: 2px solid var(--ink); position: relative; transition: border-color .15s ease;
+  }
+  .front-pick:hover { border-color: var(--accent); }
+  .front-pick:hover h3 { color: var(--accent); }
+  .front-pick .fp-img, .front-pick .fp-noimg { width: 96px; flex: none; border-right: 2px solid var(--ink); object-fit: cover; height: 100%; }
+  .front-pick .fp-noimg { display: flex; align-items: center; justify-content: center; background: #f2f2f2; }
+  .front-pick .fp-noimg svg { width: 26px; height: 26px; color: var(--ink); opacity: .5; }
+  .front-pick .pick-body { padding: 10px 14px; display: flex; flex-direction: column; justify-content: center; gap: 5px; min-width: 0; }
+  .front-pick .pick-tag { font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: .6px; text-transform: uppercase; color: var(--accent); font-weight: 700; }
+  .front-pick h3 {
+    margin: 0; font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 14.5px; line-height: 1.28;
+    display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; transition: color .15s ease;
   }
 
-  /* ---- Hero carousel (5 estrellas) ---- */
-  .hero-carousel { position: relative; height: 520px; }
-  .hc-slide {
-    height: 100%; opacity: 0; transform: translateY(8px);
-    transition: opacity .38s ease, transform .38s ease;
+  /* ---- Empty state de "Últimas entradas" ---- */
+  .briefs-empty {
+    border: 2px dashed var(--ink); padding: 26px 18px; text-align: center;
+    display: flex; flex-direction: column; align-items: center; gap: 10px; min-height: 180px; justify-content: center;
   }
-  .hc-slide.in { opacity: 1; transform: translateY(0); }
-  .hc-slide.out { opacity: 0; transform: translateY(-8px); transition: opacity .2s ease, transform .2s ease; }
-  .hc-slide .fp-hero { height: 100%; display: flex; flex-direction: column; }
-  .hc-slide .fp-hero .fp-img, .hc-slide .fp-hero .fp-noimg { height: 260px; flex: none; }
-  .hc-slide .fp-hero .fp-body { flex: 1; min-height: 0; overflow: hidden; }
-  .hc-slide .fp-hero h2 { display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
-  .hc-slide .fp-hero p { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
-  .hc-arrow {
-    position: absolute; top: 50%; transform: translateY(-50%); width: 38px; height: 38px;
-    border: 2px solid var(--ink); background: var(--bg); display: flex; align-items: center; justify-content: center;
-    cursor: pointer; color: var(--ink); z-index: 2;
-  }
-  .hc-arrow:hover { background: var(--accent); border-color: var(--accent); color: #fff; }
-  .hc-arrow svg { width: 15px; height: 15px; }
-  .hc-arrow.left { left: -18px; }
-  .hc-arrow.left svg { transform: scaleX(-1); }
-  .hc-arrow.right { right: -18px; }
-  .hc-dots { position: absolute; bottom: 14px; left: 50%; transform: translateX(-50%); display: flex; gap: 6px; z-index: 2; }
-  .hc-dot { width: 7px; height: 7px; border-radius: 50%; background: rgba(255,255,255,.6); border: 1px solid var(--ink); padding: 0; }
-  .hc-dot.on { background: var(--accent); border-color: var(--accent); }
+  .briefs-empty-icon { width: 26px; height: 26px; color: var(--accent); opacity: .55; }
+  .briefs-empty-icon svg { width: 100%; height: 100%; }
+  .briefs-empty p { margin: 0; font-size: 13px; line-height: 1.5; font-weight: 700; color: var(--ink); }
+  .briefs-empty .briefs-empty-sub { font-weight: 400; color: var(--muted); font-size: 12px; }
 
-  /* ---- 4 y 3 estrellas: columna derecha ---- */
-  .fp-secondary-col { display: flex; flex-direction: column; min-height: 520px; }
-  .fp-secondary-list { display: flex; flex-direction: column; gap: 14px; }
-  .fp-card.fp-wide { display: flex; align-items: stretch; flex: none; position: relative; }
-  .fp-card.fp-wide .fp-img, .fp-card.fp-wide .fp-noimg { width: 130px; flex: none; border-bottom: none; border-right: 2px solid var(--ink); min-height: 130px; }
-  .fp-card.fp-wide .fp-noimg svg { width: 32px; }
-  .fp-card.fp-wide .fp-body { display: flex; flex-direction: column; flex: 1 1 auto; min-width: 0; padding: 14px 16px; gap: 7px; justify-content: center; }
-  .fp-card.fp-wide h3 { margin: 0; font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 15px; line-height: 1.3; }
-  .fp-card.fp-wide p { margin: 0; font-size: 12px; line-height: 1.45; color: var(--muted); }
-  .fp-card.fp-wide .tag-row { display: flex; align-items: center; gap: 8px; }
-  .fp-pagination { flex: none; display: flex; align-items: center; justify-content: center; gap: 14px; margin-top: 12px; }
-  .pg-btn { border: 2px solid var(--ink); background: var(--bg); width: 30px; height: 30px; display: flex; align-items: center; justify-content: center; cursor: pointer; color: var(--ink); }
-  .pg-btn svg { width: 13px; height: 13px; }
-  .pg-btn.left svg { transform: scaleX(-1); }
-  .pg-btn:hover:not(:disabled) { background: var(--accent); border-color: var(--accent); color: #fff; }
-  .pg-btn:disabled { opacity: .3; cursor: default; }
-  .pg-count { font-family: 'Space Mono', monospace; font-size: 11px; color: var(--muted); }
+  /* ---- Breves: columna angosta, título en varias líneas ---- */
+  .front-briefs { border-top: 3px solid var(--ink); }
+  .brief-row {
+    display: flex; flex-direction: column; align-items: flex-start; gap: 7px; padding: 13px 2px; border-bottom: 1px solid #ddd;
+    text-decoration: none; color: var(--ink);
+  }
+  .brief-row:hover { background: rgba(255,90,31,0.06); }
+  .brief-row:hover .brief-title { color: var(--accent); }
+  .brief-stamp {
+    flex: none; font-family: 'Space Mono', monospace; font-size: 9px; font-weight: 700; letter-spacing: .8px; text-transform: uppercase;
+    border: 2px solid var(--ink); padding: 4px 8px; background: var(--bg); transform: rotate(-3deg);
+    transition: background .18s ease, color .18s ease, border-color .18s ease;
+  }
+  .brief-row:nth-child(3n+2) .brief-stamp { transform: rotate(2deg); }
+  .brief-row:nth-child(3n) .brief-stamp { transform: rotate(-1.5deg); }
+  .brief-row:hover .brief-stamp {
+    background: var(--accent); border-color: var(--accent); color: #fff;
+    animation: stampWiggle .45s ease;
+  }
+  @keyframes stampWiggle {
+    0% { transform: rotate(-3deg) scale(1); }
+    35% { transform: rotate(-9deg) scale(1.1); }
+    65% { transform: rotate(6deg) scale(1.1); }
+    100% { transform: rotate(-2deg) scale(1.05); }
+  }
+  .brief-title {
+    width: 100%; font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 14px; line-height: 1.32;
+    display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; transition: color .15s ease;
+  }
+  .brief-meta { display: flex; align-items: center; gap: 10px; }
+  .brief-date { font-size: 10.5px; color: var(--muted); }
+
+  /* ---- Paginación de "Últimas entradas" ---- */
+  .brief-pagination { display: flex; align-items: center; justify-content: center; gap: 10px; margin-top: 14px; }
+  .brief-pg-arrow {
+    border: 2px solid var(--ink); background: var(--bg); width: 26px; height: 26px; flex: none;
+    display: flex; align-items: center; justify-content: center; cursor: pointer; color: var(--ink);
+  }
+  .brief-pg-arrow svg { width: 11px; height: 11px; }
+  .brief-pg-arrow.left svg { transform: scaleX(-1); }
+  .brief-pg-arrow:hover:not(:disabled) { background: var(--accent); border-color: var(--accent); color: #fff; }
+  .brief-pg-arrow:disabled { opacity: .3; cursor: default; }
+  .brief-pg-nums { display: flex; gap: 6px; }
+  .brief-pg-num {
+    border: 2px solid var(--ink); background: var(--bg); width: 26px; height: 26px; flex: none;
+    display: flex; align-items: center; justify-content: center; cursor: pointer; color: var(--ink);
+    font-family: 'Space Mono', monospace; font-size: 11px; font-weight: 700;
+  }
+  .brief-pg-num:hover { border-color: var(--accent); color: var(--accent); }
+  .brief-pg-num.active { background: var(--ink); border-color: var(--ink); color: #fff; }
 
   /* ---- Mini rating badge (miniaturas) ---- */
   .mini-rating { display: flex; align-items: center; gap: 3px; font-family: 'Space Mono', monospace; font-size: 11px; font-weight: 700; }
@@ -417,33 +576,16 @@ TEMPLATE = r"""<!DOCTYPE html>
   .mini-rating.inline svg { color: var(--accent); }
   .mini-rating.inline.muted, .mini-rating.inline.muted svg { color: var(--muted); }
 
-  /* ---- Empty states de portada ---- */
-  .fp-empty-hero {
-    height: 520px; border: 2px dashed var(--ink); display: flex; flex-direction: column; align-items: center; justify-content: center;
-    gap: 14px; text-align: center; padding: 40px; color: var(--muted);
-  }
-  .fp-empty-hero .fp-empty-icon { width: 38px; height: 38px; opacity: .35; }
-  .fp-empty-hero .fp-empty-icon svg { width: 100%; height: 100%; }
-  .fp-empty-hero p { margin: 0; font-size: 14px; line-height: 1.6; }
-  .fp-empty-row { padding: 22px 0; color: var(--muted); font-style: italic; font-size: 13.5px; }
-
-  /* ---- Divisoria + secciones por categoría (2/1/sin valorar) ---- */
-  .fp-divider { border: none; border-top: 3px solid var(--ink); margin: 40px 0 0; }
-  .tier-section { margin-top: 36px; }
-  .rail-wrap { position: relative; display: flex; align-items: center; gap: 6px; }
-  .rail-wrap .rail { flex: 1; }
-  .rail-arrow {
-    flex: none; width: 30px; height: 30px; border: 2px solid var(--ink); background: var(--bg);
-    display: flex; align-items: center; justify-content: center; cursor: pointer; color: var(--ink);
-  }
-  .rail-arrow svg { width: 13px; height: 13px; }
-  .rail-arrow.left svg { transform: scaleX(-1); }
-  .rail-arrow:hover { background: var(--accent); border-color: var(--accent); color: #fff; }
-  .rail-arrow.hidden { visibility: hidden; }
-
   @media (max-width: 760px) {
-    .frontpage-top { grid-template-columns: 1fr; }
-    .hc-arrow { display: none; }
+    .front-top { grid-template-columns: 1fr; }
+    .front-lead .fp-hero .fp-img { height: 180px; }
+    .front-lead .fp-hero h2 { font-size: 23px; }
+    .front-picks { grid-template-columns: 1fr; }
+    .front-pick { height: 76px; }
+    .front-pick .fp-img, .front-pick .fp-noimg { width: 64px; }
+    .brief-title { font-size: 14px; }
+    .brief-meta { gap: 8px; }
+    .brief-date { display: none; }
   }
 
   .fp-card {
@@ -508,6 +650,8 @@ TEMPLATE = r"""<!DOCTYPE html>
   .overlay .close-btn { position: fixed; top: 20px; right: 24px; width: 36px; height: 36px; border: 2px solid var(--ink); background: var(--bg); display: flex; align-items: center; justify-content: center; cursor: pointer; z-index: 41; }
   .overlay .close-btn:hover { background: var(--accent); border-color: var(--accent); color: #fff; }
   .overlay .close-btn svg { width: 16px; height: 16px; }
+  .art-icon { width: 46px; height: 46px; color: var(--ink); margin-bottom: 10px; }
+  .art-icon svg { width: 100%; height: 100%; shape-rendering: crispEdges; }
   .art-tag { font-family: 'Space Mono', monospace; font-size: 10.5px; letter-spacing: 1.4px; text-transform: uppercase; color: var(--accent); font-weight: 700; }
   .art-title { font-family: 'Archivo Black', sans-serif; font-weight: 400; font-size: 42px; line-height: 1.05; margin: 10px 0 6px; letter-spacing: -1px; opacity: 0; transform: translateY(10px); animation: riseIn .5s ease forwards .1s; }
   .art-meta { font-family: 'Space Mono', monospace; font-size: 11.5px; color: var(--muted); border-bottom: 1px solid #ddd; padding-bottom: 18px; margin-bottom: 20px; }
@@ -584,7 +728,6 @@ TEMPLATE = r"""<!DOCTYPE html>
     header.masthead { padding: 40px 18px 0; }
     .ticker { margin: 0 -18px; }
     nav.sections { margin: 0 -18px; padding: 0 22px; }
-    .frontpage-top { gap: 16px; }
   }
 
   @media (max-width: 760px) {
@@ -596,24 +739,11 @@ TEMPLATE = r"""<!DOCTYPE html>
     .streak-nav { padding: 0 12px; }
     .streak-tooltip { left: auto; right: -10px; }
 
-    .frontpage-top { grid-template-columns: 1fr; }
-    .fp-col-title { font-size: 12px; }
-    .hero-carousel { height: auto; min-height: 0; }
-    .hc-slide { position: relative; }
-    .hc-slide .fp-hero .fp-img, .hc-slide .fp-hero .fp-noimg { height: 200px; }
-    .hc-slide .fp-hero .fp-body { overflow: visible; }
     .fp-hero h2 { font-size: 26px; }
     .fp-hero p { font-size: 13.5px; }
     .fp-hero.no-media .fp-body { padding: 26px 22px; gap: 10px; }
     .fp-hero.no-media h2 { font-size: 30px; }
     .fp-hero.no-media p { font-size: 14px; }
-    .hc-arrow { display: none; }
-
-    .fp-secondary-col { min-height: 0; }
-    .fp-card.fp-wide { flex-direction: column; }
-    .fp-card.fp-wide .fp-img, .fp-card.fp-wide .fp-noimg {
-      width: 100%; height: 150px; min-height: 0; border-right: none; border-bottom: 2px solid var(--ink);
-    }
 
     .rail .card { flex: 0 0 78vw; }
     .grid { grid-template-columns: 1fr; }
@@ -625,6 +755,7 @@ TEMPLATE = r"""<!DOCTYPE html>
     .art-body p, .art-body ul { font-size: 15px; }
     .overlay-inner { padding: 60px 18px 80px; }
 
+    .ency-toolbar { flex-direction: column; align-items: stretch; gap: 10px; }
     .ency-layout { flex-direction: column; gap: 8px; }
     .ency-index {
       position: static; flex-direction: row; flex-wrap: wrap; max-height: none;
@@ -633,12 +764,17 @@ TEMPLATE = r"""<!DOCTYPE html>
     }
 
     table.hist { min-width: 520px; }
+    .stat-row { flex-wrap: wrap; }
+    .stat-block { flex: 1 1 33%; padding: 14px 8px; }
+    .stat-num { font-size: 24px; }
+    .stat-bar-label { flex-basis: 100px; font-size: 9.5px; }
 
     .spotlight, .ticker-modal { padding-top: 8vh; }
   }
 
   @media (max-width: 480px) {
     .wrap { padding: 0 14px; }
+    main.wrap { padding-top: 24px; }
     header.masthead { padding: 32px 14px 0; }
     .ticker { margin: 0 -14px; }
     nav.sections { margin: 0 -14px; padding: 0 18px; }
@@ -701,6 +837,16 @@ TEMPLATE = r"""<!DOCTYPE html>
   </div>
 </div>
 
+<div class="ticker-modal" id="flash-modal">
+  <div class="ticker-modal-panel flash-panel">
+    <div class="ticker-modal-header">
+      <h3>Repasar términos</h3>
+      <button class="close-btn-sm" id="flash-modal-close"></button>
+    </div>
+    <div class="flash-modal-body" id="flash-modal-body"></div>
+  </div>
+</div>
+
 <div class="spotlight" id="spotlight">
   <div class="spotlight-panel">
     <div class="spotlight-input-row">
@@ -715,6 +861,7 @@ TEMPLATE = r"""<!DOCTYPE html>
 const ARTICLES = __ARTICLES_JSON__;
 const SECTIONS = __SECTIONS_JSON__;
 const ICONS = __ICONS_JSON__;
+const ARTICLE_ICONS = __ARTICLE_ICONS_JSON__;
 
 function bySlug(slug) { return SECTIONS.find(s => s.slug === slug); }
 
@@ -863,6 +1010,66 @@ function wireRating(articleId) {
       renderTicker();
     });
   });
+}
+
+/* ---------- notas propias por artículo ---------- */
+function getArticleNotes() { try { return JSON.parse(localStorage.getItem('articleNotes') || '{}'); } catch(e) { return {}; } }
+function setArticleNote(id, text) {
+  const notes = getArticleNotes();
+  if (!text || !text.trim()) { delete notes[id]; } else { notes[id] = text; }
+  localStorage.setItem('articleNotes', JSON.stringify(notes));
+}
+
+function noteHtml(a) {
+  const val = getArticleNotes()[a.id] || '';
+  return `<div class="art-note">
+    <h4>${ICONS.edit} Tu nota</h4>
+    <p class="note-hint">Escribe en tus palabras qué te llevas de esto, o cómo lo aplicarías. Se guarda solo, en tu navegador.</p>
+    <textarea id="art-note-input" placeholder="Ej: esto me sirve para justificar el rediseño del onboarding...">${val}</textarea>
+    <div class="note-status" id="art-note-status"></div>
+  </div>`;
+}
+
+function wireNote(articleId) {
+  const input = document.getElementById('art-note-input');
+  const status = document.getElementById('art-note-status');
+  if (!input) return;
+  let t = null;
+  input.addEventListener('input', () => {
+    clearTimeout(t);
+    status.textContent = '';
+    t = setTimeout(() => {
+      setArticleNote(articleId, input.value);
+      status.textContent = 'Guardado ✓';
+      clearTimeout(window.__noteStatusTimer);
+      window.__noteStatusTimer = setTimeout(() => { status.textContent = ''; }, 1800);
+    }, 500);
+  });
+}
+
+/* ---------- artículos relacionados ---------- */
+function relatedArticles(a) {
+  const pool = visibleArticles().filter(x => x.id !== a.id);
+  const myTerms = new Set((a.glossary || []).map(g => g.term.toLowerCase()));
+  const scored = pool.map(x => {
+    let score = 0;
+    if (a.subsection && x.subsection === a.subsection) score += 2;
+    else if (x.section === a.section) score += 1;
+    const shared = (x.glossary || []).some(g => myTerms.has(g.term.toLowerCase()));
+    if (shared) score += 2;
+    return { x, score };
+  }).filter(s => s.score > 0);
+  scored.sort((p, q) => q.score - p.score || (q.x.date_added || '').localeCompare(p.x.date_added || ''));
+  return scored.slice(0, 3).map(s => s.x);
+}
+
+function relatedHtml(a) {
+  const rel = relatedArticles(a);
+  if (!rel.length) return '';
+  return `<div class="art-related">
+    <h4>${ICONS.link} Relacionados</h4>
+    <div class="rail">${rel.map(cardHtml).join('')}</div>
+  </div>`;
 }
 
 /* ---------- modal del teleprompter: artículos nuevos sin valorar ---------- */
@@ -1065,223 +1272,182 @@ function cardHtml(a) {
   </a>`;
 }
 
-/* ---------- front page (editorial layout) ---------- */
-function fpCardOpen(a) {
+/* ---------- front page (tabloide, cronología pura) ---------- */
+/* ---------- icono pixel-art del titular, elegido según el contenido ---------- */
+const LEAD_ICON_RULES = [
+  ['px-terminal', /\bcli\b|terminal|comando|consola|\bscript\b/i],
+  ['px-chip', /\bapi\b|\bmcp\b|servidor|protocolo|integraci[oó]n/i],
+  ['px-book', /diccionario|t[eé]rmino|glosario|definici[oó]n|concepto/i],
+  ['px-chat', /ingenier[oa]s?|developer|desarrollador|colaborar|comunicaci[oó]n/i],
+  ['px-palette', /figma|dise[ñn]o|design|plugin|plantilla|\bui\b|\bux\b/i],
+  ['px-robot', /claude|\bia\b|\bai\b|agente|modelo|\bllm\b|inteligencia artificial/i],
+  ['px-brain', /aprend|estudio|repaso/i],
+];
+const LEAD_ICON_BY_SECTION = {
+  'figma-freebies': 'px-palette',
+  'ia-claude': 'px-robot',
+  'terminologia-tecnica': 'px-book',
+  'hablar-con-ingenieros': 'px-chat',
+};
+function pixelIconFor(a) {
+  const text = `${a.title} ${a.summary} ${a.subsection || ''}`;
+  const hit = LEAD_ICON_RULES.find(([, re]) => re.test(text));
+  if (hit) return hit[0];
+  return LEAD_ICON_BY_SECTION[a.section] || 'px-star';
+}
+
+/* Cada artículo tiene su propia ilustración pixel-art (ARTICLE_ICONS). Si un artículo
+   nuevo todavía no tiene la suya dibujada a mano, cae al icono por palabra clave/sección. */
+function articleIconSvg(a) {
+  return ARTICLE_ICONS[a.id] || ICONS[pixelIconFor(a)];
+}
+
+function leadHtml(a) {
   const sec = bySlug(a.section);
-  return `<span class="tag">${sec ? sec.name : a.section}${a.subsection ? ' · ' + a.subsection : ''}</span>`;
-}
-
-function fpMediaHtml(a, sec) {
-  if (a.images && a.images.length) return `<img class="fp-img" src="${a.images[0]}" alt="" loading="lazy">`;
-  return `<div class="fp-noimg">${sec ? ICONS[sec.icon] : ''}</div>`;
-}
-
-function fpHeroHtml(a) {
-  const img = (a.images && a.images.length) ? `<img class="fp-img" src="${a.images[0]}" alt="" loading="lazy">` : '';
-  return `<a class="fp-card fp-hero ${img ? '' : 'no-media'}" href="#/articulo/${a.id}">
+  const hasImg = a.images && a.images.length;
+  const img = hasImg ? `<img class="fp-img" src="${a.images[0]}" alt="" loading="lazy">` : '';
+  return `<a class="fp-card fp-hero ${hasImg ? '' : 'no-media'}" href="#/articulo/${a.id}">
     ${ratingBadgeHtml(a, 'overlay')}
     ${img}
     <div class="fp-body">
-      ${fpCardOpen(a)}
-      <h2>${truncate(a.title, 85)}</h2>
-      <p>${truncate(a.summary, 135)}</p>
+      ${!hasImg ? `<div class="lead-icon">${articleIconSvg(a)}</div>` : ''}
+      <span class="tag">${sec ? sec.name : a.section}${a.subsection ? ' · ' + a.subsection : ''}</span>
+      <h2>${truncate(a.title, 100)}</h2>
+      <p>${truncate(a.summary, 160)}</p>
       <div class="date mono">${a.date_added || '—'}</div>
     </div>
   </a>`;
 }
 
-function fpWideHtml(a) {
+/* ---------- artículo principal: carrusel de los 5★ ---------- */
+const leadState = { items: [], index: 0, timer: null };
+
+function renderLead(items) {
+  leadState.items = items;
+  leadState.index = 0;
+  paintLead();
+  resetLeadTimer();
+}
+
+function paintLead() {
+  const wrap = document.getElementById('front-lead-out');
+  if (!wrap || !leadState.items.length) return;
+  const a = leadState.items[leadState.index];
+  const multi = leadState.items.length > 1;
+  const dots = multi ? leadState.items.map((_, i) => `<button class="lead-dot ${i === leadState.index ? 'on' : ''}" data-dot="${i}"></button>`).join('') : '';
+  wrap.innerHTML = `
+    ${leadHtml(a)}
+    ${multi ? `
+      <div class="lead-controls">
+        <button class="lead-arrow left" id="lead-prev" title="Anterior">${ICONS.arrow}</button>
+        <div class="lead-dots">${dots}</div>
+        <button class="lead-arrow right" id="lead-next" title="Siguiente">${ICONS.arrow}</button>
+      </div>
+    ` : ''}
+  `;
+  if (multi) {
+    document.getElementById('lead-prev').addEventListener('click', () => leadStep(-1));
+    document.getElementById('lead-next').addEventListener('click', () => leadStep(1));
+    wrap.querySelectorAll('[data-dot]').forEach(d => d.addEventListener('click', () => {
+      leadState.index = Number(d.dataset.dot); paintLead(); resetLeadTimer();
+    }));
+    wrap.addEventListener('mouseenter', () => clearInterval(leadState.timer));
+    wrap.addEventListener('mouseleave', resetLeadTimer);
+  }
+}
+
+function leadStep(dir) {
+  leadState.index = (leadState.index + dir + leadState.items.length) % leadState.items.length;
+  paintLead();
+  resetLeadTimer();
+}
+
+function resetLeadTimer() {
+  clearInterval(leadState.timer);
+  if (leadState.items.length > 1) leadState.timer = setInterval(() => leadStep(1), 10000);
+}
+
+function frontPickHtml(a) {
   const sec = bySlug(a.section);
-  const img = fpMediaHtml(a, sec);
-  return `<a class="fp-card fp-wide" href="#/articulo/${a.id}">
+  const img = (a.images && a.images.length) ? `<img class="fp-img" src="${a.images[0]}" alt="" loading="lazy">` : `<div class="fp-noimg">${articleIconSvg(a)}</div>`;
+  return `<a class="front-pick" href="#/articulo/${a.id}">
     ${img}
-    <div class="fp-body">
-      <div class="tag-row"><span class="tag">${sec ? sec.name : a.section}</span>${ratingBadgeHtml(a, 'inline')}</div>
-      <h3>${truncate(a.title, 58)}</h3>
-      <p>${truncate(a.summary, 100)}</p>
+    <div class="pick-body">
+      <span class="pick-tag">${sec ? sec.name : a.section}</span>
+      <h3>${truncate(a.title, 70)}</h3>
     </div>
   </a>`;
 }
 
-/* ---------- hero carousel (5 estrellas) ---------- */
-const heroState = { items: [], index: 0, timer: null };
-
-function renderHeroCarousel(items) {
-  heroState.items = items;
-  heroState.index = 0;
-  paintHero(true);
-  resetHeroTimer();
-  const wrap = document.getElementById('hero-carousel');
-  if (wrap) {
-    wrap.addEventListener('mouseenter', () => clearInterval(heroState.timer));
-    wrap.addEventListener('mouseleave', resetHeroTimer);
-  }
-}
-
-function paintHero(instant) {
-  const wrap = document.getElementById('hero-carousel');
-  if (!wrap) return;
-  const existing = wrap.querySelector('.hc-slide');
-
-  const doRender = () => {
-    const a = heroState.items[heroState.index];
-    const multi = heroState.items.length > 1;
-    const dots = multi ? heroState.items.map((_, i) => `<span class="hc-dot ${i === heroState.index ? 'on' : ''}"></span>`).join('') : '';
-    wrap.innerHTML = `
-      <div class="hc-slide">${fpHeroHtml(a)}</div>
-      ${multi ? `
-        <button class="hc-arrow left" id="hc-prev" title="Anterior">${ICONS.arrow}</button>
-        <button class="hc-arrow right" id="hc-next" title="Siguiente">${ICONS.arrow}</button>
-        <div class="hc-dots">${dots}</div>
-      ` : ''}
-    `;
-    requestAnimationFrame(() => {
-      requestAnimationFrame(() => {
-        const s = wrap.querySelector('.hc-slide');
-        if (s) s.classList.add('in');
-      });
-    });
-    if (multi) {
-      document.getElementById('hc-prev').addEventListener('click', () => heroStep(-1));
-      document.getElementById('hc-next').addEventListener('click', () => heroStep(1));
-    }
-  };
-
-  if (existing && !instant) {
-    existing.classList.remove('in');
-    existing.classList.add('out');
-    setTimeout(doRender, 200);
-  } else {
-    doRender();
-  }
-}
-
-function heroStep(dir) {
-  heroState.index = (heroState.index + dir + heroState.items.length) % heroState.items.length;
-  paintHero();
-  resetHeroTimer();
-}
-
-function resetHeroTimer() {
-  clearInterval(heroState.timer);
-  if (heroState.items.length > 1) {
-    heroState.timer = setInterval(() => heroStep(1), 10000);
-  }
-}
-
-/* ---------- 4 estrellas: columna secundaria paginada ---------- */
-const secState = { items: [], page: 0, pageSize: 3 };
-
-function renderSecondaryColumn(items) {
-  secState.items = items;
-  secState.page = 0;
-  paintSecondary();
-}
-
-function paintSecondary() {
-  const wrap = document.getElementById('fp-secondary-out');
-  if (!wrap) return;
-  const { items, page, pageSize } = secState;
-  const totalPages = Math.ceil(items.length / pageSize);
-  const start = page * pageSize;
-  const pageItems = items.slice(start, start + pageSize);
-  wrap.innerHTML = `
-    <div class="fp-secondary-list">${pageItems.map(fpWideHtml).join('')}</div>
-    ${totalPages > 1 ? `
-      <div class="fp-pagination">
-        <button class="pg-btn left" id="sec-prev" ${page === 0 ? 'disabled' : ''}>${ICONS.arrow}</button>
-        <span class="pg-count">${page + 1} / ${totalPages}</span>
-        <button class="pg-btn" id="sec-next" ${page === totalPages - 1 ? 'disabled' : ''}>${ICONS.arrow}</button>
-      </div>
-    ` : ''}
-  `;
-  if (totalPages > 1) {
-    document.getElementById('sec-prev').addEventListener('click', () => { secState.page = Math.max(0, secState.page - 1); paintSecondary(); });
-    document.getElementById('sec-next').addEventListener('click', () => { secState.page = Math.min(totalPages - 1, secState.page + 1); paintSecondary(); });
-  }
-}
-
-/* ---------- 2 / 1 / sin valorar: agrupados por sección real, siempre visibles ---------- */
-function sectionRowHtml(sec, items) {
-  const railId = `rail-sec-${sec.slug}`;
-  const body = items.length
-    ? `<div class="rail-wrap">
-        <button class="rail-arrow left hidden" data-rail-prev="${railId}">${ICONS.arrow}</button>
-        <div class="rail" id="${railId}">${items.map(cardHtml).join('')}</div>
-        <button class="rail-arrow right hidden" data-rail-next="${railId}">${ICONS.arrow}</button>
-      </div>`
-    : `<div class="fp-empty-row">Todavía no hay artículos en ${sec.name}.</div>`;
-  return `<div class="tier-section">
-    <div class="subsection-title">${sec.name}</div>
-    ${body}
-  </div>`;
-}
-
-function bottomSectionsHtml(leftover) {
-  const ratings = getRatings();
-  let html = '<hr class="fp-divider">';
+function midRatedGroupsHtml(midRated) {
+  let html = '';
   SECTIONS.forEach(sec => {
-    const items = leftover.filter(a => a.section === sec.slug).sort((x, y) => {
-      const rx = ratings[x.id] || 0, ry = ratings[y.id] || 0;
-      if (ry !== rx) return ry - rx;
-      return (y.date_added || '').localeCompare(x.date_added || '');
-    });
-    html += sectionRowHtml(sec, items);
+    const items = midRated.filter(a => a.section === sec.slug);
+    if (!items.length) return;
+    html += `<div class="picks-subsection">
+      <div class="subsection-title">${sec.name}</div>
+      <div class="front-picks">${items.map(frontPickHtml).join('')}</div>
+    </div>`;
   });
   return html;
 }
 
-function heroEmptyStateHtml() {
-  return `<div class="fp-empty-hero">
-    <div class="fp-empty-icon">${ICONS.star}</div>
-    <p>Aún no tienes artículos destacados.<br>Valora con 3★ o más para que entren en el ranking.</p>
+function briefsEmptyStateHtml() {
+  return `<div class="briefs-empty">
+    <div class="briefs-empty-icon">${ICONS['wand']}</div>
+    <p>¡Estás al día! Ya has valorado todo lo que tienes guardado.</p>
+    <p class="briefs-empty-sub">Añade un artículo nuevo para que la portada vuelva a moverse.</p>
   </div>`;
 }
 
-function secondaryEmptyStateHtml() {
-  return `<div class="fp-empty-hero">
-    <div class="fp-empty-icon">${ICONS.star}</div>
-    <p>Todavía no hay más artículos en el ranking.</p>
-  </div>`;
+function briefRowHtml(a) {
+  const sec = bySlug(a.section);
+  return `<a class="brief-row" href="#/articulo/${a.id}">
+    <span class="brief-stamp">${sec ? sec.name : a.section}</span>
+    <span class="brief-title">${a.title}</span>
+    <span class="brief-meta">${ratingBadgeHtml(a, 'inline')}<span class="brief-date mono">${a.date_added || '—'}</span></span>
+  </a>`;
 }
 
-function setupRailArrows(id) {
-  const track = document.getElementById(id);
-  const prev = document.querySelector(`[data-rail-prev="${id}"]`);
-  const next = document.querySelector(`[data-rail-next="${id}"]`);
-  if (!track || !prev || !next) return;
-  function update() {
-    const overflow = track.scrollWidth > track.clientWidth + 2;
-    prev.classList.toggle('hidden', !overflow || track.scrollLeft <= 2);
-    next.classList.toggle('hidden', !overflow || track.scrollLeft >= track.scrollWidth - track.clientWidth - 2);
+/* ---------- "últimas entradas": paginado de 3 en 3 ---------- */
+const briefsState = { items: [], page: 0, pageSize: 3 };
+
+function renderBriefs(items) {
+  briefsState.items = items;
+  briefsState.page = 0;
+  paintBriefs();
+}
+
+function paintBriefs() {
+  const wrap = document.getElementById('front-briefs-out');
+  if (!wrap) return;
+  const { items, page, pageSize } = briefsState;
+  const totalPages = Math.ceil(items.length / pageSize);
+  const start = page * pageSize;
+  const pageItems = items.slice(start, start + pageSize);
+  wrap.innerHTML = `
+    <div class="front-briefs">${pageItems.map(briefRowHtml).join('')}</div>
+    ${totalPages > 1 ? `
+      <div class="brief-pagination">
+        <button class="brief-pg-arrow left" id="briefs-prev" ${page === 0 ? 'disabled' : ''}>${ICONS.arrow}</button>
+        <div class="brief-pg-nums">${Array.from({ length: totalPages }, (_, i) =>
+          `<button class="brief-pg-num ${i === page ? 'active' : ''}" data-pg="${i}">${i + 1}</button>`
+        ).join('')}</div>
+        <button class="brief-pg-arrow right" id="briefs-next" ${page === totalPages - 1 ? 'disabled' : ''}>${ICONS.arrow}</button>
+      </div>
+    ` : ''}
+  `;
+  if (totalPages > 1) {
+    document.getElementById('briefs-prev').addEventListener('click', () => { briefsState.page = Math.max(0, briefsState.page - 1); paintBriefs(); });
+    document.getElementById('briefs-next').addEventListener('click', () => { briefsState.page = Math.min(totalPages - 1, briefsState.page + 1); paintBriefs(); });
+    wrap.querySelectorAll('[data-pg]').forEach(btn => btn.addEventListener('click', () => { briefsState.page = Number(btn.dataset.pg); paintBriefs(); }));
   }
-  prev.addEventListener('click', () => track.scrollBy({ left: -320, behavior: 'smooth' }));
-  next.addEventListener('click', () => track.scrollBy({ left: 320, behavior: 'smooth' }));
-  track.addEventListener('scroll', update);
-  window.addEventListener('resize', update);
-  update();
-}
-
-
-/* ---------- ranking con decaimiento: puntuación + antigüedad ---------- */
-const RANK_HALF_LIFE_DAYS = 14; // cada 14 días, el "peso" de la puntuación se reduce a la mitad
-
-function ageDaysOf(a) {
-  const t = Date.parse(a.date_added);
-  if (isNaN(t)) return 0;
-  return Math.max(0, (Date.now() - t) / 86400000);
-}
-
-function articleScore(a, ratings) {
-  const r = ratings[a.id] || 0;
-  if (r <= 0) return 0;
-  return r * Math.pow(2, -ageDaysOf(a) / RANK_HALF_LIFE_DAYS);
 }
 
 /* ---------- pages ---------- */
 function renderPortada() {
   renderNav('');
-  clearInterval(heroState.timer);
+  clearInterval(leadState.timer);
   const list = visibleArticles();
   const main = document.getElementById('main');
 
@@ -1292,41 +1458,33 @@ function renderPortada() {
 
   const ratings = getRatings();
   const rateOf = a => ratings[a.id] || 0;
+  const byDateDesc = (x, y) => (y.date_added || '').localeCompare(x.date_added || '');
 
-  const HERO_SLOTS = 3;
-  const SECONDARY_SLOTS = 6;
+  // artículo principal: tus 5★, en carrusel si hay varias
+  const fiveStars = list.filter(a => rateOf(a) === 5).sort(byDateDesc);
+  // últimas entradas: todo lo que aún no has valorado
+  const unrated = list.filter(a => rateOf(a) === 0).sort(byDateDesc);
+  // más artículos: lo valorado con menos de 5★
+  const midRated = list.filter(a => { const r = rateOf(a); return r > 0 && r < 5; }).sort(byDateDesc);
 
-  // solo compiten por el ranking los artículos valorados con 3★ o más;
-  // el resto (1★, 2★ o sin valorar) siempre va a las secciones de abajo
-  const ranked = list.filter(a => rateOf(a) >= 3)
-    .map(a => ({ a, score: articleScore(a, ratings) }))
-    .sort((x, y) => y.score - x.score || (y.a.date_added || '').localeCompare(x.a.date_added || ''))
-    .map(x => x.a);
+  const hasLead = fiveStars.length > 0;
 
-  const hero = ranked.slice(0, HERO_SLOTS);
-  const secondary = ranked.slice(HERO_SLOTS, HERO_SLOTS + SECONDARY_SLOTS);
-  const overflow = ranked.slice(HERO_SLOTS + SECONDARY_SLOTS);
-  const leftover = list.filter(a => rateOf(a) <= 2).concat(overflow);
+  main.innerHTML = `
+    <div class="front-top ${hasLead ? '' : 'no-lead'}">
+      ${hasLead ? `<div class="front-lead" id="front-lead-out"></div>` : ''}
+      <div class="front-briefs-col">
+        <div class="front-label">Últimas entradas</div>
+        ${unrated.length ? `<div id="front-briefs-out"></div>` : briefsEmptyStateHtml()}
+      </div>
+    </div>
+    ${midRated.length ? `
+      <div class="front-divider"><span class="front-label">Más artículos</span></div>
+      ${midRatedGroupsHtml(midRated)}
+    ` : ''}
+  `;
 
-  const hasHero = hero.length > 0;
-  const hasSecondary = secondary.length > 0;
-
-  const heroColHtml = `<div class="fp-col">
-    <div class="fp-col-title">Top artículos</div>
-    ${hasHero ? `<div class="hero-carousel" id="hero-carousel"></div>` : heroEmptyStateHtml()}
-  </div>`;
-  const secondaryColHtml = `<div class="fp-col">
-    <div class="fp-col-title">También destacados</div>
-    ${hasSecondary ? `<div class="fp-secondary-col"><div id="fp-secondary-out"></div></div>` : secondaryEmptyStateHtml()}
-  </div>`;
-
-  const topHtml = `<div class="frontpage-top">${heroColHtml}${secondaryColHtml}</div>`;
-
-  main.innerHTML = `${topHtml}${bottomSectionsHtml(leftover)}`;
-
-  if (hasHero) renderHeroCarousel(hero);
-  if (hasSecondary) renderSecondaryColumn(secondary);
-  SECTIONS.forEach(sec => { const id = `rail-sec-${sec.slug}`; if (document.getElementById(id)) setupRailArrows(id); });
+  if (hasLead) renderLead(fiveStars);
+  if (unrated.length) renderBriefs(unrated);
 }
 
 function railHtml(items) {
@@ -1421,6 +1579,29 @@ function paintSectionBody() {
   wrap.innerHTML = html;
 }
 
+function progressPanelHtml(list) {
+  const bySection = SECTIONS.map(sec => ({ sec, count: list.filter(a => a.section === sec.slug).length }));
+  const maxCount = Math.max(1, ...bySection.map(b => b.count));
+  const termCount = buildEncyTerms().length;
+  const streak = computeStreak();
+  return `<div class="progress-panel">
+    <div class="stat-row">
+      <div class="stat-block"><div class="stat-num">${list.length}</div><div class="stat-label">Artículos</div></div>
+      <div class="stat-block"><div class="stat-num">${termCount}</div><div class="stat-label">Términos</div></div>
+      <div class="stat-block"><div class="stat-num">${streak}</div><div class="stat-label">Racha</div></div>
+    </div>
+    <div class="stat-bars">
+      ${bySection.map(b => `
+        <div class="stat-bar-row">
+          <span class="stat-bar-label">${b.sec.name}</span>
+          <div class="stat-bar-track"><div class="stat-bar-fill" style="width:${Math.round(b.count / maxCount * 100)}%"></div></div>
+          <span class="stat-bar-count">${b.count}</span>
+        </div>
+      `).join('')}
+    </div>
+  </div>`;
+}
+
 function renderHistorial() {
   renderNav('historial');
   const hidden = getHidden();
@@ -1430,6 +1611,7 @@ function renderHistorial() {
   const main = document.getElementById('main');
   main.innerHTML = `
     <div class="section-hero"><div><h2>Historial</h2><p>Todo lo que has ido añadiendo, con fecha. Manda a la papelera lo que ya no te interese, y desde ahí restáuralo o bórralo del todo.</p></div></div>
+    ${progressPanelHtml(list)}
     <div class="hist-scroll">
       <table class="hist">
         <thead><tr><th>Título</th><th>Sección</th><th>Fecha</th><th></th></tr></thead>
@@ -1521,13 +1703,16 @@ function renderArticleOverlay(id) {
   if (!a) { overlay.classList.remove('open'); return; }
   const sec = bySlug(a.section);
   inner.innerHTML = `
+    <div class="art-icon">${articleIconSvg(a)}</div>
     <div class="art-tag">${sec ? sec.name : a.section}${a.subsection ? ' · ' + a.subsection : ''}</div>
     <h1 class="art-title">${a.title}</h1>
     <div class="art-meta mono">Añadido el ${a.date_added || '—'}</div>
     ${ratingHtml(a)}
     <div class="art-body">${mdToHtml(a.content_md || a.summary)}</div>
     ${glossaryHtml(a)}
+    ${noteHtml(a)}
     <div class="art-original"><a href="${a.url}" target="_blank" rel="noopener">Leer el artículo original ${ICONS.arrow}</a></div>
+    ${relatedHtml(a)}
   `;
   inner.querySelectorAll('[data-term-key]').forEach(btn => btn.addEventListener('click', () => {
     const nowLiked = toggleLikedTerm(btn.dataset.termKey);
@@ -1535,8 +1720,86 @@ function renderArticleOverlay(id) {
     btn.innerHTML = nowLiked ? ICONS['heart-filled'] : ICONS.heart;
   }));
   wireRating(a.id);
+  wireNote(a.id);
   overlay.classList.add('open');
   window.scrollTo(0,0);
+}
+
+/* ---------- repaso espaciado (sistema Leitner, 5 cajas) ---------- */
+const SRS_BOX_DAYS = { 1: 1, 2: 3, 3: 7, 4: 14, 5: 30 };
+function getSRS() { try { return JSON.parse(localStorage.getItem('termSRS') || '{}'); } catch(e) { return {}; } }
+function setSRS(obj) { localStorage.setItem('termSRS', JSON.stringify(obj)); }
+function todayISO() { return new Date().toISOString().slice(0,10); }
+
+function termsDue(terms) {
+  const srs = getSRS();
+  return terms.filter(t => {
+    const s = srs[t.key];
+    return !s || s.due <= todayISO();
+  });
+}
+
+function reviewTerm(key, knewIt) {
+  const srs = getSRS();
+  const cur = srs[key] || { box: 0, due: todayISO() };
+  const box = knewIt ? Math.min(5, cur.box + 1) : 1;
+  const due = new Date();
+  due.setDate(due.getDate() + SRS_BOX_DAYS[box]);
+  srs[key] = { box, due: due.toISOString().slice(0,10) };
+  setSRS(srs);
+}
+
+/* ---------- modal de flashcards ---------- */
+const flashState = { queue: [], index: 0, revealed: false };
+
+function openFlashModal(allTerms) {
+  flashState.queue = termsDue(allTerms);
+  flashState.index = 0;
+  flashState.revealed = false;
+  document.getElementById('flash-modal').classList.add('open');
+  paintFlashCard();
+}
+function closeFlashModal() {
+  document.getElementById('flash-modal').classList.remove('open');
+  renderEnciclopedia(); // refresca el contador de "Repasar (N)"
+}
+
+function paintFlashCard() {
+  const wrap = document.getElementById('flash-modal-body');
+  const { queue, index, revealed } = flashState;
+  if (index >= queue.length) {
+    wrap.innerHTML = `<div class="flash-done">
+      ${ICONS['star-filled']}
+      <p>${queue.length ? '¡Repaso completo!' : 'Estás al día — no hay términos pendientes de repaso.'}</p>
+      <button class="review-btn" id="flash-close-btn">Cerrar</button>
+    </div>`;
+    document.getElementById('flash-close-btn').addEventListener('click', closeFlashModal);
+    return;
+  }
+  const t = queue[index];
+  wrap.innerHTML = `
+    <div class="flash-progress">${index + 1} / ${queue.length}</div>
+    <div class="flash-card ${revealed ? 'revealed' : ''}" id="flash-card">
+      <div class="flash-term">${t.term}</div>
+      ${revealed ? `
+        <p class="flash-def">${t.definition}</p>
+        <a class="src" data-open="${t.articleId}">De: ${t.articleTitle}</a>
+      ` : `<div class="flash-tap">Toca para ver la definición</div>`}
+    </div>
+    ${revealed ? `
+      <div class="flash-actions">
+        <button class="flash-no" id="flash-no">No me acordaba</button>
+        <button class="flash-yes" id="flash-yes">${ICONS.check} Lo sabía</button>
+      </div>
+    ` : ''}
+  `;
+  if (!revealed) {
+    document.getElementById('flash-card').addEventListener('click', () => { flashState.revealed = true; paintFlashCard(); });
+  } else {
+    document.getElementById('flash-no').addEventListener('click', () => { reviewTerm(t.key, false); flashState.index++; flashState.revealed = false; paintFlashCard(); });
+    document.getElementById('flash-yes').addEventListener('click', () => { reviewTerm(t.key, true); flashState.index++; flashState.revealed = false; paintFlashCard(); });
+    wrap.querySelector('[data-open]').addEventListener('click', e => { e.stopPropagation(); location.hash = '#/articulo/' + t.articleId; });
+  }
 }
 
 function encyLetterOf(term) {
@@ -1544,18 +1807,23 @@ function encyLetterOf(term) {
   return /[A-Z]/.test(l) ? l : '#';
 }
 
-function renderEnciclopedia() {
-  renderNav('enciclopedia');
-  const main = document.getElementById('main');
+function buildEncyTerms() {
   const liked = getLikedTerms();
   const terms = [];
   ARTICLES.forEach(a => {
     (a.glossary || []).forEach((g, idx) => {
       const key = termKey(a.id, idx);
-      if (a.dictionary || liked.includes(key)) terms.push({ ...g, articleId: a.id, articleTitle: a.title });
+      if (a.dictionary || liked.includes(key)) terms.push({ ...g, key, articleId: a.id, articleTitle: a.title });
     });
   });
   terms.sort((x, y) => x.term.localeCompare(y.term, 'es', { sensitivity: 'base' }));
+  return terms;
+}
+
+function renderEnciclopedia() {
+  renderNav('enciclopedia');
+  const main = document.getElementById('main');
+  const terms = buildEncyTerms();
 
   main.innerHTML = `
     <div class="section-hero"><div><h2>Enciclopedia</h2><p>Los términos que te ha interesado guardar, con su definición y de dónde salieron.</p></div></div>
@@ -1567,15 +1835,25 @@ function renderEnciclopedia() {
     return;
   }
 
+  const due = termsDue(terms);
   out.innerHTML = `
-    <div class="ency-search-row">${ICONS.search}<input type="text" id="ency-search" placeholder="Buscar en la Enciclopedia..." autocomplete="off"></div>
+    <div class="ency-toolbar">
+      <div class="ency-search-row">${ICONS.search}<input type="text" id="ency-search" placeholder="Buscar en la Enciclopedia..." autocomplete="off"></div>
+      <button class="review-btn" id="ency-review-btn">${ICONS.cards} Repasar${due.length ? ` (${due.length})` : ''}</button>
+    </div>
     <div class="ency-layout">
       <div class="ency-list" id="ency-list"></div>
       <div class="ency-index" id="ency-index"></div>
     </div>
   `;
   document.getElementById('ency-search').addEventListener('input', e => paintEncyList(terms, e.target.value));
+  document.getElementById('ency-review-btn').addEventListener('click', () => openFlashModal(terms));
   paintEncyList(terms, '');
+
+  if (window.__pendingReviewOpen) {
+    window.__pendingReviewOpen = false;
+    openFlashModal(terms);
+  }
 }
 
 function paintEncyList(terms, query) {
@@ -1643,6 +1921,12 @@ document.getElementById('ticker-modal-close').innerHTML = ICONS.close;
 document.getElementById('ticker-modal-close').addEventListener('click', closeTickerModal);
 document.getElementById('ticker-modal').addEventListener('click', e => { if (e.target.id === 'ticker-modal') closeTickerModal(); });
 document.addEventListener('keydown', e => { if (e.key === 'Escape' && document.getElementById('ticker-modal').classList.contains('open')) closeTickerModal(); });
+
+/* ---------- wiring del modal de flashcards ---------- */
+document.getElementById('flash-modal-close').innerHTML = ICONS.close;
+document.getElementById('flash-modal-close').addEventListener('click', closeFlashModal);
+document.getElementById('flash-modal').addEventListener('click', e => { if (e.target.id === 'flash-modal') closeFlashModal(); });
+document.addEventListener('keydown', e => { if (e.key === 'Escape' && document.getElementById('flash-modal').classList.contains('open')) closeFlashModal(); });
 
 /* ---------- spotlight search ---------- */
 document.getElementById('spotlight-icon').innerHTML = ICONS.search;
@@ -1744,7 +2028,8 @@ route();
 html = (TEMPLATE
         .replace("__ARTICLES_JSON__", data_json)
         .replace("__SECTIONS_JSON__", sections_json)
-        .replace("__ICONS_JSON__", icons_json))
+        .replace("__ICONS_JSON__", icons_json)
+        .replace("__ARTICLE_ICONS_JSON__", article_icons_json))
 
 with open(OUT_FILE, "w", encoding="utf-8") as f:
     f.write(html)
