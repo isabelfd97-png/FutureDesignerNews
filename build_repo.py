@@ -9,28 +9,34 @@ with open(DATA_FILE, encoding="utf-8") as f:
 
 SECTIONS = [
     {
-        "slug": "figma-freebies",
-        "name": "Figma & Freebies",
-        "desc": "Tips, plugins, plantillas y recursos gratuitos para sacarle más partido a Figma.",
+        "slug": "design-2-0",
+        "name": "Design 2.0",
+        "desc": "Cómo está cambiando la disciplina del diseño en la era de la IA: nuevos flujos, nuevas habilidades, principios que siguen mandando.",
+        "icon": "design-2-0",
+    },
+    {
+        "slug": "claude",
+        "name": "Claude",
+        "desc": "Guías, features y forma de trabajar específicas de Claude: agentes, contexto, límites de uso, Claude Code.",
+        "icon": "claude",
+    },
+    {
+        "slug": "figma",
+        "name": "Figma",
+        "desc": "Novedades, plugins y funciones de Figma, incluido todo lo que toca IA dentro de la propia herramienta.",
         "icon": "layers",
     },
     {
-        "slug": "ia-claude",
-        "name": "IA & Claude",
-        "desc": "Novedades de IA en general y de Claude en particular: modelos, features, casos de uso.",
-        "icon": "chip",
-    },
-    {
-        "slug": "terminologia-tecnica",
-        "name": "Terminología Técnica",
-        "desc": "Conceptos y palabras técnicas explicados en claro, para no perderte en una conversación de IA o de código.",
-        "icon": "book",
-    },
-    {
-        "slug": "hablar-con-ingenieros",
-        "name": "Hablar con Ingenieros",
+        "slug": "engineering",
+        "name": "Engineering",
         "desc": "Cómo colaborar mejor con developers: procesos, cultura, expectativas y lenguaje común.",
         "icon": "chat-code",
+    },
+    {
+        "slug": "ai",
+        "name": "AI",
+        "desc": "Conceptos e IA en general, más allá de Claude: fundamentos, modelos, terminología de referencia.",
+        "icon": "chip",
     },
 ]
 
@@ -56,6 +62,8 @@ PIXEL16['layers'] = ['................', '................', '.......###......',
 PIXEL16['chip'] = ['....#...#...#...', '....#...#...#...', '....#...#...#...', '...##########...', '################', '...##......##...', '...##.####.##...', '...##.####.##...', '#####.####.#####', '...##.####.##...', '...##......##...', '...##########...', '################', '....#...#...#...', '....#...#...#...', '....#...#...#...']
 PIXEL16['book'] = ['......##........', '..############..', '..##..##.....#..', '..######.#####..', '..##..##.....#..', '..######.#####..', '..##..##.....#..', '..##..##.....#..', '..##..##.....#..', '..######.#####..', '..##..##.....#..', '..######.#####..', '..##..##.....#..', '..##..##.....#..', '..############..', '................']
 PIXEL16['chat-code'] = ['................', '.##############.', '.##############.', '.#............#.', '.#...#.##.#...#.', '.#..#..##..#..#.', '.#.#...##...#.#.', '.#..#..##..#..#.', '.#...#.##.#...#.', '.#............#.', '.##############.', '................', '....#...........', '...#............', '..#.............', '................']
+PIXEL16['design-2-0'] = ['................', '................', '......#####.....', '....#######..##.', '...###.......#..', '...##........##.', '..##.............', '..##...##.......', '..##...##.......', '..##.............', '..##.............', '...##.......#...', '...###.....###..', '....#########...', '......#####.....', '................']
+PIXEL16['claude'] = ['........#.......', '........#.......', '........#.......', '..############..', '..############..', '..##........##..', '################', '################', '################', '################', '####........####', '..##.######.##..', '..############..', '..############..', '................', '................']
 
 ICONS = {}
 for _key, _rows in {**PIXEL12, **PIXEL16}.items():
@@ -1284,10 +1292,11 @@ const LEAD_ICON_RULES = [
   ['px-brain', /aprend|estudio|repaso/i],
 ];
 const LEAD_ICON_BY_SECTION = {
-  'figma-freebies': 'px-palette',
-  'ia-claude': 'px-robot',
-  'terminologia-tecnica': 'px-book',
-  'hablar-con-ingenieros': 'px-chat',
+  'design-2-0': 'px-brain',
+  'claude': 'px-robot',
+  'figma': 'px-palette',
+  'engineering': 'px-chat',
+  'ai': 'px-chip',
 };
 function pixelIconFor(a) {
   const text = `${a.title} ${a.summary} ${a.subsection || ''}`;

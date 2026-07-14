@@ -3,7 +3,7 @@
     "id": "aprendizaje-por-refuerzo-basico",
     "title": "Cómo funciona el aprendizaje por refuerzo",
     "url": "https://example.com/rl-basics",
-    "section": "ia-claude",
+    "section": "ai",
     "subsection": "Fundamentos de ML",
     "summary": "Introducción a los conceptos básicos del aprendizaje por refuerzo: agente, entorno, recompensa y política. Explica por qué es distinto al aprendizaje supervisado y por qué importa para diseñar producto con IA.",
     "key_points": [
@@ -19,7 +19,7 @@
     "id": "meta-abre-astryx-su-design-system-interno-y-ya-funciona-en-figma-make",
     "title": "Meta abre Astryx, su design system interno, y ya funciona en Figma Make",
     "url": "https://www.linkedin.com/posts/achyut-khanpara_designsystems-figmamake-uxdesign-share-7480456616299917312-4U0C/",
-    "section": "figma-freebies",
+    "section": "figma",
     "subsection": "Figma Make",
     "summary": "Meta ha hecho open source su design system interno (usado en más de 13.000 apps) y alguien lo ha probado dentro de Figma Make: se instala con un simple prompt, genera output real aunque aún en beta, y se puede personalizar sin tocar código. Lo más interesante no son los componentes, sino que viene con CLI + servidor MCP para que los agentes de IA lo lean directamente.",
     "key_points": [
@@ -51,7 +51,7 @@
     "id": "claude-agents-que-son-y-como-crear-uno",
     "title": "Claude Agents: qué son y cómo crear uno",
     "url": "https://yummy-design-sprint.notion.site/Claude-Agents-What-are-they-how-to-create-one-38e6279147098049a74ae0de250a51a1",
-    "section": "ia-claude",
+    "section": "claude",
     "subsection": "Agentes de IA",
     "summary": "Guía en lenguaje llano de Yummy Labs sobre qué es realmente un 'agente' de IA, pensada para diseñadores. La idea central: un agente no es una cosa técnica, es un trabajo que diseñas — le das un objetivo, unas herramientas y unos límites, y es Claude quien decide los pasos. Incluye ocho agentes concretos que puede construir un diseñador y un ejemplo completo, paso a paso, de un 'design reviewer'.",
     "key_points": [
@@ -87,7 +87,7 @@
     "id": "donde-va-realmente-tu-contexto-de-diseno-en-claude",
     "title": "Dónde va realmente tu contexto de diseño en Claude",
     "url": "https://yummy-design-sprint.notion.site/Where-your-design-context-actually-belongs-in-Claude-35962791470980be91fac4fc3c977fa1",
-    "section": "ia-claude",
+    "section": "claude",
     "subsection": "Claude para diseñadores",
     "summary": "Guía práctica de Yummy Labs sobre las tres capas donde puedes meter contexto de diseño en Claude —Custom Instructions, Project Knowledge y Skills— y por qué confundirlas hace que se te llene el contexto de cosas que no hacen falta. Explica cómo carga cada capa, qué poner en cada una, y aclara de una vez el bombo de los archivos .md tipo DESIGN.md.",
     "key_points": [
@@ -123,7 +123,7 @@
     "id": "los-disenadores-gastan-los-limites-de-uso-de-claude-mas-rapido-que-nad",
     "title": "Los diseñadores gastan los límites de uso de Claude más rápido que nadie: por qué y cómo arreglarlo",
     "url": "https://yummy-design-sprint.notion.site/Designers-hit-Claude-s-usage-limits-faster-than-anyone-Here-s-why-and-exactly-how-to-fix-it-33562791470980b78c4bc906178bc83f",
-    "section": "ia-claude",
+    "section": "claude",
     "subsection": "Claude para diseñadores",
     "summary": "Guía de Yummy Labs sobre por qué el trabajo de diseño agota los límites de uso de Claude más rápido que casi cualquier otro tipo de trabajo, y qué hacer al respecto. El problema de fondo: cada mensaje reprocesa TODA la conversación anterior, así que el mensaje 30 cuesta como los 30 mensajes juntos. Repasa los patrones típicos de un diseñador que disparan el gasto (iterar visualmente, MCP de Figma, seleccionar la página entera, usar Opus por defecto) y cómo arreglar cada uno.",
     "key_points": [
@@ -159,7 +159,7 @@
     "id": "diccionario-de-ia-para-disenadores",
     "title": "Diccionario de IA para diseñadores",
     "url": "https://yummy-design-sprint.notion.site/AI-Design-Dictionary-326627914709808eb562c22421ba2088",
-    "section": "terminologia-tecnica",
+    "section": "ai",
     "subsection": "Diccionario de referencia",
     "summary": "Un diccionario de 63 términos técnicos de IA y desarrollo, escrito por una diseñadora para diseñadoras, organizado en tres niveles: los básicos de la primera semana, lo que aparece al profundizar un poco, y lo que solo hace falta si te metes de lleno. Cada término trae la traducción a lenguaje de diseño y por qué importa para trabajar con IA. Todos sus términos se guardan directamente en la Enciclopedia, sin tener que darles like uno a uno.",
     "key_points": [
@@ -432,7 +432,7 @@
     "id": "5-trucos-para-que-claude-code-no-te-de-un-diseno-web-generico",
     "title": "5 trucos para que Claude Code no te dé un diseño web genérico",
     "url": "https://uxplanet.org/5-tips-to-prevent-generic-web-design-in-claude-code-7cc044760453",
-    "section": "ia-claude",
+    "section": "design-2-0",
     "subsection": "Prompting avanzado",
     "summary": "Nick Babich explica cómo evitar que Claude Code genere webs con \"cara de IA\": la clave está en montar bien el CLAUDE.md antes de pedirle nada, no en el prompt del momento.",
     "key_points": [
@@ -467,6 +467,30 @@
       }
     ],
     "date_added": "2026-07-13",
+    "dictionary": false
+  },
+  {
+    "id": "la-ley-de-pragnanz-el-buen-diseno-es-quitar-no-anadir",
+    "title": "La Ley de Prägnanz: el buen diseño es quitar, no añadir",
+    "url": "https://www.linkedin.com/posts/zanderwhitehurst_ux-ui-design-ugcPost-7480575353086906368-q0i7",
+    "section": "design-2-0",
+    "subsection": "Principios de diseño",
+    "summary": "Zander Whitehurst recuerda un principio Gestalt que muchos diseñadores ignoran: ante la complejidad, el cerebro busca simplicidad por defecto, así que añadir más botones, links y opciones va justo en contra de cómo percibimos.",
+    "key_points": [
+      "La Ley de Prägnanz es un principio de la psicología Gestalt: el cerebro interpreta formas complejas de la manera más simple posible",
+      "Los diseñadores tienden a resolver la complejidad añadiendo (más botones, más links, más features, más opciones), cuando el cerebro va en la dirección contraria",
+      "Buen diseño no es sumar elementos, es quitar todo lo que se interpone entre el usuario y lo que necesita hacer",
+      "El mismo problema aparece al generar UI con Claude Code: sin guardrails explícitos, tiende a añadir de más en vez de simplificar (ver el artículo de los 5 trucos anti-diseño-genérico)"
+    ],
+    "content_md": "## De qué va\nUn post corto de Zander Whitehurst (fundador de Memorisely) que resume un principio de diseño que se olvida fácil: la Ley de Prägnanz. Viene de la psicología Gestalt y dice que, ante algo visualmente complejo, el cerebro lo interpreta de la forma más simple posible — busca patrones simples aunque el objeto real sea complicado. La consecuencia para diseño: cuando algo se siente complicado de usar, la reacción instintiva de un equipo suele ser añadir (un botón más, un link más, una opción más para cubrir el caso raro), pero eso va justo en la dirección contraria a como percibimos. El buen diseño no es sumar, es quitar todo lo que se interpone entre la persona y lo que quiere hacer.\n\n## Por qué le importa a un product designer\nEste principio no es solo una frase bonita de LinkedIn: es literalmente la base de por qué la sobrecarga de opciones cansa aunque cada opción individual tenga sentido. Y conecta directo con algo que ya viste en el artículo de los '5 trucos para que Claude Code no te dé un diseño web genérico': una de las trampas más comunes al generar UI con IA es que, sin guardrails explícitos, el modelo tiende a añadir de más (sombras, variantes, elementos decorativos) en vez de aplicar este mismo criterio de simplicidad. La Ley de Prägnanz es, en el fondo, el argumento de por qué merece la pena poner ese límite explícito.\n\n## Ideas clave\n- La Ley de Prägnanz (psicología Gestalt): el cerebro interpreta lo complejo de la forma más simple posible.\n- Cuando algo se siente complicado, la respuesta instintiva de añadir (botones, links, opciones) va en contra de cómo percibimos.\n- Diseñar bien es un ejercicio de quitar, no de sumar.\n- El mismo patrón aparece al generar UI con IA: sin límites explícitos, tiende a añadir de más en vez de simplificar.",
+    "images": [],
+    "glossary": [
+      {
+        "term": "Ley de Prägnanz (Gestalt)",
+        "definition": "Un principio de percepción que dice que el cerebro, ante algo visualmente complejo, lo interpreta de la forma más simple y ordenada posible — no procesamos el detalle completo, buscamos el patrón más sencillo que explique lo que vemos. Es la base científica de por qué las interfaces sobrecargadas de opciones cansan, aunque cada opción por separado tenga sentido."
+      }
+    ],
+    "date_added": "2026-07-14",
     "dictionary": false
   }
 ]
