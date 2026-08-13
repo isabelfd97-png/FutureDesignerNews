@@ -305,6 +305,17 @@ TEMPLATE = r"""<!DOCTYPE html>
   .like-btn svg { width: 16px; height: 16px; }
   .like-btn:hover { border-color: var(--accent); color: var(--accent); }
   .like-btn.liked { background: var(--accent); border-color: var(--accent); color: #fff; }
+  /* ---- Reflexiones (de la skill Article Debate) ---- */
+  .art-reflections { margin-top: 32px; border: 2px solid var(--ink); }
+  .art-reflections h4 { display: flex; align-items: center; gap: 8px; margin: 0; padding: 12px 18px; background: var(--ink); color: #fff; font-family: 'Space Mono', monospace; font-size: 11px; letter-spacing: 1.5px; text-transform: uppercase; }
+  .art-reflections h4 svg { width: 16px; height: 16px; }
+  .reflection-entry { padding: 16px 18px; }
+  .reflection-entry + .reflection-entry { border-top: 1px dashed #ccc; }
+  .reflection-date { font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: .5px; text-transform: uppercase; color: var(--accent); font-weight: 700; }
+  .reflection-text { margin: 6px 0 0; font-size: 15px; line-height: 1.65; }
+  .reflection-text p { margin: 0 0 10px; }
+  .reflection-text p:last-child { margin-bottom: 0; }
+
   /* ---- Nota propia (artículo) ---- */
   .art-note { margin-top: 32px; padding: 18px 20px; background: rgba(255,90,31,0.05); border: 2px dashed var(--accent); }
   .art-note h4 { display: flex; align-items: center; gap: 8px; margin: 0 0 6px; font-family: 'Space Mono', monospace; font-size: 11px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--accent); }
@@ -685,6 +696,24 @@ TEMPLATE = r"""<!DOCTYPE html>
   .art-original a:hover { color: var(--accent); }
   .art-original a svg { width: 16px; height: 16px; }
 
+  /* ---- Materiales incluidos (artículos de la sección Materials) ---- */
+  .art-materials { margin: 28px 0; }
+  .art-materials h4 { display: flex; align-items: center; gap: 8px; margin: 0 0 14px; font-family: 'Space Mono', monospace; font-size: 11px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--accent); }
+  .art-materials h4 svg { width: 18px; height: 18px; color: var(--accent); }
+  .materials-list { display: flex; flex-direction: column; gap: 2px; }
+  .material-item { border: 2px solid var(--ink); background: var(--bg); padding: 14px 16px; }
+  .material-item + .material-item { border-top: none; }
+  .material-head { display: flex; align-items: baseline; justify-content: space-between; gap: 10px; flex-wrap: wrap; }
+  .material-name { font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 15.5px; }
+  .material-tag { flex: none; font-family: 'Space Mono', monospace; font-size: 9px; font-weight: 700; letter-spacing: .8px; text-transform: uppercase; background: var(--ink); color: #fff; padding: 3px 8px; }
+  .material-desc { margin: 6px 0 0; font-size: 13.5px; line-height: 1.5; color: var(--muted); }
+  .material-cmd { display: block; margin-top: 10px; font-family: 'Space Mono', monospace; font-size: 12px; background: #f2f2f2; border: 1px solid #ddd; padding: 8px 10px; overflow-x: auto; white-space: pre; cursor: pointer; }
+  .material-cmd:hover { border-color: var(--accent); color: var(--accent); }
+  .material-cmd.copied { border-color: var(--accent); background: #fff0ea; color: var(--accent); }
+  .material-link { display: inline-flex; align-items: center; gap: 5px; margin-top: 10px; font-family: 'Space Mono', monospace; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .5px; text-decoration: none; }
+  .material-link:hover { color: var(--accent); }
+  .material-link svg { width: 12px; height: 12px; }
+
   /* ---- Spotlight search ---- */
   .spotlight {
     position: fixed; inset: 0; background: rgba(10,10,10,0.55); z-index: 60;
@@ -1034,6 +1063,18 @@ function setArticleNote(id, text) {
   const notes = getArticleNotes();
   if (!text || !text.trim()) { delete notes[id]; } else { notes[id] = text; }
   localStorage.setItem('articleNotes', JSON.stringify(notes));
+}
+
+/* ---------- reflexiones (sintetizadas por la skill Article Debate) ---------- */
+function reflectionsHtml(a) {
+  if (!a.reflections || !a.reflections.length) return '';
+  const entries = [...a.reflections].reverse().map(r => `
+    <div class="reflection-entry">
+      <div class="reflection-date">${r.date || ''}</div>
+      <div class="reflection-text">${mdToHtml(r.text || '')}</div>
+    </div>
+  `).join('');
+  return `<div class="art-reflections"><h4>${ICONS['chat-code']} Tu reflexión</h4>${entries}</div>`;
 }
 
 function noteHtml(a) {
@@ -1695,6 +1736,23 @@ function showToast(article) {
   window.__toastTimer = setTimeout(() => { toast.style.display = 'none'; }, 6000);
 }
 
+/* ---------- materiales incluidos (artículos de la sección Materials) ---------- */
+function materialsHtml(a) {
+  if (!a.materials || !a.materials.length) return '';
+  const items = a.materials.map(m => `
+    <div class="material-item">
+      <div class="material-head">
+        <span class="material-name">${m.name || ''}</span>
+        ${m.tag ? `<span class="material-tag">${m.tag}</span>` : ''}
+      </div>
+      ${m.description ? `<p class="material-desc">${m.description}</p>` : ''}
+      ${m.install ? `<code class="material-cmd" data-copy="${m.install.replace(/"/g, '&quot;')}" title="Copiar comando">${m.install}</code>` : ''}
+      ${m.url ? `<a class="material-link" href="${m.url}" target="_blank" rel="noopener">Ver material ${ICONS.arrow}</a>` : ''}
+    </div>
+  `).join('');
+  return `<div class="art-materials"><h4>${ICONS.materials} Materiales incluidos</h4><div class="materials-list">${items}</div></div>`;
+}
+
 function glossaryHtml(a) {
   if (!a.glossary || !a.glossary.length) return '';
   const liked = getLikedTerms();
@@ -1728,6 +1786,8 @@ function renderArticleOverlay(id) {
     <div class="art-meta mono">Añadido el ${a.date_added || '—'}</div>
     ${ratingHtml(a)}
     <div class="art-body">${mdToHtml(a.content_md || a.summary)}</div>
+    ${materialsHtml(a)}
+    ${reflectionsHtml(a)}
     ${glossaryHtml(a)}
     ${noteHtml(a)}
     <div class="art-original"><a href="${a.url}" target="_blank" rel="noopener">Leer el artículo original ${ICONS.arrow}</a></div>
@@ -1737,6 +1797,14 @@ function renderArticleOverlay(id) {
     const nowLiked = toggleLikedTerm(btn.dataset.termKey);
     btn.classList.toggle('liked', nowLiked);
     btn.innerHTML = nowLiked ? ICONS['heart-filled'] : ICONS.heart;
+  }));
+  inner.querySelectorAll('[data-copy]').forEach(el => el.addEventListener('click', () => {
+    const text = el.getAttribute('data-copy');
+    if (navigator.clipboard) navigator.clipboard.writeText(text);
+    el.classList.add('copied');
+    const original = el.textContent;
+    el.textContent = 'Copiado ✓';
+    setTimeout(() => { el.classList.remove('copied'); el.textContent = original; }, 1400);
   }));
   wireRating(a.id);
   wireNote(a.id);

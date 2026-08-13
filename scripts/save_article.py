@@ -101,6 +101,7 @@ def main():
     image_urls = data.get("image_urls", []) or []
     image_paths = data.get("image_paths", []) or []
     glossary = data.get("glossary", []) or []
+    materials = data.get("materials", []) or []
     date_added = data.get("date_added") or date.today().isoformat()
     dictionary = bool(data.get("dictionary", False))
 
@@ -152,6 +153,15 @@ def main():
         "---\n\n"
     )
     md_body = full_content_md
+    if materials:
+        md_body += "\n\n## Materiales incluidos\n" + "\n".join(
+            f"- **{m.get('name','')}**"
+            + (f" ({m.get('tag')})" if m.get('tag') else "")
+            + (f" — {m.get('description')}" if m.get('description') else "")
+            + (f"\n  - Instalar: `{m.get('install')}`" if m.get('install') else "")
+            + (f"\n  - Link: {m.get('url')}" if m.get('url') else "")
+            for m in materials
+        )
     if glossary:
         md_body += "\n\n## Para aprender\n" + "\n".join(
             f"- **{g.get('term','')}**: {g.get('definition','')}" for g in glossary
@@ -174,6 +184,7 @@ def main():
         "content_md": full_content_md,
         "images": image_rel_paths,
         "glossary": glossary,
+        "materials": materials,
         "date_added": date_added,
         "dictionary": dictionary,
     }

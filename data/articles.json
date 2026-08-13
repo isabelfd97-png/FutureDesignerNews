@@ -528,14 +528,14 @@
     "url": "https://www.tasteskill.dev/",
     "section": "materials",
     "subsection": "Skills anti-diseño-genérico",
-    "summary": "Un set de skills open-source instalables con un comando que le enseñan a Claude Code, Cursor, Codex y otros agentes a no generar frontends genéricos: infieren el brief, mapean a sistemas de diseño reales y pasan un checklist antes de entregar.",
+    "summary": "Un set de 13 skills open-source instalables con un comando que le enseñan a Claude Code, Cursor, Codex y otros agentes a no generar frontends genéricos: infieren el brief, mapean a sistemas de diseño reales y pasan un checklist antes de entregar.",
     "key_points": [
-      "Taste Skill es un conjunto de archivos SKILL.md open-source que se instalan con `npx skills add Leonxlnx/taste-skill` en cualquier agente compatible: Claude Code, Cursor, Codex, Gemini CLI, v0, Lovable y más",
-      "Incluye 13 skills distintas para casos concretos, no una sola: la principal (anti-genérico general), variantes de estilo visual (minimalista, brutalista, 'soft'), una para auditar y rediseñar proyectos existentes, una compatible con GPT/Codex, y una que exporta directamente en formato DESIGN.md",
-      "La v2 (experimental) añade: lee el brief antes de generar (industria, audiencia, tono), sabe cuándo usar un sistema de diseño real ya existente (Material, Fluent, Carbon, Radix, shadcn...) en vez de inventar uno, modo oscuro por defecto, y un checklist obligatorio antes de entregar cualquier resultado",
-      "Es exactamente el mismo problema que ya viste en los '5 trucos para Claude Code' y en DESIGN.md, pero empaquetado como una skill lista para instalar en vez de tener que escribir tú las reglas desde cero"
+      "Taste Skill es un conjunto de archivos SKILL.md open-source, instalables con `npx skills add Leonxlnx/taste-skill`, compatibles con Claude Code, Cursor, Codex, Gemini CLI, v0, Lovable y más",
+      "No es una sola skill: son 13 pensadas para casos distintos (estilo visual, rediseño de proyectos existentes, exportar a DESIGN.md, generación de imágenes de referencia...)",
+      "La v2 (experimental, ya el default) lee el brief antes de generar, sabe cuándo usar un sistema de diseño real (Material, Fluent, Carbon, Radix, shadcn) en vez de inventar uno, y pasa un checklist obligatorio antes de entregar",
+      "Es el mismo problema que ya viste en los '5 trucos para Claude Code' y en DESIGN.md, pero empaquetado y mantenido por otros en vez de escrito desde cero"
     ],
-    "content_md": "## De qué va\nTaste Skill es un proyecto open-source que empaqueta, en forma de skills instalables, exactamente el problema que ya conoces de los '5 trucos para Claude Code' y de DESIGN.md: los agentes de IA por defecto tienden a generar frontends genéricos ('slop', en la jerga del proyecto) — mismos patrones, mismos colores por defecto, misma sensación de plantilla. En vez de escribir tú mismo las reglas anti-genéricas en un CLAUDE.md, Taste Skill te las da ya escritas y probadas, instalables con un solo comando (`npx skills add Leonxlnx/taste-skill`) en cualquier agente que soporte archivos SKILL.md: Claude Code, Cursor, Codex, Gemini CLI, v0, Lovable, entre otros.\n\nNo es una sola skill, son 13 pensadas para casos distintos: la principal genera interfaces con criterio general; hay variantes de estilo (minimalista, brutalista, 'soft' para interfaces calmadas y caras); una específica para auditar y rediseñar un proyecto ya existente en vez de partir de cero; una más estricta pensada para GPT/Codex; y una (`stitch-skill`) que exporta directamente en formato DESIGN.md, conectando con el artículo que ya guardaste sobre ese tema.\n\nLa versión 2 (experimental, ya el default) añade varias capas nuevas: el agente lee el brief antes de generar nada (a qué industria, para qué audiencia, qué tono), sabe cuándo te conviene un sistema de diseño real ya existente (Material, Fluent, Carbon, Polaris, Radix, shadcn, Tailwind oficial) en vez de inventar uno desde cero, aplica modo oscuro por defecto con la misma jerarquía en ambos temas, tiene un protocolo específico para rediseños (qué preservar, qué modernizar), y termina con un checklist obligatorio que el resultado tiene que pasar honestamente antes de entregarse.\n\n## Por qué le importa a un product designer\nEs la versión 'lista para instalar' de un problema que ya entiendes bien: sin guardrails explícitos, la IA genera diseño con cara de IA. La diferencia con escribir tu propio CLAUDE.md o DESIGN.md es que aquí alguien ya hizo el trabajo de investigar qué reglas funcionan, para qué casos, y las mantiene actualizadas (hay changelog y todo). Vale la pena tenerlo a mano como referencia de qué reglas concretas usar, aunque acabes escribiendo las tuyas propias adaptadas a tu marca.\n\n## Ideas clave\n- Taste Skill = skills open-source instalables con un comando para que agentes de IA dejen de generar frontends genéricos.\n- 13 skills distintas para casos distintos, no una talla única: estilo visual, rediseño, exportar a DESIGN.md, etc.\n- La v2 lee el brief, elige sistemas de diseño reales cuando toca, y pasa un checklist antes de entregar.\n- Mismo problema que CLAUDE.md/DESIGN.md, pero empaquetado y mantenido por otros en vez de escrito desde cero.",
+    "content_md": "## De qué va\nTaste Skill empaqueta, en forma de skills instalables, el mismo problema que ya conoces de los '5 trucos para Claude Code' y de DESIGN.md: por defecto, los agentes de IA tienden a generar frontends genéricos ('slop', en la jerga del proyecto). En vez de escribir tú las reglas anti-genéricas a mano, aquí vienen ya escritas y mantenidas, listas para instalar en cualquier agente compatible con archivos SKILL.md.\n\n## Por qué le importa a un product designer\nEs la versión 'lista para instalar' de un criterio que ya tienes: sin guardrails explícitos, la IA genera diseño con cara de IA. La diferencia con tu propio CLAUDE.md o DESIGN.md es que aquí alguien más ya investigó qué reglas funcionan para qué casos, y las mantiene actualizadas (tiene changelog). Vale la pena tenerlo como referencia de qué reglas concretas usar, aunque acabes adaptando las tuyas a tu propia marca.",
     "images": [],
     "glossary": [
       {
@@ -547,7 +547,130 @@
         "definition": "Término coloquial para el resultado genérico y de baja calidad que produce la IA cuando no se le dan suficientes límites o criterio: el mismo patrón visual repetido, colores por defecto, sensación de plantilla. Es lo contrario de lo que buscan guardrails como CLAUDE.md, DESIGN.md o Taste Skill."
       }
     ],
+    "materials": [
+      {
+        "name": "taste-skill",
+        "tag": "Principal · v2",
+        "description": "Lee el brief, infiere la dirección de diseño correcta y evita interfaces con cara de plantilla. Usa sistemas de diseño reales cuando toca y pasa un checklist antes de entregar.",
+        "install": "npx skills add Leonxlnx/taste-skill --skill design-taste-frontend",
+        "url": "https://github.com/Leonxlnx/taste-skill/tree/main/skills/taste-skill"
+      },
+      {
+        "name": "taste-skill-v1",
+        "tag": "Legacy",
+        "description": "La v1 original, conservada para proyectos que dependen de su comportamiento exacto. Úsala solo si v2 rompe algo específico.",
+        "install": "npx skills add Leonxlnx/taste-skill --skill design-taste-frontend-v1",
+        "url": "https://github.com/Leonxlnx/taste-skill/tree/main/skills/taste-skill-v1"
+      },
+      {
+        "name": "gpt-tasteskill",
+        "tag": "GPT / Codex",
+        "description": "Variante más estricta para modelos de GPT y Codex, con más variación de layout y dirección de movimiento.",
+        "install": "npx skills add Leonxlnx/taste-skill --skill gpt-tasteskill",
+        "url": "https://github.com/Leonxlnx/taste-skill/tree/main/skills/gpt-tasteskill"
+      },
+      {
+        "name": "image-to-code-skill",
+        "tag": "Image-first",
+        "description": "Genera referencias visuales primero, las analiza en profundidad, y luego implementa el frontend siguiéndolas de cerca.",
+        "install": "npx skills add Leonxlnx/taste-skill --skill image-to-code-skill",
+        "url": "https://github.com/Leonxlnx/taste-skill/tree/main/skills/image-to-code-skill"
+      },
+      {
+        "name": "redesign-skill",
+        "tag": "Auditoría",
+        "description": "Para proyectos existentes que necesitan una auditoría visual seria y un rediseño más limpio, no partir de cero.",
+        "install": "npx skills add Leonxlnx/taste-skill --skill redesign-skill",
+        "url": "https://github.com/Leonxlnx/taste-skill/tree/main/skills/redesign-skill"
+      },
+      {
+        "name": "soft-skill",
+        "tag": "Estilo visual",
+        "description": "Interfaces calmadas y de aspecto caro: contraste suave, mucho whitespace, movimiento fluido.",
+        "install": "npx skills add Leonxlnx/taste-skill --skill soft-skill",
+        "url": "https://github.com/Leonxlnx/taste-skill/tree/main/skills/soft-skill"
+      },
+      {
+        "name": "output-skill",
+        "tag": "Ejecución",
+        "description": "Evita resultados a medias: bloquea placeholders, secciones saltadas o trabajo sin terminar.",
+        "install": "npx skills add Leonxlnx/taste-skill --skill output-skill",
+        "url": "https://github.com/Leonxlnx/taste-skill/tree/main/skills/output-skill"
+      },
+      {
+        "name": "minimalist-skill",
+        "tag": "Estilo visual",
+        "description": "UI de producto editorial y limpia: color contenido, estructura marcada, jerarquía más ajustada.",
+        "install": "npx skills add Leonxlnx/taste-skill --skill minimalist-skill",
+        "url": "https://github.com/Leonxlnx/taste-skill/tree/main/skills/minimalist-skill"
+      },
+      {
+        "name": "brutalist-skill",
+        "tag": "Estilo visual",
+        "description": "Lenguaje visual mecánico y duro: tipografía suiza, estructura cruda, contraste marcado.",
+        "install": "npx skills add Leonxlnx/taste-skill --skill brutalist-skill",
+        "url": "https://github.com/Leonxlnx/taste-skill/tree/main/skills/brutalist-skill"
+      },
+      {
+        "name": "stitch-skill",
+        "tag": "Exportar",
+        "description": "Reglas de diseño semánticas compatibles con Google Stitch, con un formato extra de exportación a DESIGN.md.",
+        "install": "npx skills add Leonxlnx/taste-skill --skill stitch-skill",
+        "url": "https://github.com/Leonxlnx/taste-skill/tree/main/skills/stitch-skill"
+      },
+      {
+        "name": "imagegen-frontend-web",
+        "tag": "Image gen",
+        "description": "Imágenes de referencia de nivel 'premium' para webs: dirección de arte fuerte, tipografía, spacing, disciplina anti-slop.",
+        "install": "npx skills add Leonxlnx/taste-skill --skill imagegen-frontend-web",
+        "url": "https://github.com/Leonxlnx/taste-skill/tree/main/skills/imagegen-frontend-web"
+      },
+      {
+        "name": "imagegen-frontend-mobile",
+        "tag": "Image gen",
+        "description": "Conceptos de pantallas móviles y flujos completos, con jerarquía limpia y consistencia entre pantallas.",
+        "install": "npx skills add Leonxlnx/taste-skill --skill imagegen-frontend-mobile",
+        "url": "https://github.com/Leonxlnx/taste-skill/tree/main/skills/imagegen-frontend-mobile"
+      },
+      {
+        "name": "brandkit",
+        "tag": "Image gen",
+        "description": "Imágenes resumen de brand kit: conceptos de logo, sistema de color, tipografía y mockups.",
+        "install": "npx skills add Leonxlnx/taste-skill --skill brandkit",
+        "url": "https://github.com/Leonxlnx/taste-skill/tree/main/skills/brandkit"
+      }
+    ],
     "date_added": "2026-07-14",
+    "dictionary": false
+  },
+  {
+    "id": "el-loop-de-2-niveles-para-que-claude-deje-de-autopuntuarse-su-propio-d",
+    "title": "El loop de 2 niveles para que Claude deje de autopuntuarse su propio diseño",
+    "url": "https://www.linkedin.com/posts/carmenerincon_hey-designers-todays-is-a-slightly-share-7483122441939058688-KocS",
+    "section": "claude",
+    "subsection": "Evaluación de diseño con Claude Code",
+    "summary": "Carmen Rincon explica por qué dejar que Claude revise su propio diseño no sirve (sesgo de autopreferencia) y monta un loop de dos niveles en Claude Code: un panel de agentes críticos ciegos que puntúan por separado, más una capa de memoria para que no repita los mismos fallos sesión tras sesión.",
+    "key_points": [
+      "No dejes que Claude revise su propio trabajo: cuando evalúa lo que acaba de construir, lo defiende — lee lo que quiso hacer, no lo que hay realmente en pantalla (sesgo de autopreferencia)",
+      "El coste es real: en un build de cliente, Claude se puntuó a sí mismo 75/100; un panel ciego que no había construido esa pantalla puntuó el mismo trabajo un 52 — 23 puntos de diferencia",
+      "Nivel 1, el panel de críticos: agentes separados, cada uno en su propio contexto (así ninguno puede defender lo construido), cada uno dueño de una lente: craft+marca+fidelidad, UX+accesibilidad+motion, tokens+código+contenido, oportunidad/mejora",
+      "Puntúan a ciegas contra una rúbrica pensada al revés de lo normal: se pondera más lo que Claude hace peor (gusto, coherencia, craft) que lo que ya hace bien (layout, viabilidad técnica) — así la revisión es útil, no un aplauso",
+      "Nivel 2, la memoria: los fallos detectados se guardan y se recargan en cada sesión nueva, así los mismos errores (contraste, colores fuera de sistema, el mismo fallo de spacing) no vuelven a aparecer, y la puntuación sube de loop en loop en vez de resetear cada vez"
+    ],
+    "content_md": "## De qué va\nCarmen Rincon (co-fundadora de Yummy Labs, la misma fuente de los artículos que ya tienes sobre dónde va tu contexto en Claude y por qué los diseñadores gastan su límite de uso más rápido) explica un problema muy concreto: pedirle a Claude que revise el propio diseño que acaba de generar no funciona, porque cuando evalúa su propio trabajo lo defiende. Lee lo que *quiso* construir, no lo que realmente hay en pantalla — es el mismo motivo por el que no puedes corregir bien tu propio texto recién escrito. Tiene nombre: sesgo de autopreferencia (self-preferential bias).\n\nLa diferencia de puntuación que midió en un proyecto real de cliente es la prueba: Claude se puntuó a sí mismo un 75 sobre 100 en una pantalla; un panel ciego que no había construido esa pantalla puntuó exactamente el mismo trabajo un 52. 23 puntos de diferencia sobre lo mismo.\n\n## El loop de dos niveles en Claude Code\n**Nivel 1 — el panel de críticos.** En vez de que el mismo Claude que construyó la pantalla la revise, se lanzan varios agentes críticos separados, cada uno en su propio contexto (así ninguno ha visto el proceso de construcción y no puede defenderlo). Cada agente es dueño de una única lente:\n- craft + marca + fidelidad\n- UX + accesibilidad + motion\n- tokens + código + contenido\n- oportunidad / mejora\n\nPuntúan a ciegas contra una rúbrica — y aquí está el truco que casi nadie hace: la rúbrica se pondera hacia lo que Claude hace *peor*, no hacia lo que ya hace bien. Layout y viabilidad técnica ya se le dan razonablemente bien, así que pesan menos; gusto, coherencia y craft son sus puntos débiles, así que pesan más. Eso es lo que convierte la revisión en algo útil de verdad, en vez de un halago disfrazado de evaluación.\n\n**Nivel 2 — la memoria.** Los fallos detectados en el panel se guardan y se recargan cada sesión nueva, así Claude deja de repetirlos: los mismos fallos de contraste, los mismos colores fuera del sistema, el mismo error de spacing no vuelven a aparecer. La siguiente pantalla arranca más alto, y la puntuación sube de loop en loop en vez de resetear cada vez que empiezas una sesión nueva.\n\n## Por qué le importa a un product designer\nEste panel de críticos es, en el fondo, el mismo patrón de subagentes que ya viste en el artículo de 'Claude Agents': un trabajo con un objetivo claro, herramientas acotadas (aquí, de solo lectura — mirar y puntuar, nunca tocar) y límites bien definidos, aplicado en concreto a resolver el problema de que nadie se marca bien sus propios deberes. La idea de que la rúbrica debe pesar más hacia los puntos débiles del modelo, no hacia los fuertes, es aplicable más allá de este caso: cualquier sistema de revisión (humano o IA) es más útil cuando se diseña para encontrar lo que de verdad se le escapa a quien construyó, no para confirmar lo que ya sabía hacer bien.\n\n## Ideas clave\n- No dejes que Claude revise su propio trabajo: lo defiende por sesgo de autopreferencia, igual que tú no puedes corregir bien tu propio texto recién escrito.\n- Diferencia medida en un proyecto real: 75/100 autopuntuado vs. 52/100 por un panel ciego — 23 puntos de distancia sobre el mismo trabajo.\n- Nivel 1: agentes críticos separados, cada uno en su propio contexto y con una sola lente, puntuando a ciegas contra una rúbrica ponderada hacia los puntos débiles del modelo.\n- Nivel 2: los fallos se guardan y se recargan cada sesión, así la puntuación mejora acumulativamente en vez de resetear.\n- Es el mismo patrón de subagentes de 'Claude Agents', aplicado a que nadie se corrija bien sus propios deberes.",
+    "images": [],
+    "glossary": [
+      {
+        "term": "Sesgo de autopreferencia (self-preferential bias)",
+        "definition": "La tendencia a valorar mejor algo que tú mismo has hecho, porque cuando lo revisas recuerdas la intención con la que lo construiste, no solo lo que realmente quedó. Es la razón por la que revisar tu propio trabajo (de texto, de código, o de diseño) da resultados más generosos que cuando lo revisa alguien que no lo construyó."
+      },
+      {
+        "term": "Evaluación ciega (blind review)",
+        "definition": "Un proceso de revisión donde quien evalúa no sabe (o no ha visto) quién o cómo se construyó lo que está puntuando, para que no pueda inclinarse a favor de ello. En este caso, los agentes críticos evalúan la pantalla sin haber participado en construirla, así puntúan desde cero en vez de simplemente confirmar el trabajo."
+      }
+    ],
+    "materials": [],
+    "date_added": "2026-07-15",
     "dictionary": false
   }
 ]

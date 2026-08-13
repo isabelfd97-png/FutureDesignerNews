@@ -70,3 +70,4 @@ Cuando un agente vive en el proyecto compartido del equipo, y no en el historial
 
 ---
 Artículo original: https://yummy-design-sprint.notion.site/Claude-Agents-What-are-they-how-to-create-one-38e6279147098049a74ae0de250a51a1
+
