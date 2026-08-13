@@ -172,9 +172,10 @@ TEMPLATE = r"""<!DOCTYPE html>
   .ticker-scroll { overflow: hidden; }
   .ticker-track { display: inline-block; padding: 8px 0; animation: scrollTicker 64s linear infinite; }
   .ticker:hover .ticker-track { animation-play-state: paused; }
-  .ticker span.item { font-family: 'Space Mono', monospace; font-size: 12px; letter-spacing: .5px; padding: 0 22px; color: var(--muted); }
-  .ticker span.item b { color: var(--ink); font-weight: 700; }
-  .ticker span.item.empty-msg { color: var(--ink); font-weight: 700; }
+  .ticker .item { font-family: 'Space Mono', monospace; font-size: 12px; letter-spacing: .5px; padding: 0 22px; color: var(--muted); text-decoration: none; }
+  .ticker a.item:hover { color: var(--accent); }
+  .ticker a.item:hover b { color: var(--accent); }
+  .ticker .item b { color: var(--ink); font-weight: 700; }
   .ticker.empty-state .ticker-track { animation: none; padding: 8px 22px; }
   @keyframes scrollTicker { from { transform: translateX(0); } to { transform: translateX(-50%); } }
 
@@ -635,6 +636,38 @@ TEMPLATE = r"""<!DOCTYPE html>
   .fp-hero.no-media h2 { font-size: 44px; }
   .fp-hero.no-media p { font-size: 16.5px; }
 
+  /* ---- Portada: titular + segundo nivel ---- */
+  .front-lead-single { margin-top: 6px; }
+  .front-secondary { display: grid; grid-template-columns: repeat(2, 1fr); gap: 18px; margin-top: 18px; }
+  .fp-secondary .fp-img, .fp-secondary .fp-noimg { height: 190px; }
+  .fp-secondary h3 { margin: 0; font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 21px; line-height: 1.18; }
+  .fp-secondary p { margin: 0; font-size: 13.5px; line-height: 1.5; color: var(--ink); }
+  .fp-secondary .date { font-family: 'Space Mono', monospace; font-size: 10.5px; color: var(--muted); margin-top: 2px; }
+  @media (max-width: 720px) { .front-secondary { grid-template-columns: 1fr; } }
+
+  /* ---- Leído / no leído ---- */
+  .read-badge {
+    position: absolute; top: 8px; right: 8px; z-index: 3;
+    display: flex; align-items: center; gap: 4px;
+    background: var(--ink); color: #fff;
+    font-family: 'Space Mono', monospace; font-size: 9.5px; font-weight: 700;
+    letter-spacing: .6px; text-transform: uppercase; padding: 3px 7px;
+  }
+  .read-badge svg { width: 11px; height: 11px; color: #fff; }
+  .card.is-read, .fp-card.is-read { opacity: .58; }
+  .card.is-read:hover, .fp-card.is-read:hover { opacity: 1; }
+  .read-toggle {
+    display: inline-flex; align-items: center; gap: 8px; margin: 4px 0 22px;
+    font-family: 'Space Mono', monospace; font-size: 11px; font-weight: 700;
+    letter-spacing: 1px; text-transform: uppercase; cursor: pointer;
+    border: 2px solid var(--ink); background: var(--bg); color: var(--ink);
+    padding: 9px 16px; transition: background .15s ease, color .15s ease, border-color .15s ease;
+  }
+  .read-toggle svg { width: 13px; height: 13px; }
+  .read-toggle:hover { background: var(--accent); border-color: var(--accent); color: #fff; }
+  .read-toggle.on { background: var(--ink); color: #fff; }
+  .read-toggle.on:hover { background: var(--accent); border-color: var(--accent); }
+
   /* ---- Grid / cards ---- */
   .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 18px; margin-top: 14px; }
   .card {
@@ -872,16 +905,6 @@ TEMPLATE = r"""<!DOCTYPE html>
 
 <div class="toast" id="toast"></div>
 
-<div class="ticker-modal" id="ticker-modal">
-  <div class="ticker-modal-panel">
-    <div class="ticker-modal-header">
-      <h3>Artículos nuevos sin valorar</h3>
-      <button class="close-btn-sm" id="ticker-modal-close"></button>
-    </div>
-    <div class="ticker-modal-list" id="ticker-modal-list"></div>
-  </div>
-</div>
-
 <div class="ticker-modal" id="flash-modal">
   <div class="ticker-modal-panel flash-panel">
     <div class="ticker-modal-header">
@@ -909,12 +932,6 @@ const ICONS = __ICONS_JSON__;
 const ARTICLE_ICONS = __ARTICLE_ICONS_JSON__;
 
 function bySlug(slug) { return SECTIONS.find(s => s.slug === slug); }
-
-/* one-off: resetea todas las puntuaciones a 0 (todos los artículos vuelven a ser "nuevos") */
-if (!localStorage.getItem('ratingsResetTeleprompter')) {
-  localStorage.removeItem('articleRatings');
-  localStorage.setItem('ratingsResetTeleprompter', '1');
-}
 
 /* ---------- truncado limpio con puntos suspensivos ---------- */
 function truncate(str, maxLen) {
@@ -962,14 +979,7 @@ function renderSubtitle() {
   el.innerHTML = `${greeting}, Isabel — <span class="phrase">${phrase}</span>`;
 }
 
-/* ---------- ticker: solo artículos nuevos sin valorar ---------- */
-function unratedArticles() {
-  const ratings = getRatings();
-  return visibleArticles()
-    .filter(a => (ratings[a.id] || 0) === 0)
-    .sort((x, y) => (y.date_added || '').localeCompare(x.date_added || ''));
-}
-
+/* ---------- ticker: titulares más recientes ---------- */
 function renderTicker() {
   const wrap = document.getElementById('ticker');
   const track = document.getElementById('ticker-track');
@@ -979,18 +989,14 @@ function renderTicker() {
     badge.innerHTML = `<svg class="burst" viewBox="0 0 100 100"><polygon points="${pts}" fill="var(--accent)" stroke="none"/></svg><span>¡Nuevo!</span>`;
     badge.dataset.filled = '1';
   }
-  if (ARTICLES.length === 0) { wrap.style.display = 'none'; return; }
+  const items = visibleArticles()
+    .slice()
+    .sort((x, y) => (y.date_added || '').localeCompare(x.date_added || ''));
+  if (!items.length) { wrap.style.display = 'none'; return; }
   wrap.style.display = '';
-  const items = unratedArticles();
-  if (!items.length) {
-    wrap.classList.add('empty-state');
-    track.innerHTML = `<span class="item empty-msg">¡Estás al día! Añade más artículos para saber más.</span>`;
-    return;
-  }
-  wrap.classList.remove('empty-state');
   const build = () => items.map(a => {
     const sec = bySlug(a.section);
-    return `<span class="item"><b>${sec ? sec.name : ''}</b> — ${a.title}</span>`;
+    return `<a class="item" href="#/articulo/${a.id}"><b>${sec ? sec.name : ''}</b> — ${a.title}</a>`;
   }).join('');
   track.innerHTML = build() + build();
 }
@@ -1014,46 +1020,38 @@ function renderFooter() {
   el.textContent = `${n} artículo${n === 1 ? '' : 's'} guardado${n === 1 ? '' : 's'} · actualizado ${new Date().toLocaleDateString('es-ES', { day: '2-digit', month: 'short', year: 'numeric' })}`;
 }
 
-/* ---------- ratings (0-5 estrellas) ---------- */
-function getRatings() { try { return JSON.parse(localStorage.getItem('articleRatings') || '{}'); } catch(e) { return {}; } }
-function setRatingValue(id, value) {
-  const r = getRatings();
-  if (value <= 0) { delete r[id]; } else { r[id] = value; }
-  localStorage.setItem('articleRatings', JSON.stringify(r));
-}
-function getRatingValue(id) { return getRatings()[id] || 0; }
-
-function ratingHtml(a) {
-  const current = getRatingValue(a.id);
-  const stars = [1,2,3,4,5].map(n => {
-    const icon = n <= current ? ICONS['star-filled'] : ICONS.star;
-    return `<button class="star-btn ${n <= current ? 'on' : ''}" data-star="${n}" title="${n} estrella${n===1?'':'s'}">${icon}</button>`;
-  }).join('');
-  return `<div class="art-rating"><span class="rlabel">Tu valoración</span><div class="stars" id="art-stars">${stars}</div></div>`;
+/* ---------- leído / no leído (marcado manual) ---------- */
+function getRead() { try { return JSON.parse(localStorage.getItem('readArticles') || '[]'); } catch(e) { return []; } }
+function setReadList(arr) { localStorage.setItem('readArticles', JSON.stringify(arr)); }
+function isRead(id) { return getRead().includes(id); }
+function toggleRead(id) {
+  const r = getRead();
+  const i = r.indexOf(id);
+  if (i === -1) r.push(id); else r.splice(i, 1);
+  setReadList(r);
+  return r.includes(id);
 }
 
-function wireRating(articleId) {
-  const wrap = document.getElementById('art-stars');
-  if (!wrap) return;
-  const btns = Array.from(wrap.querySelectorAll('.star-btn'));
-  function paint(value) {
-    btns.forEach(b => {
-      const n = Number(b.dataset.star);
-      b.classList.toggle('on', n <= value);
-      b.innerHTML = n <= value ? ICONS['star-filled'] : ICONS.star;
-    });
-  }
-  btns.forEach(btn => {
-    const n = Number(btn.dataset.star);
-    btn.addEventListener('mouseenter', () => paint(n));
-    btn.addEventListener('mouseleave', () => paint(getRatingValue(articleId)));
-    btn.addEventListener('click', () => {
-      const current = getRatingValue(articleId);
-      const next = current === n ? 0 : n; // clicar la misma estrella la quita
-      setRatingValue(articleId, next);
-      paint(next);
-      renderTicker();
-    });
+/* distintivo "Leído" sobre las miniaturas de portada */
+function readBadgeHtml(a) {
+  return isRead(a.id) ? `<div class="read-badge">${ICONS.check}<span>Leído</span></div>` : '';
+}
+
+/* botón dentro del artículo para marcar/desmarcar */
+function readToggleLabel(read) {
+  return read ? `${ICONS.check}<span>Leído · marcar como no leído</span>` : `<span>Marcar como leído</span>`;
+}
+function readToggleHtml(a) {
+  const read = isRead(a.id);
+  return `<button class="read-toggle ${read ? 'on' : ''}" id="read-toggle">${readToggleLabel(read)}</button>`;
+}
+function wireReadToggle(id) {
+  const btn = document.getElementById('read-toggle');
+  if (!btn) return;
+  btn.addEventListener('click', () => {
+    const nowRead = toggleRead(id);
+    btn.classList.toggle('on', nowRead);
+    btn.innerHTML = readToggleLabel(nowRead);
   });
 }
 
@@ -1130,68 +1128,6 @@ function relatedHtml(a) {
 }
 
 /* ---------- modal del teleprompter: artículos nuevos sin valorar ---------- */
-function openTickerModal() {
-  document.getElementById('ticker-modal').classList.add('open');
-  renderTickerModalList();
-}
-function closeTickerModal() {
-  document.getElementById('ticker-modal').classList.remove('open');
-}
-
-function paintTmStars(btns, value) {
-  btns.forEach(b => {
-    const n = Number(b.dataset.star);
-    b.classList.toggle('on', n <= value);
-    b.innerHTML = n <= value ? ICONS['star-filled'] : ICONS.star;
-  });
-}
-
-function renderTickerModalList() {
-  const list = document.getElementById('ticker-modal-list');
-  if (!list) return;
-  const items = unratedArticles();
-  if (!items.length) {
-    list.innerHTML = `<div class="empty" style="padding:40px 20px;">¡Estás al día! Añade más artículos para saber más.</div>`;
-    return;
-  }
-  list.innerHTML = items.map(a => {
-    const sec = bySlug(a.section);
-    return `<div class="tm-row" data-id="${a.id}">
-      <a class="tm-title" data-open="${a.id}">
-        <span class="tag">${sec ? sec.name : a.section}</span>
-        <h4>${a.title}</h4>
-      </a>
-      <div class="tm-stars" data-rate-id="${a.id}">
-        ${[1, 2, 3, 4, 5].map(n => `<button class="star-btn" data-star="${n}" title="${n} estrella${n === 1 ? '' : 's'}">${ICONS.star}</button>`).join('')}
-      </div>
-    </div>`;
-  }).join('');
-
-  list.querySelectorAll('[data-open]').forEach(el => el.addEventListener('click', () => {
-    closeTickerModal();
-    location.hash = '#/articulo/' + el.dataset.open;
-  }));
-
-  list.querySelectorAll('.tm-stars').forEach(starsWrap => {
-    const id = starsWrap.dataset.rateId;
-    const btns = Array.from(starsWrap.querySelectorAll('.star-btn'));
-    btns.forEach(btn => {
-      const n = Number(btn.dataset.star);
-      btn.addEventListener('mouseenter', () => paintTmStars(btns, n));
-      btn.addEventListener('mouseleave', () => paintTmStars(btns, 0));
-      btn.addEventListener('click', e => {
-        e.preventDefault();
-        e.stopPropagation();
-        setRatingValue(id, n);
-        renderTicker();
-        const row = starsWrap.closest('.tm-row');
-        row.classList.add('tm-row-out');
-        setTimeout(renderTickerModalList, 240);
-      });
-    });
-  });
-}
-
 /* ---------- liked glossary terms (enciclopedia) ---------- */
 function getLikedTerms() { try { return JSON.parse(localStorage.getItem('likedTerms') || '[]'); } catch(e) { return []; } }
 function setLikedTerms(arr) { localStorage.setItem('likedTerms', JSON.stringify(arr)); }
@@ -1306,20 +1242,12 @@ function mdToHtml(md) {
   return html;
 }
 
-/* ---------- mini rating badge (miniaturas) ---------- */
-function ratingBadgeHtml(a, variant) {
-  const r = getRatingValue(a.id);
-  const inner = r > 0 ? `${ICONS['star-filled']}<span>${r}</span>` : `${ICONS.star}<span>—</span>`;
-  const cls = `mini-rating ${variant} ${r === 0 ? 'muted' : ''}`;
-  return `<div class="${cls}">${inner}</div>`;
-}
-
 /* ---------- card rendering ---------- */
 function cardHtml(a) {
   const sec = bySlug(a.section);
   const thumb = (a.images && a.images.length) ? `<img class="thumb" src="${a.images[0]}" alt="" loading="lazy">` : '';
-  return `<a class="card" href="#/articulo/${a.id}" data-id="${a.id}">
-    ${ratingBadgeHtml(a, 'overlay')}
+  return `<a class="card ${isRead(a.id) ? 'is-read' : ''}" href="#/articulo/${a.id}" data-id="${a.id}">
+    ${readBadgeHtml(a)}
     ${thumb}
     <div class="icon">${sec ? ICONS[sec.icon] : ''}</div>
     <span class="tag">${sec ? sec.name : a.section}${a.subsection ? ' · ' + a.subsection : ''}</span>
@@ -1366,8 +1294,8 @@ function leadHtml(a) {
   const sec = bySlug(a.section);
   const hasImg = a.images && a.images.length;
   const img = hasImg ? `<img class="fp-img" src="${a.images[0]}" alt="" loading="lazy">` : '';
-  return `<a class="fp-card fp-hero ${hasImg ? '' : 'no-media'}" href="#/articulo/${a.id}">
-    ${ratingBadgeHtml(a, 'overlay')}
+  return `<a class="fp-card fp-hero ${hasImg ? '' : 'no-media'} ${isRead(a.id) ? 'is-read' : ''}" href="#/articulo/${a.id}">
+    ${readBadgeHtml(a)}
     ${img}
     <div class="fp-body">
       ${!hasImg ? `<div class="lead-icon">${articleIconSvg(a)}</div>` : ''}
@@ -1379,172 +1307,51 @@ function leadHtml(a) {
   </a>`;
 }
 
-/* ---------- artículo principal: carrusel de los 5★ ---------- */
-const leadState = { items: [], index: 0, timer: null };
-
-function renderLead(items) {
-  leadState.items = items;
-  leadState.index = 0;
-  paintLead();
-  resetLeadTimer();
-}
-
-function paintLead() {
-  const wrap = document.getElementById('front-lead-out');
-  if (!wrap || !leadState.items.length) return;
-  const a = leadState.items[leadState.index];
-  const multi = leadState.items.length > 1;
-  const dots = multi ? leadState.items.map((_, i) => `<button class="lead-dot ${i === leadState.index ? 'on' : ''}" data-dot="${i}"></button>`).join('') : '';
-  wrap.innerHTML = `
-    ${leadHtml(a)}
-    ${multi ? `
-      <div class="lead-controls">
-        <button class="lead-arrow left" id="lead-prev" title="Anterior">${ICONS.arrow}</button>
-        <div class="lead-dots">${dots}</div>
-        <button class="lead-arrow right" id="lead-next" title="Siguiente">${ICONS.arrow}</button>
-      </div>
-    ` : ''}
-  `;
-  if (multi) {
-    document.getElementById('lead-prev').addEventListener('click', () => leadStep(-1));
-    document.getElementById('lead-next').addEventListener('click', () => leadStep(1));
-    wrap.querySelectorAll('[data-dot]').forEach(d => d.addEventListener('click', () => {
-      leadState.index = Number(d.dataset.dot); paintLead(); resetLeadTimer();
-    }));
-    wrap.addEventListener('mouseenter', () => clearInterval(leadState.timer));
-    wrap.addEventListener('mouseleave', resetLeadTimer);
-  }
-}
-
-function leadStep(dir) {
-  leadState.index = (leadState.index + dir + leadState.items.length) % leadState.items.length;
-  paintLead();
-  resetLeadTimer();
-}
-
-function resetLeadTimer() {
-  clearInterval(leadState.timer);
-  if (leadState.items.length > 1) leadState.timer = setInterval(() => leadStep(1), 10000);
-}
-
-function frontPickHtml(a) {
+/* ---------- tarjeta de segundo nivel (tamaño medio) ---------- */
+function secondaryHtml(a) {
   const sec = bySlug(a.section);
-  const img = (a.images && a.images.length) ? `<img class="fp-img" src="${a.images[0]}" alt="" loading="lazy">` : `<div class="fp-noimg">${articleIconSvg(a)}</div>`;
-  return `<a class="front-pick" href="#/articulo/${a.id}">
-    ${img}
-    <div class="pick-body">
-      <span class="pick-tag">${sec ? sec.name : a.section}</span>
-      <h3>${truncate(a.title, 70)}</h3>
+  const media = (a.images && a.images.length)
+    ? `<img class="fp-img" src="${a.images[0]}" alt="" loading="lazy">`
+    : `<div class="fp-noimg">${articleIconSvg(a)}</div>`;
+  return `<a class="fp-card fp-secondary ${(a.images && a.images.length) ? '' : 'no-media'} ${isRead(a.id) ? 'is-read' : ''}" href="#/articulo/${a.id}">
+    ${readBadgeHtml(a)}
+    ${media}
+    <div class="fp-body">
+      <span class="tag">${sec ? sec.name : a.section}${a.subsection ? ' · ' + a.subsection : ''}</span>
+      <h3>${truncate(a.title, 90)}</h3>
+      <p>${truncate(a.summary, 120)}</p>
+      <div class="date mono">${a.date_added || '—'}</div>
     </div>
   </a>`;
 }
 
-function midRatedGroupsHtml(midRated) {
-  let html = '';
-  SECTIONS.forEach(sec => {
-    const items = midRated.filter(a => a.section === sec.slug);
-    if (!items.length) return;
-    html += `<div class="picks-subsection">
-      <div class="subsection-title">${sec.name}</div>
-      <div class="front-picks">${items.map(frontPickHtml).join('')}</div>
-    </div>`;
-  });
-  return html;
-}
-
-function briefsEmptyStateHtml() {
-  return `<div class="briefs-empty">
-    <div class="briefs-empty-icon">${ICONS['wand']}</div>
-    <p>¡Estás al día! Ya has valorado todo lo que tienes guardado.</p>
-    <p class="briefs-empty-sub">Añade un artículo nuevo para que la portada vuelva a moverse.</p>
-  </div>`;
-}
-
-function briefRowHtml(a) {
-  const sec = bySlug(a.section);
-  return `<a class="brief-row" href="#/articulo/${a.id}">
-    <span class="brief-stamp">${sec ? sec.name : a.section}</span>
-    <span class="brief-title">${a.title}</span>
-    <span class="brief-meta">${ratingBadgeHtml(a, 'inline')}<span class="brief-date mono">${a.date_added || '—'}</span></span>
-  </a>`;
-}
-
-/* ---------- "últimas entradas": paginado de 3 en 3 ---------- */
-const briefsState = { items: [], page: 0, pageSize: 3 };
-
-function renderBriefs(items) {
-  briefsState.items = items;
-  briefsState.page = 0;
-  paintBriefs();
-}
-
-function paintBriefs() {
-  const wrap = document.getElementById('front-briefs-out');
-  if (!wrap) return;
-  const { items, page, pageSize } = briefsState;
-  const totalPages = Math.ceil(items.length / pageSize);
-  const start = page * pageSize;
-  const pageItems = items.slice(start, start + pageSize);
-  wrap.innerHTML = `
-    <div class="front-briefs">${pageItems.map(briefRowHtml).join('')}</div>
-    ${totalPages > 1 ? `
-      <div class="brief-pagination">
-        <button class="brief-pg-arrow left" id="briefs-prev" ${page === 0 ? 'disabled' : ''}>${ICONS.arrow}</button>
-        <div class="brief-pg-nums">${Array.from({ length: totalPages }, (_, i) =>
-          `<button class="brief-pg-num ${i === page ? 'active' : ''}" data-pg="${i}">${i + 1}</button>`
-        ).join('')}</div>
-        <button class="brief-pg-arrow right" id="briefs-next" ${page === totalPages - 1 ? 'disabled' : ''}>${ICONS.arrow}</button>
-      </div>
-    ` : ''}
-  `;
-  if (totalPages > 1) {
-    document.getElementById('briefs-prev').addEventListener('click', () => { briefsState.page = Math.max(0, briefsState.page - 1); paintBriefs(); });
-    document.getElementById('briefs-next').addEventListener('click', () => { briefsState.page = Math.min(totalPages - 1, briefsState.page + 1); paintBriefs(); });
-    wrap.querySelectorAll('[data-pg]').forEach(btn => btn.addEventListener('click', () => { briefsState.page = Number(btn.dataset.pg); paintBriefs(); }));
-  }
-}
-
-/* ---------- pages ---------- */
+/* ---------- portada: feed cronológico en 3 tamaños ----------
+   El más reciente manda (titular grande), los 2 siguientes van en tamaño
+   medio y el resto en la cuadrícula de tarjetas. Puro orden por fecha. */
 function renderPortada() {
   renderNav('');
-  clearInterval(leadState.timer);
-  const list = visibleArticles();
   const main = document.getElementById('main');
+  const list = visibleArticles()
+    .slice()
+    .sort((x, y) => (y.date_added || '').localeCompare(x.date_added || ''));
 
   if (!list.length) {
     main.innerHTML = `<div class="empty">Todavía no hay artículos.</div>`;
     return;
   }
 
-  const ratings = getRatings();
-  const rateOf = a => ratings[a.id] || 0;
-  const byDateDesc = (x, y) => (y.date_added || '').localeCompare(x.date_added || '');
-
-  // artículo principal: tus 5★, en carrusel si hay varias
-  const fiveStars = list.filter(a => rateOf(a) === 5).sort(byDateDesc);
-  // últimas entradas: todo lo que aún no has valorado
-  const unrated = list.filter(a => rateOf(a) === 0).sort(byDateDesc);
-  // más artículos: lo valorado con menos de 5★
-  const midRated = list.filter(a => { const r = rateOf(a); return r > 0 && r < 5; }).sort(byDateDesc);
-
-  const hasLead = fiveStars.length > 0;
+  const lead = list[0];
+  const secondary = list.slice(1, 3);
+  const rest = list.slice(3);
 
   main.innerHTML = `
-    <div class="front-top ${hasLead ? '' : 'no-lead'}">
-      ${hasLead ? `<div class="front-lead" id="front-lead-out"></div>` : ''}
-      <div class="front-briefs-col">
-        <div class="front-label">Últimas entradas</div>
-        ${unrated.length ? `<div id="front-briefs-out"></div>` : briefsEmptyStateHtml()}
-      </div>
-    </div>
-    ${midRated.length ? `
+    <div class="front-lead-single">${leadHtml(lead)}</div>
+    ${secondary.length ? `<div class="front-secondary">${secondary.map(secondaryHtml).join('')}</div>` : ''}
+    ${rest.length ? `
       <div class="front-divider"><span class="front-label">Más artículos</span></div>
-      ${midRatedGroupsHtml(midRated)}
+      <div class="grid">${rest.map(cardHtml).join('')}</div>
     ` : ''}
   `;
-
-  if (hasLead) renderLead(fiveStars);
-  if (unrated.length) renderBriefs(unrated);
 }
 
 function railHtml(items) {
@@ -1784,7 +1591,7 @@ function renderArticleOverlay(id) {
     <div class="art-tag">${sec ? sec.name : a.section}${a.subsection ? ' · ' + a.subsection : ''}</div>
     <h1 class="art-title">${a.title}</h1>
     <div class="art-meta mono">Añadido el ${a.date_added || '—'}</div>
-    ${ratingHtml(a)}
+    ${readToggleHtml(a)}
     <div class="art-body">${mdToHtml(a.content_md || a.summary)}</div>
     ${materialsHtml(a)}
     ${reflectionsHtml(a)}
@@ -1806,7 +1613,7 @@ function renderArticleOverlay(id) {
     el.textContent = 'Copiado ✓';
     setTimeout(() => { el.classList.remove('copied'); el.textContent = original; }, 1400);
   }));
-  wireRating(a.id);
+  wireReadToggle(a.id);
   wireNote(a.id);
   overlay.classList.add('open');
   window.scrollTo(0,0);
@@ -2002,12 +1809,6 @@ document.getElementById('close-overlay').innerHTML = ICONS.close;
 document.getElementById('close-overlay').addEventListener('click', () => { history.back(); });
 document.addEventListener('keydown', e => { if (e.key === 'Escape') { const o=document.getElementById('overlay'); if (o.classList.contains('open')) history.back(); } });
 
-/* ---------- wiring del teleprompter clicable ---------- */
-document.getElementById('ticker').addEventListener('click', openTickerModal);
-document.getElementById('ticker-modal-close').innerHTML = ICONS.close;
-document.getElementById('ticker-modal-close').addEventListener('click', closeTickerModal);
-document.getElementById('ticker-modal').addEventListener('click', e => { if (e.target.id === 'ticker-modal') closeTickerModal(); });
-document.addEventListener('keydown', e => { if (e.key === 'Escape' && document.getElementById('ticker-modal').classList.contains('open')) closeTickerModal(); });
 
 /* ---------- wiring del modal de flashcards ---------- */
 document.getElementById('flash-modal-close').innerHTML = ICONS.close;
