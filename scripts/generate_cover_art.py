@@ -97,12 +97,121 @@ def arrowhead(tip, angle_deg, size=24, seed=0):
     p2 = (tx + size * math.cos(right), ty + size * math.sin(right))
     return solid_blob([tip, p1, p2], seed, rough=1.5)
 
+def catmull_rom_path(points, closed=False):
+    """Convierte una lista de puntos en un trazo curvo suave (bézier), como un gesto de
+    rotulador seguro, en vez de segmentos rectos que tiemblan en zigzag."""
+    pts = list(points)
+    if closed:
+        ext = [pts[-1]] + pts + [pts[0], pts[1]]
+    else:
+        ext = [pts[0]] + pts + [pts[-1]]
+    d = f"M {ext[1][0]:.1f} {ext[1][1]:.1f} "
+    for i in range(1, len(ext) - 2):
+        p0, p1, p2, p3 = ext[i - 1], ext[i], ext[i + 1], ext[i + 2]
+        c1 = (p1[0] + (p2[0] - p0[0]) / 6, p1[1] + (p2[1] - p0[1]) / 6)
+        c2 = (p2[0] - (p3[0] - p1[0]) / 6, p2[1] - (p3[1] - p1[1]) / 6)
+        d += f"C {c1[0]:.1f} {c1[1]:.1f} {c2[0]:.1f} {c2[1]:.1f} {p2[0]:.1f} {p2[1]:.1f} "
+    if closed:
+        d += "Z"
+    return d
+
+def smooth_stroke(points, seed, sw=SW, rough=2.2, closed=False, passes=2, stroke=INK):
+    """Contorno curvo con un temblor de mano sutil (mueve los puntos de control, no cada
+    segmento), trazado dos veces como un rotulador que repasa la misma línea."""
+    out = []
+    for p in range(passes):
+        rng = random.Random((seed, p))
+        jittered = [jitter_pt(x, y, rough, rng) for (x, y) in points]
+        d = catmull_rom_path(jittered, closed=closed)
+        w = sw if p == 0 else sw * 0.62
+        op = 0.95 if p == 0 else 0.55
+        out.append(f'<path d="{d}" fill="none" stroke="{stroke}" stroke-width="{w:.1f}" '
+                   f'stroke-linecap="round" stroke-linejoin="round" opacity="{op}"/>')
+    return "".join(out)
+
+def smooth_fill(points, seed, rough=2, fill=INK):
+    """Silueta rellena con el mismo trazo curvo (para siluetas sólidas, no solo contornos)."""
+    rng = random.Random(seed)
+    jittered = [jitter_pt(x, y, rough, rng) for (x, y) in points]
+    d = catmull_rom_path(jittered, closed=True)
+    return f'<path d="{d}" fill="{fill}"/>'
+
+def hatch_rect(x, y, w, h, seed, angle=55, spacing=8, sw=2, opacity=0.42):
+    """Rayado paralelo tipo sombra a lápiz, recortado a un rectángulo — da volumen a una
+    forma sin recurrir a un relleno plano."""
+    cid = f"hatch{abs(hash(seed)) % 10_000_000}"
+    rng = random.Random(seed)
+    rad = math.radians(angle)
+    dx, dy = math.cos(rad), math.sin(rad)
+    nx, ny = -dy, dx
+    cx, cy = x + w / 2, y + h / 2
+    diag = (w ** 2 + h ** 2) ** 0.5
+    n = int(diag / spacing) + 2
+    lines = []
+    for i in range(-n, n):
+        jitter = rng.uniform(-1.4, 1.4)
+        ox, oy = cx + nx * i * spacing + jitter, cy + ny * i * spacing
+        x1, y1 = ox - dx * diag, oy - dy * diag
+        x2, y2 = ox + dx * diag, oy + dy * diag
+        lines.append(f'<line x1="{x1:.1f}" y1="{y1:.1f}" x2="{x2:.1f}" y2="{y2:.1f}" stroke="{INK}" stroke-width="{sw}" opacity="{opacity}"/>')
+    return (f'<clipPath id="{cid}"><rect x="{x:.1f}" y="{y:.1f}" width="{w:.1f}" height="{h:.1f}"/></clipPath>'
+            f'<g clip-path="url(#{cid})">{"".join(lines)}</g>')
+
+def ground_shadow(cx, cy, rx, ry, seed):
+    """Sombra ovalada tenue bajo un objeto/personaje, para que se apoye en la escena."""
+    pts = [deg(cx, cy, 1, a) for a in range(0, 360, 30)]
+    pts = [(cx + (px - cx) * rx, cy + (py - cy) * ry) for px, py in pts]
+    rng = random.Random(seed)
+    jittered = [jitter_pt(x, y, 2, rng) for x, y in pts]
+    d = catmull_rom_path(jittered, closed=True)
+    return f'<path d="{d}" fill="{INK}" opacity="0.13"/>'
+
 def sparkle(cx, cy, size, seed):
     """Pequeña marca de brillo/doodle a mano — firma discreta del set."""
     pts = [(cx, cy - size), (cx + size * 0.16, cy - size * 0.16), (cx + size, cy),
            (cx + size * 0.16, cy + size * 0.16), (cx, cy + size), (cx - size * 0.16, cy + size * 0.16),
            (cx - size, cy), (cx - size * 0.16, cy - size * 0.16)]
     return solid_blob(pts, seed, rough=1.2, n_sub=1)
+
+def robot_agent(cx, cy, seed, scale=1.0, rot=0):
+    """Personaje robot estilo doodle: trazo limpio de un solo paso, grosor consistente, sin
+    sombreado ni sombra en el suelo — como un sticker dibujado de un tirón, no un boceto a
+    lápiz. Coordenadas locales; se traslada/rota como grupo."""
+    hw, hh = 70 * scale, 64 * scale
+    sw = 3.4 * scale + 1
+    s = []
+
+    bw_top, bw_bot, bh, by = hw * 0.62, hw * 0.98, hh * 0.95, hh * 0.36
+    body_pts = [(-bw_top / 2, by), (0, by - 6 * scale), (bw_top / 2, by),
+                (bw_bot / 2, by + bh * 0.55), (bw_bot / 2 - 4 * scale, by + bh),
+                (-bw_bot / 2 + 4 * scale, by + bh), (-bw_bot / 2, by + bh * 0.55)]
+    s.append(smooth_stroke(body_pts, f"{seed}-body", sw=sw, rough=1.1, closed=True, passes=1))
+    s.append(smooth_stroke([(-bw_top / 2 + 2 * scale, by + 10 * scale), (-bw_bot / 2 - 6 * scale, by + bh * 0.5),
+                             (-bw_bot / 2 + 6 * scale, by + bh * 0.8)], f"{seed}-arm", sw=sw * 0.82, rough=1, closed=False, passes=1))
+
+    r = 15 * scale
+    head_pts = [
+        (-hw / 2 + r, -hh / 2), (hw / 2 - r, -hh / 2), (hw / 2, -hh / 2 + r),
+        (hw / 2, hh / 2 - r), (hw / 2 - r, hh / 2), (-hw / 2 + r, hh / 2),
+        (-hw / 2, hh / 2 - r), (-hw / 2, -hh / 2 + r),
+    ]
+    s.append(smooth_stroke(head_pts, f"{seed}-head", sw=sw, rough=1.1, closed=True, passes=1))
+
+    # ojos: puntos ovalados simples, sin brillo ni relleno de sombra
+    ew, eh, gap = hw * 0.15, hh * 0.19, hw * 0.22
+    for side, sign in ((f"{seed}-eye1", -1), (f"{seed}-eye2", 1)):
+        ex = sign * (gap / 2 + ew / 2)
+        pts = [deg(ex, -2 * scale, 1, a) for a in range(0, 360, 45)]
+        pts = [(ex + (px - ex) * ew, -2 * scale + (py + 2 * scale) * eh) for px, py in pts]
+        s.append(smooth_fill(pts, side, rough=1))
+
+    ant_pts = [(0, -hh / 2), (6 * scale, -hh / 2 - 14 * scale), (-2 * scale, -hh / 2 - 26 * scale)]
+    s.append(smooth_stroke(ant_pts, f"{seed}-antenna", sw=sw * 0.7, rough=1, closed=False, passes=1))
+    s.append(smooth_fill([deg(-2 * scale, -hh / 2 - 26 * scale, 5 * scale, a) for a in range(0, 360, 45)], f"{seed}-antenna-tip", rough=1))
+
+    body = "".join(s)
+    return f'<g transform="translate({cx:.1f} {cy:.1f}) rotate({rot})">{body}</g>'
+
 
 def frame_wrap(body, seed):
     frame = sketchy_rect(12, 12, W - 24, H - 24, (seed, "frame"), passes=2, rough=3, sw=6)
@@ -287,14 +396,44 @@ def scene_taste_skill():
     return "".join(s)
 
 def scene_two_level_loop():
-    """Loop de 2 niveles: dos bucles concéntricos alrededor de una marca de verificación."""
-    cx, cy = 600, 315
-    s = [sketchy_arc(cx, cy, 250, -40, 260, "loop-outer", sw=6.5)]
-    s.append(arrowhead(deg(cx, cy, 250, 260), 260 + 90, size=26, seed="loop-outer-arrow"))
-    s.append(sketchy_arc(cx, cy, 150, 200, 500, "loop-inner", sw=6.5))
-    s.append(arrowhead(deg(cx, cy, 150, 140), 140 + 90, size=22, seed="loop-inner-arrow"))
-    s.append(sketchy_line(cx - 45, cy, cx - 12, cy + 40, "loop-check1", sw=12))
-    s.append(sketchy_line(cx - 12, cy + 40, cx + 55, cy - 45, "loop-check2", sw=12))
+    """Loop de 2 niveles: un consejo de agentes repartido de forma desigual alrededor de un
+    monitor de verdad sobre una mesa — el panel de críticos del artículo, evaluando a ciegas."""
+    s = []
+    mon_w, mon_h = 300, 186
+    mon_x, mon_y = 600 - mon_w / 2, 300
+    table_y = mon_y + mon_h + 60
+
+    s.append(smooth_stroke([(210, table_y + 6), (600, table_y + 4), (990, table_y + 6)], "table", sw=5.5, rough=1, passes=1))
+
+    r = 14
+    screen_pts = [
+        (mon_x + r, mon_y), (mon_x + mon_w - r, mon_y), (mon_x + mon_w, mon_y + r),
+        (mon_x + mon_w, mon_y + mon_h - r), (mon_x + mon_w - r, mon_y + mon_h),
+        (mon_x + r, mon_y + mon_h), (mon_x, mon_y + mon_h - r), (mon_x, mon_y + r),
+    ]
+    s.append(smooth_stroke(screen_pts, "screen", sw=4.6, rough=1.1, closed=True, passes=1))
+    for i, ly in enumerate((mon_y + 44, mon_y + 82, mon_y + 120)):
+        width = mon_w - 56 - (i * 66 if i == 2 else 0)
+        s.append(smooth_stroke([(mon_x + 28, ly), (mon_x + 28 + width, ly)], f"screen-line-{i}", sw=3, rough=0.8, passes=1))
+    s.append(smooth_fill([deg(mon_x + mon_w - 52, mon_y + mon_h - 38, 24, a) for a in range(0, 360, 30)], "screen-star"))
+
+    s.append(smooth_stroke([(600 - 16, mon_y + mon_h - 2), (600 - 14, mon_y + mon_h + 24),
+                             (600 + 14, mon_y + mon_h + 24), (600 + 16, mon_y + mon_h - 2)],
+                            "neck", sw=4, rough=1, closed=False, passes=1))
+    s.append(smooth_stroke([(600 - 78, table_y), (600 + 78, table_y)], "monitor-base", sw=4.4, rough=1, passes=1))
+
+    # 4 agentes en posiciones y tamaños desiguales, mirando hacia la pantalla
+    agents = [
+        (230, 176, 0.98, -7),
+        (438, 100, 1.05, 3),
+        (772, 104, 1.05, -3),
+        (984, 184, 0.98, 8),
+    ]
+    for i, (cx, cy, scale, rot) in enumerate(agents):
+        s.append(smooth_stroke([(cx, cy + 100 * scale), (mon_x + 30 + (i + 0.5) * (mon_w - 60) / 4, mon_y - 4)],
+                                f"gaze-{i}", sw=2, rough=2.5, passes=1))
+    for i, (cx, cy, scale, rot) in enumerate(agents):
+        s.append(robot_agent(cx, cy, f"agent-{i}", scale, rot))
     return "".join(s)
 
 SCENES = {

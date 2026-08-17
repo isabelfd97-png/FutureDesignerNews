@@ -84,11 +84,22 @@ Opening an article slides over a full reading view. Beyond the summary and body,
 - **Read toggle:** the "Marcar como leído" button described in section 3.
 - **Glossary terms (heart to keep):** new or tricky terms appear with a definition and a heart. Hearting a term adds it to your personal Encyclopedia (section 8).
 - **Related articles (scored, not random):** up to three suggestions, ranked by relevance — sharing a subsection scores highest, then the same desk, then any shared glossary term. Only genuine matches show.
-- **Your notes (private):** a free-text reflection field per article, saved to your device and shown the next time you open it.
+- **Annotations:** highlighted quotes with your doubts, comments, and expansions — see section 8.
 
 ---
 
-## 8. Encyclopedia & flashcards — the terms you kept become a study deck
+## 8. Annotations — margin notes on the article itself
+
+While reading, you can debate an article with Claude (the *anotar-articulo* skill) and turn the outcome into an annotation anchored to the exact phrase it's about — not just a note appended at the end.
+
+- **Two types, two colours:** **ampliación** (yellow) is the explanation itself; **ejemplo** (blue) is a concrete, real-world case. When both apply to the same phrase, both highlights show at once.
+- **Highlighted, not hidden:** the phrase gets a hand-drawn marker-style highlight in the article body. Tap it and a post-it note pins itself just below, in the matching colour — no dark overlay, nothing else on the page is blocked.
+- **Real post-its, not tooltips:** the note is a rectangular sticky note that scrolls with the article. If two notes land on the same phrase, they overlap like real sticky notes — tap either one to bring it to the front.
+- **The badge:** the moment an article has any annotation, its card shows a **"¡Con anotaciones!"** flag next to the tag, on every size (lead, secondary, grid).
+
+---
+
+## 9. Encyclopedia & flashcards — the terms you kept become a study deck
 
 Every term you heart inside an article collects into the **Encyclopedia** — an A–Z of definitions, each linked back to the article it came from, with a live letter index down the side and a search box. (Some articles are marked as full "dictionary" pieces and contribute all their terms automatically.)
 
@@ -102,7 +113,7 @@ The Review button shows how many terms are *due* today, so the paper doubles as 
 
 ---
 
-## 9. The rest of the toolkit — search, streak & keeping it tidy
+## 10. The rest of the toolkit — search, streak & keeping it tidy
 
 - **Spotlight search:** a quick search that matches across titles, summaries, key points and subsections. With no query it simply shows the six most recent articles as a starting point.
 - **Two kinds of delete:** articles can be *hidden* (a soft trash you can restore from) or *permanently deleted* via the history view. Hidden and deleted items drop out of every tier, count and search.
@@ -110,7 +121,7 @@ The Review button shows how many terms are *due* today, so the paper doubles as 
 
 ---
 
-## 10. The visual language — why it looks like a brutalist newspaper
+## 11. The visual language — why it looks like a brutalist newspaper
 
 The look is deliberate: part broadsheet authority, part independent zine. It says "this is a real publication" while staying playful enough to feel personal.
 
@@ -126,16 +137,15 @@ The look is deliberate: part broadsheet authority, part independent zine. It say
 
 ---
 
-## 11. Where everything lives — it's all on your device
+## 12. Where everything lives — it's all on your device
 
-Important for anyone redesigning the experience: **nothing a reader does leaves their browser.** The read markers, notes, hearted terms and the trash are all stored locally. There is no server, no login, and no syncing between devices. Open the paper on a different machine and it starts fresh.
+Important for anyone redesigning the experience: **nothing a reader does leaves their browser.** The read markers, hearted terms and the trash are all stored locally. There is no server, no login, and no syncing between devices. Open the paper on a different machine and it starts fresh. Annotations are the one exception — they're written into `data/articles.json` itself (via the *anotar-articulo* skill), so they travel with the article for every reader, not just you.
 
 | Stored value | What it holds |
 |--------------|---------------|
 | `readArticles` | Which articles you've marked as read (drives the badge + dimming). |
 | `likedTerms` | Glossary terms you hearted into the Encyclopedia. |
 | `termSRS` | Flashcard progress — which Leitner box each term is in and when it's due. |
-| `articleNotes` | Your private written reflections per article. |
 | `hiddenArticles` / `deletedArticles` | Soft-trashed and permanently removed items. |
 
 **Consequence for design:** because state is per-device and per-person, the paper is genuinely one reader's newspaper. Features can be as personal as you like — but they can't assume anything carries over to another device, and the first-visit state (nothing read yet) is a real, common experience worth designing for.

@@ -680,7 +680,7 @@
     ],
     "content_md": "## De qué va\nCarmen Rincon (co-fundadora de Yummy Labs, la misma fuente de los artículos que ya tienes sobre dónde va tu contexto en Claude y por qué los diseñadores gastan su límite de uso más rápido) explica un problema muy concreto: pedirle a Claude que revise el propio diseño que acaba de generar no funciona, porque cuando evalúa su propio trabajo lo defiende. Lee lo que *quiso* construir, no lo que realmente hay en pantalla — es el mismo motivo por el que no puedes corregir bien tu propio texto recién escrito. Tiene nombre: sesgo de autopreferencia (self-preferential bias).\n\nLa diferencia de puntuación que midió en un proyecto real de cliente es la prueba: Claude se puntuó a sí mismo un 75 sobre 100 en una pantalla; un panel ciego que no había construido esa pantalla puntuó exactamente el mismo trabajo un 52. 23 puntos de diferencia sobre lo mismo.\n\n## El loop de dos niveles en Claude Code\n**Nivel 1 — el panel de críticos.** En vez de que el mismo Claude que construyó la pantalla la revise, se lanzan varios agentes críticos separados, cada uno en su propio contexto (así ninguno ha visto el proceso de construcción y no puede defenderlo). Cada agente es dueño de una única lente:\n- craft + marca + fidelidad\n- UX + accesibilidad + motion\n- tokens + código + contenido\n- oportunidad / mejora\n\nPuntúan a ciegas contra una rúbrica — y aquí está el truco que casi nadie hace: la rúbrica se pondera hacia lo que Claude hace *peor*, no hacia lo que ya hace bien. Layout y viabilidad técnica ya se le dan razonablemente bien, así que pesan menos; gusto, coherencia y craft son sus puntos débiles, así que pesan más. Eso es lo que convierte la revisión en algo útil de verdad, en vez de un halago disfrazado de evaluación.\n\n**Nivel 2 — la memoria.** Los fallos detectados en el panel se guardan y se recargan cada sesión nueva, así Claude deja de repetirlos: los mismos fallos de contraste, los mismos colores fuera del sistema, el mismo error de spacing no vuelven a aparecer. La siguiente pantalla arranca más alto, y la puntuación sube de loop en loop en vez de resetear cada vez que empiezas una sesión nueva.\n\n## Por qué le importa a un product designer\nEste panel de críticos es, en el fondo, el mismo patrón de subagentes que ya viste en el artículo de 'Claude Agents': un trabajo con un objetivo claro, herramientas acotadas (aquí, de solo lectura — mirar y puntuar, nunca tocar) y límites bien definidos, aplicado en concreto a resolver el problema de que nadie se marca bien sus propios deberes. La idea de que la rúbrica debe pesar más hacia los puntos débiles del modelo, no hacia los fuertes, es aplicable más allá de este caso: cualquier sistema de revisión (humano o IA) es más útil cuando se diseña para encontrar lo que de verdad se le escapa a quien construyó, no para confirmar lo que ya sabía hacer bien.\n\n## Ideas clave\n- No dejes que Claude revise su propio trabajo: lo defiende por sesgo de autopreferencia, igual que tú no puedes corregir bien tu propio texto recién escrito.\n- Diferencia medida en un proyecto real: 75/100 autopuntuado vs. 52/100 por un panel ciego — 23 puntos de distancia sobre el mismo trabajo.\n- Nivel 1: agentes críticos separados, cada uno en su propio contexto y con una sola lente, puntuando a ciegas contra una rúbrica ponderada hacia los puntos débiles del modelo.\n- Nivel 2: los fallos se guardan y se recargan cada sesión, así la puntuación mejora acumulativamente en vez de resetear.\n- Es el mismo patrón de subagentes de 'Claude Agents', aplicado a que nadie se corrija bien sus propios deberes.",
     "images": [
-      "images/el-loop-de-2-niveles-para-que-claude-deje-de-autopuntuarse-su-propio-d/cover.svg"
+      "images/el-loop-de-2-niveles-para-que-claude-deje-de-autopuntuarse-su-propio-d/cover.png"
     ],
     "glossary": [
       {
@@ -694,6 +694,44 @@
     ],
     "materials": [],
     "date_added": "2026-07-15",
-    "dictionary": false
+    "dictionary": false,
+    "annotations": [
+      {
+        "quote": "se lanzan varios agentes críticos separados, cada uno en su propio contexto (así ninguno ha visto el proceso de construcción y no puede defenderlo)",
+        "type": "ampliacion",
+        "text": "Un agente crítico separado es una conversación nueva e independiente con Claude — sin el historial de cómo se construyó el diseño — con un prompt de sistema propio (una sola lente: p. ej. solo craft+marca, o solo UX+accesibilidad), herramientas de solo lectura (puede mirar, no tocar) y la misma rúbrica. En Claude Code se lanzan como subagentes en paralelo; por API, como llamadas independientes sin el hilo de conversación anterior. Es el mismo patrón de subagentes del artículo Claude Agents, aplicado a evaluación en vez de construcción.",
+        "date": "2026-08-17"
+      },
+      {
+        "quote": "Los fallos detectados en el panel se guardan y se recargan cada sesión nueva",
+        "type": "ampliacion",
+        "text": "El panel es el mismo panel de críticos del Nivel 1 — el grupo de agentes que puntúan el diseño. Nivel 2 no es un panel nuevo: es la memoria que recuerda, sesión tras sesión, lo que ese panel encontró mal.",
+        "date": "2026-08-17"
+      },
+      {
+        "quote": "los mismos fallos de contraste, los mismos colores fuera del sistema, el mismo error de spacing no vuelven a aparecer",
+        "type": "ejemplo",
+        "text": "Ejemplo: el Crítico de UX+accesibilidad puntúa bajo un botón por falta de contraste → ese fallo concreto se guarda como entrada de memoria → en la siguiente sesión, Claude ya lo tiene presente y no lo repite. Es memoria de fallos objetivos detectados contra la rúbrica, no de preferencias estéticas personales.",
+        "date": "2026-08-17"
+      },
+      {
+        "quote": "Este panel de críticos es, en el fondo, el mismo patrón de subagentes que ya viste en el artículo de 'Claude Agents'",
+        "type": "ampliacion",
+        "text": "Panel de críticos = consejo de críticos = los agentes del Nivel 1. El artículo <a href=\"#/articulo/claude-agents-que-son-y-como-crear-uno\">Claude Agents: qué son y cómo crear uno</a> explica la idea central: un agente no es algo técnico, es un trabajo que tú diseñas — le das un objetivo, unas herramientas y unos límites, y es Claude quien decide los pasos (a diferencia de una task o un workflow, donde decides tú). Cada crítico del panel es exactamente eso: un objetivo claro (puntuar una lente concreta), herramientas acotadas (solo lectura — mirar y puntuar, nunca tocar) y límites definidos (su rúbrica). Y hay un motivo de fondo por el que esto le importa especialmente a un product designer: cuando el criterio de revisión vive en un agente compartido del proyecto — no en la cabeza de la persona senior que sabe verlo — deja de depender de que esa persona esté presente, y se convierte en un estándar versionado que se aplica igual a cada pantalla.",
+        "date": "2026-08-17"
+      },
+      {
+        "quote": "se lanzan varios agentes críticos separados, cada uno en su propio contexto (así ninguno ha visto el proceso de construcción y no puede defenderlo)",
+        "type": "ejemplo",
+        "text": "Caso real: generas una pantalla y lanzas 4 evaluaciones en paralelo, cada una viendo solo el screenshot final + la rúbrica, nunca el proceso de construcción — Crítico 1 solo mira craft+marca+fidelidad, Crítico 2 solo UX+accesibilidad+motion, Crítico 3 solo tokens+código+contenido, Crítico 4 solo oportunidad/mejora. Ninguno puede tocar nada, solo puntuar. Sus 4 notas se combinan (ponderadas hacia los puntos débiles) en la puntuación final — la del ejemplo del artículo: 52/100 frente al 75/100 que se había puesto Claude a sí mismo.",
+        "date": "2026-08-17"
+      },
+      {
+        "quote": "Este panel de críticos es, en el fondo, el mismo patrón de subagentes que ya viste en el artículo de 'Claude Agents'",
+        "type": "ejemplo",
+        "text": "Aplicado a tu día a día: en vez de pedirle a Claude \"revisa esta pantalla\", montas 4 prompts de sistema fijos (uno por lente) que guardas en el proyecto, no en tu cabeza. Cualquiera del equipo que use ese proyecto compartido obtiene la misma revisión, con los mismos criterios, aunque tú no estés delante — deja de depender de que la persona senior \"lo vea a ojo\".",
+        "date": "2026-08-17"
+      }
+    ]
   }
 ]

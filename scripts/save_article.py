@@ -197,20 +197,9 @@ def main():
         action = "añadido"
     save_json(data_json_path, articles)
 
-    # --- ensure a cover illustration exists (safety net: a bespoke hand-drawn scene should
-    # still be designed in scripts/generate_cover_art.py and shown to Isabel for approval
-    # before anything is committed — see CLAUDE.md, "Añadir un artículo") ---
-    cover_svg_rel = None
-    has_bespoke_cover = False
-    cover_script = os.path.join(project_dir, "scripts", "generate_cover_art.py")
-    if os.path.exists(cover_script) and not image_rel_paths:
-        subprocess.run([sys.executable, cover_script, "--only", article_id], cwd=project_dir, check=True)
-        articles = load_json(data_json_path, [])
-        entry_now = next((a for a in articles if a.get("id") == article_id), None)
-        if entry_now and entry_now.get("images"):
-            cover_svg_rel = entry_now["images"][0]
-        with open(cover_script, encoding="utf-8") as f:
-            has_bespoke_cover = f'"{article_id}": scene_' in f.read()
+    # --- portada: NO se genera automáticamente. Isabel pasa la imagen (ver la skill
+    # "portada-articulo") y se guarda en images/<id>/ tal cual — este script solo avisa
+    # de que falta cuando no se ha pasado ninguna. ---
 
     # --- regenerate the site ---
     build_script = os.path.join(project_dir, "build_repo.py")
@@ -225,15 +214,10 @@ def main():
         "md_path": md_path,
         "images_saved": image_rel_paths,
     }
-    if cover_svg_rel:
-        result["cover_svg"] = cover_svg_rel
-        result["cover_is_bespoke"] = has_bespoke_cover
-        if not has_bespoke_cover:
-            result["reminder"] = (
-                "Esta portada es la genérica de repuesto. Diseña una escena propia en "
-                "scripts/generate_cover_art.py, renderízala con --only " + article_id +
-                " --preview, y enséñasela a Isabel antes de hacer commit."
-            )
+    if not image_rel_paths:
+        result["reminder"] = (
+            "Sin portada todavía — pídesela a Isabel (skill 'portada-articulo'), no la generes tú."
+        )
     print(json.dumps(result, ensure_ascii=False, indent=2))
 
 

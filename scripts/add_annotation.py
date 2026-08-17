@@ -13,7 +13,7 @@ Input JSON schema:
   "project_dir": "/Users/isabelferrer-dalmau/Desktop/10 Articles and news",
   "article_id": "the-existing-article-id",
   "quote": "the EXACT phrase from that article's content_md this annotation refers to",
-  "type": "duda" | "comentario" | "ampliacion",
+  "type": "ampliacion" | "ejemplo",
   "text": "the annotation itself, in Isabel's/Claude's synthesized voice",
   "date": "2026-08-17"   # optional, defaults to today
 }
@@ -25,8 +25,13 @@ What it does (deliberately different from save_article.py):
      this is what the front-end uses to find and underline the phrase in place. Fails
      loudly (no partial writes) if the quote isn't found, so a bad match is caught here
      rather than silently failing to render.
-  3. Requires `type` to be one of duda / comentario / ampliacion.
+  3. Requires `type` to be one of ampliacion / ejemplo.
   4. Runs build_repo.py to regenerate index.html.
+
+Two annotations CAN share the exact same `quote` on purpose — e.g. an "ampliacion" explaining
+something plus an "ejemplo" making it concrete, both anchored to the same sentence. The
+front-end groups annotations by quote and renders both highlights (and both post-its) at
+once when that happens; it's a supported case, not a bug.
 
 Never commits or pushes — that stays a separate, explicit step after Isabel has reviewed
 the rendered annotation (see CLAUDE.md, "Añadir un artículo" / the anotar-articulo skill).
@@ -38,7 +43,7 @@ import sys
 import subprocess
 from datetime import date
 
-VALID_TYPES = {"duda", "comentario", "ampliacion"}
+VALID_TYPES = {"ampliacion", "ejemplo"}
 
 
 def load_json(path, default):
@@ -68,7 +73,7 @@ def main():
     project_dir = data["project_dir"]
     article_id = data["article_id"].strip()
     quote = data["quote"].strip()
-    annot_type = data.get("type", "comentario").strip()
+    annot_type = data.get("type", "ampliacion").strip()
     text = data["text"].strip()
     annot_date = data.get("date") or date.today().isoformat()
 

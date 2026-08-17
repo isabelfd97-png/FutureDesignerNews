@@ -317,19 +317,6 @@ TEMPLATE = r"""<!DOCTYPE html>
   .reflection-text p { margin: 0 0 10px; }
   .reflection-text p:last-child { margin-bottom: 0; }
 
-  /* ---- Nota propia (artículo) ---- */
-  .art-note { margin-top: 32px; padding: 18px 20px; background: rgba(255,90,31,0.05); border: 2px dashed var(--accent); }
-  .art-note h4 { display: flex; align-items: center; gap: 8px; margin: 0 0 6px; font-family: 'Space Mono', monospace; font-size: 11px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--accent); }
-  .art-note h4 svg { width: 14px; height: 14px; }
-  .note-hint { margin: 0 0 10px; font-size: 12.5px; color: var(--muted); line-height: 1.5; }
-  .art-note textarea {
-    width: 100%; min-height: 84px; resize: vertical; border: 2px solid var(--ink); background: var(--bg);
-    font-family: 'Space Grotesk', sans-serif; font-size: 14.5px; line-height: 1.5; color: var(--ink);
-    padding: 10px 12px; outline: none;
-  }
-  .art-note textarea:focus { border-color: var(--accent); }
-  .note-status { font-family: 'Space Mono', monospace; font-size: 10.5px; color: var(--accent); height: 14px; margin-top: 6px; }
-
   /* ---- Artículos relacionados ---- */
   .art-related { margin-top: 40px; padding-top: 18px; border-top: 3px solid var(--ink); }
   .art-related h4 { display: flex; align-items: center; gap: 8px; margin: 0 0 10px; font-family: 'Space Mono', monospace; font-size: 11px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--accent); }
@@ -709,10 +696,18 @@ TEMPLATE = r"""<!DOCTYPE html>
   /* ---- Article overlay ---- */
   .overlay { position: fixed; inset: 0; background: var(--bg); z-index: 40; overflow-y: auto; display: none; }
   .overlay.open { display: block; }
-  .overlay-inner { max-width: 720px; margin: 0 auto; padding: 60px 24px 100px; }
+  .overlay-inner { max-width: 720px; margin: 0 auto; padding: 60px 24px 100px; position: relative; }
   .overlay .close-btn { position: fixed; top: 20px; right: 24px; width: 36px; height: 36px; border: 2px solid var(--ink); background: var(--bg); display: flex; align-items: center; justify-content: center; cursor: pointer; z-index: 41; }
   .overlay .close-btn:hover { background: var(--accent); border-color: var(--accent); color: #fff; }
   .overlay .close-btn svg { width: 16px; height: 16px; }
+  .art-cover-wrap { position: relative; width: 100%; height: min(38vh, 320px); overflow: hidden; }
+  .art-cover-wrap img { width: 100%; height: 100%; object-fit: cover; display: block; filter: grayscale(100%) contrast(1.05); }
+  .art-cover-wrap::after {
+    content: ''; position: absolute; inset: 0; pointer-events: none;
+    background: linear-gradient(to bottom, rgba(255,255,255,0) 55%, var(--bg) 96%);
+  }
+  @media (max-width: 640px) { .art-cover-wrap { height: min(30vh, 220px); } }
+  .overlay-inner.has-cover { padding-top: 22px; }
   .art-icon { width: 46px; height: 46px; color: var(--ink); margin-bottom: 10px; }
   .art-icon svg { width: 100%; height: 100%; shape-rendering: crispEdges; }
   .art-tag { font-family: 'Space Mono', monospace; font-size: 10.5px; letter-spacing: 1.4px; text-transform: uppercase; color: var(--accent); font-weight: 700; }
@@ -723,20 +718,50 @@ TEMPLATE = r"""<!DOCTYPE html>
   .art-body ul { font-size: 15.5px; line-height: 1.7; padding-left: 22px; }
   .art-body strong { background: linear-gradient(transparent 60%, rgba(255,90,31,.3) 60%); }
 
-  /* ---- Anotaciones: dudas, comentarios y ampliaciones sobre una cita del texto ---- */
-  mark.annot { background: none; color: inherit; cursor: pointer; padding: 0 1px; }
-  mark.annot .annot-icon { display: inline-flex; width: 12px; height: 12px; margin-left: 2px; vertical-align: -1px; opacity: .7; }
-  mark.annot .annot-icon svg { width: 100%; height: 100%; }
-  mark.annot:hover, mark.annot.open { background: rgba(255,90,31,.14); }
-  mark.annot-duda { text-decoration: underline dotted; text-decoration-color: var(--ink); text-decoration-thickness: 2px; text-underline-offset: 3px; }
-  mark.annot-comentario { text-decoration: underline solid; text-decoration-color: var(--accent); text-decoration-thickness: 2px; text-underline-offset: 3px; color: var(--accent); font-weight: 700; }
-  mark.annot-ampliacion { text-decoration: underline double; text-decoration-color: var(--ink); text-underline-offset: 4px; }
+  /* ---- Anotaciones: ampliaciones (amarillo) y ejemplos (azul) sobre una cita del texto ----
+     El resaltado imita un rotulador fosforito pasado a mano; si una misma frase tiene los
+     dos tipos a la vez, se ven los dos rayados uno encima del otro, en vez de mezclarse. ---- */
+  mark.annot {
+    background: none; color: inherit; cursor: pointer; padding: 0.03em 0.15em;
+    box-decoration-break: clone; -webkit-box-decoration-break: clone;
+  }
+  mark.annot .annot-icon { display: inline-flex; gap: 2px; margin-left: 2px; vertical-align: -1px; }
+  mark.annot .annot-icon svg { width: 12px; height: 12px; opacity: .7; }
+  mark.annot:hover .annot-icon svg, mark.annot.open .annot-icon svg { opacity: 1; }
+  mark.annot-ampliacion { background-image: linear-gradient(103deg, transparent 0%, transparent 2%, rgba(255,209,10,.6) 4%, rgba(255,209,10,.6) 95%, transparent 97%, transparent 100%); }
+  mark.annot-ejemplo { background-image: linear-gradient(103deg, transparent 0%, transparent 2%, rgba(96,170,255,.5) 4%, rgba(96,170,255,.5) 95%, transparent 97%, transparent 100%); }
+  mark.annot-ampliacion.annot-ejemplo {
+    background-image:
+      linear-gradient(103deg, transparent 0%, transparent 2%, rgba(255,209,10,.6) 4%, rgba(255,209,10,.6) 95%, transparent 97%, transparent 100%),
+      linear-gradient(103deg, transparent 0%, transparent 2%, rgba(96,170,255,.5) 4%, rgba(96,170,255,.5) 95%, transparent 97%, transparent 100%);
+    background-position: 0 100%, 0 0%;
+    background-size: 100% 48%, 100% 52%;
+    background-repeat: no-repeat, no-repeat;
+  }
 
-  .annot-note { display: inline-flex; flex-direction: column; gap: 5px; margin: 6px 4px; padding: 12px 14px; border: 2px solid var(--ink); background: #fffaf3; max-width: 440px; vertical-align: top; font-size: 13.5px; line-height: 1.55; box-shadow: 4px 4px 0 var(--ink); }
-  .annot-note-label { display: inline-flex; align-items: center; gap: 6px; font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 1px; text-transform: uppercase; font-weight: 700; color: var(--muted); }
-  .annot-note-label svg { width: 12px; height: 12px; }
-  .annot-note-text { color: var(--ink); }
-  .annot-note-comentario .annot-note-label { color: var(--accent); }
+  /* nota tipo post-it, fija justo debajo de la frase subrayada (se mueve con el texto
+     al hacer scroll porque vive dentro de .overlay-inner, no pegada al viewport) */
+  .annot-note {
+    position: absolute; width: 340px; z-index: 5; cursor: pointer;
+    border: 2px solid var(--ink); box-shadow: 3px 4px 0 rgba(10,10,10,.3);
+    padding: 13px 16px 14px; font-size: 13px; line-height: 1.48;
+    transform: rotate(-1.1deg);
+  }
+  .annot-note.stack-2 { transform: rotate(1.6deg); }
+  .annot-note-ampliacion { background: #fff1a6; }
+  .annot-note-ejemplo { background: #bfe0ff; }
+  .annot-note-close {
+    position: absolute; top: 5px; right: 5px; width: 22px; height: 22px; border: none;
+    background: transparent; cursor: pointer; display: flex; align-items: center; justify-content: center;
+    opacity: .6;
+  }
+  .annot-note-close:hover { opacity: 1; }
+  .annot-note-close svg { width: 11px; height: 11px; }
+  .annot-note-label { display: flex; align-items: center; gap: 6px; font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 1px; text-transform: uppercase; font-weight: 700; margin-bottom: 7px; padding-right: 22px; color: var(--ink); }
+  .annot-note-label svg { width: 13px; height: 13px; flex: none; }
+  .annot-note-text { color: var(--ink); display: block; }
+  .annot-note-text a { color: var(--ink); text-decoration: underline; }
+  @media (max-width: 640px) { .annot-note { width: min(84vw, 340px); } }
   .art-figure { margin: 22px 0; }
   .art-figure img { width: 100%; height: auto; display: block; border: 2px solid var(--ink); filter: grayscale(100%) contrast(1.05); }
   .art-figure figcaption { font-family: 'Space Mono', monospace; font-size: 11px; color: var(--muted); margin-top: 6px; }
@@ -918,6 +943,7 @@ TEMPLATE = r"""<!DOCTYPE html>
 
 <div class="overlay" id="overlay">
   <div class="close-btn" id="close-overlay"></div>
+  <div class="art-cover-wrap" id="art-cover-wrap"></div>
   <div class="overlay-inner" id="overlay-inner"></div>
 </div>
 
@@ -1074,13 +1100,6 @@ function wireReadToggle(id) {
 }
 
 /* ---------- notas propias por artículo ---------- */
-function getArticleNotes() { try { return JSON.parse(localStorage.getItem('articleNotes') || '{}'); } catch(e) { return {}; } }
-function setArticleNote(id, text) {
-  const notes = getArticleNotes();
-  if (!text || !text.trim()) { delete notes[id]; } else { notes[id] = text; }
-  localStorage.setItem('articleNotes', JSON.stringify(notes));
-}
-
 /* ---------- reflexiones (sintetizadas por la skill Article Debate) ---------- */
 function reflectionsHtml(a) {
   if (!a.reflections || !a.reflections.length) return '';
@@ -1091,33 +1110,6 @@ function reflectionsHtml(a) {
     </div>
   `).join('');
   return `<div class="art-reflections"><h4>${ICONS['chat-code']} Tu reflexión</h4>${entries}</div>`;
-}
-
-function noteHtml(a) {
-  const val = getArticleNotes()[a.id] || '';
-  return `<div class="art-note">
-    <h4>${ICONS.edit} Tu nota</h4>
-    <p class="note-hint">Escribe en tus palabras qué te llevas de esto, o cómo lo aplicarías. Se guarda solo, en tu navegador.</p>
-    <textarea id="art-note-input" placeholder="Ej: esto me sirve para justificar el rediseño del onboarding...">${val}</textarea>
-    <div class="note-status" id="art-note-status"></div>
-  </div>`;
-}
-
-function wireNote(articleId) {
-  const input = document.getElementById('art-note-input');
-  const status = document.getElementById('art-note-status');
-  if (!input) return;
-  let t = null;
-  input.addEventListener('input', () => {
-    clearTimeout(t);
-    status.textContent = '';
-    t = setTimeout(() => {
-      setArticleNote(articleId, input.value);
-      status.textContent = 'Guardado ✓';
-      clearTimeout(window.__noteStatusTimer);
-      window.__noteStatusTimer = setTimeout(() => { status.textContent = ''; }, 1800);
-    }, 500);
-  });
 }
 
 /* ---------- artículos relacionados ---------- */
@@ -1223,24 +1215,41 @@ function setupLinksScroll() {
 }
 
 /* ---------- markdown -> html (small subset) ---------- */
-/* ---------- anotaciones: dudas, comentarios y ampliaciones sobre una cita exacta ---------- */
+/* ---------- anotaciones: ampliaciones y ejemplos sobre una cita exacta ---------- */
 const ANNOT_META = {
-  duda: { icon: 'question', label: 'Duda' },
-  comentario: { icon: 'edit', label: 'Comentario' },
   ampliacion: { icon: 'plus', label: 'Ampliación' },
+  ejemplo: { icon: 'eye', label: 'Ejemplo' },
 };
 
-/* envuelve, dentro de una línea de texto ya en plano, la primera cita sin usar de cada
-   anotación que aparezca en ella — cada anotación se resalta como mucho una vez en todo
-   el artículo, aunque la frase se repita */
-function applyAnnotations(text, annotations, used) {
-  let result = text;
+/* varias anotaciones pueden compartir la misma cita a propósito (p. ej. una ampliación y
+   su ejemplo sobre la misma frase) — se agrupan para pintar un único resaltado con los
+   dos rayados a la vez, en vez de intentar envolver el mismo texto dos veces */
+function groupAnnotationsByQuote(annotations) {
+  const groups = new Map();
   (annotations || []).forEach((an, idx) => {
-    if (used.has(idx) || !an.quote || !result.includes(an.quote)) return;
-    const meta = ANNOT_META[an.type] || ANNOT_META.comentario;
-    result = result.replace(an.quote,
-      `<mark class="annot annot-${an.type}" data-annot-idx="${idx}" tabindex="0">${an.quote}<span class="annot-icon">${ICONS[meta.icon]}</span></mark>`);
-    used.add(idx);
+    if (!an.quote) return;
+    if (!groups.has(an.quote)) groups.set(an.quote, []);
+    groups.get(an.quote).push(idx);
+  });
+  return groups;
+}
+
+/* envuelve, dentro de una línea de texto ya en plano, cada cita sin usar que aparezca en
+   ella — las citas más largas van primero para que una corta no rompa a una que la
+   contiene; cada cita se resalta como mucho una vez en todo el artículo */
+function applyAnnotations(text, annotations, usedQuotes) {
+  let result = text;
+  const groups = groupAnnotationsByQuote(annotations);
+  const quotes = [...groups.keys()].sort((a, b) => b.length - a.length);
+  quotes.forEach(quote => {
+    if (usedQuotes.has(quote) || !result.includes(quote)) return;
+    const idxs = groups.get(quote);
+    const types = [...new Set(idxs.map(i => annotations[i].type === 'ejemplo' ? 'ejemplo' : 'ampliacion'))];
+    const classes = types.map(t => `annot-${t}`).join(' ');
+    const icons = types.map(t => ICONS[(ANNOT_META[t] || ANNOT_META.ampliacion).icon]).join('');
+    result = result.replace(quote,
+      `<mark class="annot ${classes}" data-annot-idxs="${idxs.join(',')}" tabindex="0">${quote}<span class="annot-icon">${icons}</span></mark>`);
+    usedQuotes.add(quote);
   });
   return result;
 }
@@ -1631,6 +1640,11 @@ function renderArticleOverlay(id) {
   const inner = document.getElementById('overlay-inner');
   if (!a) { overlay.classList.remove('open'); return; }
   const sec = bySlug(a.section);
+  const hasCover = a.images && a.images.length;
+  const coverWrap = document.getElementById('art-cover-wrap');
+  coverWrap.innerHTML = hasCover ? `<img src="${a.images[0]}" alt="" loading="lazy">` : '';
+  coverWrap.style.display = hasCover ? '' : 'none';
+  inner.classList.toggle('has-cover', !!hasCover);
   inner.innerHTML = `
     <div class="art-icon">${articleIconSvg(a)}</div>
     <div class="art-tag">${sec ? sec.name : a.section}${a.subsection ? ' · ' + a.subsection : ''}</div>
@@ -1641,7 +1655,6 @@ function renderArticleOverlay(id) {
     ${materialsHtml(a)}
     ${reflectionsHtml(a)}
     ${glossaryHtml(a)}
-    ${noteHtml(a)}
     <div class="art-original"><a href="${a.url}" target="_blank" rel="noopener">Leer el artículo original ${ICONS.arrow}</a></div>
     ${relatedHtml(a)}
   `;
@@ -1659,35 +1672,66 @@ function renderArticleOverlay(id) {
     setTimeout(() => { el.classList.remove('copied'); el.textContent = original; }, 1400);
   }));
   wireReadToggle(a.id);
-  wireNote(a.id);
   wireAnnotations(a);
   overlay.classList.add('open');
   window.scrollTo(0,0);
 }
 
-/* click en una cita subrayada -> despliega/pliega la nota justo debajo, en el propio
-   párrafo (nada de tooltips flotantes: así funciona igual de bien con el dedo) */
+/* click en una cita subrayada -> abre uno (o dos, si coinciden ampliación + ejemplo)
+   post-it pegados justo debajo, dentro del propio artículo — nada de fondo oscuro; se
+   cierran solo con su X, y se mueven con el texto al hacer scroll */
+function closeAnnotNotesFor(mark) {
+  const inner = mark.closest('#overlay-inner');
+  if (!inner) return;
+  inner.querySelectorAll(`.annot-note[data-for-mark="${mark.dataset.annotIdxs}"]`).forEach(n => n.remove());
+  mark.classList.remove('open');
+}
+
 function wireAnnotations(a) {
   const inner = document.getElementById('overlay-inner');
   if (!inner) return;
   inner.querySelectorAll('.annot').forEach(mark => {
     mark.addEventListener('click', () => {
-      const wasOpen = mark.classList.contains('open');
-      inner.querySelectorAll('.annot-note').forEach(n => n.remove());
-      inner.querySelectorAll('.annot.open').forEach(m => m.classList.remove('open'));
-      if (wasOpen) return;
-      const idx = Number(mark.dataset.annotIdx);
-      const an = (a.annotations || [])[idx];
-      if (!an) return;
-      const meta = ANNOT_META[an.type] || ANNOT_META.comentario;
-      const note = document.createElement('span');
-      note.className = `annot-note annot-note-${an.type}`;
-      note.innerHTML = `<span class="annot-note-label">${ICONS[meta.icon]} ${meta.label}</span><span class="annot-note-text">${an.text}</span>`;
-      mark.insertAdjacentElement('afterend', note);
+      if (mark.classList.contains('open')) { closeAnnotNotesFor(mark); return; }
+
+      const idxs = mark.dataset.annotIdxs.split(',').map(Number);
+      const NOTE_W = 340, STACK_DX = 64, STACK_DY = 46;
+      const containerRect = inner.getBoundingClientRect();
+      const markRect = mark.getBoundingClientRect();
+      const top = markRect.bottom - containerRect.top + 10;
+      const left = Math.max(0, Math.min(markRect.left - containerRect.left, inner.clientWidth - NOTE_W - STACK_DX));
+
+      idxs.forEach((idx, i) => {
+        const an = (a.annotations || [])[idx];
+        if (!an) return;
+        const meta = ANNOT_META[an.type] || ANNOT_META.ampliacion;
+        const note = document.createElement('div');
+        note.className = `annot-note annot-note-${an.type} ${i === 1 ? 'stack-2' : ''}`;
+        note.dataset.forMark = mark.dataset.annotIdxs;
+        note.style.top = (top + i * STACK_DY) + 'px';
+        note.style.left = (left + i * STACK_DX) + 'px';
+        note.innerHTML = `
+          <button class="annot-note-close">${ICONS.close}</button>
+          <span class="annot-note-label">${ICONS[meta.icon]} ${meta.label}</span>
+          <span class="annot-note-text">${an.text}</span>
+        `;
+        inner.appendChild(note);
+        note.querySelector('.annot-note-close').addEventListener('click', () => closeAnnotNotesFor(mark));
+        // tocar un post-it (fuera de su X) lo trae al frente de la pila, como uno real
+        note.addEventListener('click', e => {
+          if (e.target.closest('.annot-note-close')) return;
+          inner.appendChild(note);
+        });
+      });
       mark.classList.add('open');
     });
   });
 }
+document.addEventListener('keydown', e => {
+  if (e.key !== 'Escape') return;
+  document.querySelectorAll('.annot-note').forEach(n => n.remove());
+  document.querySelectorAll('.annot.open').forEach(m => m.classList.remove('open'));
+});
 
 /* ---------- repaso espaciado (sistema Leitner, 5 cajas) ---------- */
 const SRS_BOX_DAYS = { 1: 1, 2: 3, 3: 7, 4: 14, 5: 30 };
