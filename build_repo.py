@@ -59,7 +59,7 @@ def pixel_svg(rows):
 
 # Iconos funcionales pequeños (12x12) — usados en botones y controles.
 # search, arrow, heart, history y flame se quedan con iconografía de línea normal (ver más abajo).
-PIXEL12 = {'close': ['##........##', '###......###', '.###....###.', '..###..###..', '...######...', '....####....', '....####....', '...######...', '..###..###..', '.###....###.', '###......###', '##........##'], 'check': ['............', '............', '...........#', '..........##', '.........##.', '#.......##..', '##.....##...', '.##...##....', '..##.##.....', '...###......', '....#.......', '............'], 'trash': ['...######...', '..#......#..', '.##########.', '..#.####.#..', '..#.####.#..', '..#.####.#..', '..#.####.#..', '..#.####.#..', '..#.####.#..', '..#.####.#..', '..#......#..', '...######...'], 'restore': ['............', '............', '....####.##.', '...#....#.#.', '..#......#..', '..#.........', '..#.........', '..#.........', '...#........', '....####....', '............', '............'], 'star': ['.....#......', '....###.....', '....#.#.....', '............', '.##.....##..', '##.......##.', '.##.....##..', '............', '....#.#.....', '....###.....', '.....#......', '............'], 'star-filled': ['.....#......', '....###.....', '....###.....', '....###.....', '.#########..', '###########.', '.#########..', '....###.....', '....###.....', '....###.....', '.....#......', '............'], 'edit': ['.........##.', '........####', '.......###..', '......###...', '.....###....', '....###.....', '...###......', '..###.......', '.###........', '.##.........', '.#..........', '.##.........'], 'link': ['............', '....#.......', '..#####.....', '..#...#.....', '.##...#.....', '..#...#.#...', '..#########.', '......#...#.', '.....##...#.', '......#...#.', '......####..', '............'], 'cards': ['............', '....#######.', '....#.....#.', '....#.....#.', '.#######..#.', '.#..#..#..#.', '.#..#..#..#.', '.#..#######.', '.#.....#....', '.#.....#....', '.#######....', '............'], 'eye': ['............', '....####....', '..##....##..', '.#........#.', '#....##....#', '#...####...#', '#...####...#', '#....##....#', '.#........#.', '..##....##..', '....####....', '............'], 'chart': ['............', '............', '.........###', '.........###', '.........###', '.....###.###', '.....###.###', '.....###.###', '.###.###.###', '.###.###.###', '.###.###.###', '############'], 'wrench': ['............', '..###.......', '.##.##......', '...###......', '...###......', '...####.....', '.....###....', '......###...', '.......###..', '........###.', '.........###', '..........#.']}
+PIXEL12 = {'close': ['##........##', '###......###', '.###....###.', '..###..###..', '...######...', '....####....', '....####....', '...######...', '..###..###..', '.###....###.', '###......###', '##........##'], 'check': ['............', '............', '...........#', '..........##', '.........##.', '#.......##..', '##.....##...', '.##...##....', '..##.##.....', '...###......', '....#.......', '............'], 'trash': ['...######...', '..#......#..', '.##########.', '..#.####.#..', '..#.####.#..', '..#.####.#..', '..#.####.#..', '..#.####.#..', '..#.####.#..', '..#.####.#..', '..#......#..', '...######...'], 'restore': ['............', '............', '....####.##.', '...#....#.#.', '..#......#..', '..#.........', '..#.........', '..#.........', '...#........', '....####....', '............', '............'], 'star': ['.....#......', '....###.....', '....#.#.....', '............', '.##.....##..', '##.......##.', '.##.....##..', '............', '....#.#.....', '....###.....', '.....#......', '............'], 'star-filled': ['.....#......', '....###.....', '....###.....', '....###.....', '.#########..', '###########.', '.#########..', '....###.....', '....###.....', '....###.....', '.....#......', '............'], 'edit': ['.........##.', '........####', '.......###..', '......###...', '.....###....', '....###.....', '...###......', '..###.......', '.###........', '.##.........', '.#..........', '.##.........'], 'link': ['............', '....#.......', '..#####.....', '..#...#.....', '.##...#.....', '..#...#.#...', '..#########.', '......#...#.', '.....##...#.', '......#...#.', '......####..', '............'], 'cards': ['............', '....#######.', '....#.....#.', '....#.....#.', '.#######..#.', '.#..#..#..#.', '.#..#..#..#.', '.#..#######.', '.#.....#....', '.#.....#....', '.#######....', '............'], 'eye': ['............', '....####....', '..##....##..', '.#........#.', '#....##....#', '#...####...#', '#...####...#', '#....##....#', '.#........#.', '..##....##..', '....####....', '............'], 'chart': ['............', '............', '.........###', '.........###', '.........###', '.....###.###', '.....###.###', '.....###.###', '.###.###.###', '.###.###.###', '.###.###.###', '############'], 'wrench': ['............', '..###.......', '.##.##......', '...###......', '...###......', '...####.....', '.....###....', '......###...', '.......###..', '........###.', '.........###', '..........#.'], 'question': ['....####....', '..##....##..', '.##......##.', '........##..', '.......##...', '......##....', '.....##.....', '.....##.....', '............', '.....##.....', '.....##.....', '............'], 'plus': ['............', '.....##.....', '.....##.....', '.....##.....', '.....##.....', '##########..', '##########..', '.....##.....', '.....##.....', '.....##.....', '.....##.....', '............']}
 
 # Iconos pixel-art (12x12) — secciones, artículo principal. Estilo icono, no ilustración: formas simples y limpias.
 PIXEL16 = {'px-robot': ['......#.....', '......#.....', '..████████..', '..█......█..', '███......███', '███.█..█.███', '███.█..█.███', '..█......█..', '..█.████.█..', '..████████..', '............', '............'], 'px-chip': ['...█..█..█..', '...█..█..█..', '..████████..', '███......███', '..█.████.█..', '..█.█..█.█..', '███.█..█.███', '..█.████.█..', '..█......█..', '████████████', '...█..█..█..', '...█..█..█..'], 'px-book': ['............', '..████████..', '..█..██..█..', '..█..██..█..', '..████████..', '..█..██..█..', '..████████..', '..█..██..█..', '..████████..', '..█..██..█..', '..████████..', '............'], 'px-chat': ['............', '.██████████.', '.█........█.', '.█........█.', '.█.█.█.█.█.█.', '.█.█.█.█.█.█.', '.█........█.', '.██████████.', '...█........', '..█.........', '.█..........', '............'], 'px-palette': ['............', '............', '....████....', '...██..██...', '..█.█..█.█..', '..█.....██..', '.█......███.', '..█......█..', '..█.........', '...█........', '....████....', '............'], 'px-brain': ['............', '............', '....████....', '...█..█.█...', '..█...█..█..', '..█████..█..', '.█....█...█.', '..█...████..', '..█...█..█..', '...█..█.█...', '....████....', '............'], 'px-terminal': ['............', '............', '.██████████.', '.█........█.', '.█.█......█.', '.█..█.....█.', '.█...█....█.', '.█..█.....█.', '.█.█..███.█.', '.██████████.', '............', '............'], 'layers': ['............', '.....███....', '...██...██..', '.███.....███', '....█████...', '...██...██..', '.██.......██', '...██...██..', '....█████...', '.███.....███', '...██...██..', '.....███....'], 'px-star': ['............', '.....██.....', '.....██.....', '.....██.....', '.....██.....', '.██████████.', '.██████████.', '.....██.....', '.....██.....', '.....██.....', '.....██.....', '............']}
@@ -680,6 +680,9 @@ TEMPLATE = r"""<!DOCTYPE html>
   .card .icon { width: 22px; height: 22px; }
   .card .icon svg { width: 100%; height: 100%; }
   .tag { display: inline-block; font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 1.2px; color: var(--accent); border: 1px solid var(--accent); padding: 3px 9px; width: fit-content; font-weight: 700; text-transform: uppercase; }
+  .tag-row { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+  .card-annot-badge { display: inline-flex; align-items: center; gap: 5px; font-family: 'Space Mono', monospace; font-size: 9.5px; font-weight: 700; letter-spacing: .5px; text-transform: uppercase; color: #fff; background: var(--accent); padding: 3px 8px; }
+  .card-annot-badge svg { width: 10px; height: 10px; color: #fff; }
   .card h3 { margin: 0; font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 20px; line-height: 1.2; transition: transform .2s ease; }
   .card:hover h3 { transform: skewX(-1deg); }
   .card p { margin: 0; font-size: 13.5px; line-height: 1.5; color: var(--ink); }
@@ -719,6 +722,21 @@ TEMPLATE = r"""<!DOCTYPE html>
   .art-body p { font-size: 16px; line-height: 1.7; margin: 0 0 14px; }
   .art-body ul { font-size: 15.5px; line-height: 1.7; padding-left: 22px; }
   .art-body strong { background: linear-gradient(transparent 60%, rgba(255,90,31,.3) 60%); }
+
+  /* ---- Anotaciones: dudas, comentarios y ampliaciones sobre una cita del texto ---- */
+  mark.annot { background: none; color: inherit; cursor: pointer; padding: 0 1px; }
+  mark.annot .annot-icon { display: inline-flex; width: 12px; height: 12px; margin-left: 2px; vertical-align: -1px; opacity: .7; }
+  mark.annot .annot-icon svg { width: 100%; height: 100%; }
+  mark.annot:hover, mark.annot.open { background: rgba(255,90,31,.14); }
+  mark.annot-duda { text-decoration: underline dotted; text-decoration-color: var(--ink); text-decoration-thickness: 2px; text-underline-offset: 3px; }
+  mark.annot-comentario { text-decoration: underline solid; text-decoration-color: var(--accent); text-decoration-thickness: 2px; text-underline-offset: 3px; color: var(--accent); font-weight: 700; }
+  mark.annot-ampliacion { text-decoration: underline double; text-decoration-color: var(--ink); text-underline-offset: 4px; }
+
+  .annot-note { display: inline-flex; flex-direction: column; gap: 5px; margin: 6px 4px; padding: 12px 14px; border: 2px solid var(--ink); background: #fffaf3; max-width: 440px; vertical-align: top; font-size: 13.5px; line-height: 1.55; box-shadow: 4px 4px 0 var(--ink); }
+  .annot-note-label { display: inline-flex; align-items: center; gap: 6px; font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 1px; text-transform: uppercase; font-weight: 700; color: var(--muted); }
+  .annot-note-label svg { width: 12px; height: 12px; }
+  .annot-note-text { color: var(--ink); }
+  .annot-note-comentario .annot-note-label { color: var(--accent); }
   .art-figure { margin: 22px 0; }
   .art-figure img { width: 100%; height: auto; display: block; border: 2px solid var(--ink); filter: grayscale(100%) contrast(1.05); }
   .art-figure figcaption { font-family: 'Space Mono', monospace; font-size: 11px; color: var(--muted); margin-top: 6px; }
@@ -1205,12 +1223,35 @@ function setupLinksScroll() {
 }
 
 /* ---------- markdown -> html (small subset) ---------- */
-function mdToHtml(md) {
+/* ---------- anotaciones: dudas, comentarios y ampliaciones sobre una cita exacta ---------- */
+const ANNOT_META = {
+  duda: { icon: 'question', label: 'Duda' },
+  comentario: { icon: 'edit', label: 'Comentario' },
+  ampliacion: { icon: 'plus', label: 'Ampliación' },
+};
+
+/* envuelve, dentro de una línea de texto ya en plano, la primera cita sin usar de cada
+   anotación que aparezca en ella — cada anotación se resalta como mucho una vez en todo
+   el artículo, aunque la frase se repita */
+function applyAnnotations(text, annotations, used) {
+  let result = text;
+  (annotations || []).forEach((an, idx) => {
+    if (used.has(idx) || !an.quote || !result.includes(an.quote)) return;
+    const meta = ANNOT_META[an.type] || ANNOT_META.comentario;
+    result = result.replace(an.quote,
+      `<mark class="annot annot-${an.type}" data-annot-idx="${idx}" tabindex="0">${an.quote}<span class="annot-icon">${ICONS[meta.icon]}</span></mark>`);
+    used.add(idx);
+  });
+  return result;
+}
+
+function mdToHtml(md, annotations) {
   if (!md) return '';
   const lines = md.replace(/\r/g,'').split('\n');
+  const used = new Set();
   let html = '';
   let inList = false;
-  const inlineFmt = (s) => s
+  const inlineFmt = (s) => applyAnnotations(s, annotations, used)
     .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
     .replace(/\*(.+?)\*/g, '<em>$1</em>')
     .replace(/\[(.+?)\]\((.+?)\)/g, '<a href="$2" target="_blank" rel="noopener">$1</a>');
@@ -1243,6 +1284,10 @@ function mdToHtml(md) {
 }
 
 /* ---------- card rendering ---------- */
+function annotBadgeHtml(a) {
+  return (a.annotations && a.annotations.length) ? `<span class="card-annot-badge">${ICONS.edit} ¡Con anotaciones!</span>` : '';
+}
+
 function cardHtml(a) {
   const sec = bySlug(a.section);
   const thumb = (a.images && a.images.length) ? `<img class="thumb" src="${a.images[0]}" alt="" loading="lazy">` : '';
@@ -1250,7 +1295,7 @@ function cardHtml(a) {
     ${readBadgeHtml(a)}
     ${thumb}
     <div class="icon">${sec ? ICONS[sec.icon] : ''}</div>
-    <span class="tag">${sec ? sec.name : a.section}${a.subsection ? ' · ' + a.subsection : ''}</span>
+    <div class="tag-row"><span class="tag">${sec ? sec.name : a.section}${a.subsection ? ' · ' + a.subsection : ''}</span>${annotBadgeHtml(a)}</div>
     <h3>${a.title}</h3>
     <p>${a.summary}</p>
     <div class="date">Añadido: ${a.date_added || '—'}</div>
@@ -1299,7 +1344,7 @@ function leadHtml(a) {
     ${img}
     <div class="fp-body">
       ${!hasImg ? `<div class="lead-icon">${articleIconSvg(a)}</div>` : ''}
-      <span class="tag">${sec ? sec.name : a.section}${a.subsection ? ' · ' + a.subsection : ''}</span>
+      <div class="tag-row"><span class="tag">${sec ? sec.name : a.section}${a.subsection ? ' · ' + a.subsection : ''}</span>${annotBadgeHtml(a)}</div>
       <h2>${truncate(a.title, 100)}</h2>
       <p>${truncate(a.summary, 160)}</p>
       <div class="date mono">${a.date_added || '—'}</div>
@@ -1317,7 +1362,7 @@ function secondaryHtml(a) {
     ${readBadgeHtml(a)}
     ${media}
     <div class="fp-body">
-      <span class="tag">${sec ? sec.name : a.section}${a.subsection ? ' · ' + a.subsection : ''}</span>
+      <div class="tag-row"><span class="tag">${sec ? sec.name : a.section}${a.subsection ? ' · ' + a.subsection : ''}</span>${annotBadgeHtml(a)}</div>
       <h3>${truncate(a.title, 90)}</h3>
       <p>${truncate(a.summary, 120)}</p>
       <div class="date mono">${a.date_added || '—'}</div>
@@ -1592,7 +1637,7 @@ function renderArticleOverlay(id) {
     <h1 class="art-title">${a.title}</h1>
     <div class="art-meta mono">Añadido el ${a.date_added || '—'}</div>
     ${readToggleHtml(a)}
-    <div class="art-body">${mdToHtml(a.content_md || a.summary)}</div>
+    <div class="art-body">${mdToHtml(a.content_md || a.summary, a.annotations)}</div>
     ${materialsHtml(a)}
     ${reflectionsHtml(a)}
     ${glossaryHtml(a)}
@@ -1615,8 +1660,33 @@ function renderArticleOverlay(id) {
   }));
   wireReadToggle(a.id);
   wireNote(a.id);
+  wireAnnotations(a);
   overlay.classList.add('open');
   window.scrollTo(0,0);
+}
+
+/* click en una cita subrayada -> despliega/pliega la nota justo debajo, en el propio
+   párrafo (nada de tooltips flotantes: así funciona igual de bien con el dedo) */
+function wireAnnotations(a) {
+  const inner = document.getElementById('overlay-inner');
+  if (!inner) return;
+  inner.querySelectorAll('.annot').forEach(mark => {
+    mark.addEventListener('click', () => {
+      const wasOpen = mark.classList.contains('open');
+      inner.querySelectorAll('.annot-note').forEach(n => n.remove());
+      inner.querySelectorAll('.annot.open').forEach(m => m.classList.remove('open'));
+      if (wasOpen) return;
+      const idx = Number(mark.dataset.annotIdx);
+      const an = (a.annotations || [])[idx];
+      if (!an) return;
+      const meta = ANNOT_META[an.type] || ANNOT_META.comentario;
+      const note = document.createElement('span');
+      note.className = `annot-note annot-note-${an.type}`;
+      note.innerHTML = `<span class="annot-note-label">${ICONS[meta.icon]} ${meta.label}</span><span class="annot-note-text">${an.text}</span>`;
+      mark.insertAdjacentElement('afterend', note);
+      mark.classList.add('open');
+    });
+  });
 }
 
 /* ---------- repaso espaciado (sistema Leitner, 5 cajas) ---------- */
