@@ -197,19 +197,44 @@ def main():
         action = "añadido"
     save_json(data_json_path, articles)
 
+    # --- ensure a cover illustration exists (safety net: a bespoke hand-drawn scene should
+    # still be designed in scripts/generate_cover_art.py and shown to Isabel for approval
+    # before anything is committed — see CLAUDE.md, "Añadir un artículo") ---
+    cover_svg_rel = None
+    has_bespoke_cover = False
+    cover_script = os.path.join(project_dir, "scripts", "generate_cover_art.py")
+    if os.path.exists(cover_script) and not image_rel_paths:
+        subprocess.run([sys.executable, cover_script, "--only", article_id], cwd=project_dir, check=True)
+        articles = load_json(data_json_path, [])
+        entry_now = next((a for a in articles if a.get("id") == article_id), None)
+        if entry_now and entry_now.get("images"):
+            cover_svg_rel = entry_now["images"][0]
+        with open(cover_script, encoding="utf-8") as f:
+            has_bespoke_cover = f'"{article_id}": scene_' in f.read()
+
     # --- regenerate the site ---
     build_script = os.path.join(project_dir, "build_repo.py")
     if os.path.exists(build_script):
         subprocess.run([sys.executable, build_script], cwd=project_dir, check=True)
 
-    print(json.dumps({
+    result = {
         "status": "ok",
         "action": action,
         "id": article_id,
         "section": section,
         "md_path": md_path,
         "images_saved": image_rel_paths,
-    }, ensure_ascii=False, indent=2))
+    }
+    if cover_svg_rel:
+        result["cover_svg"] = cover_svg_rel
+        result["cover_is_bespoke"] = has_bespoke_cover
+        if not has_bespoke_cover:
+            result["reminder"] = (
+                "Esta portada es la genérica de repuesto. Diseña una escena propia en "
+                "scripts/generate_cover_art.py, renderízala con --only " + article_id +
+                " --preview, y enséñasela a Isabel antes de hacer commit."
+            )
+    print(json.dumps(result, ensure_ascii=False, indent=2))
 
 
 if __name__ == "__main__":
