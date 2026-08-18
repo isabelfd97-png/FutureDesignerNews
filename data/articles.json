@@ -499,7 +499,7 @@
     ],
     "content_md": "## De qué va\nUn post corto de Zander Whitehurst (fundador de Memorisely) que resume un principio de diseño que se olvida fácil: la Ley de Prägnanz. Viene de la psicología Gestalt y dice que, ante algo visualmente complejo, el cerebro lo interpreta de la forma más simple posible — busca patrones simples aunque el objeto real sea complicado. La consecuencia para diseño: cuando algo se siente complicado de usar, la reacción instintiva de un equipo suele ser añadir (un botón más, un link más, una opción más para cubrir el caso raro), pero eso va justo en la dirección contraria a como percibimos. El buen diseño no es sumar, es quitar todo lo que se interpone entre la persona y lo que quiere hacer.\n\n## Por qué le importa a un product designer\nEste principio no es solo una frase bonita de LinkedIn: es literalmente la base de por qué la sobrecarga de opciones cansa aunque cada opción individual tenga sentido. Y conecta directo con algo que ya viste en el artículo de los '5 trucos para que Claude Code no te dé un diseño web genérico': una de las trampas más comunes al generar UI con IA es que, sin guardrails explícitos, el modelo tiende a añadir de más (sombras, variantes, elementos decorativos) en vez de aplicar este mismo criterio de simplicidad. La Ley de Prägnanz es, en el fondo, el argumento de por qué merece la pena poner ese límite explícito.\n\n## Ideas clave\n- La Ley de Prägnanz (psicología Gestalt): el cerebro interpreta lo complejo de la forma más simple posible.\n- Cuando algo se siente complicado, la respuesta instintiva de añadir (botones, links, opciones) va en contra de cómo percibimos.\n- Diseñar bien es un ejercicio de quitar, no de sumar.\n- El mismo patrón aparece al generar UI con IA: sin límites explícitos, tiende a añadir de más en vez de simplificar.",
     "images": [
-      "images/la-ley-de-pragnanz-el-buen-diseno-es-quitar-no-anadir/cover.svg"
+      "images/la-ley-de-pragnanz-el-buen-diseno-es-quitar-no-anadir/cover.png"
     ],
     "glossary": [
       {
@@ -508,7 +508,15 @@
       }
     ],
     "date_added": "2026-07-14",
-    "dictionary": false
+    "dictionary": false,
+    "annotations": [
+      {
+        "quote": "El buen diseño no es sumar, es quitar todo lo que se interpone entre la persona y lo que quiere hacer.",
+        "type": "ejemplo",
+        "text": "Ejercicio de 10 minutos: coge una pantalla real tuya de esta semana y cuenta cuántos elementos compiten por atención arriba (título, subtítulo, badge, icono, breadcrumb, botón secundario...). Ve uno a uno preguntando 'si quito esto, ¿la persona deja de entender qué hacer?'. Todo lo que sobrevive a esa pregunta se queda; el resto fuera. No es rediseñar, es solo restar — casi siempre el recuento baja a la mitad sin perder nada funcional.",
+        "date": "2026-08-18"
+      }
+    ]
   },
   {
     "id": "designmd-buenas-practicas-para-el-archivo-que-le-da-a-la-ia-tu-sistema",

@@ -8,9 +8,9 @@
 
 The home page is a **simple, predictable newspaper**: the newest article leads, and everything follows in the order it arrived.
 
-There is no algorithm, no account, and no scoring to learn. Articles are shown newest-first, at three sizes, so the page always has a clear front-page hierarchy without asking the reader to do anything. On top of that, you can mark what you've **read**, so it's easy to see at a glance what's still waiting for you.
+There is no algorithm, no account, and no scoring to learn. Articles are shown newest-first, at three sizes, so the page always has a clear front-page hierarchy without asking the reader to do anything.
 
-**Why it's built this way:** an earlier version rearranged the whole front page around a 0–5 star rating you had to give every article. It was powerful but overcomplicated — the page's shape depended on a mental model the reader had to hold ("this story is here because I gave it this many stars"). We removed ratings entirely in favour of plain chronology plus a lightweight read/unread marker.
+**Why it's built this way:** an earlier version rearranged the whole front page around a 0–5 star rating you had to give every article. It was powerful but overcomplicated — the page's shape depended on a mental model the reader had to hold ("this story is here because I gave it this many stars"). We removed ratings entirely in favour of plain chronology. A later pass added, then also removed, a manual read/unread marker for the same reason: one less thing to manage, one less piece of state to hold in your head.
 
 ---
 
@@ -30,19 +30,7 @@ That's the whole rule: **relevance = recency.** The most recent thing is the hea
 
 ---
 
-## 3. Read / unread — the one personal marker
-
-Ratings are gone. The only thing the reader marks now is whether they've **read** an article, and it's entirely manual.
-
-- **Inside an article** there's a button: **"Marcar como leído"**. Pressing it flips to **"Leído · marcar como no leído"** (with a check), and pressing again undoes it. Nothing is automatic — opening an article does *not* mark it read.
-- **On the front page**, a read article shows a black **"Leído ✓"** badge in the top-right corner and is **dimmed** (it returns to full strength on hover), so unread articles stand out. This appears at all three sizes.
-- The state is saved instantly to your device and reflected on the front page whenever you return to it.
-
-**Why manual-only:** the whole point of this pass was to reduce complexity and keep the reader in control. A manual toggle is unambiguous — the paper never guesses that you "read" something just because you clicked in.
-
----
-
-## 4. The six desks (sections)
+## 3. The six desks (sections)
 
 Content is organised into six fixed desks. These power the top navigation and the tags on every card. Each has a one-line remit that sets what belongs there.
 
@@ -57,7 +45,7 @@ Articles can also carry a free-form **subsection** label (shown after the desk n
 
 ---
 
-## 5. The living masthead — small signs that the paper is awake
+## 4. The living masthead — small signs that the paper is awake
 
 The top of the page carries several details whose only job is to make a static site feel current and personal. None of them change what you can read — they set tone.
 
@@ -68,7 +56,7 @@ The top of the page carries several details whose only job is to make a static s
 
 ---
 
-## 6. The ticker — the newest headlines
+## 5. The ticker — the newest headlines
 
 Below the masthead, a horizontal ticker scrolls the **most recent headlines**, each stamped with its desk and linking straight to its article. Hovering pauses the scroll; a hand-drawn "¡Nuevo!" starburst sits on top as a "latest" flag.
 
@@ -76,30 +64,29 @@ Below the masthead, a horizontal ticker scrolls the **most recent headlines**, e
 
 ---
 
-## 7. Inside an article — the reading view, and what it remembers
+## 6. Inside an article — the reading view, and what it remembers
 
 Opening an article slides over a full reading view. Beyond the summary and body, several elements turn passive reading into something you keep.
 
 - **Key points & summary:** every article leads with an AI-written summary and a short list of key points, so the value is legible before you commit to the full read.
-- **Read toggle:** the "Marcar como leído" button described in section 3.
 - **Glossary terms (heart to keep):** new or tricky terms appear with a definition and a heart. Hearting a term adds it to your personal Encyclopedia (section 8).
 - **Related articles (scored, not random):** up to three suggestions, ranked by relevance — sharing a subsection scores highest, then the same desk, then any shared glossary term. Only genuine matches show.
-- **Annotations:** highlighted quotes with your doubts, comments, and expansions — see section 8.
+- **Annotations:** highlighted quotes with your doubts, comments, and expansions — see section 7.
 
 ---
 
-## 8. Annotations — margin notes on the article itself
+## 7. Annotations — margin notes on the article itself
 
 While reading, you can debate an article with Claude (the *anotar-articulo* skill) and turn the outcome into an annotation anchored to the exact phrase it's about — not just a note appended at the end.
 
 - **Two types, two colours:** **ampliación** (yellow) is the explanation itself; **ejemplo** (blue) is a concrete, real-world case. When both apply to the same phrase, both highlights show at once.
 - **Highlighted, not hidden:** the phrase gets a hand-drawn marker-style highlight in the article body. Tap it and a post-it note pins itself just below, in the matching colour — no dark overlay, nothing else on the page is blocked.
 - **Real post-its, not tooltips:** the note is a rectangular sticky note that scrolls with the article. If two notes land on the same phrase, they overlap like real sticky notes — tap either one to bring it to the front.
-- **The badge:** the moment an article has any annotation, its card shows a **"¡Con anotaciones!"** flag next to the tag, on every size (lead, secondary, grid).
+- **The badge:** the moment an article has any annotation, its card shows a highlighted **"¡Con anotaciones!"** flag in the top-right corner of its thumbnail, on every size (lead, secondary, grid) — the same marker-style highlight used inside the article, so the badge itself demonstrates the feature.
 
 ---
 
-## 9. Encyclopedia & flashcards — the terms you kept become a study deck
+## 8. Encyclopedia & flashcards — the terms you kept become a study deck
 
 Every term you heart inside an article collects into the **Encyclopedia** — an A–Z of definitions, each linked back to the article it came from, with a live letter index down the side and a search box. (Some articles are marked as full "dictionary" pieces and contribute all their terms automatically.)
 
@@ -113,7 +100,7 @@ The Review button shows how many terms are *due* today, so the paper doubles as 
 
 ---
 
-## 10. The rest of the toolkit — search, streak & keeping it tidy
+## 9. The rest of the toolkit — search, streak & keeping it tidy
 
 - **Spotlight search:** a quick search that matches across titles, summaries, key points and subsections. With no query it simply shows the six most recent articles as a starting point.
 - **Two kinds of delete:** articles can be *hidden* (a soft trash you can restore from) or *permanently deleted* via the history view. Hidden and deleted items drop out of every tier, count and search.
@@ -121,7 +108,7 @@ The Review button shows how many terms are *due* today, so the paper doubles as 
 
 ---
 
-## 11. The visual language — why it looks like a brutalist newspaper
+## 10. The visual language — why it looks like a brutalist newspaper
 
 The look is deliberate: part broadsheet authority, part independent zine. It says "this is a real publication" while staying playful enough to feel personal.
 
@@ -137,15 +124,14 @@ The look is deliberate: part broadsheet authority, part independent zine. It say
 
 ---
 
-## 12. Where everything lives — it's all on your device
+## 11. Where everything lives — it's all on your device
 
-Important for anyone redesigning the experience: **nothing a reader does leaves their browser.** The read markers, hearted terms and the trash are all stored locally. There is no server, no login, and no syncing between devices. Open the paper on a different machine and it starts fresh. Annotations are the one exception — they're written into `data/articles.json` itself (via the *anotar-articulo* skill), so they travel with the article for every reader, not just you.
+Important for anyone redesigning the experience: **nothing a reader does leaves their browser.** Hearted terms and the trash are all stored locally. There is no server, no login, and no syncing between devices. Open the paper on a different machine and it starts fresh. Annotations are the one exception — they're written into `data/articles.json` itself (via the *anotar-articulo* skill), so they travel with the article for every reader, not just you.
 
 | Stored value | What it holds |
 |--------------|---------------|
-| `readArticles` | Which articles you've marked as read (drives the badge + dimming). |
 | `likedTerms` | Glossary terms you hearted into the Encyclopedia. |
 | `termSRS` | Flashcard progress — which Leitner box each term is in and when it's due. |
 | `hiddenArticles` / `deletedArticles` | Soft-trashed and permanently removed items. |
 
-**Consequence for design:** because state is per-device and per-person, the paper is genuinely one reader's newspaper. Features can be as personal as you like — but they can't assume anything carries over to another device, and the first-visit state (nothing read yet) is a real, common experience worth designing for.
+**Consequence for design:** because state is per-device and per-person, the paper is genuinely one reader's newspaper. Features can be as personal as you like — but they can't assume anything carries over to another device.

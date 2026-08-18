@@ -633,27 +633,6 @@ TEMPLATE = r"""<!DOCTYPE html>
   @media (max-width: 720px) { .front-secondary { grid-template-columns: 1fr; } }
 
   /* ---- Leído / no leído ---- */
-  .read-badge {
-    position: absolute; top: 8px; right: 8px; z-index: 3;
-    display: flex; align-items: center; gap: 4px;
-    background: var(--ink); color: #fff;
-    font-family: 'Space Mono', monospace; font-size: 9.5px; font-weight: 700;
-    letter-spacing: .6px; text-transform: uppercase; padding: 3px 7px;
-  }
-  .read-badge svg { width: 11px; height: 11px; color: #fff; }
-  .card.is-read, .fp-card.is-read { opacity: .58; }
-  .card.is-read:hover, .fp-card.is-read:hover { opacity: 1; }
-  .read-toggle {
-    display: inline-flex; align-items: center; gap: 8px; margin: 4px 0 22px;
-    font-family: 'Space Mono', monospace; font-size: 11px; font-weight: 700;
-    letter-spacing: 1px; text-transform: uppercase; cursor: pointer;
-    border: 2px solid var(--ink); background: var(--bg); color: var(--ink);
-    padding: 9px 16px; transition: background .15s ease, color .15s ease, border-color .15s ease;
-  }
-  .read-toggle svg { width: 13px; height: 13px; }
-  .read-toggle:hover { background: var(--accent); border-color: var(--accent); color: #fff; }
-  .read-toggle.on { background: var(--ink); color: #fff; }
-  .read-toggle.on:hover { background: var(--accent); border-color: var(--accent); }
 
   /* ---- Grid / cards ---- */
   .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 18px; margin-top: 14px; }
@@ -667,9 +646,17 @@ TEMPLATE = r"""<!DOCTYPE html>
   .card .icon { width: 22px; height: 22px; }
   .card .icon svg { width: 100%; height: 100%; }
   .tag { display: inline-block; font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 1.2px; color: var(--accent); border: 1px solid var(--accent); padding: 3px 9px; width: fit-content; font-weight: 700; text-transform: uppercase; }
-  .tag-row { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
-  .card-annot-badge { display: inline-flex; align-items: center; gap: 5px; font-family: 'Space Mono', monospace; font-size: 9.5px; font-weight: 700; letter-spacing: .5px; text-transform: uppercase; color: #fff; background: var(--accent); padding: 3px 8px; }
-  .card-annot-badge svg { width: 10px; height: 10px; color: #fff; }
+
+  /* ---- Insignia de "con anotaciones": avatar de Isabel + bocadillo ---- */
+  /* solo el subrayado: nada de caja, ni avatar — el mismo rotulador que las anotaciones
+     dentro del artículo, directamente sobre la miniatura */
+  .annot-flag { position: absolute; top: 10px; right: 10px; z-index: 4; }
+  .annot-flag-text {
+    font-family: 'Space Mono', monospace; font-size: 15px; font-weight: 700;
+    letter-spacing: .2px; color: #fff; white-space: nowrap; padding: 8px 12px;
+    background-image: linear-gradient(103deg, transparent 0%, transparent 2%, var(--accent) 4%, var(--accent) 95%, transparent 97%, transparent 100%);
+  }
+  @media (max-width: 480px) { .annot-flag-text { font-size: 12px; } }
   .card h3 { margin: 0; font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 20px; line-height: 1.2; transition: transform .2s ease; }
   .card:hover h3 { transform: skewX(-1deg); }
   .card p { margin: 0; font-size: 13.5px; line-height: 1.5; color: var(--ink); }
@@ -712,7 +699,11 @@ TEMPLATE = r"""<!DOCTYPE html>
   .art-icon svg { width: 100%; height: 100%; shape-rendering: crispEdges; }
   .art-tag { font-family: 'Space Mono', monospace; font-size: 10.5px; letter-spacing: 1.4px; text-transform: uppercase; color: var(--accent); font-weight: 700; }
   .art-title { font-family: 'Archivo Black', sans-serif; font-weight: 400; font-size: 42px; line-height: 1.05; margin: 10px 0 6px; letter-spacing: -1px; opacity: 0; transform: translateY(10px); animation: riseIn .5s ease forwards .1s; }
-  .art-meta { font-family: 'Space Mono', monospace; font-size: 11.5px; color: var(--muted); border-bottom: 1px solid #ddd; padding-bottom: 18px; margin-bottom: 20px; }
+  .art-meta {
+    font-family: 'Space Mono', monospace; font-size: 11.5px; color: var(--muted);
+    border-bottom: 1px solid #ddd; padding-bottom: 18px; margin-bottom: 20px;
+    display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap;
+  }
   .art-body h2 { font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 21px; margin: 26px 0 8px; }
   .art-body p { font-size: 16px; line-height: 1.7; margin: 0 0 14px; }
   .art-body ul { font-size: 15.5px; line-height: 1.7; padding-left: 22px; }
@@ -767,10 +758,14 @@ TEMPLATE = r"""<!DOCTYPE html>
   .art-figure figcaption { font-family: 'Space Mono', monospace; font-size: 11px; color: var(--muted); margin-top: 6px; }
   .card .thumb { width: 100%; height: 130px; object-fit: cover; border: 2px solid var(--ink); filter: grayscale(100%) contrast(1.05); margin-bottom: 4px; }
   .card:hover .thumb { border-color: var(--accent); }
-  .art-original { margin-top: 40px; padding-top: 18px; border-top: 3px solid var(--ink); }
-  .art-original a { display: inline-flex; align-items: center; gap: 8px; text-decoration: none; font-weight: 700; text-transform: uppercase; font-size: 12.5px; letter-spacing: .5px; font-family: 'Space Mono', monospace; }
-  .art-original a:hover { color: var(--accent); }
-  .art-original a svg { width: 16px; height: 16px; }
+  .art-original-inline {
+    display: inline-flex; align-items: center; gap: 6px; text-decoration: none;
+    font-family: 'Space Mono', monospace; font-size: 11.5px; font-weight: 700;
+    letter-spacing: .4px; text-transform: uppercase; color: var(--accent);
+    border-bottom: 2px solid var(--accent); padding-bottom: 1px; flex: none;
+  }
+  .art-original-inline:hover { color: var(--ink); border-color: var(--ink); }
+  .art-original-inline svg { width: 13px; height: 13px; }
 
   /* ---- Materiales incluidos (artículos de la sección Materials) ---- */
   .art-materials { margin: 28px 0; }
@@ -1064,42 +1059,6 @@ function renderFooter() {
   el.textContent = `${n} artículo${n === 1 ? '' : 's'} guardado${n === 1 ? '' : 's'} · actualizado ${new Date().toLocaleDateString('es-ES', { day: '2-digit', month: 'short', year: 'numeric' })}`;
 }
 
-/* ---------- leído / no leído (marcado manual) ---------- */
-function getRead() { try { return JSON.parse(localStorage.getItem('readArticles') || '[]'); } catch(e) { return []; } }
-function setReadList(arr) { localStorage.setItem('readArticles', JSON.stringify(arr)); }
-function isRead(id) { return getRead().includes(id); }
-function toggleRead(id) {
-  const r = getRead();
-  const i = r.indexOf(id);
-  if (i === -1) r.push(id); else r.splice(i, 1);
-  setReadList(r);
-  return r.includes(id);
-}
-
-/* distintivo "Leído" sobre las miniaturas de portada */
-function readBadgeHtml(a) {
-  return isRead(a.id) ? `<div class="read-badge">${ICONS.check}<span>Leído</span></div>` : '';
-}
-
-/* botón dentro del artículo para marcar/desmarcar */
-function readToggleLabel(read) {
-  return read ? `${ICONS.check}<span>Leído · marcar como no leído</span>` : `<span>Marcar como leído</span>`;
-}
-function readToggleHtml(a) {
-  const read = isRead(a.id);
-  return `<button class="read-toggle ${read ? 'on' : ''}" id="read-toggle">${readToggleLabel(read)}</button>`;
-}
-function wireReadToggle(id) {
-  const btn = document.getElementById('read-toggle');
-  if (!btn) return;
-  btn.addEventListener('click', () => {
-    const nowRead = toggleRead(id);
-    btn.classList.toggle('on', nowRead);
-    btn.innerHTML = readToggleLabel(nowRead);
-  });
-}
-
-/* ---------- notas propias por artículo ---------- */
 /* ---------- reflexiones (sintetizadas por la skill Article Debate) ---------- */
 function reflectionsHtml(a) {
   if (!a.reflections || !a.reflections.length) return '';
@@ -1294,17 +1253,18 @@ function mdToHtml(md, annotations) {
 
 /* ---------- card rendering ---------- */
 function annotBadgeHtml(a) {
-  return (a.annotations && a.annotations.length) ? `<span class="card-annot-badge">${ICONS.edit} ¡Con anotaciones!</span>` : '';
+  if (!a.annotations || !a.annotations.length) return '';
+  return `<div class="annot-flag"><span class="annot-flag-text">¡Con anotaciones!</span></div>`;
 }
 
 function cardHtml(a) {
   const sec = bySlug(a.section);
   const thumb = (a.images && a.images.length) ? `<img class="thumb" src="${a.images[0]}" alt="" loading="lazy">` : '';
-  return `<a class="card ${isRead(a.id) ? 'is-read' : ''}" href="#/articulo/${a.id}" data-id="${a.id}">
-    ${readBadgeHtml(a)}
+  return `<a class="card" href="#/articulo/${a.id}" data-id="${a.id}">
+    ${annotBadgeHtml(a)}
     ${thumb}
     <div class="icon">${sec ? ICONS[sec.icon] : ''}</div>
-    <div class="tag-row"><span class="tag">${sec ? sec.name : a.section}${a.subsection ? ' · ' + a.subsection : ''}</span>${annotBadgeHtml(a)}</div>
+    <span class="tag">${sec ? sec.name : a.section}${a.subsection ? ' · ' + a.subsection : ''}</span>
     <h3>${a.title}</h3>
     <p>${a.summary}</p>
     <div class="date">Añadido: ${a.date_added || '—'}</div>
@@ -1348,12 +1308,12 @@ function leadHtml(a) {
   const sec = bySlug(a.section);
   const hasImg = a.images && a.images.length;
   const img = hasImg ? `<img class="fp-img" src="${a.images[0]}" alt="" loading="lazy">` : '';
-  return `<a class="fp-card fp-hero ${hasImg ? '' : 'no-media'} ${isRead(a.id) ? 'is-read' : ''}" href="#/articulo/${a.id}">
-    ${readBadgeHtml(a)}
+  return `<a class="fp-card fp-hero ${hasImg ? '' : 'no-media'}" href="#/articulo/${a.id}">
+    ${annotBadgeHtml(a)}
     ${img}
     <div class="fp-body">
       ${!hasImg ? `<div class="lead-icon">${articleIconSvg(a)}</div>` : ''}
-      <div class="tag-row"><span class="tag">${sec ? sec.name : a.section}${a.subsection ? ' · ' + a.subsection : ''}</span>${annotBadgeHtml(a)}</div>
+      <span class="tag">${sec ? sec.name : a.section}${a.subsection ? ' · ' + a.subsection : ''}</span>
       <h2>${truncate(a.title, 100)}</h2>
       <p>${truncate(a.summary, 160)}</p>
       <div class="date mono">${a.date_added || '—'}</div>
@@ -1367,11 +1327,11 @@ function secondaryHtml(a) {
   const media = (a.images && a.images.length)
     ? `<img class="fp-img" src="${a.images[0]}" alt="" loading="lazy">`
     : `<div class="fp-noimg">${articleIconSvg(a)}</div>`;
-  return `<a class="fp-card fp-secondary ${(a.images && a.images.length) ? '' : 'no-media'} ${isRead(a.id) ? 'is-read' : ''}" href="#/articulo/${a.id}">
-    ${readBadgeHtml(a)}
+  return `<a class="fp-card fp-secondary ${(a.images && a.images.length) ? '' : 'no-media'}" href="#/articulo/${a.id}">
+    ${annotBadgeHtml(a)}
     ${media}
     <div class="fp-body">
-      <div class="tag-row"><span class="tag">${sec ? sec.name : a.section}${a.subsection ? ' · ' + a.subsection : ''}</span>${annotBadgeHtml(a)}</div>
+      <span class="tag">${sec ? sec.name : a.section}${a.subsection ? ' · ' + a.subsection : ''}</span>
       <h3>${truncate(a.title, 90)}</h3>
       <p>${truncate(a.summary, 120)}</p>
       <div class="date mono">${a.date_added || '—'}</div>
@@ -1649,13 +1609,14 @@ function renderArticleOverlay(id) {
     <div class="art-icon">${articleIconSvg(a)}</div>
     <div class="art-tag">${sec ? sec.name : a.section}${a.subsection ? ' · ' + a.subsection : ''}</div>
     <h1 class="art-title">${a.title}</h1>
-    <div class="art-meta mono">Añadido el ${a.date_added || '—'}</div>
-    ${readToggleHtml(a)}
+    <div class="art-meta mono">
+      <span>Añadido el ${a.date_added || '—'}</span>
+      <a class="art-original-inline" href="${a.url}" target="_blank" rel="noopener">${ICONS.link} Leer el artículo original</a>
+    </div>
     <div class="art-body">${mdToHtml(a.content_md || a.summary, a.annotations)}</div>
     ${materialsHtml(a)}
     ${reflectionsHtml(a)}
     ${glossaryHtml(a)}
-    <div class="art-original"><a href="${a.url}" target="_blank" rel="noopener">Leer el artículo original ${ICONS.arrow}</a></div>
     ${relatedHtml(a)}
   `;
   inner.querySelectorAll('[data-term-key]').forEach(btn => btn.addEventListener('click', () => {
@@ -1671,7 +1632,6 @@ function renderArticleOverlay(id) {
     el.textContent = 'Copiado ✓';
     setTimeout(() => { el.classList.remove('copied'); el.textContent = original; }, 1400);
   }));
-  wireReadToggle(a.id);
   wireAnnotations(a);
   overlay.classList.add('open');
   window.scrollTo(0,0);
