@@ -11,12 +11,22 @@ Los artículos se guardan con `scripts/save_article.py` (slugifica el título, e
 `articles/<section>/<id>.md`, hace upsert en `data/articles.json` y reconstruye `index.html`).
 Ya no genera ninguna portada automática — ver más abajo.
 
-1. Guarda el artículo como siempre con `scripts/save_article.py`.
-2. Para la imagen de portada, sigue la skill **`portada-articulo`**: Isabel la trae, nunca se
+1. **No resumas de más.** Cuando Isabel te pase el material fuente (un doc, una nota, un
+   artículo), el `content_md` tiene que recoger todo lo sustancial que trajo — pasos, reglas,
+   listas, ejemplos, plantillas. No es un resumen del resumen. Si algo no cabe o dudas si
+   merece su propia sección, pregúntale antes de decidir tú qué se queda fuera.
+2. **Nunca elimines contenido de un artículo ya guardado sin comentárselo primero.** Si al
+   revisar o reescribir un artículo ves algo que sobra, redundante o desactualizado, dile qué
+   es y por qué crees que debería salir — espera su confirmación antes de borrarlo. Esto
+   aplica a `content_md`, `key_points`, `glossary`, todo.
+3. Guarda el artículo como siempre con `scripts/save_article.py`.
+4. Para la imagen de portada, sigue la skill **`portada-articulo`**: Isabel la trae, nunca se
    genera con código. Pídesela, guárdala en `images/<id>/`, actualiza `data/articles.json` y
    reconstruye.
-3. **Enséñale el resultado y espera su aprobación antes de hacer commit o push de nada.**
-4. Solo después de su aprobación: commit + push si lo pide.
+5. **Enséñale el resultado completo y espera su aprobación antes de hacer commit o push de
+   nada.** "Completo" incluye poder ver todo el `content_md`, no solo un resumen de que "ya
+   está listo".
+6. Solo después de su aprobación: commit + push si lo pide.
 
 ## Anotaciones sobre un artículo
 

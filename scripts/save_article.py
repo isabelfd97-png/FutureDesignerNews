@@ -92,7 +92,7 @@ def main():
 
     project_dir = data["project_dir"]
     title = data["title"].strip()
-    url = data["url"].strip()
+    url = (data.get("url") or "").strip()  # opcional: vacío si el artículo es research propio, sin fuente externa
     section = data["section"].strip()
     subsection = (data.get("subsection") or "").strip()
     summary = data.get("summary", "").strip()
@@ -166,7 +166,7 @@ def main():
         md_body += "\n\n## Para aprender\n" + "\n".join(
             f"- **{g.get('term','')}**: {g.get('definition','')}" for g in glossary
         )
-    md_body += f"\n\n---\nArtículo original: {url}\n"
+    md_body += f"\n\n---\nArtículo original: {url}\n" if url else "\n\n---\nResearch propio de Isabel (sin fuente externa).\n"
     with open(md_path, "w", encoding="utf-8") as f:
         f.write(frontmatter + md_body)
 

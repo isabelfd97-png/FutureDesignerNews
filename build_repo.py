@@ -781,6 +781,22 @@ TEMPLATE = r"""<!DOCTYPE html>
   .material-cmd { display: block; margin-top: 10px; font-family: 'Space Mono', monospace; font-size: 12px; background: #f2f2f2; border: 1px solid #ddd; padding: 8px 10px; overflow-x: auto; white-space: pre; cursor: pointer; }
   .material-cmd:hover { border-color: var(--accent); color: var(--accent); }
   .material-cmd.copied { border-color: var(--accent); background: #fff0ea; color: var(--accent); }
+
+  /* ---- Bloque de código largo (plantillas, etc.), con botón de copiar ---- */
+  .code-block {
+    position: relative; display: block; margin: 16px 0; font-family: 'Space Mono', monospace;
+    font-size: 12.5px; line-height: 1.65; background: #f7f7f7; border: 2px solid var(--ink);
+    padding: 30px 18px 18px; overflow-x: auto; white-space: pre; cursor: pointer;
+  }
+  .code-block:hover { border-color: var(--accent); }
+  .code-block.copied { border-color: var(--accent); background: #fff0ea; }
+  .code-block::before {
+    content: 'Copiar'; position: absolute; top: 8px; right: 10px;
+    font-family: 'Space Mono', monospace; font-size: 9.5px; letter-spacing: .5px; text-transform: uppercase;
+    color: var(--muted); background: #fff; padding: 3px 7px; border: 1px solid #ddd;
+  }
+  .code-block:hover::before { color: var(--accent); border-color: var(--accent); }
+  .code-block.copied::before { content: 'Copiado ✓'; color: var(--accent); border-color: var(--accent); background: #fff0ea; }
   .material-link { display: inline-flex; align-items: center; gap: 5px; margin-top: 10px; font-family: 'Space Mono', monospace; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .5px; text-decoration: none; }
   .material-link:hover { color: var(--accent); }
   .material-link svg { width: 12px; height: 12px; }
@@ -1213,6 +1229,10 @@ function applyAnnotations(text, annotations, usedQuotes) {
   return result;
 }
 
+function escapeHtml(s) {
+  return s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+}
+
 function mdToHtml(md, annotations) {
   if (!md) return '';
   const lines = md.replace(/\r/g,'').split('\n');
@@ -1223,8 +1243,21 @@ function mdToHtml(md, annotations) {
     .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
     .replace(/\*(.+?)\*/g, '<em>$1</em>')
     .replace(/\[(.+?)\]\((.+?)\)/g, '<a href="$2" target="_blank" rel="noopener">$1</a>');
-  lines.forEach(line => {
-    const l = line.trim();
+  let i = 0;
+  while (i < lines.length) {
+    const l = lines[i].trim();
+    // bloque ```...``` -> se copia tal cual, no se interpreta como markdown (así una
+    // plantilla que lleva sus propios ## o - por dentro no se rompe al renderizarla)
+    if (l.startsWith('```')) {
+      const codeLines = [];
+      i++;
+      while (i < lines.length && !lines[i].trim().startsWith('```')) { codeLines.push(lines[i]); i++; }
+      i++;
+      if (inList) { html += '</ul>'; inList = false; }
+      const raw = codeLines.join('\n');
+      html += `<pre class="code-block" data-copy="${raw.replace(/"/g, '&quot;')}" title="Copiar">${escapeHtml(raw)}</pre>`;
+      continue;
+    }
     const imgMatch = l.match(/^!\[(.*?)\]\((.+?)\)$/);
     if (imgMatch) {
       if (inList) { html += '</ul>'; inList = false; }
@@ -1246,7 +1279,8 @@ function mdToHtml(md, annotations) {
       if (inList) { html += '</ul>'; inList = false; }
       html += `<p>${inlineFmt(l)}</p>`;
     }
-  });
+    i++;
+  }
   if (inList) html += '</ul>';
   return html;
 }
@@ -1611,7 +1645,7 @@ function renderArticleOverlay(id) {
     <h1 class="art-title">${a.title}</h1>
     <div class="art-meta mono">
       <span>Añadido el ${a.date_added || '—'}</span>
-      <a class="art-original-inline" href="${a.url}" target="_blank" rel="noopener">${ICONS.link} Leer el artículo original</a>
+      ${a.url ? `<a class="art-original-inline" href="${a.url}" target="_blank" rel="noopener">${ICONS.link} Leer el artículo original</a>` : ''}
     </div>
     <div class="art-body">${mdToHtml(a.content_md || a.summary, a.annotations)}</div>
     ${materialsHtml(a)}
@@ -1628,9 +1662,14 @@ function renderArticleOverlay(id) {
     const text = el.getAttribute('data-copy');
     if (navigator.clipboard) navigator.clipboard.writeText(text);
     el.classList.add('copied');
-    const original = el.textContent;
-    el.textContent = 'Copiado ✓';
-    setTimeout(() => { el.classList.remove('copied'); el.textContent = original; }, 1400);
+    if (el.classList.contains('code-block')) {
+      // bloques largos ya muestran "Copiado ✓" en su propia etiqueta de la esquina
+      setTimeout(() => el.classList.remove('copied'), 1400);
+    } else {
+      const original = el.textContent;
+      el.textContent = 'Copiado ✓';
+      setTimeout(() => { el.classList.remove('copied'); el.textContent = original; }, 1400);
+    }
   }));
   wireAnnotations(a);
   overlay.classList.add('open');
