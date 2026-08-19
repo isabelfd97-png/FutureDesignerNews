@@ -1020,7 +1020,7 @@ function renderTicker() {
   const track = document.getElementById('ticker-track');
   const badge = document.getElementById('ticker-badge');
   if (badge && !badge.dataset.filled) {
-    badge.innerHTML = `<svg class="burst" viewBox="0 0 24 24" fill="var(--accent)" stroke="none"><path d="M12 2c1 3-2 4-2 7a3 3 0 0 0 6 0c0-1-0.5-2-1-2 2 0 4 2 4 5.5A7 7 0 1 1 8 12.5C8 9 9 6 12 2Z"/></svg><span>¡Nuevo!</span>`;
+    badge.innerHTML = `<svg class="burst" viewBox="5.5 1 16 23" preserveAspectRatio="none" fill="var(--accent)" stroke="none"><path d="M12 2c1 3-2 4-2 7a3 3 0 0 0 6 0c0-1-0.5-2-1-2 2 0 4 2 4 5.5A7 7 0 1 1 8 12.5C8 9 9 6 12 2Z"/></svg><span>¡Nuevo!</span>`;
     badge.dataset.filled = '1';
   }
   const items = visibleArticles()
