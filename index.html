@@ -55,16 +55,16 @@
   h1.title span:nth-child(odd) { color: var(--accent); }
   @keyframes riseIn { to { opacity: 1; transform: translateY(0) rotate(0); } }
 
-  /* ---- Masthead utils: buscar, racha, historial ---- */
+  /* ---- Masthead utils: buscar, historial ---- */
   .masthead-utils {
     display: flex; align-items: center; gap: 8px; flex: none;
   }
   .masthead-search-btn {
-    width: 38px; height: 38px; flex: none;
-    display: flex; align-items: center; justify-content: center;
-    border: 2px solid var(--ink); background: transparent; color: var(--ink); cursor: pointer;
+    height: 38px; flex: none; display: flex; align-items: center; gap: 6px;
+    padding: 0 14px; border: 2px solid var(--ink); background: transparent; color: var(--ink); cursor: pointer;
+    font-family: 'Space Mono', monospace; font-size: 11px; letter-spacing: 1px; text-transform: uppercase; font-weight: 700;
   }
-  .masthead-search-btn svg { width: 16px; height: 16px; }
+  .masthead-search-btn svg { width: 15px; height: 15px; flex: none; }
   .masthead-search-btn:hover { background: var(--accent); border-color: var(--accent); color: #fff; }
 
   .masthead-utils .hist-link {
@@ -74,23 +74,17 @@
     color: var(--ink); font-weight: 700;
   }
   .masthead-utils .hist-link svg { width: 15px; height: 15px; }
-  .masthead-utils .hist-link.icon-only { width: 38px; padding: 0; justify-content: center; }
-  .masthead-utils .hist-link.icon-only svg { width: 17px; height: 17px; }
   .masthead-utils .hist-link:hover, .masthead-utils .hist-link.active { background: var(--accent); border-color: var(--accent); color: #fff; }
-
-  .masthead-utils .streak-nav {
-    height: 38px; border: 2px solid var(--ink); padding: 0 12px; margin: 0;
-  }
 
   /* ---- Nota "Ofrecido por Isabel": el mismo post-it que las anotaciones, pero arrastrable ---- */
   .subtitle {
     position: absolute; top: 20px; left: 24px; width: 280px; z-index: 6;
     display: flex; flex-direction: column; gap: 7px;
-    background: #ffddc2; box-shadow: 4px 5px 0 rgba(10,10,10,.3);
-    padding: 13px 16px 15px; transform: rotate(-3deg);
+    background: #ffddc2; border: 2px solid var(--ink); box-shadow: 5px 6px 0 var(--ink);
+    padding: 13px 16px 15px; transform: rotate(-4deg);
     cursor: grab; touch-action: none; user-select: none;
   }
-  .subtitle.dragging { cursor: grabbing; box-shadow: 7px 9px 0 rgba(10,10,10,.35); z-index: 50; transition: none; }
+  .subtitle.dragging { cursor: grabbing; box-shadow: 8px 10px 0 var(--ink); z-index: 50; transition: none; }
   .subtitle-row { display: flex; align-items: center; gap: 9px; }
   .subtitle-avatar {
     width: 46px; height: 46px; border-radius: 50%; border: 2px solid var(--ink); flex: none;
@@ -98,13 +92,14 @@
   }
   .subtitle-text { display: flex; flex-direction: column; gap: 2px; }
   .subtitle-name {
-    font-family: 'Space Grotesk', sans-serif; font-size: 16px; font-weight: 700; color: var(--ink);
+    font-family: 'Archivo Black', sans-serif; font-weight: 400; font-size: 14px; letter-spacing: -.2px;
+    text-transform: uppercase; color: var(--ink);
   }
   .subtitle-byline {
-    font-family: 'Space Grotesk', sans-serif; font-size: 11.5px; font-weight: 400;
-    color: var(--accent); text-decoration: underline; cursor: pointer;
+    font-family: 'Space Mono', monospace; font-size: 10.5px; font-weight: 700; letter-spacing: .3px;
+    text-transform: uppercase; color: var(--accent); text-decoration: underline; cursor: pointer;
   }
-  .subtitle-phrase { font-size: 13px; line-height: 1.4; color: var(--ink); font-weight: 400; }
+  .subtitle-phrase { font-family: 'Space Mono', monospace; font-size: 12px; line-height: 1.45; color: var(--ink); font-weight: 400; }
 
   /* ---- Ticker ---- */
   .ticker {
@@ -125,19 +120,20 @@
   @keyframes scrollTicker { from { transform: translateX(0); } to { transform: translateX(-50%); } }
 
   .ticker-badge {
-    position: absolute; top: -30px; left: 18px; width: 76px; height: 76px;
-    z-index: 3; pointer-events: none; display: flex; align-items: center; justify-content: center;
+    position: absolute; top: -16px; left: 18px; z-index: 3; pointer-events: none;
+    display: flex; align-items: center; gap: 6px;
+    background: var(--accent); border: 2px solid var(--ink); box-shadow: 3px 4px 0 var(--ink);
+    padding: 6px 11px 6px 8px;
     animation: burstWiggle 2.6s ease-in-out infinite;
   }
-  .ticker-badge svg.burst { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
+  .ticker-badge svg.burst { width: 14px; height: 14px; flex: none; color: #fff; }
   .ticker-badge span {
-    position: relative; transform: rotate(5deg);
     font-family: 'Space Mono', monospace; font-size: 10.5px; font-weight: 700;
-    letter-spacing: .5px; text-transform: uppercase; color: #fff; text-align: center; line-height: 1.15;
+    letter-spacing: .5px; text-transform: uppercase; color: #fff; white-space: nowrap; line-height: 1;
   }
   @keyframes burstWiggle {
-    0%, 100% { transform: rotate(-9deg); }
-    50% { transform: rotate(-3deg); }
+    0%, 100% { transform: rotate(-6deg); }
+    50% { transform: rotate(-2deg); }
   }
   .ticker.empty-state .ticker-badge { display: none; }
 
@@ -200,26 +196,6 @@
   nav.sections a:hover::after, nav.sections a.active::after { transform: scaleX(1); }
   nav.sections a:hover, nav.sections a.active { color: var(--accent); }
 
-  .streak-nav {
-    position: relative; display: flex; align-items: center; gap: 5px; border-left: 2px solid var(--ink);
-    padding: 0 16px; font-family: 'Space Mono', monospace; font-size: 11px; letter-spacing: .5px;
-    color: var(--muted); cursor: default;
-  }
-  .streak-nav svg { width: 13px; height: 13px; color: var(--accent); }
-  .streak-nav:hover { color: var(--ink); }
-  .streak-tooltip {
-    position: absolute; top: calc(100% + 10px); right: 0; background: var(--ink); color: #fff;
-    padding: 10px 14px; font-family: 'Space Mono', monospace; font-size: 11px; line-height: 1.5;
-    white-space: nowrap; opacity: 0; pointer-events: none; transform: translateY(-4px);
-    transition: opacity .15s ease, transform .15s ease; z-index: 20;
-  }
-  .streak-tooltip::after {
-    content: ""; position: absolute; bottom: 100%; right: 16px; border: 6px solid transparent;
-    border-bottom-color: var(--ink);
-  }
-  .streak-tooltip .tt-phrase { color: var(--accent); }
-  .streak-nav:hover .streak-tooltip { opacity: 1; transform: translateY(0); pointer-events: auto; }
-
   /* ---- Glossary (article view) ---- */
   .art-glossary { margin-top: 40px; padding-top: 18px; border-top: 3px solid var(--ink); }
   .art-glossary h4 { font-family: 'Space Mono', monospace; font-size: 11px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--accent); margin: 0 0 14px; }
@@ -265,6 +241,28 @@
   }
   .review-btn svg { width: 15px; height: 15px; }
   .review-btn:hover { background: var(--accent); border-color: var(--accent); }
+
+  /* ---- Banner de repasar, estilo anuncio, encima de la lista de Enciclopedia ---- */
+  .ency-review-banner {
+    display: flex; align-items: center; justify-content: space-between; gap: 20px; flex-wrap: wrap;
+    background: var(--accent); border: 2px solid var(--ink); box-shadow: 5px 6px 0 var(--ink);
+    padding: 22px 26px; margin: 22px 0 8px; color: #fff;
+  }
+  .ency-review-banner-text { display: flex; flex-direction: column; gap: 4px; }
+  .ency-review-banner-text strong {
+    font-family: 'Archivo Black', sans-serif; font-weight: 400; font-size: 21px; letter-spacing: -.5px;
+    text-transform: uppercase; line-height: 1.15;
+  }
+  .ency-review-banner-text span {
+    font-family: 'Space Mono', monospace; font-size: 11px; letter-spacing: .5px; text-transform: uppercase; opacity: .92;
+  }
+  .review-cta {
+    display: flex; align-items: center; gap: 9px; flex: none; background: var(--ink); color: #fff; border: 2px solid var(--ink);
+    font-family: 'Space Mono', monospace; font-size: 12.5px; font-weight: 700; letter-spacing: .8px; text-transform: uppercase;
+    padding: 14px 20px; cursor: pointer; box-shadow: 4px 5px 0 rgba(0,0,0,.35);
+  }
+  .review-cta svg { width: 17px; height: 17px; }
+  .review-cta:hover { background: #fff; color: var(--ink); transform: translate(-2px,-2px); box-shadow: 6px 7px 0 rgba(0,0,0,.35); }
 
   .ency-search-row { display: flex; align-items: center; gap: 10px; border-bottom: 2px solid var(--ink); padding: 10px 0; margin: 18px 0 6px; }
   .ency-search-row svg { width: 16px; height: 16px; color: var(--muted); flex: none; }
@@ -316,7 +314,7 @@
   }
   .flash-actions button svg { width: 14px; height: 14px; }
   .flash-no:hover { background: #eee; }
-  .flash-yes { background: var(--ink); color: #fff; }
+  .flash-actions .flash-yes { background: var(--ink); color: #fff; }
   .flash-yes:hover { background: var(--accent); border-color: var(--accent); }
   .flash-done { display: flex; flex-direction: column; align-items: center; gap: 14px; text-align: center; padding: 10px 0 6px; }
   .flash-done svg { width: 34px; height: 34px; color: var(--accent); }
@@ -793,16 +791,17 @@
   }
 
   @media (max-width: 760px) {
-    h1.title { font-size: 46px; letter-spacing: -1.5px; margin: 18px 0 26px; }
-    .subtitle { width: 210px; top: 14px; left: 14px; padding: 11px 14px 13px; }
+    h1.title { font-size: 46px; letter-spacing: -1.5px; margin: 18px 0 12px; }
+    .subtitle {
+      position: relative; top: auto; left: auto; width: 100%; max-width: 300px;
+      margin: 0 0 22px; padding: 11px 14px 13px;
+    }
     .subtitle-avatar { width: 34px; height: 34px; }
-    .subtitle-name { font-size: 13px; }
+    .subtitle-name { font-size: 12.5px; }
     .subtitle-phrase { font-size: 12px; }
 
     nav.sections a { padding: 12px 14px; font-size: 11px; }
     .masthead-utils .hist-link { padding: 0 14px; }
-    .streak-nav { padding: 0 12px; }
-    .streak-tooltip { left: auto; right: -10px; }
 
     .fp-hero h2 { font-size: 26px; }
     .fp-hero p { font-size: 13.5px; }
@@ -815,6 +814,9 @@
 
     .section-hero { flex-direction: column; align-items: flex-start; gap: 10px; }
     .section-hero h2 { font-size: 26px; }
+
+    .ency-review-banner { padding: 18px 20px; }
+    .ency-review-banner-text strong { font-size: 17px; }
 
     .art-title { font-size: 30px; }
     .art-body p, .art-body ul { font-size: 15px; }
@@ -844,19 +846,15 @@
     .ticker { margin: 0 -14px; }
     nav.sections { margin: 0 -14px; padding: 0 18px; }
 
-    h1.title { font-size: 34px; margin-bottom: 20px; }
-    .subtitle { width: 170px; top: 10px; left: 10px; padding: 9px 11px 11px; }
+    h1.title { font-size: 34px; margin-bottom: 10px; }
+    .subtitle { max-width: 100%; padding: 9px 11px 11px; margin-bottom: 18px; }
     .subtitle-avatar { width: 28px; height: 28px; }
-    .subtitle-name { font-size: 12px; }
-    .subtitle-phrase { font-size: 10.5px; }
+    .subtitle-name { font-size: 11.5px; }
+    .subtitle-phrase { font-size: 11px; }
 
     .masthead-utils { gap: 6px; }
-    .masthead-search-btn { width: 34px; height: 34px; }
-    .masthead-utils .hist-link { height: 34px; }
-    .masthead-utils .hist-link.icon-only { width: 34px; }
-    .masthead-utils .hist-link:not(.icon-only) { padding: 0 10px; font-size: 9.5px; }
-    .masthead-utils .streak-nav { height: 34px; padding: 0 8px; }
-    .streak-nav span { display: none; } /* solo la llama, sin el número de días */
+    .masthead-search-btn { height: 34px; padding: 0 10px; font-size: 9.5px; }
+    .masthead-utils .hist-link { height: 34px; padding: 0 10px; font-size: 9.5px; }
 
     .fp-hero h2 { font-size: 22px; }
     .fp-hero.no-media h2 { font-size: 24px; }
@@ -992,13 +990,15 @@ function renderSubtitle() {
 /* ---------- post-it arrastrable (masthead) ---------- */
 function makeDraggable(el, storageKey) {
   const parent = el.offsetParent || el.parentElement;
+  const mobileFlow = () => window.innerWidth <= 760; // en mobile el post-it vive en el flujo normal, bajo el titulo — nada de arrastre
   let saved = null;
   try { saved = JSON.parse(localStorage.getItem(storageKey)); } catch(e) {}
-  if (saved) { el.style.left = saved.x + 'px'; el.style.top = saved.y + 'px'; }
+  if (saved && !mobileFlow()) { el.style.left = saved.x + 'px'; el.style.top = saved.y + 'px'; }
 
   let dragging = false, offX = 0, offY = 0;
 
   el.addEventListener('pointerdown', e => {
+    if (mobileFlow()) return;
     if (e.target.closest('a, button')) return;
     dragging = true;
     el.setPointerCapture(e.pointerId);
@@ -1036,8 +1036,7 @@ function renderTicker() {
   const track = document.getElementById('ticker-track');
   const badge = document.getElementById('ticker-badge');
   if (badge && !badge.dataset.filled) {
-    const pts = "50,4 62.6,19.5 82.5,17.5 80.5,37.4 96,50 80.5,62.6 82.5,82.5 62.6,80.5 50,96 37.4,80.5 17.5,82.5 19.5,62.6 4,50 19.5,37.4 17.5,17.5 37.4,19.5";
-    badge.innerHTML = `<svg class="burst" viewBox="0 0 100 100"><polygon points="${pts}" fill="var(--accent)" stroke="none"/></svg><span>¡Nuevo!</span>`;
+    badge.innerHTML = `<svg class="burst" viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M12 2c1 3-2 4-2 7a3 3 0 0 0 6 0c0-1-0.5-2-1-2 2 0 4 2 4 5.5A7 7 0 1 1 8 12.5C8 9 9 6 12 2Z"/></svg><span>¡Nuevo!</span>`;
     badge.dataset.filled = '1';
   }
   const items = visibleArticles()
@@ -1121,7 +1120,7 @@ function toggleLikedTerm(key) {
   return liked.includes(key);
 }
 
-/* ---------- streak (junto a Historial, con tooltip) ---------- */
+/* ---------- streak (solo para el stat-block "Racha" del panel de progreso) ---------- */
 function computeStreak() {
   const dates = new Set(ARTICLES.map(a => a.date_added));
   let streak = 0;
@@ -1132,12 +1131,6 @@ function computeStreak() {
     else break;
   }
   return streak;
-}
-function streakPhrase(streak) {
-  if (streak === 0) return 'Hoy es un buen día para empezar.';
-  if (streak < 3) return 'Vas calentando motores.';
-  if (streak < 7) return 'Buena racha, no la sueltes.';
-  return 'Racha en llamas — sigue así.';
 }
 
 /* ---------- nav ---------- */
@@ -1164,14 +1157,9 @@ function renderNav(active) {
 function renderMastheadUtils(active) {
   const utils = document.getElementById('masthead-utils');
   const histCls = active === 'historial' ? 'active' : '';
-  const streak = computeStreak();
-  const streakHtml = `<div class="streak-nav">${ICONS.flame}<span>${streak}d</span>
-    <div class="streak-tooltip">${streak} día${streak===1?'':'s'} seguidos<br><span class="tt-phrase">${streakPhrase(streak)}</span></div>
-  </div>`;
   utils.innerHTML = `
-    <button class="masthead-search-btn" id="masthead-search-btn" title="Buscar">${ICONS.search}</button>
-    ${streakHtml}
-    <a href="#/historial" class="hist-link icon-only ${histCls}" title="Historial">${ICONS.history}</a>`;
+    <button class="masthead-search-btn" id="masthead-search-btn" title="Buscar">${ICONS.search}<span>Buscar</span></button>
+    <a href="#/historial" class="hist-link ${histCls}" title="Historial">${ICONS.history}<span>Historial</span></a>`;
   document.getElementById('masthead-search-btn').addEventListener('click', openSpotlight);
 }
 
@@ -1816,22 +1804,32 @@ function renderEnciclopedia() {
   renderNav('enciclopedia');
   const main = document.getElementById('main');
   const terms = buildEncyTerms();
+  const due = termsDue(terms);
+  const banner = terms.length ? `
+    <div class="ency-review-banner">
+      <div class="ency-review-banner-text">
+        <strong>${due.length ? 'Se olvida lo que no se repasa' : 'Al día. Por ahora.'}</strong>
+        <span>${due.length ? `${due.length} término${due.length === 1 ? '' : 's'} esperando` : 'Vuelve cuando el olvido llame a la puerta'}</span>
+      </div>
+      <button class="review-cta" id="ency-review-btn">${ICONS.cards} Repasar${due.length ? ` (${due.length})` : ''}</button>
+    </div>` : '';
 
   main.innerHTML = `
     <div class="section-hero"><div><h2>Enciclopedia</h2><p>Los términos que te ha interesado guardar, con su definición y de dónde salieron.</p></div></div>
+    ${banner}
     <div id="ency-out"></div>
   `;
+  if (terms.length) document.getElementById('ency-review-btn').addEventListener('click', () => openFlashModal(terms));
+
   const out = document.getElementById('ency-out');
   if (!terms.length) {
     out.innerHTML = `<div class="empty">Aún no has guardado ningún término. Dale a ${ICONS.heart} en los términos nuevos que veas dentro de un artículo.</div>`;
     return;
   }
 
-  const due = termsDue(terms);
   out.innerHTML = `
     <div class="ency-toolbar">
       <div class="ency-search-row">${ICONS.search}<input type="text" id="ency-search" placeholder="Buscar en la Enciclopedia..." autocomplete="off"></div>
-      <button class="review-btn" id="ency-review-btn">${ICONS.cards} Repasar${due.length ? ` (${due.length})` : ''}</button>
     </div>
     <div class="ency-layout">
       <div class="ency-list" id="ency-list"></div>
@@ -1839,7 +1837,6 @@ function renderEnciclopedia() {
     </div>
   `;
   document.getElementById('ency-search').addEventListener('input', e => paintEncyList(terms, e.target.value));
-  document.getElementById('ency-review-btn').addEventListener('click', () => openFlashModal(terms));
   paintEncyList(terms, '');
 
   if (window.__pendingReviewOpen) {
