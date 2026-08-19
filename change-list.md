@@ -1,7 +1,8 @@
 # Review queue — 2026-08-19
 
 ## Resumen
-7/7 hechos, 0 en pausa. 2 con duda anotada para revisar juntas: R2 (drag desactivado en mobile, ver detalle) y R4 (interpretación de "sección Strike" como el widget de racha del masthead). Rama `changes/batch-2026-08-19`, commits 1edae2b..48b51d6.
+7/7 hechos, revisados y confirmados por Isabel uno a uno. 0 en pausa.
+Dos puntos (R3, R7) necesitaron una segunda vuelta de diseño tras verlos en Chrome real — quedan documentados en su apartado con los intentos descartados y el motivo. Rama `changes/batch-2026-08-19`, commits 1edae2b..51dce38. Lista para mergear a main.
 
 ## Grupos
 - Sin agrupar: los 7 ítems tocan preocupaciones distintas (infra de despliegue, restyle subjetivo, forma de icono, eliminación de widget, claridad de iconos, bug de CSS, y redisño de layout). Aunque R1/R2 comparten componente visual (el post-it) y R6/R7 comparten componente (botón de repaso), sus causas raíz y su tipo de cambio son diferentes — mezclarlos dificultaría revisar o revertir uno sin el otro. Cada ítem = su propio commit.
