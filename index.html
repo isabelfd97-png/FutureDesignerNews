@@ -241,6 +241,16 @@
   .review-btn svg { width: 15px; height: 15px; }
   .review-btn:hover { background: var(--accent); border-color: var(--accent); }
 
+  /* ---- CTA de repasar, a la altura del titular de Enciclopedia ---- */
+  .section-hero.ency-hero { justify-content: space-between; flex-wrap: wrap; row-gap: 14px; }
+  .review-cta {
+    display: flex; align-items: center; gap: 9px; flex: none; background: var(--accent); color: #fff; border: 2px solid var(--ink);
+    font-family: 'Space Mono', monospace; font-size: 12.5px; font-weight: 700; letter-spacing: .8px; text-transform: uppercase;
+    padding: 14px 20px; cursor: pointer; box-shadow: 4px 5px 0 var(--ink);
+  }
+  .review-cta svg { width: 17px; height: 17px; }
+  .review-cta:hover { background: var(--ink); transform: translate(-2px,-2px); box-shadow: 6px 7px 0 var(--accent); }
+
   .ency-search-row { display: flex; align-items: center; gap: 10px; border-bottom: 2px solid var(--ink); padding: 10px 0; margin: 18px 0 6px; }
   .ency-search-row svg { width: 16px; height: 16px; color: var(--muted); flex: none; }
   .ency-search-row input { flex: 1; border: none; outline: none; background: transparent; font-family: 'Space Grotesk', sans-serif; font-size: 15px; color: var(--ink); }
@@ -1778,22 +1788,29 @@ function renderEnciclopedia() {
   renderNav('enciclopedia');
   const main = document.getElementById('main');
   const terms = buildEncyTerms();
+  const due = termsDue(terms);
+  const reviewCta = terms.length
+    ? `<button class="review-cta" id="ency-review-btn">${ICONS.cards} Repasar${due.length ? ` (${due.length})` : ''}</button>`
+    : '';
 
   main.innerHTML = `
-    <div class="section-hero"><div><h2>Enciclopedia</h2><p>Los términos que te ha interesado guardar, con su definición y de dónde salieron.</p></div></div>
+    <div class="section-hero ency-hero">
+      <div><h2>Enciclopedia</h2><p>Los términos que te ha interesado guardar, con su definición y de dónde salieron.</p></div>
+      ${reviewCta}
+    </div>
     <div id="ency-out"></div>
   `;
+  if (terms.length) document.getElementById('ency-review-btn').addEventListener('click', () => openFlashModal(terms));
+
   const out = document.getElementById('ency-out');
   if (!terms.length) {
     out.innerHTML = `<div class="empty">Aún no has guardado ningún término. Dale a ${ICONS.heart} en los términos nuevos que veas dentro de un artículo.</div>`;
     return;
   }
 
-  const due = termsDue(terms);
   out.innerHTML = `
     <div class="ency-toolbar">
       <div class="ency-search-row">${ICONS.search}<input type="text" id="ency-search" placeholder="Buscar en la Enciclopedia..." autocomplete="off"></div>
-      <button class="review-btn" id="ency-review-btn">${ICONS.cards} Repasar${due.length ? ` (${due.length})` : ''}</button>
     </div>
     <div class="ency-layout">
       <div class="ency-list" id="ency-list"></div>
@@ -1801,7 +1818,6 @@ function renderEnciclopedia() {
     </div>
   `;
   document.getElementById('ency-search').addEventListener('input', e => paintEncyList(terms, e.target.value));
-  document.getElementById('ency-review-btn').addEventListener('click', () => openFlashModal(terms));
   paintEncyList(terms, '');
 
   if (window.__pendingReviewOpen) {

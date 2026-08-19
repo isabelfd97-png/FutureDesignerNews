@@ -40,6 +40,8 @@ Detalle: "Me encanta en enciclopedia que pongas las cards para revisar pero el b
 Commit: pendiente
 Causa: bug real de especificidad CSS, no percepción — .flash-actions button (0,1,1 de especificidad) ponía background: var(--bg) [blanco], y esa regla le ganaba a .flash-yes { background: var(--ink) } (0,1,0) aunque .flash-yes viniera después en el archivo, porque en CSS gana la especificidad, no el orden. Resultado: texto blanco sobre fondo blanco, invisible hasta el hover (que sí tenía especificidad suficiente para ganar). Fix: subí la regla a .flash-actions .flash-yes (0,2,0). Verificado con getComputedStyle en el navegador: antes bg blanco/texto blanco, después bg negro/texto blanco.
 
-## [ ] R7 — Dar más protagonismo a la acción de "revisar" (altura de titular / CTA inicial)
+## [x] R7 — Dar más protagonismo a la acción de "revisar" (altura de titular / CTA inicial)
 Detalle: "Dale más importancia a la acción de revisar poniéndola por ejemplo a la altura del titular, o que sea más como un CTA al principio que invite al usuario a revisar"
-Área: Enciclopedia / layout de sección (relacionado con R6)
+Área: Enciclopedia / section-hero
+Commit: pendiente
+Implementado: moví el botón "Repasar (N)" de la barra de búsqueda (donde competía visualmente con el input) a la fila del titular "Enciclopedia" — misma altura que el h2, a la derecha. Lo convertí en un CTA propio (.review-cta): fondo naranja de acento, sombra dura, más grande que el botón original. En mobile se apila justo debajo del titular, antes del buscador. Solo aparece si hay términos guardados (si la enciclopedia está vacía no tiene sentido invitar a repasar).
