@@ -14,9 +14,9 @@ There is no algorithm, no account, and no scoring to learn. Articles are shown n
 
 ---
 
-## 2. The front page ("Portada") — three sizes, newest first
+## 2. The front page ("Inicio") — three sizes, newest first
 
-The home page (called *Portada* in the app) sorts every visible article by date (`date_added`, newest first) and lays them out in three tiers:
+The home page (called *Inicio* in the app) sorts every visible article by date (`date_added`, newest first) and lays them out in three tiers:
 
 | Tier | What fills it | Size |
 |------|---------------|------|
@@ -30,16 +30,15 @@ That's the whole rule: **relevance = recency.** The most recent thing is the hea
 
 ---
 
-## 3. The six desks (sections)
+## 3. The three desks (sections)
 
-Content is organised into six fixed desks. These power the top navigation and the tags on every card. Each has a one-line remit that sets what belongs there.
+Content is organised into three fixed desks, grouped by *what kind of read it is* rather than by product or brand. These power the top navigation and the tags on every card. Each has a one-line remit that sets what belongs there.
 
-- **Design 2.0** (`design-2-0`) — How the craft of design is changing in the AI era: new workflows, new skills, and the principles that still hold.
-- **Claude** (`claude`) — Guides, features and ways of working specific to Claude: agents, context, usage limits, Claude Code.
-- **Figma** (`figma`) — Updates, plugins and features in Figma, including everything AI touches inside the tool itself.
-- **Engineering** (`engineering`) — Collaborating better with developers: process, culture, expectations and a shared language.
-- **AI** (`ai`) — Concepts and AI in general, beyond Claude: fundamentals, models, reference terminology.
-- **Materials** (`materials`) — Skills, templates, repos and other downloadables bundled with an article, ready to use.
+- **Teoría** (`teoria`) — Concepts and principles with no expiry date: AI fundamentals, reference terminology, timeless design theory.
+- **Práctica** (`practica`) — Actionable guides for working better with Claude: context, usage limits, agents, CLAUDE.md, avoiding generic output.
+- **Novedades** (`novedades`) — Releases, tools and downloadable kits: what's happening right now in design systems and AI agents.
+
+**Why this axis, not product/brand:** an earlier version grouped desks by tool (Claude, Figma, Design 2.0, Engineering, AI, Materials). With the site's real content, that split left one desk carrying half the articles while another sat empty, and the tag alone didn't tell you what you'd actually get — "Claude" covered everything from agent theory to token-cost troubleshooting. Grouping by reading intent instead is more stable as content grows: a new article always slots into "timeless concept," "actionable how-to," or "news/tool," regardless of which AI product it's about.
 
 Articles can also carry a free-form **subsection** label (shown after the desk name, like *Claude · Agents*). Subsections aren't a fixed list — they emerge from the content and are used to sharpen the tag and to find related reading.
 

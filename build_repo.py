@@ -9,39 +9,21 @@ with open(DATA_FILE, encoding="utf-8") as f:
 
 SECTIONS = [
     {
-        "slug": "design-2-0",
-        "name": "Design 2.0",
-        "desc": "Cómo está cambiando la disciplina del diseño en la era de la IA: nuevos flujos, nuevas habilidades, principios que siguen mandando.",
-        "icon": "design-2-0",
+        "slug": "teoria",
+        "name": "Teoría",
+        "desc": "Conceptos y principios de fondo, sin fecha de caducidad: fundamentos de IA, terminología de referencia, teoría del diseño.",
+        "icon": "book",
     },
     {
-        "slug": "claude",
-        "name": "Claude",
-        "desc": "Guías, features y forma de trabajar específicas de Claude: agentes, contexto, límites de uso, Claude Code.",
+        "slug": "practica",
+        "name": "Práctica",
+        "desc": "Guías accionables para trabajar mejor con Claude: contexto, límites de uso, agentes, CLAUDE.md y cómo evitar el diseño genérico.",
         "icon": "claude",
     },
     {
-        "slug": "figma",
-        "name": "Figma",
-        "desc": "Novedades, plugins y funciones de Figma, incluido todo lo que toca IA dentro de la propia herramienta.",
-        "icon": "layers",
-    },
-    {
-        "slug": "engineering",
-        "name": "Engineering",
-        "desc": "Cómo colaborar mejor con developers: procesos, cultura, expectativas y lenguaje común.",
-        "icon": "chat-code",
-    },
-    {
-        "slug": "ai",
-        "name": "AI",
-        "desc": "Conceptos e IA en general, más allá de Claude: fundamentos, modelos, terminología de referencia.",
-        "icon": "chip",
-    },
-    {
-        "slug": "materials",
-        "name": "Materials",
-        "desc": "Skills, plantillas, repos y otros recursos descargables que vienen incluidos en un artículo, listos para usar.",
+        "slug": "novedades",
+        "name": "Novedades",
+        "desc": "Lanzamientos, herramientas y kits descargables: lo que está pasando ahora en design systems y agentes de IA.",
         "icon": "materials",
     },
 ]
@@ -130,10 +112,10 @@ TEMPLATE = r"""<!DOCTYPE html>
 
   /* ---- Masthead ---- */
   header.masthead { padding: 30px 24px 0; border-bottom: 4px solid var(--ink); position: relative; }
-  .top-bar { display: flex; align-items: center; justify-content: center; gap: 12px; }
+  .top-bar { display: flex; align-items: center; justify-content: flex-end; gap: 12px; flex-wrap: wrap; }
 
   .live {
-    display: flex; align-items: center; gap: 8px;
+    display: flex; align-items: center; justify-content: center; gap: 8px; margin: 4px 0 2px;
     font-family: 'Space Mono', monospace; font-size: 11px; letter-spacing: 1.5px;
     text-transform: uppercase; color: var(--muted);
   }
@@ -149,17 +131,69 @@ TEMPLATE = r"""<!DOCTYPE html>
   h1.title {
     font-family: 'Archivo Black', 'Space Grotesk', sans-serif;
     font-weight: 400; font-size: 62px; letter-spacing: -2px;
-    margin: 14px 0 6px; text-align: center; text-transform: uppercase; line-height: .92;
+    margin: 14px 0 30px; text-align: center; text-transform: uppercase; line-height: .92;
   }
   h1.title span { display: inline-block; opacity: 0; transform: translateY(18px) rotate(-1deg); animation: riseIn .55s cubic-bezier(.2,.8,.2,1) forwards; }
   h1.title span:nth-child(odd) { color: var(--accent); }
   @keyframes riseIn { to { opacity: 1; transform: translateY(0) rotate(0); } }
 
-  .subtitle {
-    color: var(--ink); font-size: 13px; text-align: center; margin-bottom: 18px;
-    font-weight: 500;
+  /* ---- Masthead utils: buscar, racha, historial ---- */
+  .masthead-utils {
+    display: flex; align-items: center; gap: 8px; flex: none;
   }
-  .subtitle .phrase { color: var(--muted); font-style: italic; font-weight: 400; }
+  .masthead-search-btn {
+    width: 38px; height: 38px; flex: none;
+    display: flex; align-items: center; justify-content: center;
+    border: 2px solid var(--ink); background: transparent; color: var(--ink); cursor: pointer;
+  }
+  .masthead-search-btn svg { width: 16px; height: 16px; }
+  .masthead-search-btn:hover { background: var(--accent); border-color: var(--accent); color: #fff; }
+
+  .masthead-utils .hist-link {
+    display: flex; align-items: center; gap: 6px; height: 38px; flex: none;
+    padding: 0 14px; border: 2px solid var(--ink); font-family: 'Space Mono', monospace;
+    font-size: 11px; letter-spacing: 1px; text-transform: uppercase; text-decoration: none;
+    color: var(--ink); font-weight: 700;
+  }
+  .masthead-utils .hist-link svg { width: 15px; height: 15px; }
+  .masthead-utils .hist-link.icon-only { width: 38px; padding: 0; justify-content: center; }
+  .masthead-utils .hist-link.icon-only svg { width: 17px; height: 17px; }
+  .masthead-utils .hist-link:hover, .masthead-utils .hist-link.active { background: var(--accent); border-color: var(--accent); color: #fff; }
+
+  .masthead-utils .streak-nav {
+    height: 38px; border: 2px solid var(--ink); padding: 0 12px; margin: 0;
+  }
+
+  /* ---- Nota "Ofrecido por Isabel": el mismo post-it que las anotaciones, pero arrastrable ---- */
+  .subtitle {
+    position: absolute; top: 20px; left: 24px; width: 280px; z-index: 6;
+    display: flex; flex-direction: column; gap: 7px;
+    background: #fff1a6; border: 2px solid var(--ink); box-shadow: 4px 5px 0 rgba(10,10,10,.3);
+    padding: 13px 16px 15px; transform: rotate(-3deg);
+    cursor: grab; touch-action: none; user-select: none;
+  }
+  .subtitle.dragging { cursor: grabbing; box-shadow: 7px 9px 0 rgba(10,10,10,.35); z-index: 50; transition: none; }
+  .subtitle-close {
+    position: absolute; top: 5px; right: 5px; width: 22px; height: 22px; border: none;
+    background: transparent; cursor: pointer; display: flex; align-items: center; justify-content: center;
+    opacity: .55; color: var(--ink);
+  }
+  .subtitle-close:hover { opacity: 1; }
+  .subtitle-close svg { width: 11px; height: 11px; }
+  .subtitle-row { display: flex; align-items: center; gap: 9px; padding-right: 14px; }
+  .subtitle-avatar {
+    width: 46px; height: 46px; border-radius: 50%; border: 2px solid var(--ink); flex: none;
+    object-fit: cover; object-position: center 15%; background: #fff; pointer-events: none;
+  }
+  .subtitle-text { display: flex; flex-direction: column; gap: 2px; }
+  .subtitle-name {
+    font-family: 'Space Grotesk', sans-serif; font-size: 16px; font-weight: 700; color: var(--ink);
+  }
+  .subtitle-byline {
+    font-family: 'Space Grotesk', sans-serif; font-size: 11.5px; font-weight: 400;
+    color: var(--accent); text-decoration: underline; cursor: pointer;
+  }
+  .subtitle-phrase { font-size: 13px; line-height: 1.4; color: var(--ink); font-weight: 400; }
 
   /* ---- Ticker ---- */
   .ticker {
@@ -227,10 +261,9 @@ TEMPLATE = r"""<!DOCTYPE html>
   nav.sections {
     margin: 0 -24px;
     padding: 0 24px;
-    display: flex; align-items: stretch;
-    flex-wrap: nowrap;
+    display: flex; justify-content: center; align-items: stretch;
   }
-  .links-wrap { flex: 1; min-width: 0; display: flex; align-items: stretch; position: relative; }
+  .links-wrap { min-width: 0; display: flex; align-items: stretch; position: relative; }
   nav.sections .links {
     display: flex; flex-wrap: nowrap; overflow-x: auto; scroll-behavior: smooth;
     scrollbar-width: none; -ms-overflow-style: none;
@@ -255,24 +288,6 @@ TEMPLATE = r"""<!DOCTYPE html>
   }
   nav.sections a:hover::after, nav.sections a.active::after { transform: scaleX(1); }
   nav.sections a:hover, nav.sections a.active { color: var(--accent); }
-  nav.sections .hist-link {
-    display: flex; align-items: center; gap: 6px; border-left: 2px solid var(--ink);
-    padding: 0 18px; font-family: 'Space Mono', monospace; font-size: 11px; letter-spacing: 1px;
-    text-transform: uppercase; text-decoration: none; color: var(--ink); font-weight: 700;
-  }
-  nav.sections .hist-link svg { width: 15px; height: 15px; }
-  nav.sections .hist-link:hover { color: var(--accent); }
-  nav.sections .hist-link.active { color: var(--accent); }
-  nav.sections .hist-link.icon-only { padding: 0 20px; }
-  nav.sections .hist-link.icon-only svg { width: 18px; height: 18px; }
-
-  .nav-icon-btn {
-    flex: none; display: flex; align-items: center; justify-content: center;
-    border: none; border-right: 2px solid var(--ink); background: transparent;
-    color: var(--ink); cursor: pointer; padding: 0 18px;
-  }
-  .nav-icon-btn svg { width: 16px; height: 16px; }
-  .nav-icon-btn:hover { color: var(--accent); }
 
   .streak-nav {
     position: relative; display: flex; align-items: center; gap: 5px; border-left: 2px solid var(--ink);
@@ -863,11 +878,14 @@ TEMPLATE = r"""<!DOCTYPE html>
   }
 
   @media (max-width: 760px) {
-    h1.title { font-size: 46px; letter-spacing: -1.5px; margin: 18px 0 8px; }
-    .subtitle { font-size: 12.5px; margin-bottom: 26px; }
+    h1.title { font-size: 46px; letter-spacing: -1.5px; margin: 18px 0 26px; }
+    .subtitle { width: 210px; top: 14px; left: 14px; padding: 11px 14px 13px; }
+    .subtitle-avatar { width: 34px; height: 34px; }
+    .subtitle-name { font-size: 13px; }
+    .subtitle-phrase { font-size: 12px; }
 
     nav.sections a { padding: 12px 14px; font-size: 11px; }
-    nav.sections .hist-link { padding: 0 14px; }
+    .masthead-utils .hist-link { padding: 0 14px; }
     .streak-nav { padding: 0 12px; }
     .streak-tooltip { left: auto; right: -10px; }
 
@@ -911,11 +929,18 @@ TEMPLATE = r"""<!DOCTYPE html>
     .ticker { margin: 0 -14px; }
     nav.sections { margin: 0 -14px; padding: 0 18px; }
 
-    h1.title { font-size: 34px; }
-    .subtitle { font-size: 11.5px; }
+    h1.title { font-size: 34px; margin-bottom: 20px; }
+    .subtitle { width: 170px; top: 10px; left: 10px; padding: 9px 11px 11px; }
+    .subtitle-avatar { width: 28px; height: 28px; }
+    .subtitle-name { font-size: 12px; }
+    .subtitle-phrase { font-size: 10.5px; }
 
-    nav.sections .hist-link:not(.icon-only) { padding: 0 10px; font-size: 9.5px; }
-    .streak-nav { padding: 0 8px; }
+    .masthead-utils { gap: 6px; }
+    .masthead-search-btn { width: 34px; height: 34px; }
+    .masthead-utils .hist-link { height: 34px; }
+    .masthead-utils .hist-link.icon-only { width: 34px; }
+    .masthead-utils .hist-link:not(.icon-only) { padding: 0 10px; font-size: 9.5px; }
+    .masthead-utils .streak-nav { height: 34px; padding: 0 8px; }
     .streak-nav span { display: none; } /* solo la llama, sin el número de días */
 
     .fp-hero h2 { font-size: 22px; }
@@ -933,8 +958,9 @@ TEMPLATE = r"""<!DOCTYPE html>
 <header class="masthead">
   <div class="wrap">
     <div class="top-bar">
-      <div class="live" id="live-kicker"></div>
+      <div class="masthead-utils" id="masthead-utils"></div>
     </div>
+    <div class="live" id="live-kicker"></div>
     <h1 class="title" id="masthead-title"></h1>
     <div class="subtitle" id="subtitle"></div>
   </div>
@@ -1023,15 +1049,76 @@ function renderLiveKicker() {
   setInterval(paint, 30000);
 }
 
-/* ---------- dynamic greeting ---------- */
+/* ---------- subtitle: nota post-it arrastrable, firma de la creadora ---------- */
+const SUBTITLE_PHRASES = [
+  'Aquí no decide ningún algoritmo. Decido yo, con más pestañas abiertas que criterio.',
+  'La IA redacta, pero el mal gusto de elegir qué leer sigue siendo mío.',
+  'Ningún LLM ha votado si esto merece la pena. Esa parte la hago yo, a mano.',
+  'Curado por una humana con síndrome del impostor y demasiada curiosidad.',
+  'Yo leo, yo decido — la IA solo aguanta el ritmo que le pongo.',
+];
+const LINKEDIN_URL = 'https://www.linkedin.com/in/isabel-ferrer-dalmau-productdesigner/';
+
 function renderSubtitle() {
   const el = document.getElementById('subtitle');
-  const h = new Date().getHours();
-  let greeting, phrase;
-  if (h >= 5 && h < 12) { greeting = 'Buenos días'; phrase = 'un café, una idea nueva y a por el día.'; }
-  else if (h >= 12 && h < 20) { greeting = 'Buenas tardes'; phrase = 'pausa entre reuniones para alimentar la curiosidad.'; }
-  else { greeting = 'Buenas noches'; phrase = 'el mejor momento para desconectar leyendo algo que sí interesa.'; }
-  el.innerHTML = `${greeting}, Isabel — <span class="phrase">${phrase}</span>`;
+  if (localStorage.getItem('postitDismissed') === '1') { el.remove(); return; }
+  const phrase = SUBTITLE_PHRASES[Math.floor(Math.random() * SUBTITLE_PHRASES.length)];
+  el.innerHTML = `
+    <button class="subtitle-close" id="subtitle-close" title="Quitar la nota">${ICONS.close}</button>
+    <div class="subtitle-row">
+      <img class="subtitle-avatar" src="images/_shared/annotations-avatar.png" alt="Isabel Ferrer - Dalmau">
+      <div class="subtitle-text">
+        <span class="subtitle-name">Nota de la editora jefe</span>
+        <a class="subtitle-byline" href="${LINKEDIN_URL}" target="_blank" rel="noopener">Isabel Ferrer - Dalmau</a>
+      </div>
+    </div>
+    <span class="subtitle-phrase">${phrase}</span>`;
+  makeDraggable(el, 'postitPos');
+  document.getElementById('subtitle-close').addEventListener('click', () => {
+    localStorage.setItem('postitDismissed', '1');
+    el.remove();
+  });
+}
+
+/* ---------- post-it arrastrable (masthead) ---------- */
+function makeDraggable(el, storageKey) {
+  const parent = el.offsetParent || el.parentElement;
+  let saved = null;
+  try { saved = JSON.parse(localStorage.getItem(storageKey)); } catch(e) {}
+  if (saved) { el.style.left = saved.x + 'px'; el.style.top = saved.y + 'px'; }
+
+  let dragging = false, offX = 0, offY = 0;
+
+  el.addEventListener('pointerdown', e => {
+    if (e.target.closest('a, button')) return;
+    dragging = true;
+    el.setPointerCapture(e.pointerId);
+    const rect = el.getBoundingClientRect();
+    offX = e.clientX - rect.left;
+    offY = e.clientY - rect.top;
+    el.classList.add('dragging');
+  });
+
+  el.addEventListener('pointermove', e => {
+    if (!dragging) return;
+    const pRect = parent.getBoundingClientRect();
+    const elRect = el.getBoundingClientRect();
+    let x = e.clientX - pRect.left - offX;
+    let y = e.clientY - pRect.top - offY;
+    x = Math.max(-elRect.width * 0.3, Math.min(x, pRect.width - elRect.width * 0.7));
+    y = Math.max(0, Math.min(y, pRect.height - elRect.height * 0.5));
+    el.style.left = x + 'px';
+    el.style.top = y + 'px';
+  });
+
+  const stop = e => {
+    if (!dragging) return;
+    dragging = false;
+    el.classList.remove('dragging');
+    localStorage.setItem(storageKey, JSON.stringify({ x: parseFloat(el.style.left), y: parseFloat(el.style.top) }));
+  };
+  el.addEventListener('pointerup', stop);
+  el.addEventListener('pointercancel', stop);
 }
 
 /* ---------- ticker: titulares más recientes ---------- */
@@ -1147,30 +1234,36 @@ function streakPhrase(streak) {
 /* ---------- nav ---------- */
 function renderNav(active) {
   const nav = document.getElementById('section-nav');
-  const items = [{slug:'', name:'Portada'}].concat(SECTIONS.map(s=>({slug:s.slug,name:s.name})));
+  const items = [{slug:'', name:'Inicio'}]
+    .concat(SECTIONS.map(s=>({slug:s.slug,name:s.name})))
+    .concat([{slug:'enciclopedia', name:'Enciclopedia'}]);
   const links = items.map(it => {
     const href = it.slug ? `#/${it.slug}` : '#/';
     const cls = (active === it.slug) ? 'active' : '';
     return `<a href="${href}" class="${cls}">${it.name}</a>`;
   }).join('');
-  const histCls = active === 'historial' ? 'active' : '';
-  const encyCls = active === 'enciclopedia' ? 'active' : '';
-  const streak = computeStreak();
-  const streakHtml = `<div class="streak-nav">${ICONS.flame}<span>${streak}d</span>
-    <div class="streak-tooltip">${streak} día${streak===1?'':'s'} seguidos<br><span class="tt-phrase">${streakPhrase(streak)}</span></div>
-  </div>`;
   nav.innerHTML = `
-    <button class="nav-icon-btn" id="nav-search-btn" title="Buscar">${ICONS.search}</button>
     <div class="links-wrap">
       <button class="links-arrow left hidden" id="links-prev" title="Ver anteriores">${ICONS.arrow}</button>
       <div class="links" id="nav-links">${links}</div>
       <button class="links-arrow right hidden" id="links-next" title="Ver más">${ICONS.arrow}</button>
-    </div>
-    <a href="#/enciclopedia" class="hist-link ${encyCls}">Enciclopedia</a>
+    </div>`;
+  setupLinksScroll();
+  renderMastheadUtils(active);
+}
+
+function renderMastheadUtils(active) {
+  const utils = document.getElementById('masthead-utils');
+  const histCls = active === 'historial' ? 'active' : '';
+  const streak = computeStreak();
+  const streakHtml = `<div class="streak-nav">${ICONS.flame}<span>${streak}d</span>
+    <div class="streak-tooltip">${streak} día${streak===1?'':'s'} seguidos<br><span class="tt-phrase">${streakPhrase(streak)}</span></div>
+  </div>`;
+  utils.innerHTML = `
+    <button class="masthead-search-btn" id="masthead-search-btn" title="Buscar">${ICONS.search}</button>
     ${streakHtml}
     <a href="#/historial" class="hist-link icon-only ${histCls}" title="Historial">${ICONS.history}</a>`;
-  document.getElementById('nav-search-btn').addEventListener('click', openSpotlight);
-  setupLinksScroll();
+  document.getElementById('masthead-search-btn').addEventListener('click', openSpotlight);
 }
 
 function setupLinksScroll() {
@@ -1318,12 +1411,9 @@ const LEAD_ICON_RULES = [
   ['px-brain', /aprend|estudio|repaso/i],
 ];
 const LEAD_ICON_BY_SECTION = {
-  'design-2-0': 'px-brain',
-  'claude': 'px-robot',
-  'figma': 'px-palette',
-  'engineering': 'px-chat',
-  'ai': 'px-chip',
-  'materials': 'px-box',
+  'teoria': 'px-brain',
+  'practica': 'px-robot',
+  'novedades': 'px-box',
 };
 function pixelIconFor(a) {
   const text = `${a.title} ${a.summary} ${a.subsection || ''}`;

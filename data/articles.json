@@ -3,7 +3,7 @@
     "id": "aprendizaje-por-refuerzo-basico",
     "title": "Cómo funciona el aprendizaje por refuerzo",
     "url": "https://example.com/rl-basics",
-    "section": "ai",
+    "section": "teoria",
     "subsection": "Fundamentos de ML",
     "summary": "Introducción a los conceptos básicos del aprendizaje por refuerzo: agente, entorno, recompensa y política. Explica por qué es distinto al aprendizaje supervisado y por qué importa para diseñar producto con IA.",
     "key_points": [
@@ -22,7 +22,7 @@
     "id": "meta-abre-astryx-su-design-system-interno-y-ya-funciona-en-figma-make",
     "title": "Meta abre Astryx, su design system interno, y ya funciona en Figma Make",
     "url": "https://www.linkedin.com/posts/achyut-khanpara_designsystems-figmamake-uxdesign-share-7480456616299917312-4U0C/",
-    "section": "figma",
+    "section": "novedades",
     "subsection": "Figma Make",
     "summary": "Meta ha hecho open source su design system interno (usado en más de 13.000 apps) y alguien lo ha probado dentro de Figma Make: se instala con un simple prompt, genera output real aunque aún en beta, y se puede personalizar sin tocar código. Lo más interesante no son los componentes, sino que viene con CLI + servidor MCP para que los agentes de IA lo lean directamente.",
     "key_points": [
@@ -56,7 +56,7 @@
     "id": "claude-agents-que-son-y-como-crear-uno",
     "title": "Claude Agents: qué son y cómo crear uno",
     "url": "https://yummy-design-sprint.notion.site/Claude-Agents-What-are-they-how-to-create-one-38e6279147098049a74ae0de250a51a1",
-    "section": "claude",
+    "section": "practica",
     "subsection": "Agentes de IA",
     "summary": "Guía en lenguaje llano de Yummy Labs sobre qué es realmente un 'agente' de IA, pensada para diseñadores. La idea central: un agente no es una cosa técnica, es un trabajo que diseñas — le das un objetivo, unas herramientas y unos límites, y es Claude quien decide los pasos. Incluye ocho agentes concretos que puede construir un diseñador y un ejemplo completo, paso a paso, de un 'design reviewer'.",
     "key_points": [
@@ -94,7 +94,7 @@
     "id": "donde-va-realmente-tu-contexto-de-diseno-en-claude",
     "title": "Dónde va realmente tu contexto de diseño en Claude",
     "url": "https://yummy-design-sprint.notion.site/Where-your-design-context-actually-belongs-in-Claude-35962791470980be91fac4fc3c977fa1",
-    "section": "claude",
+    "section": "practica",
     "subsection": "Claude para diseñadores",
     "summary": "Guía práctica de Yummy Labs sobre las tres capas donde puedes meter contexto de diseño en Claude —Custom Instructions, Project Knowledge y Skills— y por qué confundirlas hace que se te llene el contexto de cosas que no hacen falta. Explica cómo carga cada capa, qué poner en cada una, y aclara de una vez el bombo de los archivos .md tipo DESIGN.md.",
     "key_points": [
@@ -132,7 +132,7 @@
     "id": "los-disenadores-gastan-los-limites-de-uso-de-claude-mas-rapido-que-nad",
     "title": "Los diseñadores gastan los límites de uso de Claude más rápido que nadie: por qué y cómo arreglarlo",
     "url": "https://yummy-design-sprint.notion.site/Designers-hit-Claude-s-usage-limits-faster-than-anyone-Here-s-why-and-exactly-how-to-fix-it-33562791470980b78c4bc906178bc83f",
-    "section": "claude",
+    "section": "practica",
     "subsection": "Claude para diseñadores",
     "summary": "Guía de Yummy Labs sobre por qué el trabajo de diseño agota los límites de uso de Claude más rápido que casi cualquier otro tipo de trabajo, y qué hacer al respecto. El problema de fondo: cada mensaje reprocesa TODA la conversación anterior, así que el mensaje 30 cuesta como los 30 mensajes juntos. Repasa los patrones típicos de un diseñador que disparan el gasto (iterar visualmente, MCP de Figma, seleccionar la página entera, usar Opus por defecto) y cómo arreglar cada uno.",
     "key_points": [
@@ -170,7 +170,7 @@
     "id": "diccionario-de-ia-para-disenadores",
     "title": "Diccionario de IA para diseñadores",
     "url": "https://yummy-design-sprint.notion.site/AI-Design-Dictionary-326627914709808eb562c22421ba2088",
-    "section": "ai",
+    "section": "teoria",
     "subsection": "Diccionario de referencia",
     "summary": "Un diccionario de 63 términos técnicos de IA y desarrollo, escrito por una diseñadora para diseñadoras, organizado en tres niveles: los básicos de la primera semana, lo que aparece al profundizar un poco, y lo que solo hace falta si te metes de lleno. Cada término trae la traducción a lenguaje de diseño y por qué importa para trabajar con IA. Todos sus términos se guardan directamente en la Enciclopedia, sin tener que darles like uno a uno.",
     "key_points": [
@@ -445,7 +445,7 @@
     "id": "5-trucos-para-que-claude-code-no-te-de-un-diseno-web-generico",
     "title": "5 trucos para que Claude Code no te dé un diseño web genérico",
     "url": "https://uxplanet.org/5-tips-to-prevent-generic-web-design-in-claude-code-7cc044760453",
-    "section": "design-2-0",
+    "section": "practica",
     "subsection": "Prompting avanzado",
     "summary": "Nick Babich explica cómo evitar que Claude Code genere webs con \"cara de IA\": la clave está en montar bien el CLAUDE.md antes de pedirle nada, no en el prompt del momento.",
     "key_points": [
@@ -488,7 +488,7 @@
     "id": "la-ley-de-pragnanz-el-buen-diseno-es-quitar-no-anadir",
     "title": "La Ley de Prägnanz: el buen diseño es quitar, no añadir",
     "url": "https://www.linkedin.com/posts/zanderwhitehurst_ux-ui-design-ugcPost-7480575353086906368-q0i7",
-    "section": "design-2-0",
+    "section": "teoria",
     "subsection": "Principios de diseño",
     "summary": "Zander Whitehurst recuerda un principio Gestalt que muchos diseñadores ignoran: ante la complejidad, el cerebro busca simplicidad por defecto, así que añadir más botones, links y opciones va justo en contra de cómo percibimos.",
     "key_points": [
@@ -522,7 +522,7 @@
     "id": "designmd-buenas-practicas-para-el-archivo-que-le-da-a-la-ia-tu-sistema",
     "title": "DESIGN.md: buenas prácticas para el archivo que le da a la IA tu sistema de diseño",
     "url": "https://uxplanet.org/design-md-best-practices-c00325e8b23a",
-    "section": "design-2-0",
+    "section": "novedades",
     "subsection": "Design systems + IA",
     "summary": "Nick Babich explica DESIGN.md, el archivo que le da a un agente de IA (Google Stitch, Claude Code, Cursor) tu sistema de diseño real —tokens, reglas, estados— en vez de dejarle inventar estilos genéricos. Es, en la práctica, el hermano de diseño del CLAUDE.md.",
     "key_points": [
@@ -553,7 +553,7 @@
     "id": "taste-skill-el-framework-anti-slop-para-que-tu-agente-de-ia-tenga-buen",
     "title": "Taste Skill: el framework anti-slop para que tu agente de IA tenga buen gusto",
     "url": "https://www.tasteskill.dev/",
-    "section": "materials",
+    "section": "novedades",
     "subsection": "Skills anti-diseño-genérico",
     "summary": "Un set de 13 skills open-source instalables con un comando que le enseñan a Claude Code, Cursor, Codex y otros agentes a no generar frontends genéricos: infieren el brief, mapean a sistemas de diseño reales y pasan un checklist antes de entregar.",
     "key_points": [
@@ -676,7 +676,7 @@
     "id": "el-loop-de-2-niveles-para-que-claude-deje-de-autopuntuarse-su-propio-d",
     "title": "El loop de 2 niveles para que Claude deje de autopuntuarse su propio diseño",
     "url": "https://www.linkedin.com/posts/carmenerincon_hey-designers-todays-is-a-slightly-share-7483122441939058688-KocS",
-    "section": "claude",
+    "section": "practica",
     "subsection": "Evaluación de diseño con Claude Code",
     "summary": "Carmen Rincon explica por qué dejar que Claude revise su propio diseño no sirve (sesgo de autopreferencia) y monta un loop de dos niveles en Claude Code: un panel de agentes críticos ciegos que puntúan por separado, más una capa de memoria para que no repita los mismos fallos sesión tras sesión.",
     "key_points": [
@@ -746,7 +746,7 @@
     "id": "claudemd-el-proceso-paso-a-paso-para-crear-el-tuyo",
     "title": "CLAUDE.md: el proceso paso a paso para crear el tuyo",
     "url": "",
-    "section": "claude",
+    "section": "practica",
     "subsection": "Claude Code",
     "summary": "Un workflow práctico para crear tu propio CLAUDE.md — el archivo que Claude Code lee automáticamente al principio de cada sesión en un proyecto. La idea central: no se escribe de memoria ni de golpe, se construye por entrevista guiada, con un prompt de arranque, una checklist de revisión y una plantilla lista para copiar.",
     "key_points": [
