@@ -160,10 +160,6 @@ TEMPLATE = r"""<!DOCTYPE html>
   .masthead-utils .hist-link.icon-only svg { width: 17px; height: 17px; }
   .masthead-utils .hist-link:hover, .masthead-utils .hist-link.active { background: var(--accent); border-color: var(--accent); color: #fff; }
 
-  .masthead-utils .streak-nav {
-    height: 38px; border: 2px solid var(--ink); padding: 0 12px; margin: 0;
-  }
-
   /* ---- Nota "Ofrecido por Isabel": el mismo post-it que las anotaciones, pero arrastrable ---- */
   .subtitle {
     position: absolute; top: 20px; left: 24px; width: 280px; z-index: 6;
@@ -282,26 +278,6 @@ TEMPLATE = r"""<!DOCTYPE html>
   }
   nav.sections a:hover::after, nav.sections a.active::after { transform: scaleX(1); }
   nav.sections a:hover, nav.sections a.active { color: var(--accent); }
-
-  .streak-nav {
-    position: relative; display: flex; align-items: center; gap: 5px; border-left: 2px solid var(--ink);
-    padding: 0 16px; font-family: 'Space Mono', monospace; font-size: 11px; letter-spacing: .5px;
-    color: var(--muted); cursor: default;
-  }
-  .streak-nav svg { width: 13px; height: 13px; color: var(--accent); }
-  .streak-nav:hover { color: var(--ink); }
-  .streak-tooltip {
-    position: absolute; top: calc(100% + 10px); right: 0; background: var(--ink); color: #fff;
-    padding: 10px 14px; font-family: 'Space Mono', monospace; font-size: 11px; line-height: 1.5;
-    white-space: nowrap; opacity: 0; pointer-events: none; transform: translateY(-4px);
-    transition: opacity .15s ease, transform .15s ease; z-index: 20;
-  }
-  .streak-tooltip::after {
-    content: ""; position: absolute; bottom: 100%; right: 16px; border: 6px solid transparent;
-    border-bottom-color: var(--ink);
-  }
-  .streak-tooltip .tt-phrase { color: var(--accent); }
-  .streak-nav:hover .streak-tooltip { opacity: 1; transform: translateY(0); pointer-events: auto; }
 
   /* ---- Glossary (article view) ---- */
   .art-glossary { margin-top: 40px; padding-top: 18px; border-top: 3px solid var(--ink); }
@@ -887,8 +863,6 @@ TEMPLATE = r"""<!DOCTYPE html>
 
     nav.sections a { padding: 12px 14px; font-size: 11px; }
     .masthead-utils .hist-link { padding: 0 14px; }
-    .streak-nav { padding: 0 12px; }
-    .streak-tooltip { left: auto; right: -10px; }
 
     .fp-hero h2 { font-size: 26px; }
     .fp-hero p { font-size: 13.5px; }
@@ -941,8 +915,6 @@ TEMPLATE = r"""<!DOCTYPE html>
     .masthead-utils .hist-link { height: 34px; }
     .masthead-utils .hist-link.icon-only { width: 34px; }
     .masthead-utils .hist-link:not(.icon-only) { padding: 0 10px; font-size: 9.5px; }
-    .masthead-utils .streak-nav { height: 34px; padding: 0 8px; }
-    .streak-nav span { display: none; } /* solo la llama, sin el número de días */
 
     .fp-hero h2 { font-size: 22px; }
     .fp-hero.no-media h2 { font-size: 24px; }
@@ -1208,7 +1180,7 @@ function toggleLikedTerm(key) {
   return liked.includes(key);
 }
 
-/* ---------- streak (junto a Historial, con tooltip) ---------- */
+/* ---------- streak (solo para el stat-block "Racha" del panel de progreso) ---------- */
 function computeStreak() {
   const dates = new Set(ARTICLES.map(a => a.date_added));
   let streak = 0;
@@ -1219,12 +1191,6 @@ function computeStreak() {
     else break;
   }
   return streak;
-}
-function streakPhrase(streak) {
-  if (streak === 0) return 'Hoy es un buen día para empezar.';
-  if (streak < 3) return 'Vas calentando motores.';
-  if (streak < 7) return 'Buena racha, no la sueltes.';
-  return 'Racha en llamas — sigue así.';
 }
 
 /* ---------- nav ---------- */
@@ -1251,13 +1217,8 @@ function renderNav(active) {
 function renderMastheadUtils(active) {
   const utils = document.getElementById('masthead-utils');
   const histCls = active === 'historial' ? 'active' : '';
-  const streak = computeStreak();
-  const streakHtml = `<div class="streak-nav">${ICONS.flame}<span>${streak}d</span>
-    <div class="streak-tooltip">${streak} día${streak===1?'':'s'} seguidos<br><span class="tt-phrase">${streakPhrase(streak)}</span></div>
-  </div>`;
   utils.innerHTML = `
     <button class="masthead-search-btn" id="masthead-search-btn" title="Buscar">${ICONS.search}</button>
-    ${streakHtml}
     <a href="#/historial" class="hist-link icon-only ${histCls}" title="Historial">${ICONS.history}</a>`;
   document.getElementById('masthead-search-btn').addEventListener('click', openSpotlight);
 }
