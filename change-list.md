@@ -6,12 +6,15 @@
 ## [x] R1 — Imagen del post-it de la editora jefe no se ve en producción
 Detalle: "ahora mismo en la web subida la imagen del postit de la editora jefe no se ve, arreglalo pls"
 Área: masthead / subtitle post-it
-Commit: pendiente
+Commit: 1edae2b
 Causa: GitHub Pages construye con Jekyll por defecto, que ignora cualquier carpeta que empiece por "_" (como images/_shared/) salvo que exista un archivo .nojekyll en la raíz. Confirmado con curl: la imagen daba 404 en producción mientras el resto de portadas (sin "_" en la ruta) cargaban bien. Fix: añadido .nojekyll vacío en la raíz del repo.
 
-## [ ] R2 — Texto y tipografía del post-it de la editora jefe demasiado "redondita", estilo más gamberro
+## [x] R2 — Texto y tipografía del post-it de la editora jefe demasiado "redondita", estilo más gamberro
 Detalle: "El texto de nota de la editora jefe, la fuente y la tipografía no me mola, la veo demasiado redondita. Arreglalo y el estilo general de ese postit que sea un pelin más gamberro y que de inicio no tape el título de The Future Designer"
-Área: masthead / subtitle post-it (mismo componente que R1)
+Área: masthead / subtitle post-it
+Commit: pendiente
+Implementado: nombre en Archivo Black mayúsculas (la misma fuente de los titulares), frase y firma en Space Mono (en vez de Space Grotesk, la fuente redondita del cuerpo del sitio), borde negro grueso + sombra dura sólida (el lenguaje visual "brutalista" que ya usan las cards), rotación algo más marcada.
+Duda: para que "de inicio no tape el título" en mobile (donde el post-it absolute-positioned se comía la mitad de "THE FUTURE DESIGNER"), lo pasé a flujo normal (position: relative, debajo del título) solo en viewports ≤760px, y ahí desactivé el arrastre — el drag por pointer asume posicionamiento absoluto y con relative el cálculo de offsets se rompe. En desktop (>760px) el post-it sigue siendo absoluto y arrastrable exactamente como antes, y ahí ya no tapaba el título. Alternativa descartada: mantenerlo absolute en mobile y solo bajar el "top" — requería adivinar la altura exacta del título en cada breakpoint y es frágil ante cualquier cambio futuro de tamaño de fuente.
 
 ## [ ] R3 — La estrellita animada de "Nuevo" debería ser un fueguito
 Detalle: "En nuevo la estrellkita esa que se mueve no quiero que la forma sea una estrellita, quiero que sea un fueguito"

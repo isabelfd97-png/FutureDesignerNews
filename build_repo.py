@@ -168,11 +168,11 @@ TEMPLATE = r"""<!DOCTYPE html>
   .subtitle {
     position: absolute; top: 20px; left: 24px; width: 280px; z-index: 6;
     display: flex; flex-direction: column; gap: 7px;
-    background: #ffddc2; box-shadow: 4px 5px 0 rgba(10,10,10,.3);
-    padding: 13px 16px 15px; transform: rotate(-3deg);
+    background: #ffddc2; border: 2px solid var(--ink); box-shadow: 5px 6px 0 var(--ink);
+    padding: 13px 16px 15px; transform: rotate(-4deg);
     cursor: grab; touch-action: none; user-select: none;
   }
-  .subtitle.dragging { cursor: grabbing; box-shadow: 7px 9px 0 rgba(10,10,10,.35); z-index: 50; transition: none; }
+  .subtitle.dragging { cursor: grabbing; box-shadow: 8px 10px 0 var(--ink); z-index: 50; transition: none; }
   .subtitle-row { display: flex; align-items: center; gap: 9px; }
   .subtitle-avatar {
     width: 46px; height: 46px; border-radius: 50%; border: 2px solid var(--ink); flex: none;
@@ -180,13 +180,14 @@ TEMPLATE = r"""<!DOCTYPE html>
   }
   .subtitle-text { display: flex; flex-direction: column; gap: 2px; }
   .subtitle-name {
-    font-family: 'Space Grotesk', sans-serif; font-size: 16px; font-weight: 700; color: var(--ink);
+    font-family: 'Archivo Black', sans-serif; font-weight: 400; font-size: 14px; letter-spacing: -.2px;
+    text-transform: uppercase; color: var(--ink);
   }
   .subtitle-byline {
-    font-family: 'Space Grotesk', sans-serif; font-size: 11.5px; font-weight: 400;
-    color: var(--accent); text-decoration: underline; cursor: pointer;
+    font-family: 'Space Mono', monospace; font-size: 10.5px; font-weight: 700; letter-spacing: .3px;
+    text-transform: uppercase; color: var(--accent); text-decoration: underline; cursor: pointer;
   }
-  .subtitle-phrase { font-size: 13px; line-height: 1.4; color: var(--ink); font-weight: 400; }
+  .subtitle-phrase { font-family: 'Space Mono', monospace; font-size: 12px; line-height: 1.45; color: var(--ink); font-weight: 400; }
 
   /* ---- Ticker ---- */
   .ticker {
@@ -875,10 +876,13 @@ TEMPLATE = r"""<!DOCTYPE html>
   }
 
   @media (max-width: 760px) {
-    h1.title { font-size: 46px; letter-spacing: -1.5px; margin: 18px 0 26px; }
-    .subtitle { width: 210px; top: 14px; left: 14px; padding: 11px 14px 13px; }
+    h1.title { font-size: 46px; letter-spacing: -1.5px; margin: 18px 0 12px; }
+    .subtitle {
+      position: relative; top: auto; left: auto; width: 100%; max-width: 300px;
+      margin: 0 0 22px; padding: 11px 14px 13px;
+    }
     .subtitle-avatar { width: 34px; height: 34px; }
-    .subtitle-name { font-size: 13px; }
+    .subtitle-name { font-size: 12.5px; }
     .subtitle-phrase { font-size: 12px; }
 
     nav.sections a { padding: 12px 14px; font-size: 11px; }
@@ -926,11 +930,11 @@ TEMPLATE = r"""<!DOCTYPE html>
     .ticker { margin: 0 -14px; }
     nav.sections { margin: 0 -14px; padding: 0 18px; }
 
-    h1.title { font-size: 34px; margin-bottom: 20px; }
-    .subtitle { width: 170px; top: 10px; left: 10px; padding: 9px 11px 11px; }
+    h1.title { font-size: 34px; margin-bottom: 10px; }
+    .subtitle { max-width: 100%; padding: 9px 11px 11px; margin-bottom: 18px; }
     .subtitle-avatar { width: 28px; height: 28px; }
-    .subtitle-name { font-size: 12px; }
-    .subtitle-phrase { font-size: 10.5px; }
+    .subtitle-name { font-size: 11.5px; }
+    .subtitle-phrase { font-size: 11px; }
 
     .masthead-utils { gap: 6px; }
     .masthead-search-btn { width: 34px; height: 34px; }
@@ -1074,13 +1078,15 @@ function renderSubtitle() {
 /* ---------- post-it arrastrable (masthead) ---------- */
 function makeDraggable(el, storageKey) {
   const parent = el.offsetParent || el.parentElement;
+  const mobileFlow = () => window.innerWidth <= 760; // en mobile el post-it vive en el flujo normal, bajo el titulo — nada de arrastre
   let saved = null;
   try { saved = JSON.parse(localStorage.getItem(storageKey)); } catch(e) {}
-  if (saved) { el.style.left = saved.x + 'px'; el.style.top = saved.y + 'px'; }
+  if (saved && !mobileFlow()) { el.style.left = saved.x + 'px'; el.style.top = saved.y + 'px'; }
 
   let dragging = false, offX = 0, offY = 0;
 
   el.addEventListener('pointerdown', e => {
+    if (mobileFlow()) return;
     if (e.target.closest('a, button')) return;
     dragging = true;
     el.setPointerCapture(e.pointerId);
