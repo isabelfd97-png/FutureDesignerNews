@@ -211,6 +211,7 @@ TEMPLATE = r"""<!DOCTYPE html>
     position: relative; transform: rotate(5deg);
     font-family: 'Space Mono', monospace; font-size: 10.5px; font-weight: 700;
     letter-spacing: .5px; text-transform: uppercase; color: #fff; text-align: center; line-height: 1.15;
+    text-shadow: 0 1px 0 rgba(0,0,0,.55), 0 -1px 0 rgba(0,0,0,.55), 1px 0 0 rgba(0,0,0,.55), -1px 0 0 rgba(0,0,0,.55), 0 2px 4px rgba(0,0,0,.4);
   }
   @keyframes burstWiggle {
     0%, 100% { transform: rotate(-9deg); }
@@ -1102,7 +1103,7 @@ function renderTicker() {
   const track = document.getElementById('ticker-track');
   const badge = document.getElementById('ticker-badge');
   if (badge && !badge.dataset.filled) {
-    badge.innerHTML = `<svg class="burst" viewBox="5.5 1 16 23" preserveAspectRatio="none" fill="var(--accent)" stroke="none"><path d="M12 2c1 3-2 4-2 7a3 3 0 0 0 6 0c0-1-0.5-2-1-2 2 0 4 2 4 5.5A7 7 0 1 1 8 12.5C8 9 9 6 12 2Z"/></svg><span>¡Nuevo!</span>`;
+    badge.innerHTML = `<svg class="burst" viewBox="4.5 0 19 25" fill="var(--accent)" stroke="none"><path d="M12 2c1 3-2 4-2 7a3 3 0 0 0 6 0c0-1-0.5-2-1-2 2 0 4 2 4 5.5A7 7 0 1 1 8 12.5C8 9 9 6 12 2Z"/></svg><span>¡Nuevo!</span>`;
     badge.dataset.filled = '1';
   }
   const items = visibleArticles()
