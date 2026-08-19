@@ -1124,8 +1124,7 @@ function renderTicker() {
   const track = document.getElementById('ticker-track');
   const badge = document.getElementById('ticker-badge');
   if (badge && !badge.dataset.filled) {
-    const pts = "50,4 62.6,19.5 82.5,17.5 80.5,37.4 96,50 80.5,62.6 82.5,82.5 62.6,80.5 50,96 37.4,80.5 17.5,82.5 19.5,62.6 4,50 19.5,37.4 17.5,17.5 37.4,19.5";
-    badge.innerHTML = `<svg class="burst" viewBox="0 0 100 100"><polygon points="${pts}" fill="var(--accent)" stroke="none"/></svg><span>¡Nuevo!</span>`;
+    badge.innerHTML = `<svg class="burst" viewBox="0 0 24 24" fill="var(--accent)" stroke="none"><path d="M12 2c1 3-2 4-2 7a3 3 0 0 0 6 0c0-1-0.5-2-1-2 2 0 4 2 4 5.5A7 7 0 1 1 8 12.5C8 9 9 6 12 2Z"/></svg><span>¡Nuevo!</span>`;
     badge.dataset.filled = '1';
   }
   const items = visibleArticles()

@@ -16,9 +16,11 @@ Commit: pendiente
 Implementado: nombre en Archivo Black mayúsculas (la misma fuente de los titulares), frase y firma en Space Mono (en vez de Space Grotesk, la fuente redondita del cuerpo del sitio), borde negro grueso + sombra dura sólida (el lenguaje visual "brutalista" que ya usan las cards), rotación algo más marcada.
 Duda: para que "de inicio no tape el título" en mobile (donde el post-it absolute-positioned se comía la mitad de "THE FUTURE DESIGNER"), lo pasé a flujo normal (position: relative, debajo del título) solo en viewports ≤760px, y ahí desactivé el arrastre — el drag por pointer asume posicionamiento absoluto y con relative el cálculo de offsets se rompe. En desktop (>760px) el post-it sigue siendo absoluto y arrastrable exactamente como antes, y ahí ya no tapaba el título. Alternativa descartada: mantenerlo absolute en mobile y solo bajar el "top" — requería adivinar la altura exacta del título en cada breakpoint y es frágil ante cualquier cambio futuro de tamaño de fuente.
 
-## [ ] R3 — La estrellita animada de "Nuevo" debería ser un fueguito
+## [x] R3 — La estrellita animada de "Nuevo" debería ser un fueguito
 Detalle: "En nuevo la estrellkita esa que se mueve no quiero que la forma sea una estrellita, quiero que sea un fueguito"
 Área: badge/icono "Nuevo"
+Commit: pendiente
+Implementado: sustituido el polígono de estrella de 8 puntas por el path de llama que ya existía en ICONS.flame (reutilizado del icono de racha), mismo color de acento. Verificado el shape aislado antes de aplicarlo.
 
 ## [ ] R4 — Quitar la sección Strike
 Detalle: "la sección de strike no la necesitamos creo, quitala"
