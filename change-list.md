@@ -28,9 +28,11 @@ Detalle: "la sección de strike no la necesitamos creo, quitala"
 Commit: pendiente
 Duda: no existe ninguna "sección Strike" en el código ni en la navegación. Lo más parecido es el widget de "racha" (streak) del masthead — el icono de llama junto al buscador y el historial, que muestra "Xd" con un tooltip de días seguidos. Interpreté que se refería a eso (probablemente "strike" por confusión con el término, no "racha") y lo he quitado del masthead junto con su CSS y funciones muertas (streakPhrase). Dejé intacto el stat "Racha" del panel de progreso/historial (línea con stat-block), porque es un elemento distinto, ya etiquetado con texto claro, y no pareció lo que pedías quitar — si también quieres que desaparezca, dilo y lo saco.
 
-## [ ] R5 — Buscador e histórico no se entienden solo con iconos
+## [x] R5 — Buscador e histórico no se entienden solo con iconos
 Detalle: "el buscador y el historico, creo que simplemente con esos iconos no se entiende, podrías ponerlo de otra forma o completarlo con texto?"
-Área: nav / iconos buscador-histórico
+Área: masthead-utils (buscador + historial)
+Commit: pendiente
+Implementado: los dos botones ahora llevan icono + texto ("Buscar" / "Historial") en todos los tamaños de pantalla — antes eran icon-only con solo un title. Comprobado por medida (198px de ancho combinado en un viewport de 390px) que no desborda en mobile. Quité la clase icon-only y su CSS asociada, ya sin uso.
 
 ## [ ] R6 — Botón "Lo sabía" en cards de Enciclopedia no se lee hasta hacer hover
 Detalle: "Me encanta en enciclopedia que pongas las cards para revisar pero el botón de lo sabía no se lee hasta que hago hover"

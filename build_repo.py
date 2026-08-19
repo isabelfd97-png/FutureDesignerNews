@@ -137,16 +137,16 @@ TEMPLATE = r"""<!DOCTYPE html>
   h1.title span:nth-child(odd) { color: var(--accent); }
   @keyframes riseIn { to { opacity: 1; transform: translateY(0) rotate(0); } }
 
-  /* ---- Masthead utils: buscar, racha, historial ---- */
+  /* ---- Masthead utils: buscar, historial ---- */
   .masthead-utils {
     display: flex; align-items: center; gap: 8px; flex: none;
   }
   .masthead-search-btn {
-    width: 38px; height: 38px; flex: none;
-    display: flex; align-items: center; justify-content: center;
-    border: 2px solid var(--ink); background: transparent; color: var(--ink); cursor: pointer;
+    height: 38px; flex: none; display: flex; align-items: center; gap: 6px;
+    padding: 0 14px; border: 2px solid var(--ink); background: transparent; color: var(--ink); cursor: pointer;
+    font-family: 'Space Mono', monospace; font-size: 11px; letter-spacing: 1px; text-transform: uppercase; font-weight: 700;
   }
-  .masthead-search-btn svg { width: 16px; height: 16px; }
+  .masthead-search-btn svg { width: 15px; height: 15px; flex: none; }
   .masthead-search-btn:hover { background: var(--accent); border-color: var(--accent); color: #fff; }
 
   .masthead-utils .hist-link {
@@ -156,8 +156,6 @@ TEMPLATE = r"""<!DOCTYPE html>
     color: var(--ink); font-weight: 700;
   }
   .masthead-utils .hist-link svg { width: 15px; height: 15px; }
-  .masthead-utils .hist-link.icon-only { width: 38px; padding: 0; justify-content: center; }
-  .masthead-utils .hist-link.icon-only svg { width: 17px; height: 17px; }
   .masthead-utils .hist-link:hover, .masthead-utils .hist-link.active { background: var(--accent); border-color: var(--accent); color: #fff; }
 
   /* ---- Nota "Ofrecido por Isabel": el mismo post-it que las anotaciones, pero arrastrable ---- */
@@ -911,10 +909,8 @@ TEMPLATE = r"""<!DOCTYPE html>
     .subtitle-phrase { font-size: 11px; }
 
     .masthead-utils { gap: 6px; }
-    .masthead-search-btn { width: 34px; height: 34px; }
-    .masthead-utils .hist-link { height: 34px; }
-    .masthead-utils .hist-link.icon-only { width: 34px; }
-    .masthead-utils .hist-link:not(.icon-only) { padding: 0 10px; font-size: 9.5px; }
+    .masthead-search-btn { height: 34px; padding: 0 10px; font-size: 9.5px; }
+    .masthead-utils .hist-link { height: 34px; padding: 0 10px; font-size: 9.5px; }
 
     .fp-hero h2 { font-size: 22px; }
     .fp-hero.no-media h2 { font-size: 24px; }
@@ -1218,8 +1214,8 @@ function renderMastheadUtils(active) {
   const utils = document.getElementById('masthead-utils');
   const histCls = active === 'historial' ? 'active' : '';
   utils.innerHTML = `
-    <button class="masthead-search-btn" id="masthead-search-btn" title="Buscar">${ICONS.search}</button>
-    <a href="#/historial" class="hist-link icon-only ${histCls}" title="Historial">${ICONS.history}</a>`;
+    <button class="masthead-search-btn" id="masthead-search-btn" title="Buscar">${ICONS.search}<span>Buscar</span></button>
+    <a href="#/historial" class="hist-link ${histCls}" title="Historial">${ICONS.history}<span>Historial</span></a>`;
   document.getElementById('masthead-search-btn').addEventListener('click', openSpotlight);
 }
 
