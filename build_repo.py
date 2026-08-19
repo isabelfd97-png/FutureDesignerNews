@@ -324,15 +324,27 @@ TEMPLATE = r"""<!DOCTYPE html>
   .review-btn svg { width: 15px; height: 15px; }
   .review-btn:hover { background: var(--accent); border-color: var(--accent); }
 
-  /* ---- CTA de repasar, a la altura del titular de Enciclopedia ---- */
-  .section-hero.ency-hero { justify-content: space-between; flex-wrap: wrap; row-gap: 14px; }
+  /* ---- Banner de repasar, estilo anuncio, encima de la lista de Enciclopedia ---- */
+  .ency-review-banner {
+    display: flex; align-items: center; justify-content: space-between; gap: 20px; flex-wrap: wrap;
+    background: var(--accent); border: 2px solid var(--ink); box-shadow: 5px 6px 0 var(--ink);
+    padding: 22px 26px; margin: 22px 0 8px; color: #fff;
+  }
+  .ency-review-banner-text { display: flex; flex-direction: column; gap: 4px; }
+  .ency-review-banner-text strong {
+    font-family: 'Archivo Black', sans-serif; font-weight: 400; font-size: 21px; letter-spacing: -.5px;
+    text-transform: uppercase; line-height: 1.15;
+  }
+  .ency-review-banner-text span {
+    font-family: 'Space Mono', monospace; font-size: 11px; letter-spacing: .5px; text-transform: uppercase; opacity: .92;
+  }
   .review-cta {
-    display: flex; align-items: center; gap: 9px; flex: none; background: var(--accent); color: #fff; border: 2px solid var(--ink);
+    display: flex; align-items: center; gap: 9px; flex: none; background: var(--ink); color: #fff; border: 2px solid var(--ink);
     font-family: 'Space Mono', monospace; font-size: 12.5px; font-weight: 700; letter-spacing: .8px; text-transform: uppercase;
-    padding: 14px 20px; cursor: pointer; box-shadow: 4px 5px 0 var(--ink);
+    padding: 14px 20px; cursor: pointer; box-shadow: 4px 5px 0 rgba(0,0,0,.35);
   }
   .review-cta svg { width: 17px; height: 17px; }
-  .review-cta:hover { background: var(--ink); transform: translate(-2px,-2px); box-shadow: 6px 7px 0 var(--accent); }
+  .review-cta:hover { background: #fff; color: var(--ink); transform: translate(-2px,-2px); box-shadow: 6px 7px 0 rgba(0,0,0,.35); }
 
   .ency-search-row { display: flex; align-items: center; gap: 10px; border-bottom: 2px solid var(--ink); padding: 10px 0; margin: 18px 0 6px; }
   .ency-search-row svg { width: 16px; height: 16px; color: var(--muted); flex: none; }
@@ -884,6 +896,9 @@ TEMPLATE = r"""<!DOCTYPE html>
 
     .section-hero { flex-direction: column; align-items: flex-start; gap: 10px; }
     .section-hero h2 { font-size: 26px; }
+
+    .ency-review-banner { padding: 18px 20px; }
+    .ency-review-banner-text strong { font-size: 17px; }
 
     .art-title { font-size: 30px; }
     .art-body p, .art-body ul { font-size: 15px; }
@@ -1872,15 +1887,18 @@ function renderEnciclopedia() {
   const main = document.getElementById('main');
   const terms = buildEncyTerms();
   const due = termsDue(terms);
-  const reviewCta = terms.length
-    ? `<button class="review-cta" id="ency-review-btn">${ICONS.cards} Repasar${due.length ? ` (${due.length})` : ''}</button>`
-    : '';
+  const banner = terms.length ? `
+    <div class="ency-review-banner">
+      <div class="ency-review-banner-text">
+        <strong>${due.length ? 'Se olvida lo que no se repasa' : 'Al día. Por ahora.'}</strong>
+        <span>${due.length ? `${due.length} término${due.length === 1 ? '' : 's'} esperando` : 'Vuelve cuando el olvido llame a la puerta'}</span>
+      </div>
+      <button class="review-cta" id="ency-review-btn">${ICONS.cards} Repasar${due.length ? ` (${due.length})` : ''}</button>
+    </div>` : '';
 
   main.innerHTML = `
-    <div class="section-hero ency-hero">
-      <div><h2>Enciclopedia</h2><p>Los términos que te ha interesado guardar, con su definición y de dónde salieron.</p></div>
-      ${reviewCta}
-    </div>
+    <div class="section-hero"><div><h2>Enciclopedia</h2><p>Los términos que te ha interesado guardar, con su definición y de dónde salieron.</p></div></div>
+    ${banner}
     <div id="ency-out"></div>
   `;
   if (terms.length) document.getElementById('ency-review-btn').addEventListener('click', () => openFlashModal(terms));
