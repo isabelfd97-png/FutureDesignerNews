@@ -202,20 +202,20 @@ TEMPLATE = r"""<!DOCTYPE html>
   @keyframes scrollTicker { from { transform: translateX(0); } to { transform: translateX(-50%); } }
 
   .ticker-badge {
-    position: absolute; top: -30px; left: 18px; width: 76px; height: 76px;
-    z-index: 3; pointer-events: none; display: flex; align-items: center; justify-content: center;
+    position: absolute; top: -16px; left: 18px; z-index: 3; pointer-events: none;
+    display: flex; align-items: center; gap: 6px;
+    background: var(--accent); border: 2px solid var(--ink); box-shadow: 3px 4px 0 var(--ink);
+    padding: 6px 11px 6px 8px;
     animation: burstWiggle 2.6s ease-in-out infinite;
   }
-  .ticker-badge svg.burst { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
+  .ticker-badge svg.burst { width: 14px; height: 14px; flex: none; color: #fff; }
   .ticker-badge span {
-    position: relative; transform: rotate(5deg);
     font-family: 'Space Mono', monospace; font-size: 10.5px; font-weight: 700;
-    letter-spacing: .5px; text-transform: uppercase; color: #fff; text-align: center; line-height: 1.15;
-    text-shadow: 0 1px 0 rgba(0,0,0,.55), 0 -1px 0 rgba(0,0,0,.55), 1px 0 0 rgba(0,0,0,.55), -1px 0 0 rgba(0,0,0,.55), 0 2px 4px rgba(0,0,0,.4);
+    letter-spacing: .5px; text-transform: uppercase; color: #fff; white-space: nowrap; line-height: 1;
   }
   @keyframes burstWiggle {
-    0%, 100% { transform: rotate(-9deg); }
-    50% { transform: rotate(-3deg); }
+    0%, 100% { transform: rotate(-6deg); }
+    50% { transform: rotate(-2deg); }
   }
   .ticker.empty-state .ticker-badge { display: none; }
 
@@ -1103,7 +1103,7 @@ function renderTicker() {
   const track = document.getElementById('ticker-track');
   const badge = document.getElementById('ticker-badge');
   if (badge && !badge.dataset.filled) {
-    badge.innerHTML = `<svg class="burst" viewBox="4.5 0 19 25" fill="var(--accent)" stroke="none"><path d="M12 2c1 3-2 4-2 7a3 3 0 0 0 6 0c0-1-0.5-2-1-2 2 0 4 2 4 5.5A7 7 0 1 1 8 12.5C8 9 9 6 12 2Z"/></svg><span>¡Nuevo!</span>`;
+    badge.innerHTML = `<svg class="burst" viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M12 2c1 3-2 4-2 7a3 3 0 0 0 6 0c0-1-0.5-2-1-2 2 0 4 2 4 5.5A7 7 0 1 1 8 12.5C8 9 9 6 12 2Z"/></svg><span>¡Nuevo!</span>`;
     badge.dataset.filled = '1';
   }
   const items = visibleArticles()
