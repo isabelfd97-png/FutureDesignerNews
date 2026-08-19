@@ -91,14 +91,7 @@
     cursor: grab; touch-action: none; user-select: none;
   }
   .subtitle.dragging { cursor: grabbing; box-shadow: 7px 9px 0 rgba(10,10,10,.35); z-index: 50; transition: none; }
-  .subtitle-close {
-    position: absolute; top: 5px; right: 5px; width: 22px; height: 22px; border: none;
-    background: transparent; cursor: pointer; display: flex; align-items: center; justify-content: center;
-    opacity: .55; color: var(--ink);
-  }
-  .subtitle-close:hover { opacity: 1; }
-  .subtitle-close svg { width: 11px; height: 11px; }
-  .subtitle-row { display: flex; align-items: center; gap: 9px; padding-right: 14px; }
+  .subtitle-row { display: flex; align-items: center; gap: 9px; }
   .subtitle-avatar {
     width: 46px; height: 46px; border-radius: 50%; border: 2px solid var(--ink); flex: none;
     object-fit: cover; object-position: center 15%; background: #fff; pointer-events: none;
@@ -979,10 +972,8 @@ const LINKEDIN_URL = 'https://www.linkedin.com/in/isabel-ferrer-dalmau-productde
 
 function renderSubtitle() {
   const el = document.getElementById('subtitle');
-  if (localStorage.getItem('postitDismissed') === '1') { el.remove(); return; }
   const phrase = SUBTITLE_PHRASES[Math.floor(Math.random() * SUBTITLE_PHRASES.length)];
   el.innerHTML = `
-    <button class="subtitle-close" id="subtitle-close" title="Quitar la nota">${ICONS.close}</button>
     <div class="subtitle-row">
       <img class="subtitle-avatar" src="images/_shared/annotations-avatar.png" alt="Isabel Ferrer - Dalmau">
       <div class="subtitle-text">
@@ -992,10 +983,6 @@ function renderSubtitle() {
     </div>
     <span class="subtitle-phrase">${phrase}</span>`;
   makeDraggable(el, 'postitPos');
-  document.getElementById('subtitle-close').addEventListener('click', () => {
-    localStorage.setItem('postitDismissed', '1');
-    el.remove();
-  });
 }
 
 /* ---------- post-it arrastrable (masthead) ---------- */
