@@ -86,7 +86,7 @@
   .subtitle {
     position: absolute; top: 20px; left: 24px; width: 280px; z-index: 6;
     display: flex; flex-direction: column; gap: 7px;
-    background: #fff1a6; border: 2px solid var(--ink); box-shadow: 4px 5px 0 rgba(10,10,10,.3);
+    background: #ffddc2; box-shadow: 4px 5px 0 rgba(10,10,10,.3);
     padding: 13px 16px 15px; transform: rotate(-3deg);
     cursor: grab; touch-action: none; user-select: none;
   }
@@ -344,7 +344,7 @@
   .count { font-family: 'Space Mono', monospace; font-size: 11px; letter-spacing: 1px; text-transform: uppercase; color: var(--muted); margin: 14px 0; }
 
   /* ---- Section hero ---- */
-  .section-hero { display: flex; align-items: center; gap: 16px; padding: 30px 0 10px; }
+  .section-hero { display: flex; align-items: center; gap: 16px; padding: 6px 0 10px; }
   .section-hero .icon { width: 44px; height: 44px; flex: none; }
   .section-hero .icon svg { width: 100%; height: 100%; }
   .section-hero h2 { font-family: 'Archivo Black', sans-serif; font-weight: 400; font-size: 32px; margin: 0; text-transform: uppercase; letter-spacing: -1px; }
@@ -561,7 +561,7 @@
   /* ---- Leído / no leído ---- */
 
   /* ---- Grid / cards ---- */
-  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 18px; margin-top: 14px; }
+  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 16px; margin-top: 14px; }
   .card {
     position: relative; background: var(--bg); border: 2px solid var(--ink);
     padding: 20px; display: flex; flex-direction: column; gap: 10px; cursor: pointer;
@@ -569,9 +569,11 @@
     text-decoration: none;
   }
   .card:hover { color: var(--accent); border-color: var(--accent); transform: translate(-5px,-5px); box-shadow: 6px 6px 0 var(--ink); }
-  .card .icon { width: 22px; height: 22px; }
-  .card .icon svg { width: 100%; height: 100%; }
+  .card-body { display: flex; flex-direction: column; gap: 8px; min-width: 0; }
   .tag { display: inline-block; font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 1.2px; color: var(--accent); border: 1px solid var(--accent); padding: 3px 9px; width: fit-content; font-weight: 700; text-transform: uppercase; }
+  .card p {
+    display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden;
+  }
 
   /* ---- Insignia de "con anotaciones": avatar de Isabel + bocadillo ---- */
   /* solo el subrayado: nada de caja, ni avatar — el mismo rotulador que las anotaciones
@@ -583,6 +585,8 @@
     background-image: linear-gradient(103deg, transparent 0%, transparent 2%, var(--accent) 4%, var(--accent) 95%, transparent 97%, transparent 100%);
   }
   @media (max-width: 480px) { .annot-flag-text { font-size: 12px; } }
+  .card .annot-flag { top: 6px; right: 6px; }
+  .card .annot-flag-text { font-size: 11px; padding: 5px 8px; }
   .card h3 { margin: 0; font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 20px; line-height: 1.2; transition: transform .2s ease; }
   .card:hover h3 { transform: skewX(-1deg); }
   .card p { margin: 0; font-size: 13.5px; line-height: 1.5; color: var(--ink); }
@@ -682,7 +686,7 @@
   .art-figure { margin: 22px 0; }
   .art-figure img { width: 100%; height: auto; display: block; border: 2px solid var(--ink); filter: grayscale(100%) contrast(1.05); }
   .art-figure figcaption { font-family: 'Space Mono', monospace; font-size: 11px; color: var(--muted); margin-top: 6px; }
-  .card .thumb { width: 100%; height: 130px; object-fit: cover; border: 2px solid var(--ink); filter: grayscale(100%) contrast(1.05); margin-bottom: 4px; }
+  .card .thumb { display: block; width: 100%; height: 160px; object-fit: contain; background: var(--bg); border: 2px solid var(--ink); filter: grayscale(100%) contrast(1.05); margin-bottom: 4px; }
   .card:hover .thumb { border-color: var(--accent); }
   .art-original-inline {
     display: inline-flex; align-items: center; gap: 6px; text-decoration: none;
@@ -1295,11 +1299,12 @@ function cardHtml(a) {
   return `<a class="card" href="#/articulo/${a.id}" data-id="${a.id}">
     ${annotBadgeHtml(a)}
     ${thumb}
-    <div class="icon">${sec ? ICONS[sec.icon] : ''}</div>
-    <span class="tag">${sec ? sec.name : a.section}${a.subsection ? ' · ' + a.subsection : ''}</span>
-    <h3>${a.title}</h3>
-    <p>${a.summary}</p>
-    <div class="date">Añadido: ${a.date_added || '—'}</div>
+    <div class="card-body">
+      <span class="tag">${sec ? sec.name : a.section}${a.subsection ? ' · ' + a.subsection : ''}</span>
+      <h3>${a.title}</h3>
+      <p>${a.summary}</p>
+      <div class="date">Añadido: ${a.date_added || '—'}</div>
+    </div>
   </a>`;
 }
 
@@ -1462,31 +1467,16 @@ function paintSectionSubnav() {
 function paintSectionBody() {
   const wrap = document.getElementById('sections-out');
   if (!wrap) return;
-  const { list, subsections, activeSub } = sectionState;
+  const { list, activeSub } = sectionState;
   const byDate = (x, y) => (y.date_added || '').localeCompare(x.date_added || '');
-  let html = '';
+  let items;
+  if (activeSub === null) items = list.slice().sort(byDate);
+  else if (activeSub === '__otros__') items = list.filter(a => !a.subsection).sort(byDate);
+  else items = list.filter(a => a.subsection === activeSub).sort(byDate);
 
-  if (activeSub === null) {
-    const groups = subsections.length ? subsections : [null];
-    groups.forEach(sub => {
-      const items = list.filter(a => (a.subsection || null) === sub).sort(byDate);
-      if (items.length === 0) return;
-      if (sub) html += `<div class="subsection-title">${sub}</div>`;
-      html += railHtml(items);
-    });
-    if (subsections.length) {
-      const rest = list.filter(a => !a.subsection).sort(byDate);
-      if (rest.length) html += `<div class="subsection-title">Otros</div>${railHtml(rest)}`;
-    }
-  } else if (activeSub === '__otros__') {
-    const items = list.filter(a => !a.subsection).sort(byDate);
-    html = items.length ? railHtml(items) : `<div class="empty">No hay artículos aquí.</div>`;
-  } else {
-    const items = list.filter(a => a.subsection === activeSub).sort(byDate);
-    html = items.length ? railHtml(items) : `<div class="empty">No hay artículos aquí.</div>`;
-  }
-
-  wrap.innerHTML = html;
+  wrap.innerHTML = items.length
+    ? `<div class="grid">${items.map(cardHtml).join('')}</div>`
+    : `<div class="empty">No hay artículos aquí.</div>`;
 }
 
 function progressPanelHtml(list) {
