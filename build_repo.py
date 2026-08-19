@@ -373,7 +373,7 @@ TEMPLATE = r"""<!DOCTYPE html>
   }
   .flash-actions button svg { width: 14px; height: 14px; }
   .flash-no:hover { background: #eee; }
-  .flash-yes { background: var(--ink); color: #fff; }
+  .flash-actions .flash-yes { background: var(--ink); color: #fff; }
   .flash-yes:hover { background: var(--accent); border-color: var(--accent); }
   .flash-done { display: flex; flex-direction: column; align-items: center; gap: 14px; text-align: center; padding: 10px 0 6px; }
   .flash-done svg { width: 34px; height: 34px; color: var(--accent); }
