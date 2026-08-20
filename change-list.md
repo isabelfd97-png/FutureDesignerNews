@@ -40,9 +40,11 @@ Detalle: "la sección de para repasar, que tenga la misma altura exacta que la c
 Commit: pendiente (grupo G1, con H1)
 Implementado: mismo mecanismo que H1 — .ency-sidebar usa la misma variable --top-row-h (460px). La lista de términos es flex:1 con overflow-y:auto, así que si algún día caben menos o más términos, la caja no cambia de tamaño. Verificado con getBoundingClientRect: hero y sidebar dan exactamente 460 los dos.
 
-## [ ] H6 — Transición del carrusel del hero más suave
+## [x] H6 — Transición del carrusel del hero más suave
 Detalle: "las interacciones de las cards grandes que van pasando... ahora mismo salta, y es horrible... que fueran más soft"
 Área: paintHero() / .fp-hero
+Commit: pendiente (G4)
+Implementado: cross-fade — al cambiar de titular (dot, flecha o autoplay), el contenedor baja a opacidad 0 en 220ms, se sustituye el contenido, y sube de nuevo. Los puntos se actualizan al instante (no forman parte del fundido).
 
 ## [ ] H7 — Carrusel "Quizá te interese": flechas en vez de dot-nav, con animación de scroll
 Detalle: "el dot navigation es horrible, es difícil de clicar, me falta como unas arrows, y las arrows las pondría a los lados de la sección... y que cuando cambia haya animación de scroll, ahora mismo salta a las siguientes tres y se ve horrible"
