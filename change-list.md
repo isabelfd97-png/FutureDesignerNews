@@ -28,9 +28,11 @@ Detalle: "el icono este que está a la derecha del título de para repasar, que 
 Commit: pendiente (grupo G2, con H2)
 Implementado: sustituido el icono de shuffle (flechas cruzadas) por una flecha circular de refresco — el símbolo estándar y universalmente reconocible, coincide con cómo tú misma lo describiste ("entendí que es el refresh"). También amplié la animación de giro al hacer clic de 180° a 360° para reforzar la sensación de "recargar".
 
-## [ ] H4 — Clic en un término de "Para repasar" debería expandir inline, no navegar
+## [x] H4 — Clic en un término de "Para repasar" debería expandir inline, no navegar
 Detalle: "cuando clicas en uno de los términos... tendría que ser más como las cards... clicas en 'framework' y como que se expande y te dice lo que es... más interactivo, porque ahora mismo clicas y te lleva a la gestión de para repasar"
 Área: .ency-mini-row / paintEncySidebar()
+Commit: pendiente (G3)
+Implementado: cada término es ahora una mini-card plegable (acordeón, solo uno abierto a la vez) — clic muestra la definición completa y un link "De: {artículo}" que sí navega, pero directo al artículo (no a una búsqueda en Enciclopedia). Quité el mecanismo anterior (pendingEncySearch) que ya no se usa. Flecha que rota 90° al abrir/cerrar como pista visual.
 
 ## [x] H5 — El sidebar debe tener la misma altura exacta que el hero
 Detalle: "la sección de para repasar, que tenga la misma altura exacta que la card que hay a la izquierda, la grande que hemos hablado antes"

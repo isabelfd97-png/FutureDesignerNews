@@ -454,19 +454,28 @@
   .shuffle-btn.spin svg { animation: shuffleSpin .5s ease; }
   @keyframes shuffleSpin { from { transform: rotate(0); } to { transform: rotate(360deg); } }
   .ency-mini-list { display: flex; flex-direction: column; flex: 1; min-height: 0; overflow-y: auto; }
-  .ency-mini-row {
-    display: block; padding: 12px 14px; border-bottom: 1px solid #e5e5e5; text-decoration: none; color: var(--ink);
-  }
+  /* Cada término es una mini-card plegable: clic para expandir la definición ahí mismo,
+     sin salir de la home. */
+  .ency-mini-row { border-bottom: 1px solid #e5e5e5; }
   .ency-mini-row:last-child { border-bottom: none; }
-  .ency-mini-row:hover { background: rgba(255,90,31,0.06); }
-  .ency-mini-row b {
-    display: block; font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 13.5px; margin-bottom: 3px;
+  .ency-mini-row.open { background: rgba(255,90,31,0.05); }
+  .ency-mini-toggle {
+    width: 100%; display: flex; align-items: center; justify-content: space-between; gap: 8px;
+    padding: 12px 14px; border: none; background: transparent; cursor: pointer; text-align: left;
+    font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 13.5px; color: var(--ink);
   }
-  .ency-mini-row:hover b { color: var(--accent); }
-  .ency-mini-row span {
-    display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
-    font-size: 12px; line-height: 1.45; color: var(--muted);
+  .ency-mini-row:hover .ency-mini-toggle { color: var(--accent); }
+  .ency-mini-caret { flex: none; width: 11px; height: 11px; color: var(--muted); transition: transform .15s ease; }
+  .ency-mini-caret svg { width: 100%; height: 100%; transform: rotate(90deg); }
+  .ency-mini-row.open .ency-mini-caret { color: var(--accent); }
+  .ency-mini-row.open .ency-mini-caret svg { transform: rotate(-90deg); }
+  .ency-mini-def { padding: 0 14px 14px; }
+  .ency-mini-def p { margin: 0 0 8px; font-size: 12.5px; line-height: 1.5; color: var(--ink); }
+  .ency-mini-def .src {
+    font-family: 'Space Mono', monospace; font-size: 10px; text-transform: uppercase; letter-spacing: .5px;
+    color: var(--accent); cursor: pointer; text-decoration: none;
   }
+  .ency-mini-def .src:hover { text-decoration: underline; }
   .ency-sidebar-empty { padding: 20px 14px; font-size: 12.5px; color: var(--muted); text-align: center; }
 
   /* ---- Carrusel paginado de "quizá te interese" (dot-nav, sin autoplay) ---- */
@@ -1380,7 +1389,7 @@ function paintOtherCarousel() {
 }
 
 /* ---------- columna de Enciclopedia junto al titular (shuffle de términos) ---------- */
-let pendingEncySearch = null;
+let expandedEncyKey = null;
 
 function pickEncyPreview(terms) {
   if (!terms.length) return [];
@@ -1395,9 +1404,30 @@ function paintEncySidebar(items) {
     wrap.innerHTML = `<div class="ency-sidebar-empty">Aún no hay términos guardados. Dale a ${ICONS.heart} en los que veas dentro de un artículo.</div>`;
     return;
   }
-  wrap.innerHTML = items.map(t => `<a class="ency-mini-row" href="#/enciclopedia" data-term="${t.term.replace(/"/g, '&quot;')}"><b>${t.term}</b><span>${t.definition}</span></a>`).join('');
-  wrap.querySelectorAll('.ency-mini-row').forEach(row => {
-    row.addEventListener('click', () => { pendingEncySearch = row.dataset.term; });
+  wrap.innerHTML = items.map(t => {
+    const open = expandedEncyKey === t.key;
+    return `<div class="ency-mini-row ${open ? 'open' : ''}" data-key="${t.key}">
+      <button class="ency-mini-toggle">
+        <b>${t.term}</b>
+        <span class="ency-mini-caret">${ICONS.arrow}</span>
+      </button>
+      ${open ? `
+        <div class="ency-mini-def">
+          <p>${t.definition}</p>
+          <a class="src" data-open="${t.articleId}">De: ${t.articleTitle}</a>
+        </div>
+      ` : ''}
+    </div>`;
+  }).join('');
+  wrap.querySelectorAll('.ency-mini-toggle').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const key = btn.closest('.ency-mini-row').dataset.key;
+      expandedEncyKey = expandedEncyKey === key ? null : key;
+      paintEncySidebar(items);
+    });
+  });
+  wrap.querySelectorAll('.ency-mini-def [data-open]').forEach(a => {
+    a.addEventListener('click', e => { e.stopPropagation(); location.hash = '#/articulo/' + a.dataset.open; });
   });
 }
 
@@ -1920,13 +1950,7 @@ function renderEnciclopedia() {
     </div>
   `;
   document.getElementById('ency-search').addEventListener('input', e => paintEncyList(terms, e.target.value));
-  if (pendingEncySearch) {
-    document.getElementById('ency-search').value = pendingEncySearch;
-    paintEncyList(terms, pendingEncySearch);
-    pendingEncySearch = null;
-  } else {
-    paintEncyList(terms, '');
-  }
+  paintEncyList(terms, '');
 
   if (window.__pendingReviewOpen) {
     window.__pendingReviewOpen = false;
