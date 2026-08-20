@@ -46,9 +46,11 @@ Detalle: "las interacciones de las cards grandes que van pasando... ahora mismo 
 Commit: pendiente (G4)
 Implementado: cross-fade — al cambiar de titular (dot, flecha o autoplay), el contenedor baja a opacidad 0 en 220ms, se sustituye el contenido, y sube de nuevo. Los puntos se actualizan al instante (no forman parte del fundido).
 
-## [ ] H7 — Carrusel "Quizá te interese": flechas en vez de dot-nav, con animación de scroll
+## [x] H7 — Carrusel "Quizá te interese": flechas en vez de dot-nav, con animación de scroll
 Detalle: "el dot navigation es horrible, es difícil de clicar, me falta como unas arrows, y las arrows las pondría a los lados de la sección... y que cuando cambia haya animación de scroll, ahora mismo salta a las siguientes tres y se ve horrible"
 Área: otherCarouselState / paintOtherCarousel()
+Commit: pendiente (G5)
+Implementado: quité los puntos, añadí flechas a los lados (izquierda de la primera card, derecha de la última — mismo estilo que las del hero). Página anterior/siguiente con deslizamiento (translateX + fade, 220ms) en vez de salto instantáneo. Navegación circular (llegar al final vuelve al principio). Las flechas se ocultan (visibility, no display, para no mover el layout) si solo hay una página.
 
 ## [ ] H8 — Reestructurar el reparto de artículos: hero a 3, secciones fijas abajo
 Detalle: "en las cards grandes que están a la izquierda [el hero] que solo hayan tres artículos y el resto los puedes ir poniendo abajo... debajo de quizá te interese pondrás Teoría, la sección de Práctica y luego una sección de Novedades... en el futuro serán como máximo cinco últimos artículos"

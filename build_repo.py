@@ -589,7 +589,25 @@ TEMPLATE = r"""<!DOCTYPE html>
   .ency-sidebar-empty { padding: 20px 14px; font-size: 12.5px; color: var(--muted); text-align: center; }
 
   /* ---- Carrusel paginado de "quizá te interese" (dot-nav, sin autoplay) ---- */
-  .other-carousel-page { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+  .other-carousel { display: flex; align-items: center; gap: 14px; }
+  .other-carousel-viewport { flex: 1; min-width: 0; overflow: hidden; }
+  .other-carousel-arrow {
+    flex: none; border: 2px solid var(--ink); background: var(--bg); width: 34px; height: 34px;
+    display: flex; align-items: center; justify-content: center; cursor: pointer; color: var(--ink);
+  }
+  .other-carousel-arrow svg { width: 13px; height: 13px; }
+  .other-carousel-arrow.left svg { transform: scaleX(-1); }
+  .other-carousel-arrow:hover { background: var(--accent); border-color: var(--accent); color: #fff; }
+  .other-carousel-arrow.hidden { visibility: hidden; }
+  .other-carousel-page {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px;
+    transition: transform .22s ease, opacity .22s ease;
+  }
+  .other-carousel-page.slide-out-left { transform: translateX(-22px); opacity: 0; }
+  .other-carousel-page.slide-out-right { transform: translateX(22px); opacity: 0; }
+  .other-carousel-page.slide-in-right, .other-carousel-page.slide-in-left { opacity: 0; }
+  .other-carousel-page.slide-in-right { transform: translateX(22px); }
+  .other-carousel-page.slide-in-left { transform: translateX(-22px); }
   @media (max-width: 720px) { .other-carousel-page { grid-template-columns: 1fr; } }
 
   @media (max-width: 900px) {
@@ -1492,19 +1510,30 @@ function clearHeroTimer() {
 /* ---------- carrusel paginado de "quizá te interese" (dot-nav, sin autoplay) ---------- */
 const otherCarouselState = { pages: [], index: 0 };
 
-function paintOtherCarousel() {
+function paintOtherCarousel(direction) {
   const wrap = document.getElementById('other-carousel-slot');
   if (!wrap) return;
   const page = otherCarouselState.pages[otherCarouselState.index] || [];
-  wrap.innerHTML = `<div class="other-carousel-page">${page.map(secondaryHtml).join('')}</div>`;
-  const dotsWrap = document.getElementById('other-dots');
-  dotsWrap.innerHTML = otherCarouselState.pages.length > 1
-    ? otherCarouselState.pages.map((_, i) => `<button class="lead-dot ${i === otherCarouselState.index ? 'on' : ''}" data-i="${i}" aria-label="Página ${i + 1}"></button>`).join('')
-    : '';
-  dotsWrap.querySelectorAll('.lead-dot').forEach(d => d.addEventListener('click', () => {
-    otherCarouselState.index = +d.dataset.i;
-    paintOtherCarousel();
-  }));
+  const html = `<div class="other-carousel-page">${page.map(secondaryHtml).join('')}</div>`;
+
+  const outgoing = wrap.firstElementChild;
+  if (direction && outgoing) {
+    outgoing.classList.add(direction > 0 ? 'slide-out-left' : 'slide-out-right');
+    setTimeout(() => {
+      wrap.innerHTML = html;
+      const incoming = wrap.firstElementChild;
+      incoming.classList.add(direction > 0 ? 'slide-in-right' : 'slide-in-left');
+      requestAnimationFrame(() => requestAnimationFrame(() => incoming.classList.remove('slide-in-right', 'slide-in-left')));
+    }, 220);
+  } else {
+    wrap.innerHTML = html;
+  }
+}
+function otherCarouselStep(delta) {
+  const n = otherCarouselState.pages.length;
+  if (!n) return;
+  otherCarouselState.index = (otherCarouselState.index + delta + n) % n;
+  paintOtherCarousel(delta);
 }
 
 /* ---------- columna de Enciclopedia junto al titular (shuffle de términos) ---------- */
@@ -1597,8 +1626,11 @@ function renderPortada() {
     </div>
     ${otherCarouselState.pages.length ? `
       <div class="front-divider"><span class="front-label">Quizá te interese</span></div>
-      <div id="other-carousel-slot"></div>
-      <div class="lead-controls"><div class="lead-dots" id="other-dots"></div></div>
+      <div class="other-carousel">
+        <button class="other-carousel-arrow left" id="other-prev" title="Anteriores">${ICONS.arrow}</button>
+        <div class="other-carousel-viewport" id="other-carousel-slot"></div>
+        <button class="other-carousel-arrow right" id="other-next" title="Siguientes">${ICONS.arrow}</button>
+      </div>
     ` : ''}
     ${SECTIONS.filter(s => bySection[s.slug] && bySection[s.slug].length).map(s => `
       <div class="front-divider"><span class="front-label">${s.name}</span></div>
@@ -1619,7 +1651,14 @@ function renderPortada() {
     paintEncySidebar(pickEncyPreview(encyTerms));
   });
 
-  if (otherCarouselState.pages.length) paintOtherCarousel();
+  if (otherCarouselState.pages.length) {
+    paintOtherCarousel();
+    const multi = otherCarouselState.pages.length > 1;
+    document.getElementById('other-prev').classList.toggle('hidden', !multi);
+    document.getElementById('other-next').classList.toggle('hidden', !multi);
+    document.getElementById('other-prev').addEventListener('click', () => otherCarouselStep(-1));
+    document.getElementById('other-next').addEventListener('click', () => otherCarouselStep(1));
+  }
 }
 
 function railHtml(items) {
