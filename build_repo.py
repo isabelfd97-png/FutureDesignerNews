@@ -2,10 +2,14 @@ import json, os
 
 BASE = os.path.dirname(os.path.abspath(__file__))
 DATA_FILE = os.path.join(BASE, "data", "articles.json")
+COMMANDS_FILE = os.path.join(BASE, "data", "commands.json")
 OUT_FILE = os.path.join(BASE, "index.html")
 
 with open(DATA_FILE, encoding="utf-8") as f:
     articles = json.load(f)
+
+with open(COMMANDS_FILE, encoding="utf-8") as f:
+    commands = json.load(f)
 
 SECTIONS = [
     {
@@ -66,6 +70,7 @@ ICONS['history'] = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" s
 ICONS['heart'] = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 20.5s-7.5-4.6-10-9.3C.4 7.9 2 4.5 5.4 4c2-.3 3.8.6 4.9 2.3.8 1.2 1.7 1.2 2.5 0C13.8 4.6 15.6 3.7 17.6 4c3.4.5 5 3.9 3.4 7.2-2.5 4.7-9 9.3-9 9.3Z"/></svg>'
 ICONS['heart-filled'] = '<svg viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M12 20.5s-7.5-4.6-10-9.3C.4 7.9 2 4.5 5.4 4c2-.3 3.8.6 4.9 2.3.8 1.2 1.7 1.2 2.5 0C13.8 4.6 15.6 3.7 17.6 4c3.4.5 5 3.9 3.4 7.2-2.5 4.7-9 9.3-9 9.3Z"/></svg>'
 ICONS['flame'] = '<svg viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M12 2c1 3-2 4-2 7a3 3 0 0 0 6 0c0-1-0.5-2-1-2 2 0 4 2 4 5.5A7 7 0 1 1 8 12.5C8 9 9 6 12 2Z"/></svg>'
+ICONS['shuffle'] = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 6h3.5c2 0 3 1 4.2 2.8M3 18h3.5c2 0 3-1 4.2-2.8M17 6h4M17 18h4"/><path d="M17.5 3.5 21 6l-3.5 2.5M17.5 20.5 21 18l-3.5-2.5"/></svg>'
 
 # Ilustración pixel-art única por artículo (16x16, más detallada), pensada para el tema concreto de cada uno.
 # Los artículos futuros sin entrada aquí caen al icono por keyword/sección (pixelIconFor en JS).
@@ -76,6 +81,7 @@ ARTICLE_ICONS = {aid: pixel_svg(rows) for aid, rows in ARTICLE_ICONS_ROWS.items(
 ICONS['wand'] = pixel_svg(['............', '............', '.......##...', '......####..', '......####..', '.......##...', '......#.....', '.....#......', '...##.......', '...#........', '..#.........', '.#..........'])
 
 data_json = json.dumps(articles, ensure_ascii=False)
+commands_json = json.dumps(commands, ensure_ascii=False)
 sections_json = json.dumps(SECTIONS, ensure_ascii=False)
 icons_json = json.dumps(ICONS, ensure_ascii=False)
 article_icons_json = json.dumps(ARTICLE_ICONS, ensure_ascii=False)
@@ -373,6 +379,26 @@ TEMPLATE = r"""<!DOCTYPE html>
   .ency-index a:hover { color: var(--ink); }
   .ency-index a.active { color: var(--accent); }
 
+  /* ---- Claude Commands (pestaña dentro de Enciclopedia) ---- */
+  .ency-tabs { margin: 16px 0 0; }
+  .cmd-group-heading {
+    font-family: 'Archivo Black', sans-serif; font-weight: 400; font-size: 18px; color: var(--accent);
+    text-transform: uppercase; letter-spacing: -.3px; padding: 18px 0 6px; border-bottom: 3px solid var(--ink); scroll-margin-top: 90px;
+  }
+  .cmd-row { padding: 16px 0; border-bottom: 1px solid #e5e5e5; display: flex; flex-direction: column; gap: 8px; }
+  .cmd-row-head { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+  .cmd-name { font-family: 'Space Mono', monospace; font-size: 16px; font-weight: 700; color: var(--ink); }
+  .cmd-tag {
+    font-family: 'Space Mono', monospace; font-size: 9.5px; letter-spacing: .5px; text-transform: uppercase;
+    color: #fff; background: var(--accent); padding: 2px 8px;
+  }
+  .cmd-desc { margin: 0; font-size: 13.5px; color: var(--muted); line-height: 1.55; }
+  .cmd-example {
+    margin: 0; background: #f4f4f4; border: 1px solid #ddd; padding: 9px 11px;
+    font-family: 'Space Mono', monospace; font-size: 12px; line-height: 1.5; overflow-x: auto; white-space: pre-wrap;
+  }
+  .cmd-notes { margin: 0; font-size: 12.5px; font-style: italic; color: var(--ink); }
+
   /* ---- Flashcards de repaso ---- */
   .flash-panel { max-width: 460px; }
   .flash-modal-body { padding: 26px 22px 22px; display: flex; flex-direction: column; align-items: center; gap: 18px; }
@@ -477,16 +503,14 @@ TEMPLATE = r"""<!DOCTYPE html>
   .front-divider::before { max-width: 28px; }
   .front-divider .front-label { margin: 0; flex: none; }
 
-  /* ---- Fila superior: titular manda, últimas entradas es columna pequeña ---- */
+  /* ---- Fila superior: carrusel de titular + columna de Enciclopedia ---- */
   .front-top { display: grid; grid-template-columns: 2.3fr 1fr; gap: 26px; align-items: start; margin-top: 4px; }
-  .front-top.no-lead { display: block; }
-  .front-lead .fp-hero .fp-img { height: 320px; }
+  .front-lead .fp-hero .fp-img { height: 280px; }
   .front-lead .fp-hero .fp-body { padding: 20px 22px; gap: 8px; }
-  .front-lead .fp-hero h2 { font-size: 36px; }
-  .front-lead .fp-hero p { font-size: 15px; }
-  .front-briefs-col .front-label { margin-top: 0; }
+  .front-lead .fp-hero h2 { font-size: 32px; }
+  .front-lead .fp-hero p { font-size: 14.5px; }
 
-  /* ---- Controles del carrusel de 5★ (debajo del titular) ---- */
+  /* ---- Controles del carrusel de titular (flechas + puntos) ---- */
   .lead-controls { display: flex; align-items: center; justify-content: center; gap: 16px; margin-top: 14px; }
   .lead-arrow {
     border: 2px solid var(--ink); background: var(--bg); width: 30px; height: 30px; flex: none;
@@ -506,107 +530,51 @@ TEMPLATE = r"""<!DOCTYPE html>
   .lead-icon { width: 52px; height: 52px; color: var(--ink); margin-bottom: 4px; image-rendering: pixelated; }
   .lead-icon svg { width: 100%; height: 100%; shape-rendering: crispEdges; }
 
-  /* ---- Apuntes (los 2 siguientes más recientes), en fila debajo ---- */
-  .front-picks { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; margin-top: 14px; }
-  .picks-subsection:first-of-type .subsection-title { margin-top: 20px; }
-  .front-pick {
-    display: flex; gap: 0; text-decoration: none; color: var(--ink); height: 96px;
-    border: 2px solid var(--ink); position: relative; transition: border-color .15s ease;
+  /* ---- Columna de Enciclopedia junto al titular ---- */
+  .ency-sidebar { border: 2px solid var(--ink); }
+  .ency-sidebar-head {
+    display: flex; align-items: center; justify-content: space-between; gap: 10px;
+    padding: 12px 14px; border-bottom: 2px solid var(--ink); background: var(--ink); color: #fff;
   }
-  .front-pick:hover { border-color: var(--accent); }
-  .front-pick:hover h3 { color: var(--accent); }
-  .front-pick .fp-img, .front-pick .fp-noimg { width: 96px; flex: none; border-right: 2px solid var(--ink); object-fit: cover; height: 100%; }
-  .front-pick .fp-noimg { display: flex; align-items: center; justify-content: center; background: #f2f2f2; }
-  .front-pick .fp-noimg svg { width: 26px; height: 26px; color: var(--ink); opacity: .5; }
-  .front-pick .pick-body { padding: 10px 14px; display: flex; flex-direction: column; justify-content: center; gap: 5px; min-width: 0; }
-  .front-pick .pick-tag { font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: .6px; text-transform: uppercase; color: var(--accent); font-weight: 700; }
-  .front-pick h3 {
-    margin: 0; font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 14.5px; line-height: 1.28;
-    display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; transition: color .15s ease;
+  .ency-sidebar-head h3 {
+    margin: 0; font-family: 'Space Mono', monospace; font-size: 11px; letter-spacing: 1.5px;
+    text-transform: uppercase; font-weight: 700;
   }
+  .shuffle-btn {
+    border: 2px solid #fff; background: transparent; color: #fff; width: 26px; height: 26px; flex: none;
+    display: flex; align-items: center; justify-content: center; cursor: pointer;
+  }
+  .shuffle-btn svg { width: 13px; height: 13px; }
+  .shuffle-btn:hover { background: var(--accent); border-color: var(--accent); }
+  .shuffle-btn.spin svg { animation: shuffleSpin .4s ease; }
+  @keyframes shuffleSpin { from { transform: rotate(0); } to { transform: rotate(180deg); } }
+  .ency-mini-list { display: flex; flex-direction: column; }
+  .ency-mini-row {
+    display: block; padding: 12px 14px; border-bottom: 1px solid #e5e5e5; text-decoration: none; color: var(--ink);
+  }
+  .ency-mini-row:last-child { border-bottom: none; }
+  .ency-mini-row:hover { background: rgba(255,90,31,0.06); }
+  .ency-mini-row b {
+    display: block; font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 13.5px; margin-bottom: 3px;
+  }
+  .ency-mini-row:hover b { color: var(--accent); }
+  .ency-mini-row span {
+    display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
+    font-size: 12px; line-height: 1.45; color: var(--muted);
+  }
+  .ency-sidebar-empty { padding: 20px 14px; font-size: 12.5px; color: var(--muted); text-align: center; }
 
-  /* ---- Empty state de "Últimas entradas" ---- */
-  .briefs-empty {
-    border: 2px dashed var(--ink); padding: 26px 18px; text-align: center;
-    display: flex; flex-direction: column; align-items: center; gap: 10px; min-height: 180px; justify-content: center;
-  }
-  .briefs-empty-icon { width: 26px; height: 26px; color: var(--accent); opacity: .55; }
-  .briefs-empty-icon svg { width: 100%; height: 100%; }
-  .briefs-empty p { margin: 0; font-size: 13px; line-height: 1.5; font-weight: 700; color: var(--ink); }
-  .briefs-empty .briefs-empty-sub { font-weight: 400; color: var(--muted); font-size: 12px; }
+  /* ---- Carrusel paginado de "quizá te interese" (dot-nav, sin autoplay) ---- */
+  .other-carousel-page { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+  @media (max-width: 720px) { .other-carousel-page { grid-template-columns: 1fr; } }
 
-  /* ---- Breves: columna angosta, título en varias líneas ---- */
-  .front-briefs { border-top: 3px solid var(--ink); }
-  .brief-row {
-    display: flex; flex-direction: column; align-items: flex-start; gap: 7px; padding: 13px 2px; border-bottom: 1px solid #ddd;
-    text-decoration: none; color: var(--ink);
+  @media (max-width: 900px) {
+    .front-top { grid-template-columns: 1fr; }
   }
-  .brief-row:hover { background: rgba(255,90,31,0.06); }
-  .brief-row:hover .brief-title { color: var(--accent); }
-  .brief-stamp {
-    flex: none; font-family: 'Space Mono', monospace; font-size: 9px; font-weight: 700; letter-spacing: .8px; text-transform: uppercase;
-    border: 2px solid var(--ink); padding: 4px 8px; background: var(--bg); transform: rotate(-3deg);
-    transition: background .18s ease, color .18s ease, border-color .18s ease;
-  }
-  .brief-row:nth-child(3n+2) .brief-stamp { transform: rotate(2deg); }
-  .brief-row:nth-child(3n) .brief-stamp { transform: rotate(-1.5deg); }
-  .brief-row:hover .brief-stamp {
-    background: var(--accent); border-color: var(--accent); color: #fff;
-    animation: stampWiggle .45s ease;
-  }
-  @keyframes stampWiggle {
-    0% { transform: rotate(-3deg) scale(1); }
-    35% { transform: rotate(-9deg) scale(1.1); }
-    65% { transform: rotate(6deg) scale(1.1); }
-    100% { transform: rotate(-2deg) scale(1.05); }
-  }
-  .brief-title {
-    width: 100%; font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 14px; line-height: 1.32;
-    display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; transition: color .15s ease;
-  }
-  .brief-meta { display: flex; align-items: center; gap: 10px; }
-  .brief-date { font-size: 10.5px; color: var(--muted); }
-
-  /* ---- Paginación de "Últimas entradas" ---- */
-  .brief-pagination { display: flex; align-items: center; justify-content: center; gap: 10px; margin-top: 14px; }
-  .brief-pg-arrow {
-    border: 2px solid var(--ink); background: var(--bg); width: 26px; height: 26px; flex: none;
-    display: flex; align-items: center; justify-content: center; cursor: pointer; color: var(--ink);
-  }
-  .brief-pg-arrow svg { width: 11px; height: 11px; }
-  .brief-pg-arrow.left svg { transform: scaleX(-1); }
-  .brief-pg-arrow:hover:not(:disabled) { background: var(--accent); border-color: var(--accent); color: #fff; }
-  .brief-pg-arrow:disabled { opacity: .3; cursor: default; }
-  .brief-pg-nums { display: flex; gap: 6px; }
-  .brief-pg-num {
-    border: 2px solid var(--ink); background: var(--bg); width: 26px; height: 26px; flex: none;
-    display: flex; align-items: center; justify-content: center; cursor: pointer; color: var(--ink);
-    font-family: 'Space Mono', monospace; font-size: 11px; font-weight: 700;
-  }
-  .brief-pg-num:hover { border-color: var(--accent); color: var(--accent); }
-  .brief-pg-num.active { background: var(--ink); border-color: var(--ink); color: #fff; }
-
-  /* ---- Mini rating badge (miniaturas) ---- */
-  .mini-rating { display: flex; align-items: center; gap: 3px; font-family: 'Space Mono', monospace; font-size: 11px; font-weight: 700; }
-  .mini-rating svg { width: 11px; height: 11px; }
-  .mini-rating.overlay { position: absolute; top: 8px; right: 8px; background: rgba(10,10,10,.75); color: #fff; padding: 3px 7px; z-index: 2; }
-  .mini-rating.overlay svg { color: var(--accent); }
-  .mini-rating.overlay.muted svg { color: rgba(255,255,255,.4); }
-  .mini-rating.overlay.muted span { color: rgba(255,255,255,.65); }
-  .mini-rating.inline { color: var(--accent); }
-  .mini-rating.inline svg { color: var(--accent); }
-  .mini-rating.inline.muted, .mini-rating.inline.muted svg { color: var(--muted); }
 
   @media (max-width: 760px) {
-    .front-top { grid-template-columns: 1fr; }
     .front-lead .fp-hero .fp-img { height: 180px; }
     .front-lead .fp-hero h2 { font-size: 23px; }
-    .front-picks { grid-template-columns: 1fr; }
-    .front-pick { height: 76px; }
-    .front-pick .fp-img, .front-pick .fp-noimg { width: 64px; }
-    .brief-title { font-size: 14px; }
-    .brief-meta { gap: 8px; }
-    .brief-date { display: none; }
   }
 
   .fp-card {
@@ -629,14 +597,11 @@ TEMPLATE = r"""<!DOCTYPE html>
   .fp-hero.no-media h2 { font-size: 44px; }
   .fp-hero.no-media p { font-size: 16.5px; }
 
-  /* ---- Portada: titular + segundo nivel ---- */
-  .front-lead-single { margin-top: 6px; }
-  .front-secondary { display: grid; grid-template-columns: repeat(2, 1fr); gap: 18px; margin-top: 18px; }
+  /* ---- Portada: tarjeta de segundo nivel (reutilizada en el carrusel de "quizá te interese") ---- */
   .fp-secondary .fp-img, .fp-secondary .fp-noimg { height: 190px; }
   .fp-secondary h3 { margin: 0; font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 21px; line-height: 1.18; }
   .fp-secondary p { margin: 0; font-size: 13.5px; line-height: 1.5; color: var(--ink); }
   .fp-secondary .date { font-family: 'Space Mono', monospace; font-size: 10.5px; color: var(--muted); margin-top: 2px; }
-  @media (max-width: 720px) { .front-secondary { grid-template-columns: 1fr; } }
 
   /* ---- Leído / no leído ---- */
 
@@ -1003,6 +968,7 @@ TEMPLATE = r"""<!DOCTYPE html>
 
 <script>
 const ARTICLES = __ARTICLES_JSON__;
+const COMMANDS = __COMMANDS_JSON__;
 const SECTIONS = __SECTIONS_JSON__;
 const ICONS = __ICONS_JSON__;
 const ARTICLE_ICONS = __ARTICLE_ICONS_JSON__;
@@ -1446,6 +1412,79 @@ function secondaryHtml(a) {
 /* ---------- portada: feed cronológico en 3 tamaños ----------
    El más reciente manda (titular grande), los 2 siguientes van en tamaño
    medio y el resto en la cuadrícula de tarjetas. Puro orden por fecha. */
+/* ---------- carrusel de titular (autoplay 5s + flechas + puntos) ---------- */
+let heroTimer = null;
+const heroState = { items: [], index: 0 };
+
+function paintHero() {
+  const { items, index } = heroState;
+  const slot = document.getElementById('hero-slot');
+  if (!slot || !items.length) return;
+  slot.innerHTML = leadHtml(items[index]);
+  const dotsWrap = document.getElementById('hero-dots');
+  dotsWrap.innerHTML = items.length > 1
+    ? items.map((_, i) => `<button class="lead-dot ${i === index ? 'on' : ''}" data-i="${i}" aria-label="Titular ${i + 1}"></button>`).join('')
+    : '';
+  dotsWrap.querySelectorAll('.lead-dot').forEach(d => d.addEventListener('click', () => {
+    heroState.index = +d.dataset.i;
+    paintHero();
+    restartHeroTimer();
+  }));
+}
+function heroStep(delta) {
+  const n = heroState.items.length;
+  if (!n) return;
+  heroState.index = (heroState.index + delta + n) % n;
+  paintHero();
+}
+function restartHeroTimer() {
+  clearHeroTimer();
+  if (heroState.items.length > 1) heroTimer = setInterval(() => heroStep(1), 5000);
+}
+function clearHeroTimer() {
+  if (heroTimer) { clearInterval(heroTimer); heroTimer = null; }
+}
+
+/* ---------- carrusel paginado de "quizá te interese" (dot-nav, sin autoplay) ---------- */
+const otherCarouselState = { pages: [], index: 0 };
+
+function paintOtherCarousel() {
+  const wrap = document.getElementById('other-carousel-slot');
+  if (!wrap) return;
+  const page = otherCarouselState.pages[otherCarouselState.index] || [];
+  wrap.innerHTML = `<div class="other-carousel-page">${page.map(secondaryHtml).join('')}</div>`;
+  const dotsWrap = document.getElementById('other-dots');
+  dotsWrap.innerHTML = otherCarouselState.pages.length > 1
+    ? otherCarouselState.pages.map((_, i) => `<button class="lead-dot ${i === otherCarouselState.index ? 'on' : ''}" data-i="${i}" aria-label="Página ${i + 1}"></button>`).join('')
+    : '';
+  dotsWrap.querySelectorAll('.lead-dot').forEach(d => d.addEventListener('click', () => {
+    otherCarouselState.index = +d.dataset.i;
+    paintOtherCarousel();
+  }));
+}
+
+/* ---------- columna de Enciclopedia junto al titular (shuffle de términos) ---------- */
+let pendingEncySearch = null;
+
+function pickEncyPreview(terms) {
+  if (!terms.length) return [];
+  const due = termsDue(terms);
+  const pool = due.length ? due : terms;
+  return pool.slice().sort(() => Math.random() - 0.5).slice(0, 5);
+}
+function paintEncySidebar(items) {
+  const wrap = document.getElementById('ency-mini-list');
+  if (!wrap) return;
+  if (!items.length) {
+    wrap.innerHTML = `<div class="ency-sidebar-empty">Aún no hay términos guardados. Dale a ${ICONS.heart} en los que veas dentro de un artículo.</div>`;
+    return;
+  }
+  wrap.innerHTML = items.map(t => `<a class="ency-mini-row" href="#/enciclopedia" data-term="${t.term.replace(/"/g, '&quot;')}"><b>${t.term}</b><span>${t.definition}</span></a>`).join('');
+  wrap.querySelectorAll('.ency-mini-row').forEach(row => {
+    row.addEventListener('click', () => { pendingEncySearch = row.dataset.term; });
+  });
+}
+
 function renderPortada() {
   renderNav('');
   const main = document.getElementById('main');
@@ -1458,18 +1497,64 @@ function renderPortada() {
     return;
   }
 
-  const lead = list[0];
-  const secondary = list.slice(1, 3);
-  const rest = list.slice(3);
+  heroState.items = list.slice(0, 5);
+  heroState.index = 0;
+
+  const otherItems = list.slice(5, 11);
+  otherCarouselState.pages = [];
+  for (let i = 0; i < otherItems.length; i += 3) otherCarouselState.pages.push(otherItems.slice(i, i + 3));
+  otherCarouselState.index = 0;
+
+  const rest = list.slice(11);
+  const bySection = {};
+  rest.forEach(a => { (bySection[a.section] = bySection[a.section] || []).push(a); });
+
+  const encyTerms = buildEncyTerms();
+  const encyPreview = pickEncyPreview(encyTerms);
 
   main.innerHTML = `
-    <div class="front-lead-single">${leadHtml(lead)}</div>
-    ${secondary.length ? `<div class="front-secondary">${secondary.map(secondaryHtml).join('')}</div>` : ''}
-    ${rest.length ? `
-      <div class="front-divider"><span class="front-label">Más artículos</span></div>
-      <div class="grid">${rest.map(cardHtml).join('')}</div>
+    <div class="front-top">
+      <div class="front-lead">
+        <div id="hero-slot"></div>
+        <div class="lead-controls">
+          <button class="lead-arrow left" id="hero-prev" title="Titular anterior">${ICONS.arrow}</button>
+          <div class="lead-dots" id="hero-dots"></div>
+          <button class="lead-arrow" id="hero-next" title="Siguiente titular">${ICONS.arrow}</button>
+        </div>
+      </div>
+      <aside class="ency-sidebar">
+        <div class="ency-sidebar-head">
+          <h3>Para repasar</h3>
+          <button class="shuffle-btn" id="ency-shuffle-btn" title="Otros términos">${ICONS.shuffle}</button>
+        </div>
+        <div class="ency-mini-list" id="ency-mini-list"></div>
+      </aside>
+    </div>
+    ${otherCarouselState.pages.length ? `
+      <div class="front-divider"><span class="front-label">Quizá te interese</span></div>
+      <div id="other-carousel-slot"></div>
+      <div class="lead-controls"><div class="lead-dots" id="other-dots"></div></div>
     ` : ''}
+    ${SECTIONS.filter(s => bySection[s.slug] && bySection[s.slug].length).map(s => `
+      <div class="front-divider"><span class="front-label">${s.name}</span></div>
+      <div class="grid">${bySection[s.slug].map(cardHtml).join('')}</div>
+    `).join('')}
   `;
+
+  paintHero();
+  restartHeroTimer();
+  document.getElementById('hero-prev').addEventListener('click', () => { heroStep(-1); restartHeroTimer(); });
+  document.getElementById('hero-next').addEventListener('click', () => { heroStep(1); restartHeroTimer(); });
+
+  paintEncySidebar(encyPreview);
+  document.getElementById('ency-shuffle-btn').addEventListener('click', e => {
+    const btn = e.currentTarget;
+    btn.classList.add('spin');
+    setTimeout(() => btn.classList.remove('spin'), 400);
+    paintEncySidebar(pickEncyPreview(encyTerms));
+  });
+
+  if (otherCarouselState.pages.length) paintOtherCarousel();
 }
 
 function railHtml(items) {
@@ -1882,9 +1967,28 @@ function buildEncyTerms() {
   return terms;
 }
 
-function renderEnciclopedia() {
+function encyTabsHtml(view) {
+  return `<div class="subnav ency-tabs">
+    <a href="#/enciclopedia" class="subnav-pill ${view === 'terminos' ? 'active' : ''}">Términos</a>
+    <a href="#/enciclopedia/comandos" class="subnav-pill ${view === 'comandos' ? 'active' : ''}">Claude Commands</a>
+  </div>`;
+}
+
+function renderEnciclopedia(view) {
+  view = view === 'comandos' ? 'comandos' : 'terminos';
   renderNav('enciclopedia');
   const main = document.getElementById('main');
+
+  if (view === 'comandos') {
+    main.innerHTML = `
+      <div class="section-hero"><div><h2>Enciclopedia</h2><p>Comandos de Claude que merece la pena tener a mano, con ejemplo y notas.</p></div></div>
+      ${encyTabsHtml(view)}
+      <div id="cmd-out"></div>
+    `;
+    renderComandos();
+    return;
+  }
+
   const terms = buildEncyTerms();
   const due = termsDue(terms);
   const banner = terms.length ? `
@@ -1898,6 +2002,7 @@ function renderEnciclopedia() {
 
   main.innerHTML = `
     <div class="section-hero"><div><h2>Enciclopedia</h2><p>Los términos que te ha interesado guardar, con su definición y de dónde salieron.</p></div></div>
+    ${encyTabsHtml(view)}
     ${banner}
     <div id="ency-out"></div>
   `;
@@ -1919,12 +2024,109 @@ function renderEnciclopedia() {
     </div>
   `;
   document.getElementById('ency-search').addEventListener('input', e => paintEncyList(terms, e.target.value));
-  paintEncyList(terms, '');
+  if (pendingEncySearch) {
+    document.getElementById('ency-search').value = pendingEncySearch;
+    paintEncyList(terms, pendingEncySearch);
+    pendingEncySearch = null;
+  } else {
+    paintEncyList(terms, '');
+  }
 
   if (window.__pendingReviewOpen) {
     window.__pendingReviewOpen = false;
     openFlashModal(terms);
   }
+}
+
+/* ---------- Claude Commands (pestaña de consulta dentro de Enciclopedia) ---------- */
+const cmdState = { groupBy: 'categoria', query: '' };
+
+function renderComandos() {
+  const out = document.getElementById('cmd-out');
+  if (!COMMANDS.length) {
+    out.innerHTML = `<div class="empty">Aún no hay comandos guardados aquí.</div>`;
+    return;
+  }
+  out.innerHTML = `
+    <div class="ency-toolbar">
+      <div class="ency-search-row">${ICONS.search}<input type="text" id="cmd-search" placeholder="Buscar comandos..." autocomplete="off"></div>
+      <div class="subnav" style="margin:0;">
+        <button class="subnav-pill ${cmdState.groupBy === 'categoria' ? 'active' : ''}" data-group="categoria">Por categoría</button>
+        <button class="subnav-pill ${cmdState.groupBy === 'az' ? 'active' : ''}" data-group="az">A-Z</button>
+      </div>
+    </div>
+    <div class="ency-layout">
+      <div class="ency-list" id="cmd-list"></div>
+      <div class="ency-index" id="cmd-index"></div>
+    </div>
+  `;
+  const searchInput = document.getElementById('cmd-search');
+  searchInput.value = cmdState.query;
+  searchInput.addEventListener('input', e => { cmdState.query = e.target.value; paintCommandsList(); });
+  out.querySelectorAll('[data-group]').forEach(btn => {
+    btn.addEventListener('click', () => { cmdState.groupBy = btn.dataset.group; renderComandos(); });
+  });
+  paintCommandsList();
+}
+
+function cmdRowHtml(c) {
+  return `<div class="cmd-row">
+    <div class="cmd-row-head"><b class="cmd-name">${escapeHtml(c.name)}</b><span class="cmd-tag">${escapeHtml(c.category)}</span></div>
+    <p class="cmd-desc">${escapeHtml(c.description)}</p>
+    ${c.example ? `<pre class="cmd-example">${escapeHtml(c.example)}</pre>` : ''}
+    ${c.notes ? `<p class="cmd-notes">${escapeHtml(c.notes)}</p>` : ''}
+  </div>`;
+}
+
+function paintCommandsList() {
+  const q = (cmdState.query || '').trim().toLowerCase();
+  const filtered = q
+    ? COMMANDS.filter(c => (c.name + ' ' + c.description + ' ' + (c.notes || '') + ' ' + c.category).toLowerCase().includes(q))
+    : COMMANDS;
+
+  const list = document.getElementById('cmd-list');
+  const index = document.getElementById('cmd-index');
+  if (!list || !index) return;
+
+  if (window.__cmdObserver) { window.__cmdObserver.disconnect(); window.__cmdObserver = null; }
+
+  if (!filtered.length) {
+    list.innerHTML = `<div class="empty">Sin resultados para "${escapeHtml(cmdState.query)}".</div>`;
+    index.innerHTML = '';
+    return;
+  }
+
+  const keyOf = c => cmdState.groupBy === 'az' ? encyLetterOf(c.name.replace(/^\//, '')) : (c.category || 'Otros');
+  const groups = {};
+  filtered.forEach(c => { const k = keyOf(c); (groups[k] = groups[k] || []).push(c); });
+  const keys = Object.keys(groups).sort((a, b) => a.localeCompare(b, 'es', { sensitivity: 'base' }));
+
+  list.innerHTML = keys.map((k, i) => `
+    <div class="ency-letter-group">
+      <div class="cmd-group-heading" id="cmd-group-${i}" data-idx="${i}">${escapeHtml(k)}</div>
+      <div class="ency-vlist">${groups[k].map(cmdRowHtml).join('')}</div>
+    </div>
+  `).join('');
+
+  index.innerHTML = keys.map((k, i) => `<a href="#cmd-group-${i}" data-idx="${i}" class="${i === 0 ? 'active' : ''}">${escapeHtml(k)}</a>`).join('');
+
+  index.querySelectorAll('a').forEach(a => a.addEventListener('click', e => {
+    e.preventDefault();
+    const target = document.getElementById(`cmd-group-${a.dataset.idx}`);
+    if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }));
+
+  const headers = list.querySelectorAll('.cmd-group-heading');
+  const indexLinks = index.querySelectorAll('a');
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(en => {
+      if (en.isIntersecting) {
+        indexLinks.forEach(a => a.classList.toggle('active', a.dataset.idx === en.target.dataset.idx));
+      }
+    });
+  }, { rootMargin: '-15% 0px -75% 0px', threshold: 0 });
+  headers.forEach(h => obs.observe(h));
+  window.__cmdObserver = obs;
 }
 
 function paintEncyList(terms, query) {
@@ -2068,13 +2270,15 @@ function route() {
   const hash = location.hash || '#/';
   const overlay = document.getElementById('overlay');
   closeSpotlight();
+  clearHeroTimer();
   const m = hash.match(/^#\/articulo\/(.+)$/);
   if (m) { renderArticleOverlay(decodeURIComponent(m[1])); return; }
   overlay.classList.remove('open');
 
   if (hash === '#/' || hash === '') { renderPortada(); return; }
   if (hash === '#/historial') { renderHistorial(); return; }
-  if (hash === '#/enciclopedia') { renderEnciclopedia(); return; }
+  if (hash === '#/enciclopedia') { renderEnciclopedia('terminos'); return; }
+  if (hash === '#/enciclopedia/comandos') { renderEnciclopedia('comandos'); return; }
   const sm = hash.match(/^#\/(.+)$/);
   if (sm && bySlug(sm[1])) { renderSection(sm[1]); return; }
   renderPortada();
@@ -2092,6 +2296,7 @@ route();
 
 html = (TEMPLATE
         .replace("__ARTICLES_JSON__", data_json)
+        .replace("__COMMANDS_JSON__", commands_json)
         .replace("__SECTIONS_JSON__", sections_json)
         .replace("__ICONS_JSON__", icons_json)
         .replace("__ARTICLE_ICONS_JSON__", article_icons_json))
