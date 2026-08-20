@@ -2,6 +2,9 @@
 
 Rama: `feature/rediseno-home` (ya en marcha con el rediseño base commiteado en a5b6b78 — se reutiliza esta rama en vez de crear una `changes/batch-*` nueva, porque ya es una rama aislada dedicada a este mismo trabajo).
 
+## Resumen
+8/8 hechos, 0 en pausa. Sin dudas de interpretación reseñables — todo implementado tal como se pidió. Rama `feature/rediseno-home`, commits a5b6b78..(pendiente el último). Lista para revisar en Chrome.
+
 ## Grupos
 - G1: H1, H5 — mismo problema de fondo (sistema de alturas de la fila superior: hero, carrusel y sidebar deben compartir una altura consistente)
 - G2: H2, H3 — mismo componente (cabecera del sidebar), cambios triviales de estilo/icono
@@ -52,6 +55,8 @@ Detalle: "el dot navigation es horrible, es difícil de clicar, me falta como un
 Commit: pendiente (G5)
 Implementado: quité los puntos, añadí flechas a los lados (izquierda de la primera card, derecha de la última — mismo estilo que las del hero). Página anterior/siguiente con deslizamiento (translateX + fade, 220ms) en vez de salto instantáneo. Navegación circular (llegar al final vuelve al principio). Las flechas se ocultan (visibility, no display, para no mover el layout) si solo hay una página.
 
-## [ ] H8 — Reestructurar el reparto de artículos: hero a 3, secciones fijas abajo
+## [x] H8 — Reestructurar el reparto de artículos: hero a 3, secciones fijas abajo
 Detalle: "en las cards grandes que están a la izquierda [el hero] que solo hayan tres artículos y el resto los puedes ir poniendo abajo... debajo de quizá te interese pondrás Teoría, la sección de Práctica y luego una sección de Novedades... en el futuro serán como máximo cinco últimos artículos"
 Área: renderPortada() — reparto de list.slice(...) y secciones inferiores
+Commit: pendiente (G6)
+Implementado: hero baja de 5 a 3 artículos, "Quizá te interese" toma los 6 siguientes (2 páginas de 3), y el resto se agrupa por sección (Teoría/Práctica/Novedades, mismo orden que ya tenían en SECTIONS) con tope de 5 por sección. Las 3 secciones se muestran siempre, en ese orden fijo, aunque no les toque ningún artículo — con un mensaje de estado vacío en vez de desaparecer, tal como dijiste que se vería "un poco vacío" por ahora. Con los 12 artículos actuales: Teoría 1, Práctica 2, Novedades 0 (vacía).

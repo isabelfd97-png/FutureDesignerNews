@@ -1591,15 +1591,15 @@ function renderPortada() {
     return;
   }
 
-  heroState.items = list.slice(0, 5);
+  heroState.items = list.slice(0, 3);
   heroState.index = 0;
 
-  const otherItems = list.slice(5, 11);
+  const otherItems = list.slice(3, 9);
   otherCarouselState.pages = [];
   for (let i = 0; i < otherItems.length; i += 3) otherCarouselState.pages.push(otherItems.slice(i, i + 3));
   otherCarouselState.index = 0;
 
-  const rest = list.slice(11);
+  const rest = list.slice(9);
   const bySection = {};
   rest.forEach(a => { (bySection[a.section] = bySection[a.section] || []).push(a); });
 
@@ -1632,10 +1632,15 @@ function renderPortada() {
         <button class="other-carousel-arrow right" id="other-next" title="Siguientes">${ICONS.arrow}</button>
       </div>
     ` : ''}
-    ${SECTIONS.filter(s => bySection[s.slug] && bySection[s.slug].length).map(s => `
-      <div class="front-divider"><span class="front-label">${s.name}</span></div>
-      <div class="grid">${bySection[s.slug].map(cardHtml).join('')}</div>
-    `).join('')}
+    ${SECTIONS.map(s => {
+      const items = (bySection[s.slug] || []).slice(0, 5);
+      return `
+        <div class="front-divider"><span class="front-label">${s.name}</span></div>
+        ${items.length
+          ? `<div class="grid">${items.map(cardHtml).join('')}</div>`
+          : `<div class="empty">Todavía no hay más artículos de ${s.name.toLowerCase()} por aquí — vuelve pronto.</div>`}
+      `;
+    }).join('')}
   `;
 
   paintHero();
