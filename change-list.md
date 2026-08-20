@@ -16,13 +16,17 @@ Detalle: "el tamaño de todas las cards, estas grandes que se ofrecen en la home
 Commit: pendiente (grupo G1, con H5)
 Implementado: hero con altura fija 460px (variable --top-row-h) independientemente de si el artículo tiene imagen o no, con line-clamp en título (2 líneas) y resumen (3 líneas) para que el texto nunca desborde. Las 3 cards de "quizá te interese" fijas a 380px cada una, mismo mecanismo de clamp. En mobile (≤900px, todo apilado) se libera a altura automática — no tiene sentido forzar 460px cuando ya no compiten por espacio en la misma fila.
 
-## [ ] H2 — Quitar el fondo negro de "Para repasar"
+## [x] H2 — Quitar el fondo negro de "Para repasar"
 Detalle: "la sección para repasar, veo como muy... que sea de color negro, no me gusta"
 Área: .ency-sidebar-head
+Commit: pendiente (grupo G2, con H3)
+Implementado: fondo de la cabecera de negro a naranja de acento — mismo color que el banner "Se olvida lo que no se repasa" de Enciclopedia (R7 del lote anterior), así queda coherente con el resto de CTAs de repaso del sitio.
 
-## [ ] H3 — El icono de shuffle no se entiende como refresh
+## [x] H3 — El icono de shuffle no se entiende como refresh
 Detalle: "el icono este que está a la derecha del título de para repasar, que entendí que es el refresh, no se entiende, así que cambia el icono o algo"
 Área: .shuffle-btn / ICONS.shuffle
+Commit: pendiente (grupo G2, con H2)
+Implementado: sustituido el icono de shuffle (flechas cruzadas) por una flecha circular de refresco — el símbolo estándar y universalmente reconocible, coincide con cómo tú misma lo describiste ("entendí que es el refresh"). También amplié la animación de giro al hacer clic de 180° a 360° para reforzar la sensación de "recargar".
 
 ## [ ] H4 — Clic en un término de "Para repasar" debería expandir inline, no navegar
 Detalle: "cuando clicas en uno de los términos... tendría que ser más como las cards... clicas en 'framework' y como que se expande y te dice lo que es... más interactivo, porque ahora mismo clicas y te lleva a la gestión de para repasar"

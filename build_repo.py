@@ -66,7 +66,7 @@ ICONS['history'] = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" s
 ICONS['heart'] = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 20.5s-7.5-4.6-10-9.3C.4 7.9 2 4.5 5.4 4c2-.3 3.8.6 4.9 2.3.8 1.2 1.7 1.2 2.5 0C13.8 4.6 15.6 3.7 17.6 4c3.4.5 5 3.9 3.4 7.2-2.5 4.7-9 9.3-9 9.3Z"/></svg>'
 ICONS['heart-filled'] = '<svg viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M12 20.5s-7.5-4.6-10-9.3C.4 7.9 2 4.5 5.4 4c2-.3 3.8.6 4.9 2.3.8 1.2 1.7 1.2 2.5 0C13.8 4.6 15.6 3.7 17.6 4c3.4.5 5 3.9 3.4 7.2-2.5 4.7-9 9.3-9 9.3Z"/></svg>'
 ICONS['flame'] = '<svg viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M12 2c1 3-2 4-2 7a3 3 0 0 0 6 0c0-1-0.5-2-1-2 2 0 4 2 4 5.5A7 7 0 1 1 8 12.5C8 9 9 6 12 2Z"/></svg>'
-ICONS['shuffle'] = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 6h3.5c2 0 3 1 4.2 2.8M3 18h3.5c2 0 3-1 4.2-2.8M17 6h4M17 18h4"/><path d="M17.5 3.5 21 6l-3.5 2.5M17.5 20.5 21 18l-3.5-2.5"/></svg>'
+ICONS['refresh'] = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M20 11A8 8 0 1 0 18 16"/><path d="M20 4v6h-6"/></svg>'
 
 # Ilustración pixel-art única por artículo (16x16, más detallada), pensada para el tema concreto de cada uno.
 # Los artículos futuros sin entrada aquí caen al icono por keyword/sección (pixelIconFor en JS).
@@ -522,7 +522,7 @@ TEMPLATE = r"""<!DOCTYPE html>
   .ency-sidebar { border: 2px solid var(--ink); height: var(--top-row-h); display: flex; flex-direction: column; }
   .ency-sidebar-head {
     display: flex; align-items: center; justify-content: space-between; gap: 10px;
-    padding: 12px 14px; border-bottom: 2px solid var(--ink); background: var(--ink); color: #fff;
+    padding: 12px 14px; border-bottom: 2px solid var(--ink); background: var(--accent); color: #fff;
   }
   .ency-sidebar-head h3 {
     margin: 0; font-family: 'Space Mono', monospace; font-size: 11px; letter-spacing: 1.5px;
@@ -533,9 +533,9 @@ TEMPLATE = r"""<!DOCTYPE html>
     display: flex; align-items: center; justify-content: center; cursor: pointer;
   }
   .shuffle-btn svg { width: 13px; height: 13px; }
-  .shuffle-btn:hover { background: var(--accent); border-color: var(--accent); }
-  .shuffle-btn.spin svg { animation: shuffleSpin .4s ease; }
-  @keyframes shuffleSpin { from { transform: rotate(0); } to { transform: rotate(180deg); } }
+  .shuffle-btn:hover { background: var(--ink); border-color: var(--ink); }
+  .shuffle-btn.spin svg { animation: shuffleSpin .5s ease; }
+  @keyframes shuffleSpin { from { transform: rotate(0); } to { transform: rotate(360deg); } }
   .ency-mini-list { display: flex; flex-direction: column; flex: 1; min-height: 0; overflow-y: auto; }
   .ency-mini-row {
     display: block; padding: 12px 14px; border-bottom: 1px solid #e5e5e5; text-decoration: none; color: var(--ink);
@@ -1524,7 +1524,7 @@ function renderPortada() {
       <aside class="ency-sidebar">
         <div class="ency-sidebar-head">
           <h3>Para repasar</h3>
-          <button class="shuffle-btn" id="ency-shuffle-btn" title="Otros términos">${ICONS.shuffle}</button>
+          <button class="shuffle-btn" id="ency-shuffle-btn" title="Otros términos">${ICONS.refresh}</button>
         </div>
         <div class="ency-mini-list" id="ency-mini-list"></div>
       </aside>
