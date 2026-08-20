@@ -17,7 +17,8 @@ Rama: `feature/rediseno-home` (ya en marcha con el rediseño base commiteado en 
 Detalle: "el tamaño de todas las cards, estas grandes que se ofrecen en la home page, debería ser el mismo, el height debería ser el mismo"
 Área: hero carousel (.fp-hero) + carrusel "Quizá te interese" (.fp-secondary)
 Commit: pendiente (grupo G1, con H5)
-Implementado: hero con altura fija 460px (variable --top-row-h) independientemente de si el artículo tiene imagen o no, con line-clamp en título (2 líneas) y resumen (3 líneas) para que el texto nunca desborde. Las 3 cards de "quizá te interese" fijas a 380px cada una, mismo mecanismo de clamp. En mobile (≤900px, todo apilado) se libera a altura automática — no tiene sentido forzar 460px cuando ya no compiten por espacio en la misma fila.
+Implementado: hero con altura fija (variable --top-row-h) independientemente de si el artículo tiene imagen o no, con line-clamp en título (2 líneas) y resumen (3 líneas) para que el texto nunca desborde. Las 3 cards de "quizá te interese" con altura fija, mismo mecanismo de clamp. En mobile (≤900px, todo apilado) se libera a altura automática.
+Fix post-revisión: con 460px de altura y la imagen a 260px, el texto (título+resumen) no cabía en el espacio restante ni siquiera ya recortado a 2+3 líneas — el contenedor lo cortaba a lo bruto antes de que el propio recorte pudiera mostrar los puntos suspensivos con normalidad. Subí --top-row-h a 520px, bajé la imagen del hero a 230px y la altura de las cards del carrusel a 420px. Verificado con scrollHeight vs clientHeight en las 3 posiciones del hero y las 3 cards del carrusel: cero desbordamiento en todos los casos.
 
 ## [x] H2 — Quitar el fondo negro de "Para repasar"
 Detalle: "la sección para repasar, veo como muy... que sea de color negro, no me gusta"
@@ -41,7 +42,7 @@ Implementado: cada término es ahora una mini-card plegable (acordeón, solo uno
 Detalle: "la sección de para repasar, que tenga la misma altura exacta que la card que hay a la izquierda, la grande que hemos hablado antes"
 Área: .ency-sidebar / .front-top
 Commit: pendiente (grupo G1, con H1)
-Implementado: mismo mecanismo que H1 — .ency-sidebar usa la misma variable --top-row-h (460px). La lista de términos es flex:1 con overflow-y:auto, así que si algún día caben menos o más términos, la caja no cambia de tamaño. Verificado con getBoundingClientRect: hero y sidebar dan exactamente 460 los dos.
+Implementado: mismo mecanismo que H1 — .ency-sidebar usa la misma variable --top-row-h (520px tras el fix de H1). La lista de términos es flex:1 con overflow-y:auto, así que si algún día caben menos o más términos, la caja no cambia de tamaño. Verificado con getBoundingClientRect: hero y sidebar siempre dan el mismo valor.
 
 ## [x] H6 — Transición del carrusel del hero más suave
 Detalle: "las interacciones de las cards grandes que van pasando... ahora mismo salta, y es horrible... que fueran más soft"

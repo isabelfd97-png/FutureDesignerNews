@@ -100,7 +100,7 @@ TEMPLATE = r"""<!DOCTYPE html>
     --muted: #7a7a7a;
     --accent: #ff5a1f;
     --line: #0a0a0a;
-    --top-row-h: 460px;
+    --top-row-h: 520px;
   }
   * { box-sizing: border-box; }
   html { scroll-behavior: smooth; }
@@ -511,7 +511,7 @@ TEMPLATE = r"""<!DOCTYPE html>
   #hero-slot { transition: opacity .22s ease; }
   #hero-slot.fading { opacity: 0; }
   .front-lead .fp-hero { height: var(--top-row-h); display: flex; flex-direction: column; }
-  .front-lead .fp-hero .fp-img, .front-lead .fp-hero .fp-noimg { height: 260px; flex: none; }
+  .front-lead .fp-hero .fp-img, .front-lead .fp-hero .fp-noimg { height: 230px; flex: none; }
   .front-lead .fp-hero .fp-body { padding: 20px 22px; gap: 8px; flex: 1; min-height: 0; overflow: hidden; }
   .front-lead .fp-hero h2 {
     font-size: 32px; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
@@ -644,7 +644,7 @@ TEMPLATE = r"""<!DOCTYPE html>
 
   /* ---- Portada: tarjeta de segundo nivel (reutilizada en el carrusel de "quizá te interese") ---- */
   /* Altura fija para que las 3 cards de una misma página del carrusel midan siempre lo mismo. */
-  .fp-secondary { height: 380px; display: flex; flex-direction: column; }
+  .fp-secondary { height: 420px; display: flex; flex-direction: column; }
   .fp-secondary .fp-img, .fp-secondary .fp-noimg { height: 190px; flex: none; }
   .fp-secondary .fp-body { flex: 1; min-height: 0; overflow: hidden; }
   .fp-secondary h3 {
