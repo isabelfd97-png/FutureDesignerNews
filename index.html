@@ -12,6 +12,7 @@
     --muted: #7a7a7a;
     --accent: #ff5a1f;
     --line: #0a0a0a;
+    --top-row-h: 460px;
   }
   * { box-sizing: border-box; }
   html { scroll-behavior: smooth; }
@@ -396,11 +397,23 @@
   .front-divider .front-label { margin: 0; flex: none; }
 
   /* ---- Fila superior: carrusel de titular + columna de Enciclopedia ---- */
+  /* Hero y sidebar comparten la misma altura fija (--top-row-h) para que no bailen
+     de tamaño según lo largo que sea el título/resumen de cada artículo. */
   .front-top { display: grid; grid-template-columns: 2.3fr 1fr; gap: 26px; align-items: start; margin-top: 4px; }
-  .front-lead .fp-hero .fp-img { height: 280px; }
-  .front-lead .fp-hero .fp-body { padding: 20px 22px; gap: 8px; }
-  .front-lead .fp-hero h2 { font-size: 32px; }
-  .front-lead .fp-hero p { font-size: 14.5px; }
+  .front-lead .fp-hero { height: var(--top-row-h); display: flex; flex-direction: column; }
+  .front-lead .fp-hero .fp-img, .front-lead .fp-hero .fp-noimg { height: 260px; flex: none; }
+  .front-lead .fp-hero .fp-body { padding: 20px 22px; gap: 8px; flex: 1; min-height: 0; overflow: hidden; }
+  .front-lead .fp-hero h2 {
+    font-size: 32px; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
+  }
+  .front-lead .fp-hero p {
+    font-size: 14.5px; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden;
+  }
+  /* Neutraliza el tamaño extra grande de .no-media fuera de la home para que un
+     titular sin imagen mantenga la misma altura/proporciones que uno con imagen. */
+  .front-lead .fp-hero.no-media .fp-body { padding: 20px 22px; gap: 8px; }
+  .front-lead .fp-hero.no-media h2 { font-size: 32px; }
+  .front-lead .fp-hero.no-media p { font-size: 14.5px; }
 
   /* ---- Controles del carrusel de titular (flechas + puntos) ---- */
   .lead-controls { display: flex; align-items: center; justify-content: center; gap: 16px; margin-top: 14px; }
@@ -423,7 +436,7 @@
   .lead-icon svg { width: 100%; height: 100%; shape-rendering: crispEdges; }
 
   /* ---- Columna de Enciclopedia junto al titular ---- */
-  .ency-sidebar { border: 2px solid var(--ink); }
+  .ency-sidebar { border: 2px solid var(--ink); height: var(--top-row-h); display: flex; flex-direction: column; }
   .ency-sidebar-head {
     display: flex; align-items: center; justify-content: space-between; gap: 10px;
     padding: 12px 14px; border-bottom: 2px solid var(--ink); background: var(--ink); color: #fff;
@@ -440,7 +453,7 @@
   .shuffle-btn:hover { background: var(--accent); border-color: var(--accent); }
   .shuffle-btn.spin svg { animation: shuffleSpin .4s ease; }
   @keyframes shuffleSpin { from { transform: rotate(0); } to { transform: rotate(180deg); } }
-  .ency-mini-list { display: flex; flex-direction: column; }
+  .ency-mini-list { display: flex; flex-direction: column; flex: 1; min-height: 0; overflow-y: auto; }
   .ency-mini-row {
     display: block; padding: 12px 14px; border-bottom: 1px solid #e5e5e5; text-decoration: none; color: var(--ink);
   }
@@ -462,10 +475,13 @@
 
   @media (max-width: 900px) {
     .front-top { grid-template-columns: 1fr; }
+    /* Apiladas, hero y sidebar no necesitan compartir altura exacta */
+    .front-lead .fp-hero, .front-lead .fp-hero.no-media, .ency-sidebar { height: auto; }
+    .ency-mini-list { overflow-y: visible; }
   }
 
   @media (max-width: 760px) {
-    .front-lead .fp-hero .fp-img { height: 180px; }
+    .front-lead .fp-hero .fp-img, .front-lead .fp-hero .fp-noimg { height: 180px; }
     .front-lead .fp-hero h2 { font-size: 23px; }
   }
 
@@ -490,9 +506,18 @@
   .fp-hero.no-media p { font-size: 16.5px; }
 
   /* ---- Portada: tarjeta de segundo nivel (reutilizada en el carrusel de "quizá te interese") ---- */
-  .fp-secondary .fp-img, .fp-secondary .fp-noimg { height: 190px; }
-  .fp-secondary h3 { margin: 0; font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 21px; line-height: 1.18; }
-  .fp-secondary p { margin: 0; font-size: 13.5px; line-height: 1.5; color: var(--ink); }
+  /* Altura fija para que las 3 cards de una misma página del carrusel midan siempre lo mismo. */
+  .fp-secondary { height: 380px; display: flex; flex-direction: column; }
+  .fp-secondary .fp-img, .fp-secondary .fp-noimg { height: 190px; flex: none; }
+  .fp-secondary .fp-body { flex: 1; min-height: 0; overflow: hidden; }
+  .fp-secondary h3 {
+    margin: 0; font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 21px; line-height: 1.18;
+    display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
+  }
+  .fp-secondary p {
+    margin: 0; font-size: 13.5px; line-height: 1.5; color: var(--ink);
+    display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden;
+  }
   .fp-secondary .date { font-family: 'Space Mono', monospace; font-size: 10.5px; color: var(--muted); margin-top: 2px; }
 
   /* ---- Leído / no leído ---- */
