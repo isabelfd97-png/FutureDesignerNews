@@ -3,7 +3,7 @@
 Rama: `feature/rediseno-home` (ya en marcha con el rediseño base commiteado en a5b6b78 — se reutiliza esta rama en vez de crear una `changes/batch-*` nueva, porque ya es una rama aislada dedicada a este mismo trabajo).
 
 ## Resumen
-8/8 hechos, 0 en pausa. Sin dudas de interpretación reseñables — todo implementado tal como se pidió. Rama `feature/rediseno-home`, commits a5b6b78..(pendiente el último). Lista para revisar en Chrome.
+8/8 hechos, 0 en pausa. Sin dudas de interpretación reseñables — todo implementado tal como se pidió. Rama `feature/rediseno-home`, commits a5b6b78..626da8b. Lista para revisar en Chrome.
 
 ## Grupos
 - G1: H1, H5 — mismo problema de fondo (sistema de alturas de la fila superior: hero, carrusel y sidebar deben compartir una altura consistente)
