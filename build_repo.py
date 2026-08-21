@@ -551,12 +551,27 @@ TEMPLATE = r"""<!DOCTYPE html>
   .ency-sidebar-stack { height: var(--top-row-h); display: flex; flex-direction: column; gap: 14px; }
 
   /* Término del día: post-it que gira en 3D al hacer clic, como el de la editora */
-  .term-of-day { position: relative; flex: none; height: 160px; perspective: 900px; cursor: pointer; }
-  .term-of-day-inner {
-    position: relative; z-index: 1; width: 100%; height: 100%; transform: rotate(-2deg);
-    transition: transform .5s ease; transform-style: preserve-3d;
+  .term-of-day { position: relative; flex: none; height: 160px; perspective: 1000px; cursor: pointer; }
+  /* la definición vive fija debajo, como el papel del bloc bajo la nota de arriba */
+  .term-of-day-back {
+    position: absolute; inset: 0; display: flex; flex-direction: column; justify-content: center; gap: 10px;
+    padding: 16px 18px; background: #fff6ea;
   }
-  .term-of-day.flipped .term-of-day-inner { transform: rotate(-2deg) rotateY(180deg); }
+  .term-of-day-back p { margin: 0; font-size: 13px; line-height: 1.5; color: var(--ink); overflow-y: auto; }
+  .term-of-day-back .src {
+    font-family: 'Space Mono', monospace; font-size: 10px; text-transform: uppercase; letter-spacing: .5px;
+    color: var(--accent); cursor: pointer; text-decoration: none; flex: none;
+  }
+  .term-of-day-back .src:hover { text-decoration: underline; }
+
+  /* la nota de arriba: se despega desde el borde superior (donde está la cinta) hacia
+     abajo, y vuelve a caer/pegarse al tocar otra vez — en vez de un giro plano. */
+  .term-of-day-lift {
+    position: absolute; inset: 0; z-index: 1; transform-origin: top center;
+    transform: rotate(-2deg) rotateX(0deg); transform-style: preserve-3d;
+    transition: transform .5s cubic-bezier(.5,0,.35,1);
+  }
+  .term-of-day.flipped .term-of-day-lift { transform: rotate(-2deg) rotateX(-115deg); }
   .term-of-day-face {
     position: absolute; inset: 0; backface-visibility: hidden; display: flex; flex-direction: column;
     justify-content: center; gap: 6px; padding: 18px 20px 26px;
@@ -574,9 +589,9 @@ TEMPLATE = r"""<!DOCTYPE html>
     background: linear-gradient(135deg, #f6d5b3 0%, #f6d5b3 45%, rgba(10,10,10,.35) 62%, rgba(10,10,10,.15) 100%);
     clip-path: polygon(100% 0, 100% 100%, 0 100%);
   }
-  /* dos trocitos de cinta sujetando la nota por las esquinas de arriba: fuera del
-     clip-path de la cara (si no, el recorte de la nota se los comía por arriba) */
-  .term-of-day-inner > .tape {
+  /* dos trocitos de cinta sujetando la nota: fijos en .term-of-day, no se mueven con
+     el despegue (como la cinta real, que se queda pegada a la mesa) */
+  .term-of-day > .tape {
     position: absolute; top: -11px; z-index: 2; width: 48px; height: 24px; pointer-events: none;
     background:
       linear-gradient(115deg, transparent 0%, transparent 38%, rgba(255,255,255,.65) 46%, rgba(255,255,255,.65) 54%, transparent 62%, transparent 100%),
@@ -584,26 +599,19 @@ TEMPLATE = r"""<!DOCTYPE html>
     box-shadow: 0 2px 4px rgba(10,10,10,.25);
     border-radius: 1px;
   }
-  .term-of-day-inner > .tape-left { left: 6px; transform: rotate(-16deg); }
-  .term-of-day-inner > .tape-right { right: 6px; transform: rotate(14deg); }
-  .term-of-day-back { transform: rotateY(180deg); justify-content: flex-start; gap: 10px; }
+  .term-of-day > .tape-left { left: 6px; transform: rotate(-16deg); }
+  .term-of-day > .tape-right { right: 6px; transform: rotate(14deg); }
   .term-of-day-label {
     font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 1.2px; text-transform: uppercase;
     color: var(--accent); font-weight: 700;
   }
-  .term-of-day-front b {
+  .term-of-day-face b {
     font-family: 'Archivo Black', sans-serif; font-weight: 400; font-size: 22px; text-transform: uppercase;
     letter-spacing: -.3px; line-height: 1.1;
   }
   .term-of-day-hint {
     font-family: 'Space Mono', monospace; font-size: 10.5px; color: var(--muted); text-transform: uppercase; letter-spacing: .5px;
   }
-  .term-of-day-back p { margin: 0; font-size: 13px; line-height: 1.5; color: var(--ink); overflow-y: auto; }
-  .term-of-day-back .src {
-    font-family: 'Space Mono', monospace; font-size: 10px; text-transform: uppercase; letter-spacing: .5px;
-    color: var(--accent); cursor: pointer; text-decoration: none; flex: none;
-  }
-  .term-of-day-back .src:hover { text-decoration: underline; }
 
   /* Chuleta de comandos: lista alfabética con scroll interno */
   .cmd-cheatsheet { flex: 1; min-height: 0; border: 2px solid var(--ink); display: flex; flex-direction: column; }
@@ -1585,18 +1593,17 @@ function paintTermOfDay(term) {
     return;
   }
   wrap.innerHTML = `
-    <div class="term-of-day-inner">
-      <span class="tape tape-left"></span><span class="tape tape-right"></span>
-      <div class="term-of-day-face term-of-day-front">
+    <span class="tape tape-left"></span><span class="tape tape-right"></span>
+    <div class="term-of-day-back">
+      <p>${term.definition}</p>
+      <a class="src" data-open="${term.articleId}">De: ${term.articleTitle}</a>
+    </div>
+    <div class="term-of-day-lift">
+      <div class="term-of-day-face">
         <span class="curl"></span>
         <span class="term-of-day-label">Término del día</span>
         <b>${term.term}</b>
-        <span class="term-of-day-hint">Toca para ver la definición</span>
-      </div>
-      <div class="term-of-day-face term-of-day-back">
-        <span class="curl"></span>
-        <p>${term.definition}</p>
-        <a class="src" data-open="${term.articleId}">De: ${term.articleTitle}</a>
+        <span class="term-of-day-hint">Toca para despegarlo</span>
       </div>
     </div>
   `;
