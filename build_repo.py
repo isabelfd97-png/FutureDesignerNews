@@ -569,14 +569,14 @@ TEMPLATE = r"""<!DOCTYPE html>
   /* la nota de arriba: se despega desde el borde superior (donde está la cinta) —
      se levanta, se inclina y se echa a un lado, en vez de voltearse como una tarjeta.
      Vuelve a bajar y "pegarse" al tocar otra vez. */
+  /* Doblez en dos fases (controlado por JS, ver animateTermOfDay): primero se
+     "levanta" pasando por el canto (rotateX ~-90 + un empujón hacia arriba), y
+     luego cae/se asienta en el estado final — así no se ve como una rotación
+     plana, sino como un pliegue real con peso. */
   .term-of-day-lift {
     position: absolute; inset: 0; z-index: 1; transform-origin: top center;
-    transform: rotate(-2deg) rotateX(0deg); transform-style: preserve-3d;
-    transition: transform .55s cubic-bezier(.45,0,.4,1);
+    transform: rotate(-2deg) rotateX(0deg) translateY(0); transform-style: preserve-3d;
   }
-  /* se queda doblada hacia atrás por la bisagra de arriba (donde está la cinta),
-     no sale disparada — como cuando levantas un post-it agarrándolo por abajo. */
-  .term-of-day.flipped .term-of-day-lift { transform: rotate(-2deg) rotateX(-160deg); }
   .term-of-day-face {
     position: absolute; inset: 0; backface-visibility: hidden; display: flex; flex-direction: column;
     justify-content: center; gap: 6px; padding: 18px 20px 26px;
@@ -1590,6 +1590,27 @@ function pickTermOfDay(terms) {
 }
 let termOfDayFlipped = false;
 
+/* Doblez en dos fases: primero un tramo rápido hasta el canto (con un empujón
+   hacia arriba, como al levantar la nota por abajo), luego un tramo más lento
+   hasta el estado final — un solo transition lineal se ve como una rotación
+   plana, esto se lee como un pliegue real con peso. */
+function animateTermLift(lift, opening) {
+  const REST = 'rotate(-2deg) rotateX(0deg) translateY(0)';
+  const MID = 'rotate(-2deg) rotateX(-92deg) translateY(-16px)';
+  const END = 'rotate(-2deg) rotateX(-160deg) translateY(0)';
+  const from = opening ? REST : END;
+  const to = opening ? END : REST;
+  lift.style.transition = 'none';
+  lift.style.transform = from;
+  void lift.offsetWidth;
+  lift.style.transition = 'transform .22s cubic-bezier(.4,0,1,1)';
+  lift.style.transform = MID;
+  setTimeout(() => {
+    lift.style.transition = 'transform .3s cubic-bezier(0,0,.2,1)';
+    lift.style.transform = to;
+  }, 220);
+}
+
 function paintTermOfDay(term) {
   const wrap = document.getElementById('term-of-day');
   if (!wrap) return;
@@ -1612,10 +1633,14 @@ function paintTermOfDay(term) {
       </div>
     </div>
   `;
+  const lift = wrap.querySelector('.term-of-day-lift');
+  if (termOfDayFlipped) lift.style.transform = 'rotate(-2deg) rotateX(-160deg) translateY(0)';
   wrap.classList.toggle('flipped', termOfDayFlipped);
   wrap.addEventListener('click', () => {
-    termOfDayFlipped = !termOfDayFlipped;
-    wrap.classList.toggle('flipped', termOfDayFlipped);
+    const opening = !termOfDayFlipped;
+    termOfDayFlipped = opening;
+    wrap.classList.toggle('flipped', opening);
+    animateTermLift(lift, opening);
   });
   wrap.querySelector('[data-open]').addEventListener('click', e => {
     e.stopPropagation();
