@@ -574,14 +574,18 @@ TEMPLATE = r"""<!DOCTYPE html>
     background: linear-gradient(135deg, #f6d5b3 0%, #f6d5b3 45%, rgba(10,10,10,.35) 62%, rgba(10,10,10,.15) 100%);
     clip-path: polygon(100% 0, 100% 100%, 0 100%);
   }
-  /* dos trocitos de cinta sujetando la nota por las esquinas de arriba */
-  .term-of-day-face .tape {
-    position: absolute; top: -10px; width: 46px; height: 22px;
-    background: rgba(240, 150, 160, .5); border: 1px solid rgba(240, 150, 160, .6);
-    box-shadow: 0 1px 3px rgba(10,10,10,.2);
+  /* dos trocitos de cinta sujetando la nota por las esquinas de arriba: fuera del
+     clip-path de la cara (si no, el recorte de la nota se los comía por arriba) */
+  .term-of-day-inner > .tape {
+    position: absolute; top: -11px; z-index: 2; width: 48px; height: 24px; pointer-events: none;
+    background:
+      linear-gradient(115deg, transparent 0%, transparent 38%, rgba(255,255,255,.65) 46%, rgba(255,255,255,.65) 54%, transparent 62%, transparent 100%),
+      linear-gradient(rgba(244, 172, 180, .68), rgba(244, 172, 180, .68));
+    box-shadow: 0 2px 4px rgba(10,10,10,.25);
+    border-radius: 1px;
   }
-  .term-of-day-face .tape-left { left: 4px; transform: rotate(-16deg); }
-  .term-of-day-face .tape-right { right: 4px; transform: rotate(14deg); }
+  .term-of-day-inner > .tape-left { left: 6px; transform: rotate(-16deg); }
+  .term-of-day-inner > .tape-right { right: 6px; transform: rotate(14deg); }
   .term-of-day-back { transform: rotateY(180deg); justify-content: flex-start; gap: 10px; }
   .term-of-day-label {
     font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 1.2px; text-transform: uppercase;
@@ -1582,14 +1586,15 @@ function paintTermOfDay(term) {
   }
   wrap.innerHTML = `
     <div class="term-of-day-inner">
+      <span class="tape tape-left"></span><span class="tape tape-right"></span>
       <div class="term-of-day-face term-of-day-front">
-        <span class="tape tape-left"></span><span class="tape tape-right"></span><span class="curl"></span>
+        <span class="curl"></span>
         <span class="term-of-day-label">Término del día</span>
         <b>${term.term}</b>
         <span class="term-of-day-hint">Toca para ver la definición</span>
       </div>
       <div class="term-of-day-face term-of-day-back">
-        <span class="tape tape-left"></span><span class="tape tape-right"></span><span class="curl"></span>
+        <span class="curl"></span>
         <p>${term.definition}</p>
         <a class="src" data-open="${term.articleId}">De: ${term.articleTitle}</a>
       </div>
