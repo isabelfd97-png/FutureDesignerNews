@@ -118,7 +118,7 @@ TEMPLATE = r"""<!DOCTYPE html>
   .mono { font-family: 'Space Mono', monospace; }
 
   /* ---- Masthead ---- */
-  header.masthead { padding: 22px 24px 20px; border-bottom: 4px solid var(--ink); position: relative; }
+  header.masthead { padding: 22px 24px 0; border-bottom: 4px solid var(--ink); position: relative; }
   /* Maquetación de cabecera de periódico clásico: fecha/en-directo a la izquierda,
      título centrado, utilidades a la derecha — el título queda centrado de verdad
      (grid 1fr auto 1fr) sin importar que los dos lados midan distinto. */
@@ -183,7 +183,7 @@ TEMPLATE = r"""<!DOCTYPE html>
 
   /* ---- Ticker ---- */
   .ticker {
-    margin: 0 -24px;
+    margin: 20px -24px 0;
     border-top: 2px solid var(--accent); border-bottom: 2px solid var(--accent);
     background: rgba(255, 90, 31, 0.06);
     white-space: nowrap; position: relative; cursor: pointer;
@@ -914,7 +914,7 @@ TEMPLATE = r"""<!DOCTYPE html>
   @media (max-width: 900px) {
     .wrap { padding: 0 18px; }
     header.masthead { padding: 40px 18px 0; }
-    .ticker { margin: 0 -18px; }
+    .ticker { margin: 20px -18px 0; }
     nav.sections { margin: 0 -18px; padding: 0 22px; }
   }
 
@@ -969,7 +969,7 @@ TEMPLATE = r"""<!DOCTYPE html>
     .wrap { padding: 0 14px; }
     main.wrap { padding-top: 24px; }
     header.masthead { padding: 32px 14px 0; }
-    .ticker { margin: 0 -14px; }
+    .ticker { margin: 16px -14px 0; }
     nav.sections { margin: 0 -14px; padding: 0 18px; }
 
     h1.title { font-size: 24px; }
