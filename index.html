@@ -474,8 +474,20 @@
   .term-of-day.flipped .term-of-day-inner { transform: rotateY(180deg); }
   .term-of-day-face {
     position: absolute; inset: 0; backface-visibility: hidden; display: flex; flex-direction: column;
-    justify-content: center; gap: 6px; padding: 16px 18px;
+    justify-content: center; gap: 6px; padding: 18px 18px 22px;
     background: #ffddc2; border: 2px solid var(--ink); box-shadow: 4px 5px 0 var(--ink);
+    clip-path: polygon(0 0, 100% 0, 100% calc(100% - 20px), calc(100% - 20px) 100%, 0 100%);
+  }
+  /* esquina despegada: simula el pico de papel que se curva hacia arriba */
+  .term-of-day-face::after {
+    content: ''; position: absolute; right: 0; bottom: 0; width: 0; height: 0;
+    border-style: solid; border-width: 0 0 20px 20px; border-color: transparent transparent #e8b98e transparent;
+    filter: drop-shadow(-1px -1px 1px rgba(10,10,10,.35));
+  }
+  /* tira de cinta arriba, como si estuviera pegado al margen */
+  .term-of-day-face::before {
+    content: ''; position: absolute; top: -9px; left: 50%; transform: translateX(-50%) rotate(-1.5deg);
+    width: 54px; height: 20px; background: rgba(255,255,255,.55); border: 1px solid rgba(10,10,10,.15);
   }
   .term-of-day-back { transform: rotateY(180deg); justify-content: flex-start; gap: 10px; }
   .term-of-day-label {
