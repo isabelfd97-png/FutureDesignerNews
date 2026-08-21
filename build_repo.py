@@ -551,7 +551,7 @@ TEMPLATE = r"""<!DOCTYPE html>
   .ency-sidebar-stack { height: var(--top-row-h); display: flex; flex-direction: column; gap: 14px; }
 
   /* Término del día: post-it que gira en 3D al hacer clic, como el de la editora */
-  .term-of-day { position: relative; flex: none; height: 160px; cursor: pointer; perspective: 480px; }
+  .term-of-day { position: relative; flex: none; height: 160px; cursor: pointer; }
   /* la definición vive en su propio post-it debajo — otro color, ligera rotación
      propia — no un fondo plano, como si hubiera un segundo papel pegado ahí. */
   .term-of-day-back {
@@ -574,16 +574,23 @@ TEMPLATE = r"""<!DOCTYPE html>
      luego cae/se asienta en el estado final — así no se ve como una rotación
      plana, sino como un pliegue real con peso. */
   .term-of-day-lift {
-    position: absolute; inset: 0; z-index: 1; transform-origin: top center;
-    transform: rotate(-2deg) rotateX(0deg) translateY(0); transform-style: preserve-3d;
+    position: absolute; inset: 0; z-index: 1; transform-origin: top center; transform: rotate(-2deg);
   }
+  /* Sin rotación 3D: la nota se recorta progresivamente desde abajo hacia arriba
+     (clip-path), como si se quitara de un tirón — sin el artefacto de "aplastado"
+     que da un rotateX a este tamaño tan pequeño. */
   .term-of-day-face {
-    position: absolute; inset: 0; backface-visibility: hidden; display: flex; flex-direction: column;
+    position: absolute; inset: 0; display: flex; flex-direction: column;
     justify-content: center; gap: 6px; padding: 18px 20px 26px;
     background: #ffddc2;
     box-shadow: 0 14px 20px -10px rgba(10,10,10,.45), 0 3px 6px rgba(10,10,10,.18);
-    clip-path: polygon(0 0, 100% 0, 100% calc(100% - 24px), calc(100% - 24px) 100%, 0 100%);
-    transition: box-shadow .15s ease;
+    clip-path: inset(0 0 0% 0);
+    transform: rotate(0deg) translateY(0);
+    transition: clip-path .45s cubic-bezier(.65,0,.35,1), transform .45s cubic-bezier(.65,0,.35,1), box-shadow .15s ease;
+  }
+  .term-of-day.flipped .term-of-day-face {
+    clip-path: inset(0 0 100% 0);
+    transform: rotate(-5deg) translateY(-12px);
   }
   .term-of-day:hover .term-of-day-face {
     box-shadow: 0 18px 24px -8px rgba(10,10,10,.5), 0 4px 8px rgba(10,10,10,.2);
@@ -1594,23 +1601,6 @@ let termOfDayFlipped = false;
    hacia arriba, como al levantar la nota por abajo), luego un tramo más lento
    hasta el estado final — un solo transition lineal se ve como una rotación
    plana, esto se lee como un pliegue real con peso. */
-function animateTermLift(lift, opening) {
-  const REST = 'rotate(-2deg) rotateX(0deg) translateY(0)';
-  const MID = 'rotate(-2deg) rotateX(-92deg) translateY(-16px)';
-  const END = 'rotate(-2deg) rotateX(-160deg) translateY(0)';
-  const from = opening ? REST : END;
-  const to = opening ? END : REST;
-  lift.style.transition = 'none';
-  lift.style.transform = from;
-  void lift.offsetWidth;
-  lift.style.transition = 'transform .22s cubic-bezier(.4,0,1,1)';
-  lift.style.transform = MID;
-  setTimeout(() => {
-    lift.style.transition = 'transform .3s cubic-bezier(0,0,.2,1)';
-    lift.style.transform = to;
-  }, 220);
-}
-
 function paintTermOfDay(term) {
   const wrap = document.getElementById('term-of-day');
   if (!wrap) return;
@@ -1633,14 +1623,10 @@ function paintTermOfDay(term) {
       </div>
     </div>
   `;
-  const lift = wrap.querySelector('.term-of-day-lift');
-  if (termOfDayFlipped) lift.style.transform = 'rotate(-2deg) rotateX(-160deg) translateY(0)';
   wrap.classList.toggle('flipped', termOfDayFlipped);
   wrap.addEventListener('click', () => {
-    const opening = !termOfDayFlipped;
-    termOfDayFlipped = opening;
-    wrap.classList.toggle('flipped', opening);
-    animateTermLift(lift, opening);
+    termOfDayFlipped = !termOfDayFlipped;
+    wrap.classList.toggle('flipped', termOfDayFlipped);
   });
   wrap.querySelector('[data-open]').addEventListener('click', e => {
     e.stopPropagation();
