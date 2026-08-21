@@ -467,7 +467,7 @@
   /* la definición vive en su propio post-it debajo — otro color, ligera rotación
      propia — no un fondo plano, como si hubiera un segundo papel pegado ahí. */
   .term-of-day-back {
-    position: absolute; inset: 0; z-index: 0; display: flex; flex-direction: column; justify-content: center; gap: 10px;
+    position: absolute; inset: 0; z-index: 1; display: flex; flex-direction: column; justify-content: center; gap: 10px;
     padding: 16px 18px; background: #fff3b0; transform: rotate(2deg);
     box-shadow: 0 10px 16px -8px rgba(10,10,10,.4), 0 2px 4px rgba(10,10,10,.15);
   }
@@ -486,21 +486,22 @@
      luego cae/se asienta en el estado final — así no se ve como una rotación
      plana, sino como un pliegue real con peso. */
   .term-of-day-lift {
-    position: absolute; inset: 0; z-index: 1; transform-origin: top center; transform: rotate(-2deg);
+    position: absolute; inset: 0; z-index: 2; transform-origin: top center; transform: rotate(-2deg);
   }
-  /* Sin rotación 3D: la nota se recorta progresivamente desde abajo hacia arriba
-     (clip-path), como si se quitara de un tirón — sin el artefacto de "aplastado"
-     que da un rotateX a este tamaño tan pequeño. */
+  /* al hacer clic, la nota naranja se mete detrás de la amarilla (z-index) y se
+     desliza hacia abajo, como cuando empujas una nota al fondo del taco — sigue
+     visible, asomando por debajo, en vez de desaparecer. */
+  .term-of-day.flipped .term-of-day-lift { z-index: 0; }
   .term-of-day-face {
     position: absolute; inset: 0; display: flex; flex-direction: column;
     justify-content: center; gap: 6px; padding: 18px 20px 26px;
     background: #ffddc2;
     box-shadow: 0 14px 20px -10px rgba(10,10,10,.45), 0 3px 6px rgba(10,10,10,.18);
-    opacity: 1; transform: translateY(0);
-    transition: opacity .3s ease, transform .3s ease, box-shadow .15s ease;
+    transform: translateY(0) rotate(0deg);
+    transition: transform .35s cubic-bezier(.4,0,.2,1), box-shadow .15s ease;
   }
   .term-of-day.flipped .term-of-day-face {
-    opacity: 0; transform: translateY(-10px); pointer-events: none;
+    transform: translateY(30px) rotate(-6deg);
   }
   .term-of-day:hover .term-of-day-face {
     box-shadow: 0 18px 24px -8px rgba(10,10,10,.5), 0 4px 8px rgba(10,10,10,.2);
@@ -1529,7 +1530,7 @@ function paintTermOfDay(term) {
         <span class="curl"></span>
         <span class="term-of-day-label">Término del día</span>
         <b>${term.term}</b>
-        <span class="term-of-day-hint">Toca para despegarlo</span>
+        <span class="term-of-day-hint">Toca para ver la definición</span>
       </div>
     </div>
   `;
