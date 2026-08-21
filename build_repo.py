@@ -551,7 +551,11 @@ TEMPLATE = r"""<!DOCTYPE html>
   .ency-sidebar-stack { height: var(--top-row-h); display: flex; flex-direction: column; gap: 14px; }
 
   /* Término del día: post-it que gira en 3D al hacer clic, como el de la editora */
-  .term-of-day { flex: none; height: 160px; perspective: 900px; cursor: pointer; }
+  .term-of-day {
+    flex: none; height: 160px; perspective: 900px; cursor: pointer;
+    transform: rotate(-3deg); transition: transform .15s ease;
+  }
+  .term-of-day:hover { transform: rotate(-1deg) translateY(-2px); }
   .term-of-day-inner {
     position: relative; width: 100%; height: 100%; transition: transform .5s ease; transform-style: preserve-3d;
   }
@@ -1573,9 +1577,9 @@ function paintTermOfDay(term) {
     </div>
   `;
   wrap.classList.toggle('flipped', termOfDayFlipped);
-  wrap.querySelector('.term-of-day-front').addEventListener('click', () => {
-    termOfDayFlipped = true;
-    wrap.classList.add('flipped');
+  wrap.addEventListener('click', () => {
+    termOfDayFlipped = !termOfDayFlipped;
+    wrap.classList.toggle('flipped', termOfDayFlipped);
   });
   wrap.querySelector('[data-open]').addEventListener('click', e => {
     e.stopPropagation();
