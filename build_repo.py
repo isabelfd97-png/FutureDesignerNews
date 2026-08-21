@@ -118,15 +118,19 @@ TEMPLATE = r"""<!DOCTYPE html>
   .mono { font-family: 'Space Mono', monospace; }
 
   /* ---- Masthead ---- */
-  header.masthead { padding: 30px 24px 0; border-bottom: 4px solid var(--ink); position: relative; }
-  .top-bar { display: flex; align-items: center; justify-content: flex-end; gap: 12px; flex-wrap: wrap; }
+  header.masthead { padding: 22px 24px 0; border-bottom: 4px solid var(--ink); position: relative; }
+  /* Maquetación de cabecera de periódico clásico: fecha/en-directo a la izquierda,
+     título centrado, utilidades a la derecha — el título queda centrado de verdad
+     (grid 1fr auto 1fr) sin importar que los dos lados midan distinto. */
+  .masthead-row { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 16px; padding: 6px 0; }
 
   .live {
-    display: flex; align-items: center; justify-content: center; gap: 8px; margin: 4px 0 2px;
-    font-family: 'Space Mono', monospace; font-size: 11px; letter-spacing: 1.5px;
-    text-transform: uppercase; color: var(--muted);
+    display: flex; flex-direction: column; gap: 3px; justify-self: start;
+    font-family: 'Space Mono', monospace; font-size: 10.5px; letter-spacing: 1px;
+    text-transform: uppercase; color: var(--muted); white-space: nowrap;
   }
-  .live .dot-wrap { position: relative; width: 9px; height: 9px; }
+  .live-status { display: flex; align-items: center; gap: 7px; color: var(--ink); font-weight: 700; }
+  .live .dot-wrap { position: relative; width: 8px; height: 8px; flex: none; }
   .live .dot-wrap::before, .live .dot-wrap::after {
     content: ""; position: absolute; inset: 0; border-radius: 50%; background: var(--accent);
   }
@@ -137,8 +141,8 @@ TEMPLATE = r"""<!DOCTYPE html>
 
   h1.title {
     font-family: 'Archivo Black', 'Space Grotesk', sans-serif;
-    font-weight: 400; font-size: 62px; letter-spacing: -2px;
-    margin: 14px 0 30px; text-align: center; text-transform: uppercase; line-height: .92;
+    font-weight: 400; font-size: 34px; letter-spacing: -1px;
+    margin: 0; text-align: center; text-transform: uppercase; line-height: 1; white-space: nowrap;
   }
   h1.title span { display: inline-block; opacity: 0; transform: translateY(18px) rotate(-1deg); animation: riseIn .55s cubic-bezier(.2,.8,.2,1) forwards; }
   h1.title span:nth-child(odd) { color: var(--accent); }
@@ -146,7 +150,7 @@ TEMPLATE = r"""<!DOCTYPE html>
 
   /* ---- Masthead utils: buscar, historial ---- */
   .masthead-utils {
-    display: flex; align-items: center; gap: 8px; flex: none;
+    display: flex; align-items: center; gap: 8px; flex: none; justify-self: end;
   }
   .masthead-search-btn {
     height: 38px; flex: none; display: flex; align-items: center; gap: 6px;
@@ -915,7 +919,12 @@ TEMPLATE = r"""<!DOCTYPE html>
   }
 
   @media (max-width: 760px) {
-    h1.title { font-size: 46px; letter-spacing: -1.5px; margin: 18px 0 12px; }
+    /* Apilado: en directo/fecha arriba, título centrado debajo, utilidades abajo —
+       las tres columnas ya no caben cómodamente en una fila tan estrecha. */
+    .masthead-row { grid-template-columns: 1fr; justify-items: center; row-gap: 10px; }
+    .live { justify-self: center; align-items: center; }
+    .masthead-utils { justify-self: center; }
+    h1.title { font-size: 30px; letter-spacing: -1px; white-space: normal; }
 
     nav.sections a { padding: 12px 14px; font-size: 11px; }
     .masthead-utils .hist-link { padding: 0 14px; }
@@ -963,7 +972,7 @@ TEMPLATE = r"""<!DOCTYPE html>
     .ticker { margin: 0 -14px; }
     nav.sections { margin: 0 -14px; padding: 0 18px; }
 
-    h1.title { font-size: 34px; margin-bottom: 10px; }
+    h1.title { font-size: 24px; }
     .editor-note { font-size: 10px; padding: 6px 12px; }
     .editor-note-avatar { width: 26px; height: 26px; }
     .editor-note-text { max-width: 260px; }
@@ -988,11 +997,11 @@ TEMPLATE = r"""<!DOCTYPE html>
 
 <header class="masthead">
   <div class="wrap">
-    <div class="top-bar">
+    <div class="masthead-row">
+      <div class="live" id="live-kicker"></div>
+      <h1 class="title" id="masthead-title"></h1>
       <div class="masthead-utils" id="masthead-utils"></div>
     </div>
-    <div class="live" id="live-kicker"></div>
-    <h1 class="title" id="masthead-title"></h1>
   </div>
   <div class="ticker" id="ticker"><div class="ticker-badge" id="ticker-badge"></div><div class="ticker-scroll"><div class="ticker-track" id="ticker-track"></div></div></div>
   <nav class="sections" id="section-nav"></nav>
@@ -1074,7 +1083,7 @@ function renderLiveKicker() {
     const now = new Date();
     const date = now.toLocaleDateString('es-ES', { day: '2-digit', month: 'short', year: 'numeric' }).toUpperCase();
     const time = now.toLocaleTimeString('es-ES', { hour: '2-digit', minute: '2-digit' });
-    el.innerHTML = `<span class="dot-wrap"></span> En directo · ${date} · ${time}`;
+    el.innerHTML = `<span class="live-status"><span class="dot-wrap"></span>En directo</span><span class="live-date">${date} · ${time}</span>`;
   }
   paint();
   setInterval(paint, 30000);
