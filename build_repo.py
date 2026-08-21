@@ -1092,7 +1092,7 @@ function renderLiveKicker() {
 /* ---------- nota de la editora: barrita sutil encima de todo ---------- */
 const SUBTITLE_PHRASES = [
   'Ningún algoritmo decide aquí. Decido yo, a base de café y 47 pestañas abiertas.',
-  'La IA escribe los borradores. Yo pongo el mal gusto de siempre.',
+  'La IA propone borradores. Decidir qué se queda sigue siendo cosa mía.',
   'Ningún LLM ha votado si esto merece la pena — por suerte, aquí no es una democracia.',
   'Curada por una humana con síndrome del impostor, cero sueño y demasiada curiosidad.',
   'Yo leo, yo decido, y culpo a la IA cuando algo sale mal.',
