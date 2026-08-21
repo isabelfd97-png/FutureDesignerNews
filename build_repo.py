@@ -165,30 +165,17 @@ TEMPLATE = r"""<!DOCTYPE html>
   .masthead-utils .hist-link svg { width: 15px; height: 15px; }
   .masthead-utils .hist-link:hover, .masthead-utils .hist-link.active { background: var(--accent); border-color: var(--accent); color: #fff; }
 
-  /* ---- Nota "Ofrecido por Isabel": el mismo post-it que las anotaciones, pero arrastrable ---- */
-  .subtitle {
-    position: absolute; top: 20px; left: 24px; width: 280px; z-index: 6;
-    display: flex; flex-direction: column; gap: 7px;
-    background: #ffddc2; border: 2px solid var(--ink); box-shadow: 5px 6px 0 var(--ink);
-    padding: 13px 16px 15px; transform: rotate(-4deg);
-    cursor: grab; touch-action: none; user-select: none;
+  /* ---- Nota de la editora: barrita sutil encima de todo el sitio ---- */
+  .editor-note {
+    display: flex; align-items: center; justify-content: center; gap: 8px;
+    padding: 7px 16px; background: var(--bg); border-bottom: 1px solid #e5e5e5;
+    font-family: 'Space Mono', monospace; font-size: 11px; line-height: 1.4; color: var(--muted);
+    text-align: center;
   }
-  .subtitle.dragging { cursor: grabbing; box-shadow: 8px 10px 0 var(--ink); z-index: 50; transition: none; }
-  .subtitle-row { display: flex; align-items: center; gap: 9px; }
-  .subtitle-avatar {
-    width: 46px; height: 46px; border-radius: 50%; border: 2px solid var(--ink); flex: none;
-    object-fit: cover; object-position: center 15%; background: #fff; pointer-events: none;
-  }
-  .subtitle-text { display: flex; flex-direction: column; gap: 2px; }
-  .subtitle-name {
-    font-family: 'Archivo Black', sans-serif; font-weight: 400; font-size: 14px; letter-spacing: -.2px;
-    text-transform: uppercase; color: var(--ink);
-  }
-  .subtitle-byline {
-    font-family: 'Space Mono', monospace; font-size: 10.5px; font-weight: 700; letter-spacing: .3px;
-    text-transform: uppercase; color: var(--accent); text-decoration: underline; cursor: pointer;
-  }
-  .subtitle-phrase { font-family: 'Space Mono', monospace; font-size: 12px; line-height: 1.45; color: var(--ink); font-weight: 400; }
+  .editor-note-avatar { width: 18px; height: 18px; border-radius: 50%; object-fit: cover; object-position: center 15%; flex: none; }
+  .editor-note-text { max-width: 720px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .editor-note-text a { color: var(--accent); font-weight: 700; text-decoration: none; }
+  .editor-note-text a:hover { text-decoration: underline; }
 
   /* ---- Ticker ---- */
   .ticker {
@@ -929,13 +916,6 @@ TEMPLATE = r"""<!DOCTYPE html>
 
   @media (max-width: 760px) {
     h1.title { font-size: 46px; letter-spacing: -1.5px; margin: 18px 0 12px; }
-    .subtitle {
-      position: relative; top: auto; left: auto; width: 100%; max-width: 300px;
-      margin: 0 0 22px; padding: 11px 14px 13px;
-    }
-    .subtitle-avatar { width: 34px; height: 34px; }
-    .subtitle-name { font-size: 12.5px; }
-    .subtitle-phrase { font-size: 12px; }
 
     nav.sections a { padding: 12px 14px; font-size: 11px; }
     .masthead-utils .hist-link { padding: 0 14px; }
@@ -984,10 +964,8 @@ TEMPLATE = r"""<!DOCTYPE html>
     nav.sections { margin: 0 -14px; padding: 0 18px; }
 
     h1.title { font-size: 34px; margin-bottom: 10px; }
-    .subtitle { max-width: 100%; padding: 9px 11px 11px; margin-bottom: 18px; }
-    .subtitle-avatar { width: 28px; height: 28px; }
-    .subtitle-name { font-size: 11.5px; }
-    .subtitle-phrase { font-size: 11px; }
+    .editor-note { font-size: 10px; padding: 6px 12px; }
+    .editor-note-text { max-width: 200px; }
 
     .masthead-utils { gap: 6px; }
     .masthead-search-btn { height: 34px; padding: 0 10px; font-size: 9.5px; }
@@ -1005,6 +983,8 @@ TEMPLATE = r"""<!DOCTYPE html>
 </head>
 <body>
 
+<div class="editor-note" id="subtitle"></div>
+
 <header class="masthead">
   <div class="wrap">
     <div class="top-bar">
@@ -1012,7 +992,6 @@ TEMPLATE = r"""<!DOCTYPE html>
     </div>
     <div class="live" id="live-kicker"></div>
     <h1 class="title" id="masthead-title"></h1>
-    <div class="subtitle" id="subtitle"></div>
   </div>
   <div class="ticker" id="ticker"><div class="ticker-badge" id="ticker-badge"></div><div class="ticker-scroll"><div class="ticker-track" id="ticker-track"></div></div></div>
   <nav class="sections" id="section-nav"></nav>
@@ -1100,7 +1079,7 @@ function renderLiveKicker() {
   setInterval(paint, 30000);
 }
 
-/* ---------- subtitle: nota post-it arrastrable, firma de la creadora ---------- */
+/* ---------- nota de la editora: barrita sutil encima de todo ---------- */
 const SUBTITLE_PHRASES = [
   'Aquí no decide ningún algoritmo. Decido yo, con más pestañas abiertas que criterio.',
   'La IA redacta, pero el mal gusto de elegir qué leer sigue siendo mío.',
@@ -1114,58 +1093,10 @@ function renderSubtitle() {
   const el = document.getElementById('subtitle');
   const phrase = SUBTITLE_PHRASES[Math.floor(Math.random() * SUBTITLE_PHRASES.length)];
   el.innerHTML = `
-    <div class="subtitle-row">
-      <img class="subtitle-avatar" src="images/_shared/annotations-avatar.png" alt="Isabel Ferrer - Dalmau">
-      <div class="subtitle-text">
-        <span class="subtitle-name">Nota de la editora jefe</span>
-        <a class="subtitle-byline" href="${LINKEDIN_URL}" target="_blank" rel="noopener">Isabel Ferrer - Dalmau</a>
-      </div>
-    </div>
-    <span class="subtitle-phrase">${phrase}</span>`;
-  makeDraggable(el, 'postitPos');
-}
-
-/* ---------- post-it arrastrable (masthead) ---------- */
-function makeDraggable(el, storageKey) {
-  const parent = el.offsetParent || el.parentElement;
-  const mobileFlow = () => window.innerWidth <= 760; // en mobile el post-it vive en el flujo normal, bajo el titulo — nada de arrastre
-  let saved = null;
-  try { saved = JSON.parse(localStorage.getItem(storageKey)); } catch(e) {}
-  if (saved && !mobileFlow()) { el.style.left = saved.x + 'px'; el.style.top = saved.y + 'px'; }
-
-  let dragging = false, offX = 0, offY = 0;
-
-  el.addEventListener('pointerdown', e => {
-    if (mobileFlow()) return;
-    if (e.target.closest('a, button')) return;
-    dragging = true;
-    el.setPointerCapture(e.pointerId);
-    const rect = el.getBoundingClientRect();
-    offX = e.clientX - rect.left;
-    offY = e.clientY - rect.top;
-    el.classList.add('dragging');
-  });
-
-  el.addEventListener('pointermove', e => {
-    if (!dragging) return;
-    const pRect = parent.getBoundingClientRect();
-    const elRect = el.getBoundingClientRect();
-    let x = e.clientX - pRect.left - offX;
-    let y = e.clientY - pRect.top - offY;
-    x = Math.max(-elRect.width * 0.3, Math.min(x, pRect.width - elRect.width * 0.7));
-    y = Math.max(0, Math.min(y, pRect.height - elRect.height * 0.5));
-    el.style.left = x + 'px';
-    el.style.top = y + 'px';
-  });
-
-  const stop = e => {
-    if (!dragging) return;
-    dragging = false;
-    el.classList.remove('dragging');
-    localStorage.setItem(storageKey, JSON.stringify({ x: parseFloat(el.style.left), y: parseFloat(el.style.top) }));
-  };
-  el.addEventListener('pointerup', stop);
-  el.addEventListener('pointercancel', stop);
+    <img class="editor-note-avatar" src="images/_shared/annotations-avatar.png" alt="Isabel Ferrer - Dalmau">
+    <span class="editor-note-text">
+      <a href="${LINKEDIN_URL}" target="_blank" rel="noopener">Nota de la editora jefe</a> — ${phrase}
+    </span>`;
 }
 
 /* ---------- ticker: titulares más recientes ---------- */
