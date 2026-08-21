@@ -172,8 +172,8 @@ TEMPLATE = r"""<!DOCTYPE html>
     font-family: 'Space Mono', monospace; font-size: 11px; line-height: 1.4; color: var(--muted);
     text-align: center;
   }
-  .editor-note-avatar { width: 18px; height: 18px; border-radius: 50%; object-fit: cover; object-position: center 15%; flex: none; }
-  .editor-note-text { max-width: 720px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .editor-note-avatar { width: 26px; height: 26px; border-radius: 50%; object-fit: cover; object-position: center 15%; flex: none; }
+  .editor-note-text { max-width: 720px; }
   .editor-note-text a { color: var(--accent); font-weight: 700; text-decoration: none; }
   .editor-note-text a:hover { text-decoration: underline; }
 
@@ -965,7 +965,8 @@ TEMPLATE = r"""<!DOCTYPE html>
 
     h1.title { font-size: 34px; margin-bottom: 10px; }
     .editor-note { font-size: 10px; padding: 6px 12px; }
-    .editor-note-text { max-width: 200px; }
+    .editor-note-avatar { width: 20px; height: 20px; }
+    .editor-note-text { max-width: 260px; }
 
     .masthead-utils { gap: 6px; }
     .masthead-search-btn { height: 34px; padding: 0 10px; font-size: 9.5px; }
