@@ -638,26 +638,12 @@ TEMPLATE = r"""<!DOCTYPE html>
   .cmd-cheat-row span { font-size: 11.5px; line-height: 1.4; color: var(--muted); }
   .ency-sidebar-empty { padding: 20px 14px; font-size: 12.5px; color: var(--muted); text-align: center; }
 
-  /* ---- Carrusel paginado de "quizá te interese" (dot-nav, sin autoplay) ---- */
-  .other-carousel { display: flex; align-items: center; gap: 14px; }
-  .other-carousel-viewport { flex: 1; min-width: 0; overflow: hidden; }
-  .other-carousel-arrow {
-    flex: none; border: 2px solid var(--ink); background: var(--bg); width: 34px; height: 34px;
-    display: flex; align-items: center; justify-content: center; cursor: pointer; color: var(--ink);
-  }
-  .other-carousel-arrow svg { width: 13px; height: 13px; }
-  .other-carousel-arrow.left svg { transform: scaleX(-1); }
-  .other-carousel-arrow:hover { background: var(--accent); border-color: var(--accent); color: #fff; }
-  .other-carousel-arrow.hidden { visibility: hidden; }
-  .other-carousel-page {
-    display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px;
-    transition: transform .22s ease, opacity .22s ease;
-  }
-  .other-carousel-page.slide-out-left { transform: translateX(-22px); opacity: 0; }
-  .other-carousel-page.slide-out-right { transform: translateX(22px); opacity: 0; }
-  .other-carousel-page.slide-in-right, .other-carousel-page.slide-in-left { opacity: 0; }
-  .other-carousel-page.slide-in-right { transform: translateX(22px); }
-  .other-carousel-page.slide-in-left { transform: translateX(-22px); }
+  /* ---- Carrusel de "quizá te interese": clásico de 1 en 1, flechas debajo
+     (misma fila que las del hero) en vez de a los lados de las cards. ---- */
+  .other-carousel-viewport { overflow: hidden; margin-top: 4px; }
+  .other-carousel-page { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+  .other-carousel-track { display: flex; }
+  #other-controls.hidden { display: none; }
   @media (max-width: 720px) { .other-carousel-page { grid-template-columns: 1fr; } }
 
   @media (max-width: 900px) {
@@ -1558,32 +1544,58 @@ function clearHeroTimer() {
 }
 
 /* ---------- carrusel paginado de "quizá te interese" (dot-nav, sin autoplay) ---------- */
-const otherCarouselState = { pages: [], index: 0 };
+const otherCarouselState = { items: [], index: 0 };
 
-function paintOtherCarousel(direction) {
+/* ventana de `count` artículos empezando en `start`, dando la vuelta al llegar al final */
+function otherCarouselWindow(start, count) {
+  const n = otherCarouselState.items.length;
+  const out = [];
+  for (let i = 0; i < count; i++) out.push(otherCarouselState.items[(start + i + n) % n]);
+  return out;
+}
+
+/* estado de reposo: grid normal de 3, sin pista ni transform */
+function paintOtherCarousel() {
   const wrap = document.getElementById('other-carousel-slot');
   if (!wrap) return;
-  const page = otherCarouselState.pages[otherCarouselState.index] || [];
-  const html = `<div class="other-carousel-page">${page.map(secondaryHtml).join('')}</div>`;
-
-  const outgoing = wrap.firstElementChild;
-  if (direction && outgoing) {
-    outgoing.classList.add(direction > 0 ? 'slide-out-left' : 'slide-out-right');
-    setTimeout(() => {
-      wrap.innerHTML = html;
-      const incoming = wrap.firstElementChild;
-      incoming.classList.add(direction > 0 ? 'slide-in-right' : 'slide-in-left');
-      requestAnimationFrame(() => requestAnimationFrame(() => incoming.classList.remove('slide-in-right', 'slide-in-left')));
-    }, 220);
-  } else {
-    wrap.innerHTML = html;
-  }
+  const { items, index } = otherCarouselState;
+  if (!items.length) { wrap.innerHTML = ''; return; }
+  wrap.innerHTML = `<div class="other-carousel-page">${otherCarouselWindow(index, 3).map(secondaryHtml).join('')}</div>`;
 }
+
+/* carrusel clásico de 1 en 1: pista de 5 cards (una de más a cada lado, fuera de
+   la ventana) que se desliza un ancho de card, y al terminar se sustituye por el
+   grid de reposo ya con la ventana desplazada — así el 1 desaparece por la
+   izquierda y el 4 entra por la derecha, en vez de saltar de página en página. */
 function otherCarouselStep(delta) {
-  const n = otherCarouselState.pages.length;
-  if (!n) return;
-  otherCarouselState.index = (otherCarouselState.index + delta + n) % n;
-  paintOtherCarousel(delta);
+  const n = otherCarouselState.items.length;
+  if (n <= 3) return;
+  const wrap = document.getElementById('other-carousel-slot');
+  const grid = wrap.querySelector('.other-carousel-page');
+  if (!grid || !grid.children.length) return;
+  const cardW = grid.children[0].getBoundingClientRect().width;
+  const gap = 18;
+  const step = cardW + gap;
+
+  const windowStart = delta > 0 ? otherCarouselState.index : otherCarouselState.index - 1;
+  const track = document.createElement('div');
+  track.className = 'other-carousel-track';
+  track.style.gap = gap + 'px';
+  track.style.width = (cardW * 5 + gap * 4) + 'px';
+  track.innerHTML = otherCarouselWindow(windowStart, 5).map(secondaryHtml).join('');
+  [...track.children].forEach(c => { c.style.flex = `0 0 ${cardW}px`; });
+  track.style.transform = `translateX(${-step}px)`;
+
+  wrap.innerHTML = '';
+  wrap.appendChild(track);
+  void track.offsetWidth;
+  track.style.transition = 'transform .4s cubic-bezier(.4,0,.2,1)';
+  track.style.transform = `translateX(${-step * (delta > 0 ? 2 : 0)}px)`;
+
+  setTimeout(() => {
+    otherCarouselState.index = (otherCarouselState.index + delta + n) % n;
+    paintOtherCarousel();
+  }, 400);
 }
 
 /* ---------- término del día (post-it que gira, junto al titular) ---------- */
@@ -1666,9 +1678,7 @@ function renderPortada() {
   heroState.items = list.slice(0, 3);
   heroState.index = 0;
 
-  const otherItems = list.slice(3, 9);
-  otherCarouselState.pages = [];
-  for (let i = 0; i < otherItems.length; i += 3) otherCarouselState.pages.push(otherItems.slice(i, i + 3));
+  otherCarouselState.items = list.slice(3, 9);
   otherCarouselState.index = 0;
 
   const rest = list.slice(9);
@@ -1696,12 +1706,12 @@ function renderPortada() {
         </aside>
       </div>
     </div>
-    ${otherCarouselState.pages.length ? `
+    ${otherCarouselState.items.length ? `
       <div class="front-divider"><span class="front-label">Quizá te interese</span></div>
-      <div class="other-carousel">
-        <button class="other-carousel-arrow left" id="other-prev" title="Anteriores">${ICONS.arrow}</button>
-        <div class="other-carousel-viewport" id="other-carousel-slot"></div>
-        <button class="other-carousel-arrow right" id="other-next" title="Siguientes">${ICONS.arrow}</button>
+      <div class="other-carousel-viewport" id="other-carousel-slot"></div>
+      <div class="lead-controls" id="other-controls">
+        <button class="lead-arrow left" id="other-prev" title="Anteriores">${ICONS.arrow}</button>
+        <button class="lead-arrow" id="other-next" title="Siguientes">${ICONS.arrow}</button>
       </div>
     ` : ''}
     ${SECTIONS.map(s => {
@@ -1723,11 +1733,10 @@ function renderPortada() {
   paintTermOfDay(termOfDay);
   paintCmdCheatsheet();
 
-  if (otherCarouselState.pages.length) {
+  if (otherCarouselState.items.length) {
     paintOtherCarousel();
-    const multi = otherCarouselState.pages.length > 1;
-    document.getElementById('other-prev').classList.toggle('hidden', !multi);
-    document.getElementById('other-next').classList.toggle('hidden', !multi);
+    const multi = otherCarouselState.items.length > 3;
+    document.getElementById('other-controls').classList.toggle('hidden', !multi);
     document.getElementById('other-prev').addEventListener('click', () => otherCarouselStep(-1));
     document.getElementById('other-next').addEventListener('click', () => otherCarouselStep(1));
   }
