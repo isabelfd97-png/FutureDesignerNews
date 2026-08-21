@@ -70,7 +70,7 @@ ICONS['history'] = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" s
 ICONS['heart'] = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 20.5s-7.5-4.6-10-9.3C.4 7.9 2 4.5 5.4 4c2-.3 3.8.6 4.9 2.3.8 1.2 1.7 1.2 2.5 0C13.8 4.6 15.6 3.7 17.6 4c3.4.5 5 3.9 3.4 7.2-2.5 4.7-9 9.3-9 9.3Z"/></svg>'
 ICONS['heart-filled'] = '<svg viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M12 20.5s-7.5-4.6-10-9.3C.4 7.9 2 4.5 5.4 4c2-.3 3.8.6 4.9 2.3.8 1.2 1.7 1.2 2.5 0C13.8 4.6 15.6 3.7 17.6 4c3.4.5 5 3.9 3.4 7.2-2.5 4.7-9 9.3-9 9.3Z"/></svg>'
 ICONS['flame'] = '<svg viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M12 2c1 3-2 4-2 7a3 3 0 0 0 6 0c0-1-0.5-2-1-2 2 0 4 2 4 5.5A7 7 0 1 1 8 12.5C8 9 9 6 12 2Z"/></svg>'
-ICONS['shuffle'] = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 6h3.5c2 0 3 1 4.2 2.8M3 18h3.5c2 0 3-1 4.2-2.8M17 6h4M17 18h4"/><path d="M17.5 3.5 21 6l-3.5 2.5M17.5 20.5 21 18l-3.5-2.5"/></svg>'
+ICONS['refresh'] = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M20 11A8 8 0 1 0 18 16"/><path d="M20 4v6h-6"/></svg>'
 
 # Ilustración pixel-art única por artículo (16x16, más detallada), pensada para el tema concreto de cada uno.
 # Los artículos futuros sin entrada aquí caen al icono por keyword/sección (pixelIconFor en JS).
@@ -100,6 +100,7 @@ TEMPLATE = r"""<!DOCTYPE html>
     --muted: #7a7a7a;
     --accent: #ff5a1f;
     --line: #0a0a0a;
+    --top-row-h: 520px;
   }
   * { box-sizing: border-box; }
   html { scroll-behavior: smooth; }
@@ -117,15 +118,19 @@ TEMPLATE = r"""<!DOCTYPE html>
   .mono { font-family: 'Space Mono', monospace; }
 
   /* ---- Masthead ---- */
-  header.masthead { padding: 30px 24px 0; border-bottom: 4px solid var(--ink); position: relative; }
-  .top-bar { display: flex; align-items: center; justify-content: flex-end; gap: 12px; flex-wrap: wrap; }
+  header.masthead { padding: 22px 24px 0; border-bottom: 4px solid var(--ink); position: relative; }
+  /* Maquetación de cabecera de periódico clásico: fecha/en-directo a la izquierda,
+     título centrado, utilidades a la derecha — el título queda centrado de verdad
+     (grid 1fr auto 1fr) sin importar que los dos lados midan distinto. */
+  .masthead-row { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 16px; padding: 6px 0; }
 
   .live {
-    display: flex; align-items: center; justify-content: center; gap: 8px; margin: 4px 0 2px;
-    font-family: 'Space Mono', monospace; font-size: 11px; letter-spacing: 1.5px;
-    text-transform: uppercase; color: var(--muted);
+    display: flex; flex-direction: column; gap: 3px; justify-self: start;
+    font-family: 'Space Mono', monospace; font-size: 10.5px; letter-spacing: 1px;
+    text-transform: uppercase; color: var(--muted); white-space: nowrap;
   }
-  .live .dot-wrap { position: relative; width: 9px; height: 9px; }
+  .live-status { display: flex; align-items: center; gap: 7px; color: var(--ink); font-weight: 700; }
+  .live .dot-wrap { position: relative; width: 8px; height: 8px; flex: none; }
   .live .dot-wrap::before, .live .dot-wrap::after {
     content: ""; position: absolute; inset: 0; border-radius: 50%; background: var(--accent);
   }
@@ -136,8 +141,8 @@ TEMPLATE = r"""<!DOCTYPE html>
 
   h1.title {
     font-family: 'Archivo Black', 'Space Grotesk', sans-serif;
-    font-weight: 400; font-size: 62px; letter-spacing: -2px;
-    margin: 14px 0 30px; text-align: center; text-transform: uppercase; line-height: .92;
+    font-weight: 400; font-size: 34px; letter-spacing: -1px;
+    margin: 0; text-align: center; text-transform: uppercase; line-height: 1; white-space: nowrap;
   }
   h1.title span { display: inline-block; opacity: 0; transform: translateY(18px) rotate(-1deg); animation: riseIn .55s cubic-bezier(.2,.8,.2,1) forwards; }
   h1.title span:nth-child(odd) { color: var(--accent); }
@@ -145,7 +150,7 @@ TEMPLATE = r"""<!DOCTYPE html>
 
   /* ---- Masthead utils: buscar, historial ---- */
   .masthead-utils {
-    display: flex; align-items: center; gap: 8px; flex: none;
+    display: flex; align-items: center; gap: 8px; flex: none; justify-self: end;
   }
   .masthead-search-btn {
     height: 38px; flex: none; display: flex; align-items: center; gap: 6px;
@@ -164,34 +169,21 @@ TEMPLATE = r"""<!DOCTYPE html>
   .masthead-utils .hist-link svg { width: 15px; height: 15px; }
   .masthead-utils .hist-link:hover, .masthead-utils .hist-link.active { background: var(--accent); border-color: var(--accent); color: #fff; }
 
-  /* ---- Nota "Ofrecido por Isabel": el mismo post-it que las anotaciones, pero arrastrable ---- */
-  .subtitle {
-    position: absolute; top: 20px; left: 24px; width: 280px; z-index: 6;
-    display: flex; flex-direction: column; gap: 7px;
-    background: #ffddc2; border: 2px solid var(--ink); box-shadow: 5px 6px 0 var(--ink);
-    padding: 13px 16px 15px; transform: rotate(-4deg);
-    cursor: grab; touch-action: none; user-select: none;
+  /* ---- Nota de la editora: barrita sutil encima de todo el sitio ---- */
+  .editor-note {
+    display: flex; align-items: center; justify-content: center; gap: 8px;
+    padding: 7px 16px; background: var(--bg); border-bottom: 1px solid #e5e5e5;
+    font-family: 'Space Mono', monospace; font-size: 11px; line-height: 1.4; color: var(--muted);
+    text-align: center;
   }
-  .subtitle.dragging { cursor: grabbing; box-shadow: 8px 10px 0 var(--ink); z-index: 50; transition: none; }
-  .subtitle-row { display: flex; align-items: center; gap: 9px; }
-  .subtitle-avatar {
-    width: 46px; height: 46px; border-radius: 50%; border: 2px solid var(--ink); flex: none;
-    object-fit: cover; object-position: center 15%; background: #fff; pointer-events: none;
-  }
-  .subtitle-text { display: flex; flex-direction: column; gap: 2px; }
-  .subtitle-name {
-    font-family: 'Archivo Black', sans-serif; font-weight: 400; font-size: 14px; letter-spacing: -.2px;
-    text-transform: uppercase; color: var(--ink);
-  }
-  .subtitle-byline {
-    font-family: 'Space Mono', monospace; font-size: 10.5px; font-weight: 700; letter-spacing: .3px;
-    text-transform: uppercase; color: var(--accent); text-decoration: underline; cursor: pointer;
-  }
-  .subtitle-phrase { font-family: 'Space Mono', monospace; font-size: 12px; line-height: 1.45; color: var(--ink); font-weight: 400; }
+  .editor-note-avatar { width: 34px; height: 34px; border-radius: 50%; object-fit: cover; object-position: center 15%; flex: none; }
+  .editor-note-text { max-width: 720px; }
+  .editor-note-text a { color: var(--accent); font-weight: 700; text-decoration: none; }
+  .editor-note-text a:hover { text-decoration: underline; }
 
   /* ---- Ticker ---- */
   .ticker {
-    margin: 0 -24px;
+    margin: 20px -24px 0;
     border-top: 2px solid var(--accent); border-bottom: 2px solid var(--accent);
     background: rgba(255, 90, 31, 0.06);
     white-space: nowrap; position: relative; cursor: pointer;
@@ -504,11 +496,27 @@ TEMPLATE = r"""<!DOCTYPE html>
   .front-divider .front-label { margin: 0; flex: none; }
 
   /* ---- Fila superior: carrusel de titular + columna de Enciclopedia ---- */
+  /* Hero y sidebar comparten la misma altura fija (--top-row-h) para que no bailen
+     de tamaño según lo largo que sea el título/resumen de cada artículo. */
   .front-top { display: grid; grid-template-columns: 2.3fr 1fr; gap: 26px; align-items: start; margin-top: 4px; }
-  .front-lead .fp-hero .fp-img { height: 280px; }
-  .front-lead .fp-hero .fp-body { padding: 20px 22px; gap: 8px; }
-  .front-lead .fp-hero h2 { font-size: 32px; }
-  .front-lead .fp-hero p { font-size: 14.5px; }
+  #hero-slot { transition: opacity .22s ease; }
+  #hero-slot.fading { opacity: 0; }
+  .front-lead .fp-hero { height: var(--top-row-h); display: flex; flex-direction: column; }
+  .front-lead .fp-hero .fp-img, .front-lead .fp-hero .fp-noimg { height: 230px; flex: none; }
+  .front-lead .fp-hero .fp-body { gap: 8px; flex: 1; min-height: 0; overflow: hidden; }
+  .front-lead .fp-hero h2 {
+    font-size: 32px; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden;
+  }
+  .front-lead .fp-hero p {
+    font-size: 14.5px; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
+  }
+  /* La fecha se ancla siempre al borde inferior de la card, así un artículo con
+     título/resumen corto no deja un hueco vacío flotando antes del final. */
+  .front-lead .fp-hero .date { margin-top: auto; }
+  /* Neutraliza el tamaño extra grande de .no-media fuera de la home para que un
+     titular sin imagen mantenga la misma altura/proporciones que uno con imagen. */
+  .front-lead .fp-hero.no-media h2 { font-size: 32px; }
+  .front-lead .fp-hero.no-media p { font-size: 14.5px; }
 
   /* ---- Controles del carrusel de titular (flechas + puntos) ---- */
   .lead-controls { display: flex; align-items: center; justify-content: center; gap: 16px; margin-top: 14px; }
@@ -521,7 +529,7 @@ TEMPLATE = r"""<!DOCTYPE html>
   .lead-arrow:hover { background: var(--accent); border-color: var(--accent); color: #fff; }
   .lead-dots { display: flex; gap: 8px; }
   .lead-dot {
-    width: 9px; height: 9px; border-radius: 50%; background: #ddd; border: 2px solid var(--ink);
+    width: 12px; height: 12px; border-radius: 50%; background: #ddd; border: 2px solid var(--ink);
     padding: 0; cursor: pointer;
   }
   .lead-dot.on { background: var(--accent); border-color: var(--accent); }
@@ -530,50 +538,114 @@ TEMPLATE = r"""<!DOCTYPE html>
   .lead-icon { width: 52px; height: 52px; color: var(--ink); margin-bottom: 4px; image-rendering: pixelated; }
   .lead-icon svg { width: 100%; height: 100%; shape-rendering: crispEdges; }
 
-  /* ---- Columna de Enciclopedia junto al titular ---- */
-  .ency-sidebar { border: 2px solid var(--ink); }
-  .ency-sidebar-head {
-    display: flex; align-items: center; justify-content: space-between; gap: 10px;
-    padding: 12px 14px; border-bottom: 2px solid var(--ink); background: var(--ink); color: #fff;
+  /* ---- Columna junto al titular: término del día + chuleta de comandos ---- */
+  .ency-sidebar-stack { height: var(--top-row-h); display: flex; flex-direction: column; gap: 14px; }
+
+  /* Término del día: post-it que gira en 3D al hacer clic, como el de la editora */
+  .term-of-day { position: relative; flex: none; height: 160px; cursor: pointer; }
+  /* la definición vive en su propio post-it debajo — otro color, ligera rotación
+     propia — no un fondo plano, como si hubiera un segundo papel pegado ahí. */
+  .term-of-day-back {
+    position: absolute; inset: 0; z-index: 1; display: flex; flex-direction: column; justify-content: center; gap: 10px;
+    padding: 16px 18px; background: #fff3b0; transform: rotate(2deg);
+    box-shadow: 0 10px 16px -8px rgba(10,10,10,.4), 0 2px 4px rgba(10,10,10,.15);
   }
-  .ency-sidebar-head h3 {
+  .term-of-day-back p { margin: 0; font-size: 13px; line-height: 1.5; color: var(--ink); overflow-y: auto; }
+  .term-of-day-back .src {
+    font-family: 'Space Mono', monospace; font-size: 10px; text-transform: uppercase; letter-spacing: .5px;
+    color: var(--accent); cursor: pointer; text-decoration: none; flex: none;
+  }
+  .term-of-day-back .src:hover { text-decoration: underline; }
+
+  /* la nota de arriba: se despega desde el borde superior (donde está la cinta) —
+     se levanta, se inclina y se echa a un lado, en vez de voltearse como una tarjeta.
+     Vuelve a bajar y "pegarse" al tocar otra vez. */
+  /* Doblez en dos fases (controlado por JS, ver animateTermOfDay): primero se
+     "levanta" pasando por el canto (rotateX ~-90 + un empujón hacia arriba), y
+     luego cae/se asienta en el estado final — así no se ve como una rotación
+     plana, sino como un pliegue real con peso. */
+  .term-of-day-lift {
+    position: absolute; inset: 0; z-index: 2; transform-origin: top center; transform: rotate(-2deg);
+  }
+  /* al hacer clic, la nota naranja se mete detrás de la amarilla (z-index) y se
+     desliza hacia abajo, como cuando empujas una nota al fondo del taco — sigue
+     visible, asomando por debajo, en vez de desaparecer. */
+  .term-of-day.flipped .term-of-day-lift { z-index: 0; }
+  .term-of-day-face {
+    position: absolute; inset: 0; display: flex; flex-direction: column;
+    justify-content: center; gap: 6px; padding: 18px 20px 26px;
+    background: #ffddc2;
+    box-shadow: 0 14px 20px -10px rgba(10,10,10,.45), 0 3px 6px rgba(10,10,10,.18);
+    transform: translateY(0) rotate(0deg);
+    transition: transform .35s cubic-bezier(.4,0,.2,1), box-shadow .15s ease;
+  }
+  .term-of-day.flipped .term-of-day-face {
+    transform: translateY(30px) rotate(-6deg);
+  }
+  .term-of-day:hover .term-of-day-face {
+    box-shadow: 0 18px 24px -8px rgba(10,10,10,.5), 0 4px 8px rgba(10,10,10,.2);
+  }
+  /* esquina curvada: el pico de papel que se despega, con degradado de sombra */
+  .term-of-day-face .curl {
+    position: absolute; right: 0; bottom: 0; width: 24px; height: 24px;
+    background: linear-gradient(135deg, #f6d5b3 0%, #f6d5b3 45%, rgba(10,10,10,.35) 62%, rgba(10,10,10,.15) 100%);
+    clip-path: polygon(100% 0, 100% 100%, 0 100%);
+  }
+  /* dos trocitos de cinta sujetando la nota: fijos en .term-of-day, no se mueven con
+     el despegue (como la cinta real, que se queda pegada a la mesa) */
+  .term-of-day > .tape {
+    position: absolute; top: -11px; z-index: 3; width: 48px; height: 24px; pointer-events: none;
+    background:
+      linear-gradient(115deg, transparent 0%, transparent 38%, rgba(255,255,255,.65) 46%, rgba(255,255,255,.65) 54%, transparent 62%, transparent 100%),
+      linear-gradient(rgba(244, 172, 180, .68), rgba(244, 172, 180, .68));
+    box-shadow: 0 2px 4px rgba(10,10,10,.25);
+    border-radius: 1px;
+  }
+  .term-of-day > .tape-left { left: 6px; transform: rotate(-16deg); }
+  .term-of-day > .tape-right { right: 6px; transform: rotate(14deg); }
+  .term-of-day-label {
+    font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 1.2px; text-transform: uppercase;
+    color: var(--accent); font-weight: 700;
+  }
+  .term-of-day-face b {
+    font-family: 'Archivo Black', sans-serif; font-weight: 400; font-size: 22px; text-transform: uppercase;
+    letter-spacing: -.3px; line-height: 1.1;
+  }
+  .term-of-day-hint {
+    font-family: 'Space Mono', monospace; font-size: 10.5px; color: var(--muted); text-transform: uppercase; letter-spacing: .5px;
+  }
+
+  /* Chuleta de comandos: lista alfabética con scroll interno */
+  .cmd-cheatsheet { flex: 1; min-height: 0; border: 2px solid var(--ink); display: flex; flex-direction: column; }
+  .cmd-cheatsheet-head { padding: 10px 14px; border-bottom: 2px solid var(--ink); background: var(--ink); }
+  .cmd-cheatsheet-head h3 {
     margin: 0; font-family: 'Space Mono', monospace; font-size: 11px; letter-spacing: 1.5px;
-    text-transform: uppercase; font-weight: 700;
+    text-transform: uppercase; font-weight: 700; color: #fff;
   }
-  .shuffle-btn {
-    border: 2px solid #fff; background: transparent; color: #fff; width: 26px; height: 26px; flex: none;
-    display: flex; align-items: center; justify-content: center; cursor: pointer;
-  }
-  .shuffle-btn svg { width: 13px; height: 13px; }
-  .shuffle-btn:hover { background: var(--accent); border-color: var(--accent); }
-  .shuffle-btn.spin svg { animation: shuffleSpin .4s ease; }
-  @keyframes shuffleSpin { from { transform: rotate(0); } to { transform: rotate(180deg); } }
-  .ency-mini-list { display: flex; flex-direction: column; }
-  .ency-mini-row {
-    display: block; padding: 12px 14px; border-bottom: 1px solid #e5e5e5; text-decoration: none; color: var(--ink);
-  }
-  .ency-mini-row:last-child { border-bottom: none; }
-  .ency-mini-row:hover { background: rgba(255,90,31,0.06); }
-  .ency-mini-row b {
-    display: block; font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 13.5px; margin-bottom: 3px;
-  }
-  .ency-mini-row:hover b { color: var(--accent); }
-  .ency-mini-row span {
-    display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
-    font-size: 12px; line-height: 1.45; color: var(--muted);
-  }
+  .cmd-cheat-list { flex: 1; min-height: 0; overflow-y: auto; }
+  .cmd-cheat-row { padding: 10px 14px; border-bottom: 1px solid #e5e5e5; display: flex; flex-direction: column; gap: 3px; }
+  .cmd-cheat-row:last-child { border-bottom: none; }
+  .cmd-cheat-row b { font-family: 'Space Mono', monospace; font-size: 12.5px; font-weight: 700; color: var(--ink); }
+  .cmd-cheat-row span { font-size: 11.5px; line-height: 1.4; color: var(--muted); }
   .ency-sidebar-empty { padding: 20px 14px; font-size: 12.5px; color: var(--muted); text-align: center; }
 
-  /* ---- Carrusel paginado de "quizá te interese" (dot-nav, sin autoplay) ---- */
+  /* ---- Carrusel de "quizá te interese": clásico de 1 en 1, flechas debajo
+     (misma fila que las del hero) en vez de a los lados de las cards. ---- */
+  .other-carousel-viewport { overflow: hidden; margin-top: 4px; }
   .other-carousel-page { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+  .other-carousel-track { display: flex; }
+  #other-controls.hidden { display: none; }
   @media (max-width: 720px) { .other-carousel-page { grid-template-columns: 1fr; } }
 
   @media (max-width: 900px) {
     .front-top { grid-template-columns: 1fr; }
+    /* Apiladas, hero y sidebar no necesitan compartir altura exacta */
+    .front-lead .fp-hero, .front-lead .fp-hero.no-media, .ency-sidebar-stack { height: auto; }
+    .cmd-cheatsheet { max-height: 320px; }
   }
 
   @media (max-width: 760px) {
-    .front-lead .fp-hero .fp-img { height: 180px; }
+    .front-lead .fp-hero .fp-img, .front-lead .fp-hero .fp-noimg { height: 180px; }
     .front-lead .fp-hero h2 { font-size: 23px; }
   }
 
@@ -598,9 +670,18 @@ TEMPLATE = r"""<!DOCTYPE html>
   .fp-hero.no-media p { font-size: 16.5px; }
 
   /* ---- Portada: tarjeta de segundo nivel (reutilizada en el carrusel de "quizá te interese") ---- */
-  .fp-secondary .fp-img, .fp-secondary .fp-noimg { height: 190px; }
-  .fp-secondary h3 { margin: 0; font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 21px; line-height: 1.18; }
-  .fp-secondary p { margin: 0; font-size: 13.5px; line-height: 1.5; color: var(--ink); }
+  /* Altura fija para que las 3 cards de una misma página del carrusel midan siempre lo mismo. */
+  .fp-secondary { height: 420px; display: flex; flex-direction: column; }
+  .fp-secondary .fp-img, .fp-secondary .fp-noimg { height: 190px; flex: none; }
+  .fp-secondary .fp-body { flex: 1; min-height: 0; overflow: hidden; }
+  .fp-secondary h3 {
+    margin: 0; font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 21px; line-height: 1.18;
+    display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
+  }
+  .fp-secondary p {
+    margin: 0; font-size: 13.5px; line-height: 1.5; color: var(--ink);
+    display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden;
+  }
   .fp-secondary .date { font-family: 'Space Mono', monospace; font-size: 10.5px; color: var(--muted); margin-top: 2px; }
 
   /* ---- Leído / no leído ---- */
@@ -833,19 +914,17 @@ TEMPLATE = r"""<!DOCTYPE html>
   @media (max-width: 900px) {
     .wrap { padding: 0 18px; }
     header.masthead { padding: 40px 18px 0; }
-    .ticker { margin: 0 -18px; }
+    .ticker { margin: 20px -18px 0; }
     nav.sections { margin: 0 -18px; padding: 0 22px; }
   }
 
   @media (max-width: 760px) {
-    h1.title { font-size: 46px; letter-spacing: -1.5px; margin: 18px 0 12px; }
-    .subtitle {
-      position: relative; top: auto; left: auto; width: 100%; max-width: 300px;
-      margin: 0 0 22px; padding: 11px 14px 13px;
-    }
-    .subtitle-avatar { width: 34px; height: 34px; }
-    .subtitle-name { font-size: 12.5px; }
-    .subtitle-phrase { font-size: 12px; }
+    /* Apilado: en directo/fecha arriba, título centrado debajo, utilidades abajo —
+       las tres columnas ya no caben cómodamente en una fila tan estrecha. */
+    .masthead-row { grid-template-columns: 1fr; justify-items: center; row-gap: 10px; }
+    .live { justify-self: center; align-items: center; }
+    .masthead-utils { justify-self: center; }
+    h1.title { font-size: 30px; letter-spacing: -1px; white-space: normal; }
 
     nav.sections a { padding: 12px 14px; font-size: 11px; }
     .masthead-utils .hist-link { padding: 0 14px; }
@@ -890,14 +969,13 @@ TEMPLATE = r"""<!DOCTYPE html>
     .wrap { padding: 0 14px; }
     main.wrap { padding-top: 24px; }
     header.masthead { padding: 32px 14px 0; }
-    .ticker { margin: 0 -14px; }
+    .ticker { margin: 16px -14px 0; }
     nav.sections { margin: 0 -14px; padding: 0 18px; }
 
-    h1.title { font-size: 34px; margin-bottom: 10px; }
-    .subtitle { max-width: 100%; padding: 9px 11px 11px; margin-bottom: 18px; }
-    .subtitle-avatar { width: 28px; height: 28px; }
-    .subtitle-name { font-size: 11.5px; }
-    .subtitle-phrase { font-size: 11px; }
+    h1.title { font-size: 24px; }
+    .editor-note { font-size: 10px; padding: 6px 12px; }
+    .editor-note-avatar { width: 26px; height: 26px; }
+    .editor-note-text { max-width: 260px; }
 
     .masthead-utils { gap: 6px; }
     .masthead-search-btn { height: 34px; padding: 0 10px; font-size: 9.5px; }
@@ -915,14 +993,15 @@ TEMPLATE = r"""<!DOCTYPE html>
 </head>
 <body>
 
+<div class="editor-note" id="subtitle"></div>
+
 <header class="masthead">
   <div class="wrap">
-    <div class="top-bar">
+    <div class="masthead-row">
+      <div class="live" id="live-kicker"></div>
+      <h1 class="title" id="masthead-title"></h1>
       <div class="masthead-utils" id="masthead-utils"></div>
     </div>
-    <div class="live" id="live-kicker"></div>
-    <h1 class="title" id="masthead-title"></h1>
-    <div class="subtitle" id="subtitle"></div>
   </div>
   <div class="ticker" id="ticker"><div class="ticker-badge" id="ticker-badge"></div><div class="ticker-scroll"><div class="ticker-track" id="ticker-track"></div></div></div>
   <nav class="sections" id="section-nav"></nav>
@@ -1004,19 +1083,20 @@ function renderLiveKicker() {
     const now = new Date();
     const date = now.toLocaleDateString('es-ES', { day: '2-digit', month: 'short', year: 'numeric' }).toUpperCase();
     const time = now.toLocaleTimeString('es-ES', { hour: '2-digit', minute: '2-digit' });
-    el.innerHTML = `<span class="dot-wrap"></span> En directo · ${date} · ${time}`;
+    el.innerHTML = `<span class="live-status"><span class="dot-wrap"></span>En directo</span><span class="live-date">${date} · ${time}</span>`;
   }
   paint();
   setInterval(paint, 30000);
 }
 
-/* ---------- subtitle: nota post-it arrastrable, firma de la creadora ---------- */
+/* ---------- nota de la editora: barrita sutil encima de todo ---------- */
 const SUBTITLE_PHRASES = [
-  'Aquí no decide ningún algoritmo. Decido yo, con más pestañas abiertas que criterio.',
-  'La IA redacta, pero el mal gusto de elegir qué leer sigue siendo mío.',
-  'Ningún LLM ha votado si esto merece la pena. Esa parte la hago yo, a mano.',
-  'Curado por una humana con síndrome del impostor y demasiada curiosidad.',
-  'Yo leo, yo decido — la IA solo aguanta el ritmo que le pongo.',
+  'Ningún algoritmo decide aquí. Decido yo, a base de café y 47 pestañas abiertas.',
+  'La IA propone borradores. Decidir qué se queda sigue siendo cosa mía.',
+  'Ningún LLM ha votado si esto merece la pena — por suerte, aquí no es una democracia.',
+  'Curada por una humana con síndrome del impostor, cero sueño y demasiada curiosidad.',
+  'Yo leo, yo decido, y culpo a la IA cuando algo sale mal.',
+  'Sin comité editorial. Solo yo, mi instinto, y una IA que hace lo que puede.',
 ];
 const LINKEDIN_URL = 'https://www.linkedin.com/in/isabel-ferrer-dalmau-productdesigner/';
 
@@ -1024,58 +1104,10 @@ function renderSubtitle() {
   const el = document.getElementById('subtitle');
   const phrase = SUBTITLE_PHRASES[Math.floor(Math.random() * SUBTITLE_PHRASES.length)];
   el.innerHTML = `
-    <div class="subtitle-row">
-      <img class="subtitle-avatar" src="images/_shared/annotations-avatar.png" alt="Isabel Ferrer - Dalmau">
-      <div class="subtitle-text">
-        <span class="subtitle-name">Nota de la editora jefe</span>
-        <a class="subtitle-byline" href="${LINKEDIN_URL}" target="_blank" rel="noopener">Isabel Ferrer - Dalmau</a>
-      </div>
-    </div>
-    <span class="subtitle-phrase">${phrase}</span>`;
-  makeDraggable(el, 'postitPos');
-}
-
-/* ---------- post-it arrastrable (masthead) ---------- */
-function makeDraggable(el, storageKey) {
-  const parent = el.offsetParent || el.parentElement;
-  const mobileFlow = () => window.innerWidth <= 760; // en mobile el post-it vive en el flujo normal, bajo el titulo — nada de arrastre
-  let saved = null;
-  try { saved = JSON.parse(localStorage.getItem(storageKey)); } catch(e) {}
-  if (saved && !mobileFlow()) { el.style.left = saved.x + 'px'; el.style.top = saved.y + 'px'; }
-
-  let dragging = false, offX = 0, offY = 0;
-
-  el.addEventListener('pointerdown', e => {
-    if (mobileFlow()) return;
-    if (e.target.closest('a, button')) return;
-    dragging = true;
-    el.setPointerCapture(e.pointerId);
-    const rect = el.getBoundingClientRect();
-    offX = e.clientX - rect.left;
-    offY = e.clientY - rect.top;
-    el.classList.add('dragging');
-  });
-
-  el.addEventListener('pointermove', e => {
-    if (!dragging) return;
-    const pRect = parent.getBoundingClientRect();
-    const elRect = el.getBoundingClientRect();
-    let x = e.clientX - pRect.left - offX;
-    let y = e.clientY - pRect.top - offY;
-    x = Math.max(-elRect.width * 0.3, Math.min(x, pRect.width - elRect.width * 0.7));
-    y = Math.max(0, Math.min(y, pRect.height - elRect.height * 0.5));
-    el.style.left = x + 'px';
-    el.style.top = y + 'px';
-  });
-
-  const stop = e => {
-    if (!dragging) return;
-    dragging = false;
-    el.classList.remove('dragging');
-    localStorage.setItem(storageKey, JSON.stringify({ x: parseFloat(el.style.left), y: parseFloat(el.style.top) }));
-  };
-  el.addEventListener('pointerup', stop);
-  el.addEventListener('pointercancel', stop);
+    <img class="editor-note-avatar" src="images/_shared/annotations-avatar.png" alt="Isabel Ferrer - Dalmau">
+    <span class="editor-note-text">
+      <a href="${LINKEDIN_URL}" target="_blank" rel="noopener">Nota de la editora jefe</a> — ${phrase}
+    </span>`;
 }
 
 /* ---------- ticker: titulares más recientes ---------- */
@@ -1420,7 +1452,15 @@ function paintHero() {
   const { items, index } = heroState;
   const slot = document.getElementById('hero-slot');
   if (!slot || !items.length) return;
-  slot.innerHTML = leadHtml(items[index]);
+
+  const swap = () => { slot.innerHTML = leadHtml(items[index]); slot.classList.remove('fading'); };
+  if (slot.children.length) {
+    slot.classList.add('fading');
+    setTimeout(swap, 220);
+  } else {
+    swap();
+  }
+
   const dotsWrap = document.getElementById('hero-dots');
   dotsWrap.innerHTML = items.length > 1
     ? items.map((_, i) => `<button class="lead-dot ${i === index ? 'on' : ''}" data-i="${i}" aria-label="Titular ${i + 1}"></button>`).join('')
@@ -1446,43 +1486,123 @@ function clearHeroTimer() {
 }
 
 /* ---------- carrusel paginado de "quizá te interese" (dot-nav, sin autoplay) ---------- */
-const otherCarouselState = { pages: [], index: 0 };
+const otherCarouselState = { items: [], index: 0 };
 
+/* ventana de `count` artículos empezando en `start`, dando la vuelta al llegar al final */
+function otherCarouselWindow(start, count) {
+  const n = otherCarouselState.items.length;
+  const out = [];
+  for (let i = 0; i < count; i++) out.push(otherCarouselState.items[(start + i + n) % n]);
+  return out;
+}
+
+/* estado de reposo: grid normal de 3, sin pista ni transform */
 function paintOtherCarousel() {
   const wrap = document.getElementById('other-carousel-slot');
   if (!wrap) return;
-  const page = otherCarouselState.pages[otherCarouselState.index] || [];
-  wrap.innerHTML = `<div class="other-carousel-page">${page.map(secondaryHtml).join('')}</div>`;
-  const dotsWrap = document.getElementById('other-dots');
-  dotsWrap.innerHTML = otherCarouselState.pages.length > 1
-    ? otherCarouselState.pages.map((_, i) => `<button class="lead-dot ${i === otherCarouselState.index ? 'on' : ''}" data-i="${i}" aria-label="Página ${i + 1}"></button>`).join('')
-    : '';
-  dotsWrap.querySelectorAll('.lead-dot').forEach(d => d.addEventListener('click', () => {
-    otherCarouselState.index = +d.dataset.i;
+  const { items, index } = otherCarouselState;
+  if (!items.length) { wrap.innerHTML = ''; return; }
+  wrap.innerHTML = `<div class="other-carousel-page">${otherCarouselWindow(index, 3).map(secondaryHtml).join('')}</div>`;
+}
+
+/* carrusel clásico de 1 en 1: pista de 5 cards (una de más a cada lado, fuera de
+   la ventana) que se desliza un ancho de card, y al terminar se sustituye por el
+   grid de reposo ya con la ventana desplazada — así el 1 desaparece por la
+   izquierda y el 4 entra por la derecha, en vez de saltar de página en página. */
+function otherCarouselStep(delta) {
+  const n = otherCarouselState.items.length;
+  if (n <= 3) return;
+  const wrap = document.getElementById('other-carousel-slot');
+  const grid = wrap.querySelector('.other-carousel-page');
+  if (!grid || !grid.children.length) return;
+  const cardW = grid.children[0].getBoundingClientRect().width;
+  const gap = 18;
+  const step = cardW + gap;
+
+  const windowStart = delta > 0 ? otherCarouselState.index : otherCarouselState.index - 1;
+  const track = document.createElement('div');
+  track.className = 'other-carousel-track';
+  track.style.gap = gap + 'px';
+  track.style.width = (cardW * 5 + gap * 4) + 'px';
+  track.innerHTML = otherCarouselWindow(windowStart, 5).map(secondaryHtml).join('');
+  [...track.children].forEach(c => { c.style.flex = `0 0 ${cardW}px`; });
+  track.style.transform = `translateX(${-step}px)`;
+
+  wrap.innerHTML = '';
+  wrap.appendChild(track);
+  void track.offsetWidth;
+  track.style.transition = 'transform .4s cubic-bezier(.4,0,.2,1)';
+  track.style.transform = `translateX(${-step * (delta > 0 ? 2 : 0)}px)`;
+
+  setTimeout(() => {
+    otherCarouselState.index = (otherCarouselState.index + delta + n) % n;
     paintOtherCarousel();
-  }));
+  }, 400);
 }
 
-/* ---------- columna de Enciclopedia junto al titular (shuffle de términos) ---------- */
-let pendingEncySearch = null;
-
-function pickEncyPreview(terms) {
-  if (!terms.length) return [];
-  const due = termsDue(terms);
-  const pool = due.length ? due : terms;
-  return pool.slice().sort(() => Math.random() - 0.5).slice(0, 5);
+/* ---------- término del día (post-it que gira, junto al titular) ---------- */
+function pickTermOfDay(terms) {
+  if (!terms.length) return null;
+  const iso = todayISO();
+  let hash = 0;
+  for (let i = 0; i < iso.length; i++) hash = (hash * 31 + iso.charCodeAt(i)) >>> 0;
+  return terms[hash % terms.length];
 }
-function paintEncySidebar(items) {
-  const wrap = document.getElementById('ency-mini-list');
+let termOfDayFlipped = false;
+
+/* Doblez en dos fases: primero un tramo rápido hasta el canto (con un empujón
+   hacia arriba, como al levantar la nota por abajo), luego un tramo más lento
+   hasta el estado final — un solo transition lineal se ve como una rotación
+   plana, esto se lee como un pliegue real con peso. */
+function paintTermOfDay(term) {
+  const wrap = document.getElementById('term-of-day');
   if (!wrap) return;
-  if (!items.length) {
+  if (!term) {
     wrap.innerHTML = `<div class="ency-sidebar-empty">Aún no hay términos guardados. Dale a ${ICONS.heart} en los que veas dentro de un artículo.</div>`;
     return;
   }
-  wrap.innerHTML = items.map(t => `<a class="ency-mini-row" href="#/enciclopedia" data-term="${t.term.replace(/"/g, '&quot;')}"><b>${t.term}</b><span>${t.definition}</span></a>`).join('');
-  wrap.querySelectorAll('.ency-mini-row').forEach(row => {
-    row.addEventListener('click', () => { pendingEncySearch = row.dataset.term; });
+  wrap.innerHTML = `
+    <span class="tape tape-left"></span><span class="tape tape-right"></span>
+    <div class="term-of-day-back">
+      <p>${term.definition}</p>
+      <a class="src" data-open="${term.articleId}">De: ${term.articleTitle}</a>
+    </div>
+    <div class="term-of-day-lift">
+      <div class="term-of-day-face">
+        <span class="curl"></span>
+        <span class="term-of-day-label">Término del día</span>
+        <b>${term.term}</b>
+        <span class="term-of-day-hint">Toca para ver la definición</span>
+      </div>
+    </div>
+  `;
+  wrap.classList.toggle('flipped', termOfDayFlipped);
+  wrap.addEventListener('click', () => {
+    termOfDayFlipped = !termOfDayFlipped;
+    wrap.classList.toggle('flipped', termOfDayFlipped);
   });
+  wrap.querySelector('[data-open]').addEventListener('click', e => {
+    e.stopPropagation();
+    location.hash = '#/articulo/' + e.currentTarget.dataset.open;
+  });
+}
+
+/* ---------- chuleta de comandos de Claude (junto al titular) ---------- */
+function cmdCheatRowHtml(c) {
+  return `<div class="cmd-cheat-row">
+    <b>${escapeHtml(c.name)}</b>
+    <span>${escapeHtml(c.description)}</span>
+  </div>`;
+}
+function paintCmdCheatsheet() {
+  const wrap = document.getElementById('cmd-cheat-list');
+  if (!wrap) return;
+  if (!COMMANDS.length) {
+    wrap.innerHTML = `<div class="ency-sidebar-empty">Aún no hay comandos guardados aquí.</div>`;
+    return;
+  }
+  const sorted = COMMANDS.slice().sort((a, b) => a.name.replace(/^\//, '').localeCompare(b.name.replace(/^\//, ''), 'es', { sensitivity: 'base' }));
+  wrap.innerHTML = sorted.map(cmdCheatRowHtml).join('');
 }
 
 function renderPortada() {
@@ -1497,20 +1617,18 @@ function renderPortada() {
     return;
   }
 
-  heroState.items = list.slice(0, 5);
+  heroState.items = list.slice(0, 3);
   heroState.index = 0;
 
-  const otherItems = list.slice(5, 11);
-  otherCarouselState.pages = [];
-  for (let i = 0; i < otherItems.length; i += 3) otherCarouselState.pages.push(otherItems.slice(i, i + 3));
+  otherCarouselState.items = list.slice(3, 9);
   otherCarouselState.index = 0;
 
-  const rest = list.slice(11);
+  const rest = list.slice(9);
   const bySection = {};
   rest.forEach(a => { (bySection[a.section] = bySection[a.section] || []).push(a); });
 
   const encyTerms = buildEncyTerms();
-  const encyPreview = pickEncyPreview(encyTerms);
+  const termOfDay = pickTermOfDay(encyTerms);
 
   main.innerHTML = `
     <div class="front-top">
@@ -1522,23 +1640,31 @@ function renderPortada() {
           <button class="lead-arrow" id="hero-next" title="Siguiente titular">${ICONS.arrow}</button>
         </div>
       </div>
-      <aside class="ency-sidebar">
-        <div class="ency-sidebar-head">
-          <h3>Para repasar</h3>
-          <button class="shuffle-btn" id="ency-shuffle-btn" title="Otros términos">${ICONS.shuffle}</button>
-        </div>
-        <div class="ency-mini-list" id="ency-mini-list"></div>
-      </aside>
+      <div class="ency-sidebar-stack">
+        <div class="term-of-day" id="term-of-day"></div>
+        <aside class="cmd-cheatsheet">
+          <div class="cmd-cheatsheet-head"><h3>Chuleta de comandos</h3></div>
+          <div class="cmd-cheat-list" id="cmd-cheat-list"></div>
+        </aside>
+      </div>
     </div>
-    ${otherCarouselState.pages.length ? `
+    ${otherCarouselState.items.length ? `
       <div class="front-divider"><span class="front-label">Quizá te interese</span></div>
-      <div id="other-carousel-slot"></div>
-      <div class="lead-controls"><div class="lead-dots" id="other-dots"></div></div>
+      <div class="other-carousel-viewport" id="other-carousel-slot"></div>
+      <div class="lead-controls" id="other-controls">
+        <button class="lead-arrow left" id="other-prev" title="Anteriores">${ICONS.arrow}</button>
+        <button class="lead-arrow" id="other-next" title="Siguientes">${ICONS.arrow}</button>
+      </div>
     ` : ''}
-    ${SECTIONS.filter(s => bySection[s.slug] && bySection[s.slug].length).map(s => `
-      <div class="front-divider"><span class="front-label">${s.name}</span></div>
-      <div class="grid">${bySection[s.slug].map(cardHtml).join('')}</div>
-    `).join('')}
+    ${SECTIONS.map(s => {
+      const items = (bySection[s.slug] || []).slice(0, 5);
+      return `
+        <div class="front-divider"><span class="front-label">${s.name}</span></div>
+        ${items.length
+          ? `<div class="grid">${items.map(cardHtml).join('')}</div>`
+          : `<div class="empty">Todavía no hay más artículos de ${s.name.toLowerCase()} por aquí — vuelve pronto.</div>`}
+      `;
+    }).join('')}
   `;
 
   paintHero();
@@ -1546,15 +1672,16 @@ function renderPortada() {
   document.getElementById('hero-prev').addEventListener('click', () => { heroStep(-1); restartHeroTimer(); });
   document.getElementById('hero-next').addEventListener('click', () => { heroStep(1); restartHeroTimer(); });
 
-  paintEncySidebar(encyPreview);
-  document.getElementById('ency-shuffle-btn').addEventListener('click', e => {
-    const btn = e.currentTarget;
-    btn.classList.add('spin');
-    setTimeout(() => btn.classList.remove('spin'), 400);
-    paintEncySidebar(pickEncyPreview(encyTerms));
-  });
+  paintTermOfDay(termOfDay);
+  paintCmdCheatsheet();
 
-  if (otherCarouselState.pages.length) paintOtherCarousel();
+  if (otherCarouselState.items.length) {
+    paintOtherCarousel();
+    const multi = otherCarouselState.items.length > 3;
+    document.getElementById('other-controls').classList.toggle('hidden', !multi);
+    document.getElementById('other-prev').addEventListener('click', () => otherCarouselStep(-1));
+    document.getElementById('other-next').addEventListener('click', () => otherCarouselStep(1));
+  }
 }
 
 function railHtml(items) {
@@ -2024,13 +2151,7 @@ function renderEnciclopedia(view) {
     </div>
   `;
   document.getElementById('ency-search').addEventListener('input', e => paintEncyList(terms, e.target.value));
-  if (pendingEncySearch) {
-    document.getElementById('ency-search').value = pendingEncySearch;
-    paintEncyList(terms, pendingEncySearch);
-    pendingEncySearch = null;
-  } else {
-    paintEncyList(terms, '');
-  }
+  paintEncyList(terms, '');
 
   if (window.__pendingReviewOpen) {
     window.__pendingReviewOpen = false;
