@@ -459,47 +459,51 @@
   .lead-icon { width: 52px; height: 52px; color: var(--ink); margin-bottom: 4px; image-rendering: pixelated; }
   .lead-icon svg { width: 100%; height: 100%; shape-rendering: crispEdges; }
 
-  /* ---- Columna de Enciclopedia junto al titular ---- */
-  .ency-sidebar { border: 2px solid var(--ink); height: var(--top-row-h); display: flex; flex-direction: column; }
-  .ency-sidebar-head {
-    display: flex; align-items: center; justify-content: space-between; gap: 10px;
-    padding: 12px 14px; border-bottom: 2px solid var(--ink); background: var(--accent); color: #fff;
+  /* ---- Columna junto al titular: término del día + chuleta de comandos ---- */
+  .ency-sidebar-stack { height: var(--top-row-h); display: flex; flex-direction: column; gap: 14px; }
+
+  /* Término del día: post-it que gira en 3D al hacer clic, como el de la editora */
+  .term-of-day { flex: none; height: 160px; perspective: 900px; cursor: pointer; }
+  .term-of-day-inner {
+    position: relative; width: 100%; height: 100%; transition: transform .5s ease; transform-style: preserve-3d;
   }
-  .ency-sidebar-head h3 {
-    margin: 0; font-family: 'Space Mono', monospace; font-size: 11px; letter-spacing: 1.5px;
-    text-transform: uppercase; font-weight: 700;
+  .term-of-day.flipped .term-of-day-inner { transform: rotateY(180deg); }
+  .term-of-day-face {
+    position: absolute; inset: 0; backface-visibility: hidden; display: flex; flex-direction: column;
+    justify-content: center; gap: 6px; padding: 16px 18px;
+    background: #ffddc2; border: 2px solid var(--ink); box-shadow: 4px 5px 0 var(--ink);
   }
-  .shuffle-btn {
-    border: 2px solid #fff; background: transparent; color: #fff; width: 26px; height: 26px; flex: none;
-    display: flex; align-items: center; justify-content: center; cursor: pointer;
+  .term-of-day-back { transform: rotateY(180deg); justify-content: flex-start; gap: 10px; }
+  .term-of-day-label {
+    font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 1.2px; text-transform: uppercase;
+    color: var(--accent); font-weight: 700;
   }
-  .shuffle-btn svg { width: 13px; height: 13px; }
-  .shuffle-btn:hover { background: var(--ink); border-color: var(--ink); }
-  .shuffle-btn.spin svg { animation: shuffleSpin .5s ease; }
-  @keyframes shuffleSpin { from { transform: rotate(0); } to { transform: rotate(360deg); } }
-  .ency-mini-list { display: flex; flex-direction: column; flex: 1; min-height: 0; overflow-y: auto; }
-  /* Cada término es una mini-card plegable: clic para expandir la definición ahí mismo,
-     sin salir de la home. */
-  .ency-mini-row { border-bottom: 1px solid #e5e5e5; }
-  .ency-mini-row:last-child { border-bottom: none; }
-  .ency-mini-row.open { background: rgba(255,90,31,0.05); }
-  .ency-mini-toggle {
-    width: 100%; display: flex; align-items: center; justify-content: space-between; gap: 8px;
-    padding: 12px 14px; border: none; background: transparent; cursor: pointer; text-align: left;
-    font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 13.5px; color: var(--ink);
+  .term-of-day-front b {
+    font-family: 'Archivo Black', sans-serif; font-weight: 400; font-size: 22px; text-transform: uppercase;
+    letter-spacing: -.3px; line-height: 1.1;
   }
-  .ency-mini-row:hover .ency-mini-toggle { color: var(--accent); }
-  .ency-mini-caret { flex: none; width: 11px; height: 11px; color: var(--muted); transition: transform .15s ease; }
-  .ency-mini-caret svg { width: 100%; height: 100%; transform: rotate(90deg); }
-  .ency-mini-row.open .ency-mini-caret { color: var(--accent); }
-  .ency-mini-row.open .ency-mini-caret svg { transform: rotate(-90deg); }
-  .ency-mini-def { padding: 0 14px 14px; }
-  .ency-mini-def p { margin: 0 0 8px; font-size: 12.5px; line-height: 1.5; color: var(--ink); }
-  .ency-mini-def .src {
+  .term-of-day-hint {
+    font-family: 'Space Mono', monospace; font-size: 10.5px; color: var(--muted); text-transform: uppercase; letter-spacing: .5px;
+  }
+  .term-of-day-back p { margin: 0; font-size: 13px; line-height: 1.5; color: var(--ink); overflow-y: auto; }
+  .term-of-day-back .src {
     font-family: 'Space Mono', monospace; font-size: 10px; text-transform: uppercase; letter-spacing: .5px;
-    color: var(--accent); cursor: pointer; text-decoration: none;
+    color: var(--accent); cursor: pointer; text-decoration: none; flex: none;
   }
-  .ency-mini-def .src:hover { text-decoration: underline; }
+  .term-of-day-back .src:hover { text-decoration: underline; }
+
+  /* Chuleta de comandos: lista alfabética con scroll interno */
+  .cmd-cheatsheet { flex: 1; min-height: 0; border: 2px solid var(--ink); display: flex; flex-direction: column; }
+  .cmd-cheatsheet-head { padding: 10px 14px; border-bottom: 2px solid var(--ink); background: var(--ink); }
+  .cmd-cheatsheet-head h3 {
+    margin: 0; font-family: 'Space Mono', monospace; font-size: 11px; letter-spacing: 1.5px;
+    text-transform: uppercase; font-weight: 700; color: #fff;
+  }
+  .cmd-cheat-list { flex: 1; min-height: 0; overflow-y: auto; }
+  .cmd-cheat-row { padding: 10px 14px; border-bottom: 1px solid #e5e5e5; display: flex; flex-direction: column; gap: 3px; }
+  .cmd-cheat-row:last-child { border-bottom: none; }
+  .cmd-cheat-row b { font-family: 'Space Mono', monospace; font-size: 12.5px; font-weight: 700; color: var(--ink); }
+  .cmd-cheat-row span { font-size: 11.5px; line-height: 1.4; color: var(--muted); }
   .ency-sidebar-empty { padding: 20px 14px; font-size: 12.5px; color: var(--muted); text-align: center; }
 
   /* ---- Carrusel paginado de "quizá te interese" (dot-nav, sin autoplay) ---- */
@@ -527,8 +531,8 @@
   @media (max-width: 900px) {
     .front-top { grid-template-columns: 1fr; }
     /* Apiladas, hero y sidebar no necesitan compartir altura exacta */
-    .front-lead .fp-hero, .front-lead .fp-hero.no-media, .ency-sidebar { height: auto; }
-    .ency-mini-list { overflow-y: visible; }
+    .front-lead .fp-hero, .front-lead .fp-hero.no-media, .ency-sidebar-stack { height: auto; }
+    .cmd-cheatsheet { max-height: 320px; }
   }
 
   @media (max-width: 760px) {
@@ -1450,47 +1454,63 @@ function otherCarouselStep(delta) {
   paintOtherCarousel(delta);
 }
 
-/* ---------- columna de Enciclopedia junto al titular (shuffle de términos) ---------- */
-let expandedEncyKey = null;
-
-function pickEncyPreview(terms) {
-  if (!terms.length) return [];
-  const due = termsDue(terms);
-  const pool = due.length ? due : terms;
-  return pool.slice().sort(() => Math.random() - 0.5).slice(0, 5);
+/* ---------- término del día (post-it que gira, junto al titular) ---------- */
+function pickTermOfDay(terms) {
+  if (!terms.length) return null;
+  const iso = todayISO();
+  let hash = 0;
+  for (let i = 0; i < iso.length; i++) hash = (hash * 31 + iso.charCodeAt(i)) >>> 0;
+  return terms[hash % terms.length];
 }
-function paintEncySidebar(items) {
-  const wrap = document.getElementById('ency-mini-list');
+let termOfDayFlipped = false;
+
+function paintTermOfDay(term) {
+  const wrap = document.getElementById('term-of-day');
   if (!wrap) return;
-  if (!items.length) {
+  if (!term) {
     wrap.innerHTML = `<div class="ency-sidebar-empty">Aún no hay términos guardados. Dale a ${ICONS.heart} en los que veas dentro de un artículo.</div>`;
     return;
   }
-  wrap.innerHTML = items.map(t => {
-    const open = expandedEncyKey === t.key;
-    return `<div class="ency-mini-row ${open ? 'open' : ''}" data-key="${t.key}">
-      <button class="ency-mini-toggle">
-        <b>${t.term}</b>
-        <span class="ency-mini-caret">${ICONS.arrow}</span>
-      </button>
-      ${open ? `
-        <div class="ency-mini-def">
-          <p>${t.definition}</p>
-          <a class="src" data-open="${t.articleId}">De: ${t.articleTitle}</a>
-        </div>
-      ` : ''}
-    </div>`;
-  }).join('');
-  wrap.querySelectorAll('.ency-mini-toggle').forEach(btn => {
-    btn.addEventListener('click', () => {
-      const key = btn.closest('.ency-mini-row').dataset.key;
-      expandedEncyKey = expandedEncyKey === key ? null : key;
-      paintEncySidebar(items);
-    });
+  wrap.innerHTML = `
+    <div class="term-of-day-inner">
+      <div class="term-of-day-face term-of-day-front">
+        <span class="term-of-day-label">Término del día</span>
+        <b>${term.term}</b>
+        <span class="term-of-day-hint">Toca para ver la definición</span>
+      </div>
+      <div class="term-of-day-face term-of-day-back">
+        <p>${term.definition}</p>
+        <a class="src" data-open="${term.articleId}">De: ${term.articleTitle}</a>
+      </div>
+    </div>
+  `;
+  wrap.classList.toggle('flipped', termOfDayFlipped);
+  wrap.querySelector('.term-of-day-front').addEventListener('click', () => {
+    termOfDayFlipped = true;
+    wrap.classList.add('flipped');
   });
-  wrap.querySelectorAll('.ency-mini-def [data-open]').forEach(a => {
-    a.addEventListener('click', e => { e.stopPropagation(); location.hash = '#/articulo/' + a.dataset.open; });
+  wrap.querySelector('[data-open]').addEventListener('click', e => {
+    e.stopPropagation();
+    location.hash = '#/articulo/' + e.currentTarget.dataset.open;
   });
+}
+
+/* ---------- chuleta de comandos de Claude (junto al titular) ---------- */
+function cmdCheatRowHtml(c) {
+  return `<div class="cmd-cheat-row">
+    <b>${escapeHtml(c.name)}</b>
+    <span>${escapeHtml(c.description)}</span>
+  </div>`;
+}
+function paintCmdCheatsheet() {
+  const wrap = document.getElementById('cmd-cheat-list');
+  if (!wrap) return;
+  if (!COMMANDS.length) {
+    wrap.innerHTML = `<div class="ency-sidebar-empty">Aún no hay comandos guardados aquí.</div>`;
+    return;
+  }
+  const sorted = COMMANDS.slice().sort((a, b) => a.name.replace(/^\//, '').localeCompare(b.name.replace(/^\//, ''), 'es', { sensitivity: 'base' }));
+  wrap.innerHTML = sorted.map(cmdCheatRowHtml).join('');
 }
 
 function renderPortada() {
@@ -1518,7 +1538,7 @@ function renderPortada() {
   rest.forEach(a => { (bySection[a.section] = bySection[a.section] || []).push(a); });
 
   const encyTerms = buildEncyTerms();
-  const encyPreview = pickEncyPreview(encyTerms);
+  const termOfDay = pickTermOfDay(encyTerms);
 
   main.innerHTML = `
     <div class="front-top">
@@ -1530,13 +1550,13 @@ function renderPortada() {
           <button class="lead-arrow" id="hero-next" title="Siguiente titular">${ICONS.arrow}</button>
         </div>
       </div>
-      <aside class="ency-sidebar">
-        <div class="ency-sidebar-head">
-          <h3>Para repasar</h3>
-          <button class="shuffle-btn" id="ency-shuffle-btn" title="Otros términos">${ICONS.refresh}</button>
-        </div>
-        <div class="ency-mini-list" id="ency-mini-list"></div>
-      </aside>
+      <div class="ency-sidebar-stack">
+        <div class="term-of-day" id="term-of-day"></div>
+        <aside class="cmd-cheatsheet">
+          <div class="cmd-cheatsheet-head"><h3>Chuleta de comandos</h3></div>
+          <div class="cmd-cheat-list" id="cmd-cheat-list"></div>
+        </aside>
+      </div>
     </div>
     ${otherCarouselState.pages.length ? `
       <div class="front-divider"><span class="front-label">Quizá te interese</span></div>
@@ -1562,13 +1582,8 @@ function renderPortada() {
   document.getElementById('hero-prev').addEventListener('click', () => { heroStep(-1); restartHeroTimer(); });
   document.getElementById('hero-next').addEventListener('click', () => { heroStep(1); restartHeroTimer(); });
 
-  paintEncySidebar(encyPreview);
-  document.getElementById('ency-shuffle-btn').addEventListener('click', e => {
-    const btn = e.currentTarget;
-    btn.classList.add('spin');
-    setTimeout(() => btn.classList.remove('spin'), 400);
-    paintEncySidebar(pickEncyPreview(encyTerms));
-  });
+  paintTermOfDay(termOfDay);
+  paintCmdCheatsheet();
 
   if (otherCarouselState.pages.length) {
     paintOtherCarousel();
