@@ -584,13 +584,11 @@ TEMPLATE = r"""<!DOCTYPE html>
     justify-content: center; gap: 6px; padding: 18px 20px 26px;
     background: #ffddc2;
     box-shadow: 0 14px 20px -10px rgba(10,10,10,.45), 0 3px 6px rgba(10,10,10,.18);
-    clip-path: inset(0 0 0% 0);
-    transform: rotate(0deg) translateY(0);
-    transition: clip-path .45s cubic-bezier(.65,0,.35,1), transform .45s cubic-bezier(.65,0,.35,1), box-shadow .15s ease;
+    opacity: 1; transform: translateY(0);
+    transition: opacity .3s ease, transform .3s ease, box-shadow .15s ease;
   }
   .term-of-day.flipped .term-of-day-face {
-    clip-path: inset(0 0 100% 0);
-    transform: rotate(-5deg) translateY(-12px);
+    opacity: 0; transform: translateY(-10px); pointer-events: none;
   }
   .term-of-day:hover .term-of-day-face {
     box-shadow: 0 18px 24px -8px rgba(10,10,10,.5), 0 4px 8px rgba(10,10,10,.2);
