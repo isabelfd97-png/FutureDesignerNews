@@ -551,11 +551,13 @@ TEMPLATE = r"""<!DOCTYPE html>
   .ency-sidebar-stack { height: var(--top-row-h); display: flex; flex-direction: column; gap: 14px; }
 
   /* Término del día: post-it que gira en 3D al hacer clic, como el de la editora */
-  .term-of-day { position: relative; flex: none; height: 160px; perspective: 1000px; cursor: pointer; }
-  /* la definición vive fija debajo, como el papel del bloc bajo la nota de arriba */
+  .term-of-day { position: relative; flex: none; height: 160px; cursor: pointer; }
+  /* la definición vive en su propio post-it debajo — otro color, ligera rotación
+     propia — no un fondo plano, como si hubiera un segundo papel pegado ahí. */
   .term-of-day-back {
-    position: absolute; inset: 0; display: flex; flex-direction: column; justify-content: center; gap: 10px;
-    padding: 16px 18px; background: #fff6ea;
+    position: absolute; inset: 0; z-index: 0; display: flex; flex-direction: column; justify-content: center; gap: 10px;
+    padding: 16px 18px; background: #fff3b0; transform: rotate(2deg);
+    box-shadow: 0 10px 16px -8px rgba(10,10,10,.4), 0 2px 4px rgba(10,10,10,.15);
   }
   .term-of-day-back p { margin: 0; font-size: 13px; line-height: 1.5; color: var(--ink); overflow-y: auto; }
   .term-of-day-back .src {
@@ -564,16 +566,18 @@ TEMPLATE = r"""<!DOCTYPE html>
   }
   .term-of-day-back .src:hover { text-decoration: underline; }
 
-  /* la nota de arriba: se despega desde el borde superior (donde está la cinta) hacia
-     abajo, y vuelve a caer/pegarse al tocar otra vez — en vez de un giro plano. */
+  /* la nota de arriba: se despega desde el borde superior (donde está la cinta) —
+     se levanta, se inclina y se echa a un lado, en vez de voltearse como una tarjeta.
+     Vuelve a bajar y "pegarse" al tocar otra vez. */
   .term-of-day-lift {
     position: absolute; inset: 0; z-index: 1; transform-origin: top center;
-    transform: rotate(-2deg) rotateX(0deg); transform-style: preserve-3d;
-    transition: transform .5s cubic-bezier(.5,0,.35,1);
+    transform: rotate(-2deg); transition: transform .45s cubic-bezier(.34,1.1,.4,1);
   }
-  .term-of-day.flipped .term-of-day-lift { transform: rotate(-2deg) rotateX(-115deg); }
+  .term-of-day.flipped .term-of-day-lift {
+    transform: rotate(-2deg) translateY(-64%) scale(.92) rotate(-18deg);
+  }
   .term-of-day-face {
-    position: absolute; inset: 0; backface-visibility: hidden; display: flex; flex-direction: column;
+    position: absolute; inset: 0; display: flex; flex-direction: column;
     justify-content: center; gap: 6px; padding: 18px 20px 26px;
     background: #ffddc2;
     box-shadow: 0 14px 20px -10px rgba(10,10,10,.45), 0 3px 6px rgba(10,10,10,.18);
