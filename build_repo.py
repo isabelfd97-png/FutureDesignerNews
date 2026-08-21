@@ -2,10 +2,14 @@ import json, os
 
 BASE = os.path.dirname(os.path.abspath(__file__))
 DATA_FILE = os.path.join(BASE, "data", "articles.json")
+COMMANDS_FILE = os.path.join(BASE, "data", "commands.json")
 OUT_FILE = os.path.join(BASE, "index.html")
 
 with open(DATA_FILE, encoding="utf-8") as f:
     articles = json.load(f)
+
+with open(COMMANDS_FILE, encoding="utf-8") as f:
+    commands = json.load(f)
 
 SECTIONS = [
     {
@@ -77,6 +81,7 @@ ARTICLE_ICONS = {aid: pixel_svg(rows) for aid, rows in ARTICLE_ICONS_ROWS.items(
 ICONS['wand'] = pixel_svg(['............', '............', '.......##...', '......####..', '......####..', '.......##...', '......#.....', '.....#......', '...##.......', '...#........', '..#.........', '.#..........'])
 
 data_json = json.dumps(articles, ensure_ascii=False)
+commands_json = json.dumps(commands, ensure_ascii=False)
 sections_json = json.dumps(SECTIONS, ensure_ascii=False)
 icons_json = json.dumps(ICONS, ensure_ascii=False)
 article_icons_json = json.dumps(ARTICLE_ICONS, ensure_ascii=False)
@@ -374,6 +379,26 @@ TEMPLATE = r"""<!DOCTYPE html>
   .ency-index a { color: var(--muted); text-decoration: none; padding: 2px 4px; text-align: center; }
   .ency-index a:hover { color: var(--ink); }
   .ency-index a.active { color: var(--accent); }
+
+  /* ---- Claude Commands (pestaña dentro de Enciclopedia) ---- */
+  .ency-tabs { margin: 16px 0 0; }
+  .cmd-group-heading {
+    font-family: 'Archivo Black', sans-serif; font-weight: 400; font-size: 18px; color: var(--accent);
+    text-transform: uppercase; letter-spacing: -.3px; padding: 18px 0 6px; border-bottom: 3px solid var(--ink); scroll-margin-top: 90px;
+  }
+  .cmd-row { padding: 16px 0; border-bottom: 1px solid #e5e5e5; display: flex; flex-direction: column; gap: 8px; }
+  .cmd-row-head { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+  .cmd-name { font-family: 'Space Mono', monospace; font-size: 16px; font-weight: 700; color: var(--ink); }
+  .cmd-tag {
+    font-family: 'Space Mono', monospace; font-size: 9.5px; letter-spacing: .5px; text-transform: uppercase;
+    color: #fff; background: var(--accent); padding: 2px 8px;
+  }
+  .cmd-desc { margin: 0; font-size: 13.5px; color: var(--muted); line-height: 1.55; }
+  .cmd-example {
+    margin: 0; background: #f4f4f4; border: 1px solid #ddd; padding: 9px 11px;
+    font-family: 'Space Mono', monospace; font-size: 12px; line-height: 1.5; overflow-x: auto; white-space: pre-wrap;
+  }
+  .cmd-notes { margin: 0; font-size: 12.5px; font-style: italic; color: var(--ink); }
 
   /* ---- Flashcards de repaso ---- */
   .flash-panel { max-width: 460px; }
@@ -999,6 +1024,7 @@ TEMPLATE = r"""<!DOCTYPE html>
 
 <script>
 const ARTICLES = __ARTICLES_JSON__;
+const COMMANDS = __COMMANDS_JSON__;
 const SECTIONS = __SECTIONS_JSON__;
 const ICONS = __ICONS_JSON__;
 const ARTICLE_ICONS = __ARTICLE_ICONS_JSON__;
@@ -2052,9 +2078,28 @@ function buildEncyTerms() {
   return terms;
 }
 
-function renderEnciclopedia() {
+function encyTabsHtml(view) {
+  return `<div class="subnav ency-tabs">
+    <a href="#/enciclopedia" class="subnav-pill ${view === 'terminos' ? 'active' : ''}">Términos</a>
+    <a href="#/enciclopedia/comandos" class="subnav-pill ${view === 'comandos' ? 'active' : ''}">Claude Commands</a>
+  </div>`;
+}
+
+function renderEnciclopedia(view) {
+  view = view === 'comandos' ? 'comandos' : 'terminos';
   renderNav('enciclopedia');
   const main = document.getElementById('main');
+
+  if (view === 'comandos') {
+    main.innerHTML = `
+      <div class="section-hero"><div><h2>Enciclopedia</h2><p>Comandos de Claude que merece la pena tener a mano, con ejemplo y notas.</p></div></div>
+      ${encyTabsHtml(view)}
+      <div id="cmd-out"></div>
+    `;
+    renderComandos();
+    return;
+  }
+
   const terms = buildEncyTerms();
   const due = termsDue(terms);
   const banner = terms.length ? `
@@ -2068,6 +2113,7 @@ function renderEnciclopedia() {
 
   main.innerHTML = `
     <div class="section-hero"><div><h2>Enciclopedia</h2><p>Los términos que te ha interesado guardar, con su definición y de dónde salieron.</p></div></div>
+    ${encyTabsHtml(view)}
     ${banner}
     <div id="ency-out"></div>
   `;
@@ -2095,6 +2141,97 @@ function renderEnciclopedia() {
     window.__pendingReviewOpen = false;
     openFlashModal(terms);
   }
+}
+
+/* ---------- Claude Commands (pestaña de consulta dentro de Enciclopedia) ---------- */
+const cmdState = { groupBy: 'categoria', query: '' };
+
+function renderComandos() {
+  const out = document.getElementById('cmd-out');
+  if (!COMMANDS.length) {
+    out.innerHTML = `<div class="empty">Aún no hay comandos guardados aquí.</div>`;
+    return;
+  }
+  out.innerHTML = `
+    <div class="ency-toolbar">
+      <div class="ency-search-row">${ICONS.search}<input type="text" id="cmd-search" placeholder="Buscar comandos..." autocomplete="off"></div>
+      <div class="subnav" style="margin:0;">
+        <button class="subnav-pill ${cmdState.groupBy === 'categoria' ? 'active' : ''}" data-group="categoria">Por categoría</button>
+        <button class="subnav-pill ${cmdState.groupBy === 'az' ? 'active' : ''}" data-group="az">A-Z</button>
+      </div>
+    </div>
+    <div class="ency-layout">
+      <div class="ency-list" id="cmd-list"></div>
+      <div class="ency-index" id="cmd-index"></div>
+    </div>
+  `;
+  const searchInput = document.getElementById('cmd-search');
+  searchInput.value = cmdState.query;
+  searchInput.addEventListener('input', e => { cmdState.query = e.target.value; paintCommandsList(); });
+  out.querySelectorAll('[data-group]').forEach(btn => {
+    btn.addEventListener('click', () => { cmdState.groupBy = btn.dataset.group; renderComandos(); });
+  });
+  paintCommandsList();
+}
+
+function cmdRowHtml(c) {
+  return `<div class="cmd-row">
+    <div class="cmd-row-head"><b class="cmd-name">${escapeHtml(c.name)}</b><span class="cmd-tag">${escapeHtml(c.category)}</span></div>
+    <p class="cmd-desc">${escapeHtml(c.description)}</p>
+    ${c.example ? `<pre class="cmd-example">${escapeHtml(c.example)}</pre>` : ''}
+    ${c.notes ? `<p class="cmd-notes">${escapeHtml(c.notes)}</p>` : ''}
+  </div>`;
+}
+
+function paintCommandsList() {
+  const q = (cmdState.query || '').trim().toLowerCase();
+  const filtered = q
+    ? COMMANDS.filter(c => (c.name + ' ' + c.description + ' ' + (c.notes || '') + ' ' + c.category).toLowerCase().includes(q))
+    : COMMANDS;
+
+  const list = document.getElementById('cmd-list');
+  const index = document.getElementById('cmd-index');
+  if (!list || !index) return;
+
+  if (window.__cmdObserver) { window.__cmdObserver.disconnect(); window.__cmdObserver = null; }
+
+  if (!filtered.length) {
+    list.innerHTML = `<div class="empty">Sin resultados para "${escapeHtml(cmdState.query)}".</div>`;
+    index.innerHTML = '';
+    return;
+  }
+
+  const keyOf = c => cmdState.groupBy === 'az' ? encyLetterOf(c.name.replace(/^\//, '')) : (c.category || 'Otros');
+  const groups = {};
+  filtered.forEach(c => { const k = keyOf(c); (groups[k] = groups[k] || []).push(c); });
+  const keys = Object.keys(groups).sort((a, b) => a.localeCompare(b, 'es', { sensitivity: 'base' }));
+
+  list.innerHTML = keys.map((k, i) => `
+    <div class="ency-letter-group">
+      <div class="cmd-group-heading" id="cmd-group-${i}" data-idx="${i}">${escapeHtml(k)}</div>
+      <div class="ency-vlist">${groups[k].map(cmdRowHtml).join('')}</div>
+    </div>
+  `).join('');
+
+  index.innerHTML = keys.map((k, i) => `<a href="#cmd-group-${i}" data-idx="${i}" class="${i === 0 ? 'active' : ''}">${escapeHtml(k)}</a>`).join('');
+
+  index.querySelectorAll('a').forEach(a => a.addEventListener('click', e => {
+    e.preventDefault();
+    const target = document.getElementById(`cmd-group-${a.dataset.idx}`);
+    if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }));
+
+  const headers = list.querySelectorAll('.cmd-group-heading');
+  const indexLinks = index.querySelectorAll('a');
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(en => {
+      if (en.isIntersecting) {
+        indexLinks.forEach(a => a.classList.toggle('active', a.dataset.idx === en.target.dataset.idx));
+      }
+    });
+  }, { rootMargin: '-15% 0px -75% 0px', threshold: 0 });
+  headers.forEach(h => obs.observe(h));
+  window.__cmdObserver = obs;
 }
 
 function paintEncyList(terms, query) {
@@ -2245,7 +2382,8 @@ function route() {
 
   if (hash === '#/' || hash === '') { renderPortada(); return; }
   if (hash === '#/historial') { renderHistorial(); return; }
-  if (hash === '#/enciclopedia') { renderEnciclopedia(); return; }
+  if (hash === '#/enciclopedia') { renderEnciclopedia('terminos'); return; }
+  if (hash === '#/enciclopedia/comandos') { renderEnciclopedia('comandos'); return; }
   const sm = hash.match(/^#\/(.+)$/);
   if (sm && bySlug(sm[1])) { renderSection(sm[1]); return; }
   renderPortada();
@@ -2263,6 +2401,7 @@ route();
 
 html = (TEMPLATE
         .replace("__ARTICLES_JSON__", data_json)
+        .replace("__COMMANDS_JSON__", commands_json)
         .replace("__SECTIONS_JSON__", sections_json)
         .replace("__ICONS_JSON__", icons_json)
         .replace("__ARTICLE_ICONS_JSON__", article_icons_json))

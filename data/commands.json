@@ -1,0 +1,16 @@
+[
+  {
+    "name": "/clear",
+    "category": "Contexto",
+    "description": "Borra el historial de la conversación actual y empieza de cero.",
+    "example": "/clear",
+    "notes": "Útil cuando el contexto se ha llenado de ruido de idas y vueltas y prefieres arrancar limpio en vez de seguir acumulando."
+  },
+  {
+    "name": "/compact",
+    "category": "Contexto",
+    "description": "Resume la conversación para liberar espacio de contexto sin perder el hilo de lo importante.",
+    "example": "/compact",
+    "notes": "A diferencia de /clear, conserva un resumen — mejor cuando quieres seguir en la misma tarea pero se está quedando sin espacio."
+  }
+]
