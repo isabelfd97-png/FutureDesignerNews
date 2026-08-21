@@ -552,24 +552,36 @@ TEMPLATE = r"""<!DOCTYPE html>
 
   /* Término del día: post-it que gira en 3D al hacer clic, como el de la editora */
   .term-of-day { position: relative; flex: none; height: 160px; perspective: 900px; cursor: pointer; }
-  /* taco de post-its: dos notas fantasma asomando detrás de la de arriba */
-  .term-of-day::before, .term-of-day::after {
-    content: ''; position: absolute; inset: 0; border: 2px solid var(--ink); z-index: 0;
-  }
-  .term-of-day::before { background: #ffddc2; transform: rotate(7deg) translateY(2px); }
-  .term-of-day::after { background: #f4c396; transform: rotate(-9deg) translateY(4px); }
   .term-of-day-inner {
-    position: relative; z-index: 1; width: 100%; height: 100%; transform: rotate(-3deg);
+    position: relative; z-index: 1; width: 100%; height: 100%; transform: rotate(-2deg);
     transition: transform .5s ease; transform-style: preserve-3d;
   }
-  .term-of-day.flipped .term-of-day-inner { transform: rotate(-3deg) rotateY(180deg); }
+  .term-of-day.flipped .term-of-day-inner { transform: rotate(-2deg) rotateY(180deg); }
   .term-of-day-face {
     position: absolute; inset: 0; backface-visibility: hidden; display: flex; flex-direction: column;
-    justify-content: center; gap: 6px; padding: 16px 18px;
-    background: #ffddc2; border: 2px solid var(--ink); box-shadow: 4px 5px 0 var(--ink);
+    justify-content: center; gap: 6px; padding: 18px 20px 26px;
+    background: #ffddc2;
+    box-shadow: 0 14px 20px -10px rgba(10,10,10,.45), 0 3px 6px rgba(10,10,10,.18);
+    clip-path: polygon(0 0, 100% 0, 100% calc(100% - 24px), calc(100% - 24px) 100%, 0 100%);
     transition: box-shadow .15s ease;
   }
-  .term-of-day:hover .term-of-day-face { box-shadow: 6px 7px 0 var(--ink); }
+  .term-of-day:hover .term-of-day-face {
+    box-shadow: 0 18px 24px -8px rgba(10,10,10,.5), 0 4px 8px rgba(10,10,10,.2);
+  }
+  /* esquina curvada: el pico de papel que se despega, con degradado de sombra */
+  .term-of-day-face .curl {
+    position: absolute; right: 0; bottom: 0; width: 24px; height: 24px;
+    background: linear-gradient(135deg, #f6d5b3 0%, #f6d5b3 45%, rgba(10,10,10,.35) 62%, rgba(10,10,10,.15) 100%);
+    clip-path: polygon(100% 0, 100% 100%, 0 100%);
+  }
+  /* dos trocitos de cinta sujetando la nota por las esquinas de arriba */
+  .term-of-day-face .tape {
+    position: absolute; top: -10px; width: 46px; height: 22px;
+    background: rgba(240, 150, 160, .5); border: 1px solid rgba(240, 150, 160, .6);
+    box-shadow: 0 1px 3px rgba(10,10,10,.2);
+  }
+  .term-of-day-face .tape-left { left: 4px; transform: rotate(-16deg); }
+  .term-of-day-face .tape-right { right: 4px; transform: rotate(14deg); }
   .term-of-day-back { transform: rotateY(180deg); justify-content: flex-start; gap: 10px; }
   .term-of-day-label {
     font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 1.2px; text-transform: uppercase;
@@ -1571,11 +1583,13 @@ function paintTermOfDay(term) {
   wrap.innerHTML = `
     <div class="term-of-day-inner">
       <div class="term-of-day-face term-of-day-front">
+        <span class="tape tape-left"></span><span class="tape tape-right"></span><span class="curl"></span>
         <span class="term-of-day-label">Término del día</span>
         <b>${term.term}</b>
         <span class="term-of-day-hint">Toca para ver la definición</span>
       </div>
       <div class="term-of-day-face term-of-day-back">
+        <span class="tape tape-left"></span><span class="tape tape-right"></span><span class="curl"></span>
         <p>${term.definition}</p>
         <a class="src" data-open="${term.articleId}">De: ${term.articleTitle}</a>
       </div>
