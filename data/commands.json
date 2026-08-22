@@ -4,13 +4,375 @@
     "category": "Contexto",
     "description": "Borra el historial de la conversación actual y empieza de cero.",
     "example": "/clear",
-    "notes": "Útil cuando el contexto se ha llenado de ruido de idas y vueltas y prefieres arrancar limpio en vez de seguir acumulando."
+    "notes": "Útil cuando el contexto se ha llenado de ruido de idas y vueltas y prefieres arrancar limpio en vez de seguir acumulando.",
+    "tipo": "comando"
   },
   {
     "name": "/compact",
     "category": "Contexto",
     "description": "Resume la conversación para liberar espacio de contexto sin perder el hilo de lo importante.",
     "example": "/compact",
-    "notes": "A diferencia de /clear, conserva un resumen — mejor cuando quieres seguir en la misma tarea pero se está quedando sin espacio."
+    "notes": "A diferencia de /clear, conserva un resumen — mejor cuando quieres seguir en la misma tarea pero se está quedando sin espacio.",
+    "tipo": "comando"
+  },
+  {
+    "name": "/init",
+    "category": "Contexto y memoria",
+    "description": "Escanea toda la base de código del proyecto (estructura de carpetas, stack, dependencias, convenciones) y genera un CLAUDE.md inicial a partir de eso. Es el primer comando recomendado al empezar un proyecto nuevo con Claude Code, porque le da memoria persistente sin que tengas que explicárselo todo a mano cada sesión.",
+    "example": "/init",
+    "notes": "Guarda el resultado en CLAUDE.md, el archivo que Claude lee al arrancar cada sesión en ese proyecto.",
+    "tipo": "comando"
+  },
+  {
+    "name": "/memory",
+    "category": "Contexto y memoria",
+    "description": "Abre el CLAUDE.md actual para editarlo directamente: añadir, corregir o borrar partes del resumen que /init generó (o que se ha ido quedando desactualizado con el tiempo).",
+    "example": "/memory",
+    "notes": "",
+    "tipo": "comando"
+  },
+  {
+    "name": "/context",
+    "category": "Contexto y memoria",
+    "description": "Muestra cuánta ventana de contexto llevas usada en la sesión activa y qué se está comiendo ese espacio (archivos leídos, historial de conversación, etc.), con sugerencias de qué recortar. Sirve para anticiparte al momento en que Claude empieza a olvidar cosas que le dijiste antes por falta de espacio.",
+    "example": "/context",
+    "notes": "",
+    "tipo": "comando"
+  },
+  {
+    "name": "/btw",
+    "category": "Contexto y memoria",
+    "description": "Deja colar una nota o dato de contexto adicional sin interrumpir la tarea en curso ni desviar el hilo principal — literalmente \"by the way\". Útil para ese detalle que se te olvidó mencionar al principio y que, si no lo dices, hace que Claude tire por un camino equivocado.",
+    "example": "/btw también hay que soportar usuarios sin JavaScript",
+    "notes": "",
+    "tipo": "comando"
+  },
+  {
+    "name": "!",
+    "category": "Sesión y navegación",
+    "description": "Ejecuta un comando de terminal normal directamente desde la ventana de Claude, sin cambiar de pestaña. El resultado se queda visible en la conversación, así que Claude también lo puede leer y reaccionar a él.",
+    "example": "!git status",
+    "notes": "Prefijo, no un comando con nombre propio.",
+    "tipo": "comando"
+  },
+  {
+    "name": "Doble Escape",
+    "category": "Sesión y navegación",
+    "description": "Pulsar Escape dos veces rebobina la conversación hasta el último punto bueno, antes de que se metiera un cambio no deseado. En vez de discutir con Claude para que deshaga algo, saltas directo atrás e intentas de nuevo con instrucciones más claras.",
+    "example": "Esc Esc",
+    "notes": "Es un atajo de teclado, no un slash-command.",
+    "tipo": "comando"
+  },
+  {
+    "name": "/resume",
+    "category": "Sesión y navegación",
+    "description": "Recupera una conversación pasada por nombre o ID para seguir donde la dejaste, en vez de empezar una nueva desde cero.",
+    "example": "/resume",
+    "notes": "Alias: /continue",
+    "tipo": "comando"
+  },
+  {
+    "name": "/rename",
+    "category": "Sesión y navegación",
+    "description": "Le pone un nombre a la sesión actual para poder identificarla y encontrarla fácilmente más adelante entre varias conversaciones guardadas.",
+    "example": "/rename",
+    "notes": "",
+    "tipo": "comando"
+  },
+  {
+    "name": "/export",
+    "category": "Sesión y navegación",
+    "description": "Vuelca toda la conversación como texto plano, para compartirla o pegarla en un documento externo.",
+    "example": "/export",
+    "notes": "",
+    "tipo": "comando"
+  },
+  {
+    "name": "/tasks",
+    "category": "Sesión y navegación",
+    "description": "Lista todo lo que está corriendo en segundo plano en tu sesión (procesos, subagentes) sin tener que parar lo que tienes activo para verlo.",
+    "example": "/tasks",
+    "notes": "Alias: /bashes",
+    "tipo": "comando"
+  },
+  {
+    "name": "/background",
+    "category": "Sesión y navegación",
+    "description": "Desacopla la sesión actual para que siga trabajando sola mientras liberas la terminal y haces otra cosa.",
+    "example": "/background",
+    "notes": "Alias: /bg",
+    "tipo": "comando"
+  },
+  {
+    "name": "/theme",
+    "category": "Sesión y navegación",
+    "description": "Cambia el tema visual de la sesión. Útil para diferenciar de un vistazo varias sesiones abiertas a la vez.",
+    "example": "/theme",
+    "notes": "",
+    "tipo": "comando"
+  },
+  {
+    "name": "/color",
+    "category": "Sesión y navegación",
+    "description": "Cambia los colores de la sesión. Igual que /theme, ayuda a distinguir sesiones abiertas en paralelo.",
+    "example": "/color",
+    "notes": "",
+    "tipo": "comando"
+  },
+  {
+    "name": "/feedback",
+    "category": "Sesión y navegación",
+    "description": "Reporta un problema de la sesión con el contexto adjunto automáticamente, para no tener que copiar y pegar todo a mano al informar de un fallo.",
+    "example": "/feedback",
+    "notes": "Alias: /bug, /share",
+    "tipo": "comando"
+  },
+  {
+    "name": "/plan",
+    "category": "Planificación y ejecución",
+    "description": "Pone a Claude en \"modo plan\": investiga la base de código y propone un enfoque antes de tocar un solo archivo. Pensado para cambios donde quieres revisar la estrategia antes de que se ejecute nada.",
+    "example": "/plan add rate limiting to the /api/upload endpoint",
+    "notes": "",
+    "tipo": "comando"
+  },
+  {
+    "name": "/model",
+    "category": "Planificación y ejecución",
+    "description": "Cambia el modelo subyacente o el nivel de esfuerzo/razonamiento aplicado, sin tener que reiniciar la sesión ni perder el contexto acumulado.",
+    "example": "/model",
+    "notes": "",
+    "tipo": "comando"
+  },
+  {
+    "name": "/usage",
+    "category": "Planificación y ejecución",
+    "description": "Muestra el coste de la sesión actual, los límites de tu plan y un desglose de en qué se está yendo el consumo.",
+    "example": "/usage",
+    "notes": "Alias: /cost, /stats",
+    "tipo": "comando"
+  },
+  {
+    "name": "/help",
+    "category": "Planificación y ejecución",
+    "description": "Lista los comandos disponibles en la versión instalada, como referencia fiable frente a listas desactualizadas por internet.",
+    "example": "/help",
+    "notes": "",
+    "tipo": "comando"
+  },
+  {
+    "name": "/review",
+    "category": "Revisión y calidad",
+    "description": "Pide una revisión de código. Según el flujo, puede aplicarse sobre el diff que tienes sin commitear o sobre un pull request ya abierto en GitHub.",
+    "example": "/review [PR]",
+    "notes": "",
+    "tipo": "comando"
+  },
+  {
+    "name": "/code-review",
+    "category": "Revisión y calidad",
+    "description": "Revisa el diff actual buscando bugs de lógica, oportunidades de reutilización y limpiezas de código.",
+    "example": "/code-review --fix",
+    "notes": "Flag --fix aplica los cambios directamente; --comment los deja como comentarios en vez de tocar el código.",
+    "tipo": "comando"
+  },
+  {
+    "name": "/security-review",
+    "category": "Revisión y calidad",
+    "description": "Análisis dedicado de seguridad sobre los cambios pendientes: inyección SQL, XSS, fallos de autenticación, manejo inseguro de datos y vulnerabilidades de dependencias.",
+    "example": "/security-review",
+    "notes": "",
+    "tipo": "comando"
+  },
+  {
+    "name": "/diff",
+    "category": "Revisión y calidad",
+    "description": "Abre un visor interactivo de los cambios sin commitear, para repasarlos cómodamente antes de confirmar nada.",
+    "example": "/diff",
+    "notes": "",
+    "tipo": "comando"
+  },
+  {
+    "name": "/verify",
+    "category": "Revisión y calidad",
+    "description": "Construye el proyecto, lo ejecuta y observa el comportamiento real para confirmar que un cambio hace lo que dice hacer — va más allá de que pasen los tests, comprueba la app en marcha.",
+    "example": "/verify",
+    "notes": "",
+    "tipo": "comando"
+  },
+  {
+    "name": "/run",
+    "category": "Revisión y calidad",
+    "description": "Lanza y opera la app real del proyecto (no una simulación ni solo tests), para ver un cambio funcionando de verdad.",
+    "example": "/run",
+    "notes": "",
+    "tipo": "comando"
+  },
+  {
+    "name": "/agents",
+    "category": "Delegación y automatización",
+    "description": "Gestiona subagentes especializados a los que Claude puede delegar partes de una tarea, cada uno enfocado en un tipo de trabajo concreto.",
+    "example": "/agents",
+    "notes": "",
+    "tipo": "comando"
+  },
+  {
+    "name": "/batch",
+    "category": "Delegación y automatización",
+    "description": "Pensado para cambios grandes que tocan todo el codebase: investiga el trabajo, lo divide en 5-30 fragmentos independientes y corre cada uno como subagente en segundo plano, cada uno en su propio git worktree.",
+    "example": "/batch",
+    "notes": "",
+    "tipo": "comando"
+  },
+  {
+    "name": "/mcp",
+    "category": "Delegación y automatización",
+    "description": "Gestiona las conexiones a servicios externos vía Model Context Protocol (GitHub, bases de datos, Sentry, etc.), para que Claude pueda leer y actuar sobre esas herramientas directamente.",
+    "example": "/mcp",
+    "notes": "",
+    "tipo": "comando"
+  },
+  {
+    "name": "/permissions",
+    "category": "Delegación y automatización",
+    "description": "Abre un diálogo interactivo para configurar reglas de permitir/preguntar/denegar por herramienta, de una vez, en lugar de ir aprobando cada acción sobre la marcha.",
+    "example": "/permissions",
+    "notes": "",
+    "tipo": "comando"
+  },
+  {
+    "name": "/run-skill-generator",
+    "category": "Delegación y automatización",
+    "description": "Genera una skill reutilizable que le enseña a /run y /verify cómo construir y lanzar un proyecto específico desde un entorno limpio.",
+    "example": "/run-skill-generator",
+    "notes": "",
+    "tipo": "comando"
+  },
+  {
+    "name": "/rewind",
+    "category": "Ramificar y deshacer",
+    "description": "Retrocede el código y/o la conversación a un punto de control anterior; funciona como red de seguridad ante un cambio que salió mal.",
+    "example": "/rewind",
+    "notes": "Alias: /checkpoint, /undo",
+    "tipo": "comando"
+  },
+  {
+    "name": "/branch",
+    "category": "Ramificar y deshacer",
+    "description": "Bifurca la conversación en el punto actual para probar una dirección alternativa, sin tocar la línea principal de trabajo.",
+    "example": "/branch",
+    "notes": "",
+    "tipo": "comando"
+  },
+  {
+    "name": "/fork",
+    "category": "Ramificar y deshacer",
+    "description": "Crea una copia o rama de la conversación actual en el punto donde estás, para experimentar con una idea arriesgada sin comprometer la sesión original; la versión anterior queda intacta.",
+    "example": "/fork",
+    "notes": "En algunos flujos se lanza como un subagente en segundo plano en vez de ocupar la sesión activa, similar a /branch pero sin bloquear el trabajo principal.",
+    "tipo": "comando"
+  },
+  {
+    "name": "Skill personalizado",
+    "category": "Skills",
+    "description": "Un archivo Markdown en .claude/skills/<nombre>/SKILL.md, con frontmatter que define name, description, argument-hint (qué parámetros espera) y allowed-tools (qué herramientas puede usar esa skill). Permite empaquetar un flujo de trabajo repetible como si fuera un comando propio.",
+    "example": ".claude/skills/test-pattern/SKILL.md",
+    "notes": "",
+    "tipo": "skill"
+  },
+  {
+    "name": "Comando personalizado",
+    "category": "Comandos personalizados",
+    "description": "Una indicación (prompt) frecuente guardada como archivo Markdown que Claude Code ejecuta como si fuera un comando propio. El nombre del archivo es el nombre del comando.",
+    "example": "~/.claude/commands/draft-commit.md → /draft-commit",
+    "notes": "Se guardan en .claude/commands (a nivel de proyecto) o ~/.claude/commands (a nivel personal, para todos los proyectos). Ejemplo citado: /draft-commit transforma una descripción de cambios en un mensaje de commit siguiendo Conventional Commits.",
+    "tipo": "comando"
+  },
+  {
+    "name": "-p",
+    "category": "Flags de línea de comandos",
+    "description": "Modo no interactivo, pensado para scripts o integraciones de CI: Claude responde y termina, sin quedarse esperando más turnos.",
+    "example": "claude -p \"query\"",
+    "notes": "",
+    "tipo": "comando"
+  },
+  {
+    "name": "-c",
+    "category": "Flags de línea de comandos",
+    "description": "Continúa la conversación más reciente en el directorio actual, sin tener que buscarla por nombre.",
+    "example": "claude -c",
+    "notes": "",
+    "tipo": "comando"
+  },
+  {
+    "name": "-r",
+    "category": "Flags de línea de comandos",
+    "description": "Reanuda una sesión concreta por nombre o ID.",
+    "example": "claude -r \"nombre-de-sesion\"",
+    "notes": "",
+    "tipo": "comando"
+  },
+  {
+    "name": "--output-format json",
+    "category": "Flags de línea de comandos",
+    "description": "Da la respuesta en JSON estructurado en vez de texto libre, para procesarla automáticamente en un pipeline.",
+    "example": "claude -p --output-format json \"run the auth test suite\"",
+    "notes": "",
+    "tipo": "comando"
+  },
+  {
+    "name": "--max-turns",
+    "category": "Flags de línea de comandos",
+    "description": "Limita el número de pasos autónomos que Claude puede dar en una ejecución desatendida, para que no se vaya por libre indefinidamente.",
+    "example": "claude -p --max-turns 10 \"...\"",
+    "notes": "",
+    "tipo": "comando"
+  },
+  {
+    "name": "--max-budget-usd",
+    "category": "Flags de línea de comandos",
+    "description": "Pone un tope de gasto en dólares para una ejecución concreta, cortando antes de que se dispare el coste.",
+    "example": "claude -p --max-budget-usd 2 \"...\"",
+    "notes": "",
+    "tipo": "comando"
+  },
+  {
+    "name": "--permission-mode plan",
+    "category": "Flags de línea de comandos",
+    "description": "Arranca la sesión directamente en modo plan, sin tener que escribir /plan a mano nada más empezar.",
+    "example": "claude --permission-mode plan",
+    "notes": "",
+    "tipo": "comando"
+  },
+  {
+    "name": "--add-dir",
+    "category": "Flags de línea de comandos",
+    "description": "Da acceso a un directorio adicional fuera del proyecto actual, útil cuando el cambio necesita tocar código en otro repositorio o carpeta.",
+    "example": "claude --add-dir ../otro-proyecto",
+    "notes": "",
+    "tipo": "comando"
+  },
+  {
+    "name": "-w",
+    "category": "Flags de línea de comandos",
+    "description": "Arranca la sesión en un git worktree aislado, para experimentar en paralelo sin arriesgar el estado del repositorio principal.",
+    "example": "claude -w",
+    "notes": "Alias: --worktree",
+    "tipo": "comando"
+  },
+  {
+    "name": "--settings",
+    "category": "Flags de línea de comandos",
+    "description": "Sobrescribe la configuración global de Claude Code solo para esa invocación concreta, usando un archivo de settings distinto.",
+    "example": "claude --settings ./file.json",
+    "notes": "",
+    "tipo": "comando"
+  },
+  {
+    "name": "test-pattern",
+    "category": "Skills",
+    "tipo": "skill",
+    "description": "Skill de ejemplo citada como referencia del formato: ejecuta los tests que coincidan con un patrón dado, detecta automáticamente el framework de testing que usa el proyecto y, si algo falla, intenta corregir la implementación.",
+    "example": ".claude/skills/test-pattern/SKILL.md",
+    "notes": "Es el ejemplo con el que el artículo ilustra cómo se ve una skill personalizada en la práctica."
   }
 ]
