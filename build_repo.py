@@ -478,6 +478,16 @@ TEMPLATE = r"""<!DOCTYPE html>
   .subnav-pill:hover { color: var(--accent); border-color: var(--accent); }
   .subnav-pill.active { background: var(--ink); color: var(--bg); border-color: var(--ink); }
 
+  /* ---- Second-level nav (nested under a subnav tab): plain underline tabs, no boxes ---- */
+  .subnav-2 { display: flex; gap: 22px; padding: 14px 0 0; margin: 0 0 4px; border-bottom: 1px solid var(--line); }
+  .subnav-2-pill {
+    font-family: 'Space Mono', monospace; font-size: 11px; letter-spacing: 1px; text-transform: uppercase;
+    font-weight: 700; border: none; border-bottom: 3px solid transparent; padding: 0 0 9px; text-decoration: none;
+    color: var(--muted); background: transparent; cursor: pointer; -webkit-appearance: none; appearance: none;
+  }
+  .subnav-2-pill:hover { color: var(--ink); }
+  .subnav-2-pill.active { color: var(--ink); border-bottom-color: var(--accent); }
+
   /* ---- Rail (horizontal scroll) ---- */
   .rail { display: flex; gap: 16px; overflow-x: auto; padding: 6px 4px 18px; margin-top: 4px; scroll-behavior: smooth; }
   .rail .card { flex: 0 0 300px; }
@@ -1643,7 +1653,7 @@ function renderPortada() {
       <div class="ency-sidebar-stack">
         <div class="term-of-day" id="term-of-day"></div>
         <aside class="cmd-cheatsheet">
-          <div class="cmd-cheatsheet-head"><h3>Chuleta de comandos</h3></div>
+          <div class="cmd-cheatsheet-head"><h3>Chuleta de comandos y skills</h3></div>
           <div class="cmd-cheat-list" id="cmd-cheat-list"></div>
         </aside>
       </div>
@@ -2097,7 +2107,7 @@ function buildEncyTerms() {
 function encyTabsHtml(view) {
   return `<div class="subnav ency-tabs">
     <a href="#/enciclopedia" class="subnav-pill ${view === 'terminos' ? 'active' : ''}">Términos</a>
-    <a href="#/enciclopedia/comandos" class="subnav-pill ${view === 'comandos' ? 'active' : ''}">Claude Commands</a>
+    <a href="#/enciclopedia/comandos" class="subnav-pill ${view === 'comandos' ? 'active' : ''}">Claude Commands and Skills</a>
   </div>`;
 }
 
@@ -2160,7 +2170,7 @@ function renderEnciclopedia(view) {
 }
 
 /* ---------- Claude Commands (pestaña de consulta dentro de Enciclopedia) ---------- */
-const cmdState = { groupBy: 'categoria', query: '' };
+const cmdState = { groupBy: 'categoria', query: '', tipo: 'comando' };
 
 function renderComandos() {
   const out = document.getElementById('cmd-out');
@@ -2168,7 +2178,13 @@ function renderComandos() {
     out.innerHTML = `<div class="empty">Aún no hay comandos guardados aquí.</div>`;
     return;
   }
+  const nComandos = COMMANDS.filter(c => c.tipo !== 'skill').length;
+  const nSkills = COMMANDS.filter(c => c.tipo === 'skill').length;
   out.innerHTML = `
+    <div class="subnav-2">
+      <button class="subnav-2-pill ${cmdState.tipo === 'comando' ? 'active' : ''}" data-tipo="comando">Comandos (${nComandos})</button>
+      <button class="subnav-2-pill ${cmdState.tipo === 'skill' ? 'active' : ''}" data-tipo="skill">Skills (${nSkills})</button>
+    </div>
     <div class="ency-toolbar">
       <div class="ency-search-row">${ICONS.search}<input type="text" id="cmd-search" placeholder="Buscar comandos..." autocomplete="off"></div>
       <div class="subnav" style="margin:0;">
@@ -2187,6 +2203,9 @@ function renderComandos() {
   out.querySelectorAll('[data-group]').forEach(btn => {
     btn.addEventListener('click', () => { cmdState.groupBy = btn.dataset.group; renderComandos(); });
   });
+  out.querySelectorAll('[data-tipo]').forEach(btn => {
+    btn.addEventListener('click', () => { cmdState.tipo = btn.dataset.tipo; renderComandos(); });
+  });
   paintCommandsList();
 }
 
@@ -2201,9 +2220,10 @@ function cmdRowHtml(c) {
 
 function paintCommandsList() {
   const q = (cmdState.query || '').trim().toLowerCase();
+  const byTipo = COMMANDS.filter(c => (cmdState.tipo === 'skill') === (c.tipo === 'skill'));
   const filtered = q
-    ? COMMANDS.filter(c => (c.name + ' ' + c.description + ' ' + (c.notes || '') + ' ' + c.category).toLowerCase().includes(q))
-    : COMMANDS;
+    ? byTipo.filter(c => (c.name + ' ' + c.description + ' ' + (c.notes || '') + ' ' + c.category).toLowerCase().includes(q))
+    : byTipo;
 
   const list = document.getElementById('cmd-list');
   const index = document.getElementById('cmd-index');
