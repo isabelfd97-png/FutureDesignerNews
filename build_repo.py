@@ -2178,12 +2178,14 @@ function renderComandos() {
     out.innerHTML = `<div class="empty">Aún no hay comandos guardados aquí.</div>`;
     return;
   }
-  const nComandos = COMMANDS.filter(c => c.tipo !== 'skill').length;
+  const nComandos = COMMANDS.filter(c => c.tipo === 'comando').length;
   const nSkills = COMMANDS.filter(c => c.tipo === 'skill').length;
+  const nPlugins = COMMANDS.filter(c => c.tipo === 'plugin').length;
   out.innerHTML = `
     <div class="subnav-2">
       <button class="subnav-2-pill ${cmdState.tipo === 'comando' ? 'active' : ''}" data-tipo="comando">Comandos (${nComandos})</button>
       <button class="subnav-2-pill ${cmdState.tipo === 'skill' ? 'active' : ''}" data-tipo="skill">Skills (${nSkills})</button>
+      <button class="subnav-2-pill ${cmdState.tipo === 'plugin' ? 'active' : ''}" data-tipo="plugin">Plugins (${nPlugins})</button>
     </div>
     <div class="ency-toolbar">
       <div class="ency-search-row">${ICONS.search}<input type="text" id="cmd-search" placeholder="Buscar comandos..." autocomplete="off"></div>
@@ -2220,7 +2222,7 @@ function cmdRowHtml(c) {
 
 function paintCommandsList() {
   const q = (cmdState.query || '').trim().toLowerCase();
-  const byTipo = COMMANDS.filter(c => (cmdState.tipo === 'skill') === (c.tipo === 'skill'));
+  const byTipo = COMMANDS.filter(c => c.tipo === cmdState.tipo);
   const filtered = q
     ? byTipo.filter(c => (c.name + ' ' + c.description + ' ' + (c.notes || '') + ' ' + c.category).toLowerCase().includes(q))
     : byTipo;

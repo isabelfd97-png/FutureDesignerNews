@@ -374,5 +374,477 @@
     "description": "Skill de ejemplo citada como referencia del formato: ejecuta los tests que coincidan con un patrón dado, detecta automáticamente el framework de testing que usa el proyecto y, si algo falla, intenta corregir la implementación.",
     "example": ".claude/skills/test-pattern/SKILL.md",
     "notes": "Es el ejemplo con el que el artículo ilustra cómo se ve una skill personalizada en la práctica."
+  },
+  {
+    "name": "layers-orient",
+    "category": "Diagnóstico inicial",
+    "tipo": "skill",
+    "notes": "Fuente: jamiemill/layers-skills (github.com/jamiemill/layers-skills)",
+    "description": "Audita un proyecto de diseño en 7 capas de decisión (estrategia, alcance, modelo conceptual, estructura, interacción, layout, superficie visual) y señala en cuál está el verdadero cuello de botella, antes de tocar nada visual.",
+    "example": "/layers-orient quiero iterar el estilo de esta gráfica de campañas"
+  },
+  {
+    "name": "layers-user-needs",
+    "category": "Descubrimiento e investigación",
+    "tipo": "skill",
+    "notes": "Fuente: jamiemill/layers-skills (github.com/jamiemill/layers-skills)",
+    "description": "Convierte una idea vaga o una queja en job stories ('Cuando..., quiero..., para poder...') priorizadas, en vez de saltar directo a una solución sin verificar la necesidad real.",
+    "example": "/layers-user-needs quiero crear una gráfica nueva pero no sé qué debería mostrar"
+  },
+  {
+    "name": "layers-observed-behaviour",
+    "category": "Descubrimiento e investigación",
+    "tipo": "skill",
+    "notes": "Fuente: jamiemill/layers-skills (github.com/jamiemill/layers-skills)",
+    "description": "Convierte notas o comentarios reales de usuarios en job stories, marcando cada una como 🟢 Observado, 🟡 Inferido o 🔴 Asumido, para no colar una suposición como si fuera un dato verificado.",
+    "example": "/layers-observed-behaviour aquí tienes los comentarios de la última review de equipo"
+  },
+  {
+    "name": "layers-domain",
+    "category": "Descubrimiento e investigación",
+    "tipo": "skill",
+    "notes": "Fuente: jamiemill/layers-skills (github.com/jamiemill/layers-skills)",
+    "description": "Cosecha el vocabulario real de conversaciones de equipo y detecta dónde PM, diseño e ingeniería usan la misma palabra para cosas distintas.",
+    "example": "/layers-domain no sé si todos entendemos 'segmento' igual, aquí hay 3 hilos de Slack"
+  },
+  {
+    "name": "synthetic-persona",
+    "category": "Descubrimiento e investigación",
+    "tipo": "skill",
+    "notes": "Fuente: segundo cerebro personal de Isabel (no viene de las colecciones externas)",
+    "description": "Construye una persona sintética fundamentada en investigación real (o marcada como suposición si no la hay), con entrevista guiada de 9 áreas y una fase para 'hablar' con la persona ya construida.",
+    "example": "/synthetic-persona quiero construir el perfil de un usuario de marketing que gestiona campañas"
+  },
+  {
+    "name": "journey-map",
+    "category": "Descubrimiento e investigación",
+    "tipo": "skill",
+    "notes": "Fuente: Owl-Listener/designer-skills (github.com/Owl-Listener/designer-skills)",
+    "description": "Mapa de recorrido de usuario con etapas, touchpoints, emociones y pain points — y siempre termina con una fila de oportunidades accionables, no solo el diagnóstico del dolor.",
+    "example": "/journey-map alguien de marketing consultando el dashboard para decidir si repetir una campaña"
+  },
+  {
+    "name": "discover",
+    "category": "Descubrimiento e investigación",
+    "tipo": "skill",
+    "notes": "Fuente: phuryn/pm-skills (github.com/phuryn/pm-skills)",
+    "description": "Ciclo completo de discovery: ideación multi-perspectiva → suposiciones (Valor/Usabilidad/Viabilidad/Factibilidad) → priorización por Impacto×Riesgo → experimento más barato para validar.",
+    "example": "/discover el equipo no sabe qué campaña repetir porque no se pueden comparar directamente"
+  },
+  {
+    "name": "interview",
+    "category": "Descubrimiento e investigación",
+    "tipo": "skill",
+    "notes": "Fuente: phuryn/pm-skills (github.com/phuryn/pm-skills)",
+    "description": "Dos modos: Prep genera un guion de entrevista con preguntas JTBD antes de hablar con un usuario; Summarize convierte la transcripción ya grabada en el job real, señales de satisfacción/frustración y acciones.",
+    "example": "/interview prep voy a entrevistar a alguien de marketing sobre cómo decide qué campaña repetir"
+  },
+  {
+    "name": "test-plan",
+    "category": "Descubrimiento e investigación",
+    "tipo": "skill",
+    "notes": "Fuente: Owl-Listener/designer-skills (github.com/Owl-Listener/designer-skills)",
+    "description": "Plan de test de usabilidad completo: preguntas de investigación, criterios de reclutamiento, tareas orientadas a objetivo (no dirigidas), criterio de éxito definido antes de la sesión, guía de facilitación.",
+    "example": "/test-plan quiero testear si la gente entiende cómo comparar dos campañas"
+  },
+  {
+    "name": "frame-problem",
+    "category": "Estrategia y priorización",
+    "tipo": "skill",
+    "notes": "Fuente: Owl-Listener/designer-skills (github.com/Owl-Listener/designer-skills)",
+    "description": "Convierte un encargo ambiguo ('tenemos que rediseñar X') en un problem statement con quién se ve afectado, qué pasa exactamente, por qué importa ahora y cómo se sabría que está resuelto.",
+    "example": "/frame-problem tenemos que rediseñar el onboarding"
+  },
+  {
+    "name": "opportunity-solution-tree",
+    "category": "Estrategia y priorización",
+    "tipo": "skill",
+    "notes": "Fuente: phuryn/pm-skills (github.com/phuryn/pm-skills)",
+    "description": "Árbol de Teresa Torres: outcome de negocio → oportunidades → soluciones → experimentos, para que cada feature se pueda trazar hacia arriba hasta un resultado medible real.",
+    "example": "/opportunity-solution-tree quiero iterar el estilo de la gráfica, ¿responde a alguna oportunidad real?"
+  },
+  {
+    "name": "north-star-metric",
+    "category": "Estrategia y priorización",
+    "tipo": "skill",
+    "notes": "Fuente: phuryn/pm-skills (github.com/phuryn/pm-skills)",
+    "description": "Define la métrica única que mejor captura el valor real entregado (North Star) y sus métricas de apoyo, clasificando primero el negocio en 'juego' (atención/transacción/productividad).",
+    "example": "/north-star-metric la feature de comparación de campañas que estamos lanzando"
+  },
+  {
+    "name": "value-proposition",
+    "category": "Estrategia y priorización",
+    "tipo": "skill",
+    "notes": "Fuente: phuryn/pm-skills (github.com/phuryn/pm-skills)",
+    "description": "Propuesta de valor en 6 partes JTBD (Who/Why/What before/How/What after/Alternatives), con énfasis en el contraste antes/después, que es donde la mayoría de propuestas se rompen.",
+    "example": "/value-proposition la feature de comparación automática de campañas"
+  },
+  {
+    "name": "identify-assumptions-existing",
+    "category": "Estrategia y priorización",
+    "tipo": "skill",
+    "notes": "Fuente: phuryn/pm-skills (github.com/phuryn/pm-skills)",
+    "description": "Audita algo YA decidido (no una idea nueva) contra las 4 categorías de riesgo de Marty Cagan — Valor, Usabilidad, Viabilidad, Factibilidad — antes de comprometer trabajo sobre ello.",
+    "example": "/identify-assumptions-existing ya decidimos crear la gráfica nueva de métricas de campaña"
+  },
+  {
+    "name": "strategy",
+    "category": "Estrategia y priorización",
+    "tipo": "skill",
+    "notes": "Fuente: phuryn/pm-skills (github.com/phuryn/pm-skills)",
+    "description": "Product Strategy Canvas completo de 9 secciones (visión, propuesta de valor, segmento, modelo de negocio, monetización, go-to-market, competencia, métricas, defensibilidad). Uso poco frecuente, para decisiones de negocio grandes.",
+    "example": "/strategy mi equipo va a lanzar una nueva línea de comparación automática de campañas"
+  },
+  {
+    "name": "market-scan",
+    "category": "Estrategia y priorización",
+    "tipo": "skill",
+    "notes": "Fuente: phuryn/pm-skills (github.com/phuryn/pm-skills)",
+    "description": "SWOT + PESTLE + Porter's Five Forces + Ansoff Matrix combinados en un solo análisis de entorno macro. Para momentos de alto impacto: defender una inversión, una reunión de planificación, una entrevista de trabajo.",
+    "example": "/market-scan mi empresa se plantea lanzar esta feature como producto independiente"
+  },
+  {
+    "name": "layers-conceptual-model",
+    "category": "Modelo conceptual",
+    "tipo": "skill",
+    "notes": "Fuente: jamiemill/layers-skills (github.com/jamiemill/layers-skills)",
+    "description": "Define por escrito, sin ninguna interfaz todavía, los objetos, relaciones, estados y vocabulario de un producto o feature — evita que un equipo discuta 'qué es esto' mirando la misma pantalla.",
+    "example": "/layers-conceptual-model voy a montar una pantalla nueva de campañas"
+  },
+  {
+    "name": "layers-interaction-flow",
+    "category": "Flujo e interacción",
+    "tipo": "skill",
+    "notes": "Fuente: jamiemill/layers-skills (github.com/jamiemill/layers-skills)",
+    "description": "Breadboarding (Shape Up): lugares, affordances y conexiones entre ellos, sin ningún diseño visual, marcando caminos de fallo y decisiones abiertas.",
+    "example": "/layers-interaction-flow mapea el flujo de comparar dos campañas en el dashboard"
+  },
+  {
+    "name": "map-states",
+    "category": "Flujo e interacción",
+    "tipo": "skill",
+    "notes": "Fuente: Owl-Listener/designer-skills (github.com/Owl-Listener/designer-skills)",
+    "description": "Máquina de estados formal de un componente: estados, eventos que disparan cada transición, guards, y foco especial en los estados que se olvidan (loading, empty, error, partial, offline).",
+    "example": "/map-states la gráfica de comparación de campañas — quiero los estados formalizados"
+  },
+  {
+    "name": "error-flow",
+    "category": "Flujo e interacción",
+    "tipo": "skill",
+    "notes": "Fuente: Owl-Listener/designer-skills (github.com/Owl-Listener/designer-skills)",
+    "description": "Diseña qué le pasa al usuario cuando algo falla — prevención, detección, mensaje, recuperación — no solo detecta que un error puede ocurrir.",
+    "example": "/error-flow qué pasa si falla la carga de una de las dos campañas comparadas"
+  },
+  {
+    "name": "create-component",
+    "category": "Especificación para construir",
+    "tipo": "skill",
+    "notes": "Fuente: Owl-Listener/designer-skills (github.com/Owl-Listener/designer-skills)",
+    "description": "Spec completa y reutilizable de un componente (props, variantes, estados, accesibilidad, edge cases) pensada para vivir en una librería, no para documentar una sola pantalla.",
+    "example": "/create-component quiero especificar el componente de gráfica de comparación para la librería"
+  },
+  {
+    "name": "tokenize",
+    "category": "Especificación para construir",
+    "tipo": "skill",
+    "notes": "Fuente: Owl-Listener/designer-skills (github.com/Owl-Listener/designer-skills)",
+    "description": "Extrae colores, espaciados y tipografías escritos 'a pelo' en código real y los organiza en design tokens con nombre, estructura y mapeo de tema.",
+    "example": "/tokenize aquí está el CSS de la gráfica, tiene colores repetidos por todos lados"
+  },
+  {
+    "name": "write-prd",
+    "category": "Especificación para construir",
+    "tipo": "skill",
+    "notes": "Fuente: phuryn/pm-skills (github.com/phuryn/pm-skills)",
+    "description": "PRD completo de 8 secciones (resumen, contactos, contexto, objetivo, segmento, propuesta de valor, solución con suposiciones marcadas, release) a partir de una idea o problem statement.",
+    "example": "/write-prd la feature de comparación automática de campañas"
+  },
+  {
+    "name": "handoff",
+    "category": "Especificación para construir",
+    "tipo": "skill",
+    "notes": "Fuente: Owl-Listener/designer-skills (github.com/Owl-Listener/designer-skills)",
+    "description": "Spec de handoff a ingeniería más un checklist de QA para verificar DESPUÉS de implementar si lo construido coincide con el diseño.",
+    "example": "/handoff la vista de comparación de campañas — ya tengo la spec, quiero el checklist de QA"
+  },
+  {
+    "name": "evaluate",
+    "category": "Validación antes de lanzar",
+    "tipo": "skill",
+    "notes": "Fuente: Owl-Listener/designer-skills (github.com/Owl-Listener/designer-skills)",
+    "description": "Evaluación heurística de Nielsen (10 principios de usabilidad) con severidad 0-4, más barata que un test de usabilidad real aunque no lo sustituye del todo.",
+    "example": "/evaluate la pantalla de comparación de campañas, aquí tienes las capturas"
+  },
+  {
+    "name": "cognitive-load-assessment",
+    "category": "Validación antes de lanzar",
+    "tipo": "skill",
+    "notes": "Fuente: owl-listener/inclusive-design-skills (github.com/owl-listener/inclusive-design-skills)",
+    "description": "Evalúa memoria, atención y complejidad de decisión de un flujo, distinguiendo carga intrínseca (inevitable) de extrínseca (evitable por diseño).",
+    "example": "/cognitive-load-assessment el flujo de comparar dos campañas, lo usa gente con prisa"
+  },
+  {
+    "name": "cognitive-accessibility-review",
+    "category": "Validación antes de lanzar",
+    "tipo": "skill",
+    "notes": "Fuente: owl-listener/inclusive-design-skills (github.com/owl-listener/inclusive-design-skills)",
+    "description": "Revisión completa en 6 dimensiones (carga cognitiva, lenguaje, wayfinding, errores, foco, memoria). El listón: ¿puede alguien cansado y sin familiaridad completar la tarea sin ayuda?",
+    "example": "/cognitive-accessibility-review el flujo completo de comparación de campañas"
+  },
+  {
+    "name": "responsive-audit",
+    "category": "Validación antes de lanzar",
+    "tipo": "skill",
+    "notes": "Fuente: Owl-Listener/designer-skills (github.com/Owl-Listener/designer-skills)",
+    "description": "Audita layout, touch targets y reflow en cada breakpoint (móvil/tablet/desktop) para detectar pensamiento 'desktop-first' antes de producción.",
+    "example": "/responsive-audit audita la gráfica de campañas, sospecho que la leyenda se sale en móvil"
+  },
+  {
+    "name": "benchmark",
+    "category": "Validación antes de lanzar",
+    "tipo": "skill",
+    "notes": "Fuente: Owl-Listener/designer-skills (github.com/Owl-Listener/designer-skills)",
+    "description": "Compara cómo resuelven distintos competidores un patrón concreto de interfaz, con tabla comparativa y gap analysis. Necesita capturas reales, no inventa cómo se ve una app no vista.",
+    "example": "/benchmark cómo resuelven otras herramientas de marketing la comparación de campañas"
+  },
+  {
+    "name": "audit-system",
+    "category": "Validación antes de lanzar",
+    "tipo": "skill",
+    "notes": "Fuente: Owl-Listener/designer-skills (github.com/Owl-Listener/designer-skills)",
+    "description": "Audita un sistema de diseño en consistencia, completitud y accesibilidad, priorizado por severidad — listo para usarse como agenda de una reunión de migración.",
+    "example": "/audit-system antes de la v2 de nuestro sistema de componentes de gráficas"
+  },
+  {
+    "name": "experiment",
+    "category": "Validación antes de lanzar",
+    "tipo": "skill",
+    "notes": "Fuente: Owl-Listener/designer-skills (github.com/Owl-Listener/designer-skills)",
+    "description": "Diseña un experimento A/B de principio a fin — hipótesis, variantes, métrica principal, tamaño de muestra — avisando si no hay tráfico suficiente para un resultado fiable.",
+    "example": "/experiment quiero probar si mover la leyenda debajo de la gráfica mejora la comparación"
+  },
+  {
+    "name": "pre-mortem",
+    "category": "Validación antes de lanzar",
+    "tipo": "skill",
+    "notes": "Fuente: phuryn/pm-skills (github.com/phuryn/pm-skills)",
+    "description": "Estresa un plan o PRD ya escrito clasificando riesgos en Tigers (reales y urgentes), Paper Tigers (parecen graves y no lo son) y Elephants (grandes, lentos, todos lo saben y nadie lo aborda).",
+    "example": "/pre-mortem el PRD de comparación de campañas que ya escribimos"
+  },
+  {
+    "name": "analyze-test",
+    "category": "Lanzamiento y medición",
+    "tipo": "skill",
+    "notes": "Fuente: phuryn/pm-skills (github.com/phuryn/pm-skills)",
+    "description": "Analiza resultados reales de un A/B — significancia estadística, validación de tamaño de muestra, y recomendación Ship / Extend / Stop.",
+    "example": "/analyze-test los resultados del experimento de la leyenda, llevamos 2 semanas corriendo"
+  },
+  {
+    "name": "retro",
+    "category": "Proceso de equipo y cierre",
+    "tipo": "skill",
+    "notes": "Fuente: phuryn/pm-skills (github.com/phuryn/pm-skills)",
+    "description": "Retrospectiva de sprint estructurada (Start/Stop/Continue, 4Ls o Sailboat) que siempre cierra con 2-3 acciones con responsable y plazo, y hace seguimiento de las anteriores.",
+    "example": "/retro sprint de la feature de comparación de campañas, formato Start/Stop/Continue"
+  },
+  {
+    "name": "summarize-meeting",
+    "category": "Proceso de equipo y cierre",
+    "tipo": "skill",
+    "notes": "Fuente: phuryn/pm-skills (github.com/phuryn/pm-skills)",
+    "description": "Convierte la transcripción bruta de una reunión en discusión, decisiones, acciones (con responsable y plazo) y preguntas abiertas sin resolver.",
+    "example": "/summarize-meeting reunión de hoy sobre el lanzamiento de comparación de campañas"
+  },
+  {
+    "name": "write-rationale",
+    "category": "Proceso de equipo y cierre",
+    "tipo": "skill",
+    "notes": "Fuente: Owl-Listener/designer-skills (github.com/Owl-Listener/designer-skills)",
+    "description": "Escribe por qué se tomó una decisión, conectada a necesidad de usuario, objetivo de negocio y principio de diseño, para que el criterio sobreviva más allá de la conversación.",
+    "example": "/write-rationale por qué decidimos no incluir normalización de periodos en la primera versión"
+  },
+  {
+    "name": "conversation-patterns",
+    "category": "Diseñar con IA",
+    "tipo": "skill",
+    "notes": "Fuente: Owl-Listener/ai-design-skills (github.com/Owl-Listener/ai-design-skills) · Parte del plugin model-interaction-design",
+    "description": "Fundamentos de turn-taking y secuencias de reparación entre humano e IA: reconocer explícitamente un malentendido antes de reintentar, en vez de ignorarlo.",
+    "example": "Diseñando un asistente de IA que ayuda a comparar campañas"
+  },
+  {
+    "name": "mixed-initiative-flow",
+    "category": "Diseñar con IA",
+    "tipo": "skill",
+    "notes": "Fuente: Owl-Listener/ai-design-skills (github.com/Owl-Listener/ai-design-skills) · Parte del plugin model-interaction-design",
+    "description": "Decide cuándo lidera la IA y cuándo el usuario en una interacción, y cómo se cede el control de uno a otro sin que se sienta abrupto.",
+    "example": "¿Debería el asistente proponer proactivamente, o esperar a que le pregunten?"
+  },
+  {
+    "name": "progressive-disclosure",
+    "category": "Diseñar con IA",
+    "tipo": "skill",
+    "notes": "Fuente: Owl-Listener/ai-design-skills (github.com/Owl-Listener/ai-design-skills) · Parte del plugin model-interaction-design",
+    "description": "Diseña cómo se revela gradualmente la capacidad de una IA, para no abrumar con todo lo que sabe hacer en el primer contacto.",
+    "example": "La primera vez que un usuario usa el asistente, ¿cuánto le cuento de golpe?"
+  },
+  {
+    "name": "multimodal-orchestration",
+    "category": "Diseñar con IA",
+    "tipo": "skill",
+    "notes": "Fuente: Owl-Listener/ai-design-skills (github.com/Owl-Listener/ai-design-skills) · Parte del plugin model-interaction-design",
+    "description": "Coordina texto, imagen, voz y uso de herramientas dentro de una misma interacción con IA, decidiendo qué modalidad usar en cada momento.",
+    "example": "Cuándo la IA debería mostrar una gráfica generada en vez de describirla en texto"
+  },
+  {
+    "name": "context-window-design",
+    "category": "Diseñar con IA",
+    "tipo": "skill",
+    "notes": "Fuente: Owl-Listener/ai-design-skills (github.com/Owl-Listener/ai-design-skills) · Parte del plugin model-interaction-design",
+    "description": "Diseña qué se recuerda entre sesiones y qué se olvida, y cómo se comunica al usuario cuando algo se ha perdido por límite de contexto.",
+    "example": "Un asistente con memoria persistente entre sesiones de trabajo"
+  },
+  {
+    "name": "generative-ui",
+    "category": "Diseñar con IA",
+    "tipo": "skill",
+    "notes": "Fuente: Owl-Listener/ai-design-skills (github.com/Owl-Listener/ai-design-skills) · Parte del plugin model-interaction-design",
+    "description": "Diseña interfaces donde la IA genera componentes de UI dinámicamente (una gráfica, una tarjeta) en vez de responder solo con texto.",
+    "example": "La IA genera una gráfica ajustada a la pregunta, en vez de solo describir los números"
+  },
+  {
+    "name": "feedback-loops",
+    "category": "Diseñar con IA",
+    "tipo": "skill",
+    "notes": "Fuente: Owl-Listener/ai-design-skills (github.com/Owl-Listener/ai-design-skills) · Parte del plugin model-interaction-design",
+    "description": "Diseña cómo el usuario corrige o valora una respuesta de IA (pulgar arriba/abajo, edición inline) y qué pasa con esa señal después.",
+    "example": "Un botón de pulgar abajo que en realidad no cambia nada — señal vacía a evitar"
+  },
+  {
+    "name": "frustration-detection",
+    "category": "Diseñar con IA",
+    "tipo": "skill",
+    "notes": "Fuente: Owl-Listener/ai-design-skills (github.com/Owl-Listener/ai-design-skills) · Parte del plugin model-interaction-design",
+    "description": "Detecta señales de frustración del usuario en texto (mayúsculas, repetición, latencia) y define cómo debería adaptarse la IA antes del abandono.",
+    "example": "El usuario repite la misma pregunta 3 veces con frases cada vez más cortas"
+  },
+  {
+    "name": "design-conversation",
+    "category": "Diseñar con IA",
+    "tipo": "skill",
+    "notes": "Fuente: Owl-Listener/ai-design-skills (github.com/Owl-Listener/ai-design-skills) · Comando del plugin model-interaction-design",
+    "description": "Diseña un flujo de conversación humano-IA completo, combinando turn-taking, iniciativa mixta y revelación progresiva, de principio a fin.",
+    "example": "/design-conversation un asistente dentro del dashboard que ayuda a decidir qué campaña repetir"
+  },
+  {
+    "name": "audit-interaction",
+    "category": "Diseñar con IA",
+    "tipo": "skill",
+    "notes": "Fuente: Owl-Listener/ai-design-skills (github.com/Owl-Listener/ai-design-skills) · Comando del plugin model-interaction-design",
+    "description": "Evalúa una interacción de IA ya existente contra las 8 dimensiones del plugin, para pasar de 'se siente rara' a un diagnóstico concreto.",
+    "example": "/audit-interaction el asistente de campañas ya en producción, aquí una grabación de uso"
+  },
+  {
+    "name": "map-initiative",
+    "category": "Diseñar con IA",
+    "tipo": "skill",
+    "notes": "Fuente: Owl-Listener/ai-design-skills (github.com/Owl-Listener/ai-design-skills) · Comando del plugin model-interaction-design",
+    "description": "Mapea quién lidera — IA o usuario — en cada etapa de un flujo, y dónde se cede el control, detectando transiciones abruptas.",
+    "example": "/map-initiative el flujo de comparar campañas con el asistente de IA integrado"
+  },
+  {
+    "name": "system-prompt-structure",
+    "category": "Diseñar con IA",
+    "tipo": "skill",
+    "notes": "Fuente: Owl-Listener/ai-design-skills (github.com/Owl-Listener/ai-design-skills) · Parte del plugin prompt-architecture",
+    "description": "Anatomía de un system prompt efectivo: rol, contexto, restricciones, formato.",
+    "example": "Revisar por qué un prompt en producción da resultados inconsistentes"
+  },
+  {
+    "name": "template-design",
+    "category": "Diseñar con IA",
+    "tipo": "skill",
+    "notes": "Fuente: Owl-Listener/ai-design-skills (github.com/Owl-Listener/ai-design-skills) · Parte del plugin prompt-architecture",
+    "description": "Plantillas de prompt reutilizables y parametrizadas para producir salidas consistentes cada vez, sin reescribir desde cero.",
+    "example": "Una función de IA que genera un resumen de campaña distinto cada vez, con la misma estructura"
+  },
+  {
+    "name": "chain-of-thought-design",
+    "category": "Diseñar con IA",
+    "tipo": "skill",
+    "notes": "Fuente: Owl-Listener/ai-design-skills (github.com/Owl-Listener/ai-design-skills) · Parte del plugin prompt-architecture",
+    "description": "Diseña cadenas de razonamiento paso a paso dentro de un prompt, en vez de pedir la respuesta final directamente.",
+    "example": "Una tarea de comparar y priorizar que da resultados superficiales si se pide todo de golpe"
+  },
+  {
+    "name": "few-shot-patterns",
+    "category": "Diseñar con IA",
+    "tipo": "skill",
+    "notes": "Fuente: Owl-Listener/ai-design-skills (github.com/Owl-Listener/ai-design-skills) · Parte del plugin prompt-architecture",
+    "description": "Diseña ejemplos de entrada/salida dentro de un prompt para orientar el comportamiento de la IA, cuando describirlo en palabras no basta.",
+    "example": "Mostrar 2-3 ejemplos de un resumen bien escrito en vez de solo explicar la regla"
+  },
+  {
+    "name": "constraint-specification",
+    "category": "Diseñar con IA",
+    "tipo": "skill",
+    "notes": "Fuente: Owl-Listener/ai-design-skills (github.com/Owl-Listener/ai-design-skills) · Parte del plugin prompt-architecture",
+    "description": "Define formato de salida, longitud, tono y límites de contenido dentro de un prompt, para que la IA no se salga de lo esperado.",
+    "example": "Un prompt que a veces responde demasiado largo o con un tono distinto al esperado"
+  },
+  {
+    "name": "prompt-versioning",
+    "category": "Diseñar con IA",
+    "tipo": "skill",
+    "notes": "Fuente: Owl-Listener/ai-design-skills (github.com/Owl-Listener/ai-design-skills) · Parte del plugin prompt-architecture",
+    "description": "Gestiona iteraciones de un prompt en el tiempo: qué cambió, qué se probó, qué funcionó.",
+    "example": "Un prompt con varias versiones sin ningún registro de por qué se cambió cada vez"
+  },
+  {
+    "name": "context-engineering",
+    "category": "Diseñar con IA",
+    "tipo": "skill",
+    "notes": "Fuente: Owl-Listener/ai-design-skills (github.com/Owl-Listener/ai-design-skills) · Parte del plugin prompt-architecture",
+    "description": "Decide qué información entra en la ventana de contexto de un prompt y en qué orden, para que la IA priorice lo relevante.",
+    "example": "Una función de IA con acceso a mucho historial de cuenta, sin criterio de qué incluir"
+  },
+  {
+    "name": "design-prompt",
+    "category": "Diseñar con IA",
+    "tipo": "skill",
+    "notes": "Fuente: Owl-Listener/ai-design-skills (github.com/Owl-Listener/ai-design-skills) · Comando del plugin prompt-architecture",
+    "description": "Crea un system prompt estructurado para una función de IA nueva, combinando rol, contexto, restricciones y formato.",
+    "example": "/design-prompt un asistente que resume por qué una campaña tuvo el rendimiento que tuvo"
+  },
+  {
+    "name": "build-chain",
+    "category": "Diseñar con IA",
+    "tipo": "skill",
+    "notes": "Fuente: Owl-Listener/ai-design-skills (github.com/Owl-Listener/ai-design-skills) · Comando del plugin prompt-architecture",
+    "description": "Diseña una cadena de prompts de varios pasos para una tarea compleja que un solo prompt no resuelve bien de una vez.",
+    "example": "/build-chain generar el resumen de rendimiento de campaña — falla en algo distinto cada vez"
+  },
+  {
+    "name": "audit-prompt",
+    "category": "Diseñar con IA",
+    "tipo": "skill",
+    "notes": "Fuente: Owl-Listener/ai-design-skills (github.com/Owl-Listener/ai-design-skills) · Comando del plugin prompt-architecture",
+    "description": "Evalúa un prompt ya existente por claridad, efectividad y edge cases, en vez de iterar a ciegas por prueba y error.",
+    "example": "/audit-prompt este prompt a veces dice 'excelente rendimiento' cuando los datos son mediocres"
+  },
+  {
+    "name": "model-interaction-design",
+    "category": "Diseñar con IA",
+    "tipo": "plugin",
+    "notes": "Fuente: Owl-Listener/ai-design-skills (github.com/Owl-Listener/ai-design-skills)",
+    "description": "Plugin de 8 skills + 3 comandos sobre cómo se comportan las interacciones humano-IA: quién lidera en cada momento, cómo se revela la capacidad de la IA, qué pasa ante un malentendido, cómo se detecta frustración. Incluye conversation-patterns, mixed-initiative-flow, progressive-disclosure, multimodal-orchestration, context-window-design, generative-ui, feedback-loops, frustration-detection, y los comandos design-conversation, audit-interaction, map-initiative.",
+    "example": "claude plugin install model-interaction-design@ai-design-skills"
+  },
+  {
+    "name": "prompt-architecture",
+    "category": "Diseñar con IA",
+    "tipo": "plugin",
+    "notes": "Fuente: Owl-Listener/ai-design-skills (github.com/Owl-Listener/ai-design-skills)",
+    "description": "Plugin de 7 skills + 3 comandos que trata los prompts como superficie de producto: estructura, plantillas, cadenas de razonamiento, restricciones, versionado. Incluye system-prompt-structure, template-design, chain-of-thought-design, few-shot-patterns, constraint-specification, prompt-versioning, context-engineering, y los comandos design-prompt, build-chain, audit-prompt.",
+    "example": "claude plugin install prompt-architecture@ai-design-skills"
   }
 ]
