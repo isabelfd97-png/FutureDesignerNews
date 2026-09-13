@@ -668,183 +668,183 @@
     "category": "Diseñar con IA",
     "tipo": "skill",
     "notes": "Fuente: Owl-Listener/ai-design-skills (github.com/Owl-Listener/ai-design-skills) · Parte del plugin model-interaction-design",
-    "description": "Fundamentos de turn-taking y secuencias de reparación entre humano e IA: reconocer explícitamente un malentendido antes de reintentar, en vez de ignorarlo.",
-    "example": "Diseñando un asistente de IA que ayuda a comparar campañas"
+    "description": "Reglas básicas de cómo debería fluir una conversación entre una persona y una IA: quién habla primero, y sobre todo, qué pasa cuando la IA entiende mal algo. A eso se le llama 'reparación': reconocer el malentendido antes de seguir, en vez de ignorarlo y responder como si nada.",
+    "example": "El usuario corrige al asistente ('no, me refería a otra campaña'). Sin esta skill, el asistente reintenta sin decir nada. Con ella, primero dice 'ah, perdona, ¿te refieres a la Campaña Y?' antes de continuar."
   },
   {
     "name": "mixed-initiative-flow",
     "category": "Diseñar con IA",
     "tipo": "skill",
     "notes": "Fuente: Owl-Listener/ai-design-skills (github.com/Owl-Listener/ai-design-skills) · Parte del plugin model-interaction-design",
-    "description": "Decide cuándo lidera la IA y cuándo el usuario en una interacción, y cómo se cede el control de uno a otro sin que se sienta abrupto.",
-    "example": "¿Debería el asistente proponer proactivamente, o esperar a que le pregunten?"
+    "description": "Decide quién 'lleva la voz cantante' en cada momento de una conversación con IA: si el asistente espera pasivo a que le pregunten, o propone él mismo sin que se lo pidan — y cómo se pasa el testigo de uno a otro sin que se note raro.",
+    "example": "Cuando una campaña termina, ¿el asistente espera a que el usuario pregunte 'cómo fue', o avisa él solo: 'esta campaña acaba de cerrar, ¿la comparo con la anterior?'"
   },
   {
     "name": "progressive-disclosure",
     "category": "Diseñar con IA",
     "tipo": "skill",
     "notes": "Fuente: Owl-Listener/ai-design-skills (github.com/Owl-Listener/ai-design-skills) · Parte del plugin model-interaction-design",
-    "description": "Diseña cómo se revela gradualmente la capacidad de una IA, para no abrumar con todo lo que sabe hacer en el primer contacto.",
-    "example": "La primera vez que un usuario usa el asistente, ¿cuánto le cuento de golpe?"
+    "description": "Decide cuánto le cuentas a alguien de lo que tu IA sabe hacer la primera vez que la usa. En vez de explicar de golpe las 8 cosas que puede hacer (agobia), se va descubriendo poco a poco, según haga falta.",
+    "example": "La primera vez que alguien usa el asistente, solo le dice 'puedo comparar campañas' — no le suelta también que puede resumir, predecir y generar informes, aunque sepa hacer todo eso."
   },
   {
     "name": "multimodal-orchestration",
     "category": "Diseñar con IA",
     "tipo": "skill",
     "notes": "Fuente: Owl-Listener/ai-design-skills (github.com/Owl-Listener/ai-design-skills) · Parte del plugin model-interaction-design",
-    "description": "Coordina texto, imagen, voz y uso de herramientas dentro de una misma interacción con IA, decidiendo qué modalidad usar en cada momento.",
-    "example": "Cuándo la IA debería mostrar una gráfica generada en vez de describirla en texto"
+    "description": "'Multimodal' significa que la IA puede responder con más de un tipo de contenido: texto, una imagen, voz, o ejecutando una acción real. Esta skill decide cuál usar en cada momento, para no confundir combinando demasiados a la vez.",
+    "example": "Si preguntas '¿cómo va la campaña?', ¿la IA responde con una frase, o directamente te enseña la gráfica? Decidir eso es lo que cubre esta skill."
   },
   {
     "name": "context-window-design",
     "category": "Diseñar con IA",
     "tipo": "skill",
     "notes": "Fuente: Owl-Listener/ai-design-skills (github.com/Owl-Listener/ai-design-skills) · Parte del plugin model-interaction-design",
-    "description": "Diseña qué se recuerda entre sesiones y qué se olvida, y cómo se comunica al usuario cuando algo se ha perdido por límite de contexto.",
-    "example": "Un asistente con memoria persistente entre sesiones de trabajo"
+    "description": "Una IA solo puede 'recordar' una cantidad limitada de conversación a la vez (su 'ventana de contexto'). Esta skill decide qué información se guarda de una sesión a otra, qué se olvida, y cómo se avisa al usuario cuando algo se ha perdido — en vez de que la IA finja recordar algo que ya no tiene.",
+    "example": "Si retomas una conversación de hace una semana, ¿el asistente actúa como si recordara todo, o dice honestamente 'no tengo el contexto de la sesión anterior, ¿me lo resumes?'"
   },
   {
     "name": "generative-ui",
     "category": "Diseñar con IA",
     "tipo": "skill",
     "notes": "Fuente: Owl-Listener/ai-design-skills (github.com/Owl-Listener/ai-design-skills) · Parte del plugin model-interaction-design",
-    "description": "Diseña interfaces donde la IA genera componentes de UI dinámicamente (una gráfica, una tarjeta) en vez de responder solo con texto.",
-    "example": "La IA genera una gráfica ajustada a la pregunta, en vez de solo describir los números"
+    "description": "En vez de que la IA solo responda con texto, puede 'dibujar' sobre la marcha un componente visual (una gráfica, una tarjeta, un formulario) ajustado a lo que le preguntas. Esta skill decide qué puede variar libremente en ese componente generado y qué debe respetar siempre el estilo del resto del producto.",
+    "example": "Preguntas '¿cómo comparan estas dos campañas?' y la IA no contesta con números en un párrafo, sino que genera al momento una gráfica comparativa."
   },
   {
     "name": "feedback-loops",
     "category": "Diseñar con IA",
     "tipo": "skill",
     "notes": "Fuente: Owl-Listener/ai-design-skills (github.com/Owl-Listener/ai-design-skills) · Parte del plugin model-interaction-design",
-    "description": "Diseña cómo el usuario corrige o valora una respuesta de IA (pulgar arriba/abajo, edición inline) y qué pasa con esa señal después.",
-    "example": "Un botón de pulgar abajo que en realidad no cambia nada — señal vacía a evitar"
+    "description": "Diseña cómo alguien le dice a la IA 'esto está mal' o 'esto está bien' (un pulgar arriba/abajo, editar directamente la respuesta) — y qué pasa realmente con esa señal después. Un botón de 'no me sirve' que no cambia nada enseña a la gente a dejar de usarlo.",
+    "example": "Si alguien le da 'pulgar abajo' a un resumen de campaña, ¿solo desaparece el botón, o el sistema realmente ajusta algo la próxima vez?"
   },
   {
     "name": "frustration-detection",
     "category": "Diseñar con IA",
     "tipo": "skill",
     "notes": "Fuente: Owl-Listener/ai-design-skills (github.com/Owl-Listener/ai-design-skills) · Parte del plugin model-interaction-design",
-    "description": "Detecta señales de frustración del usuario en texto (mayúsculas, repetición, latencia) y define cómo debería adaptarse la IA antes del abandono.",
-    "example": "El usuario repite la misma pregunta 3 veces con frases cada vez más cortas"
+    "description": "Detecta, por cómo escribe alguien (mayúsculas, signos de exclamación seguidos, repetir la misma pregunta con otras palabras, tardar cada vez más en responder), que se está frustrando con la IA — y decide qué hacer antes de que esa persona se vaya sin decir nada.",
+    "example": "El usuario escribe '??? NO ES ESO' después de 3 intentos fallidos. La IA debería reconocer la frustración y ofrecer, por ejemplo, hablar con una persona, en vez de intentarlo una cuarta vez igual."
   },
   {
     "name": "design-conversation",
     "category": "Diseñar con IA",
     "tipo": "skill",
     "notes": "Fuente: Owl-Listener/ai-design-skills (github.com/Owl-Listener/ai-design-skills) · Comando del plugin model-interaction-design",
-    "description": "Diseña un flujo de conversación humano-IA completo, combinando turn-taking, iniciativa mixta y revelación progresiva, de principio a fin.",
-    "example": "/design-conversation un asistente dentro del dashboard que ayuda a decidir qué campaña repetir"
+    "description": "Comando que diseña una conversación completa entre humano e IA de principio a fin, uniendo varias skills: quién habla primero, cuánto se cuenta al principio, y qué pasa si hay un malentendido.",
+    "example": "'/design-conversation un asistente dentro del dashboard que ayuda a decidir qué campaña repetir' → devuelve cómo debería arrancar la conversación, qué le cuenta al usuario la primera vez, y cómo reacciona si el usuario le corrige algo."
   },
   {
     "name": "audit-interaction",
     "category": "Diseñar con IA",
     "tipo": "skill",
     "notes": "Fuente: Owl-Listener/ai-design-skills (github.com/Owl-Listener/ai-design-skills) · Comando del plugin model-interaction-design",
-    "description": "Evalúa una interacción de IA ya existente contra las 8 dimensiones del plugin, para pasar de 'se siente rara' a un diagnóstico concreto.",
-    "example": "/audit-interaction el asistente de campañas ya en producción, aquí una grabación de uso"
+    "description": "Comando que revisa una función de IA que ya existe (propia o de un competidor) y dice, con criterio concreto, en qué falla — en vez de quedarse en 'esto se siente raro' sin más.",
+    "example": "Le pasas una grabación de cómo se usa el asistente de campañas y te dice, por ejemplo: 'cuando el usuario corrige algo, el asistente no reconoce el error, solo reintenta — eso rompe la confianza'."
   },
   {
     "name": "map-initiative",
     "category": "Diseñar con IA",
     "tipo": "skill",
     "notes": "Fuente: Owl-Listener/ai-design-skills (github.com/Owl-Listener/ai-design-skills) · Comando del plugin model-interaction-design",
-    "description": "Mapea quién lidera — IA o usuario — en cada etapa de un flujo, y dónde se cede el control, detectando transiciones abruptas.",
-    "example": "/map-initiative el flujo de comparar campañas con el asistente de IA integrado"
+    "description": "Comando que dibuja, paso a paso, quién lleva la iniciativa (la IA o la persona) en cada etapa de un proceso con IA, para detectar si en algún punto el cambio de 'quién manda' es demasiado brusco.",
+    "example": "En el flujo de comparar campañas: la IA propone, el usuario confirma, la IA muestra el resultado... y de repente se espera que el usuario decida sin que nadie se lo diga claramente. Eso es lo que detecta este comando."
   },
   {
     "name": "system-prompt-structure",
     "category": "Diseñar con IA",
     "tipo": "skill",
     "notes": "Fuente: Owl-Listener/ai-design-skills (github.com/Owl-Listener/ai-design-skills) · Parte del plugin prompt-architecture",
-    "description": "Anatomía de un system prompt efectivo: rol, contexto, restricciones, formato.",
-    "example": "Revisar por qué un prompt en producción da resultados inconsistentes"
+    "description": "Un 'system prompt' es la instrucción de fondo que le dice a una IA quién es y cómo debe comportarse en una función concreta (no la escribe el usuario, va oculta detrás). Esta skill define las 4 partes que debería tener siempre: quién es (rol), qué información tiene (contexto), qué no debe hacer (restricciones), y cómo debe responder (formato).",
+    "example": "Un asistente que a veces contesta fatal — normalmente es porque a su instrucción de fondo le falta alguna de estas 4 partes, y esta skill ayuda a encontrar cuál."
   },
   {
     "name": "template-design",
     "category": "Diseñar con IA",
     "tipo": "skill",
     "notes": "Fuente: Owl-Listener/ai-design-skills (github.com/Owl-Listener/ai-design-skills) · Parte del plugin prompt-architecture",
-    "description": "Plantillas de prompt reutilizables y parametrizadas para producir salidas consistentes cada vez, sin reescribir desde cero.",
-    "example": "Una función de IA que genera un resumen de campaña distinto cada vez, con la misma estructura"
+    "description": "Cuando una IA hace la misma tarea muchas veces con datos distintos (por ejemplo, resumir campañas), esta skill diseña una plantilla reutilizable para esa instrucción de fondo, en vez de escribirla de cero cada vez.",
+    "example": "En vez de escribir un prompt distinto para resumir cada campaña, se diseña una plantilla con un hueco para 'los datos de esta campaña' que siempre produce el mismo tipo de resumen."
   },
   {
     "name": "chain-of-thought-design",
     "category": "Diseñar con IA",
     "tipo": "skill",
     "notes": "Fuente: Owl-Listener/ai-design-skills (github.com/Owl-Listener/ai-design-skills) · Parte del plugin prompt-architecture",
-    "description": "Diseña cadenas de razonamiento paso a paso dentro de un prompt, en vez de pedir la respuesta final directamente.",
-    "example": "Una tarea de comparar y priorizar que da resultados superficiales si se pide todo de golpe"
+    "description": "Para tareas complicadas, pedirle la respuesta final directamente a una IA a veces da resultados flojos. Esta skill diseña los pasos intermedios de razonamiento que se le piden antes de la respuesta final (primero esto, luego esto, luego decide) para mejorar la calidad.",
+    "example": "En vez de pedir 'dime qué campaña repetir', se le pide 'primero compara los números, luego identifica qué cambió, luego decide' — el resultado final suele ser mejor."
   },
   {
     "name": "few-shot-patterns",
     "category": "Diseñar con IA",
     "tipo": "skill",
     "notes": "Fuente: Owl-Listener/ai-design-skills (github.com/Owl-Listener/ai-design-skills) · Parte del plugin prompt-architecture",
-    "description": "Diseña ejemplos de entrada/salida dentro de un prompt para orientar el comportamiento de la IA, cuando describirlo en palabras no basta.",
-    "example": "Mostrar 2-3 ejemplos de un resumen bien escrito en vez de solo explicar la regla"
+    "description": "'Few-shot' significa dar ejemplos concretos dentro de la instrucción de la IA, en vez de solo explicarle con palabras lo que quieres. A veces mostrar 2-3 ejemplos bien elegidos enseña mejor que cualquier explicación.",
+    "example": "En vez de explicar 'quiero un resumen breve y directo', se le enseñan 2 resúmenes ya escritos como ejemplo, y la IA copia ese estilo."
   },
   {
     "name": "constraint-specification",
     "category": "Diseñar con IA",
     "tipo": "skill",
     "notes": "Fuente: Owl-Listener/ai-design-skills (github.com/Owl-Listener/ai-design-skills) · Parte del plugin prompt-architecture",
-    "description": "Define formato de salida, longitud, tono y límites de contenido dentro de un prompt, para que la IA no se salga de lo esperado.",
-    "example": "Un prompt que a veces responde demasiado largo o con un tono distinto al esperado"
+    "description": "Fija límites explícitos dentro de la instrucción de una IA: cuánto puede escribir como máximo, en qué tono, y qué temas no debe tocar. Sin esto, la IA se comporta bien la mayoría de las veces pero se sale del patrón en algún caso concreto.",
+    "example": "Un asistente que a veces escribe párrafos larguísimos — se le puede fijar explícitamente 'máximo 3 frases' para que no varíe."
   },
   {
     "name": "prompt-versioning",
     "category": "Diseñar con IA",
     "tipo": "skill",
     "notes": "Fuente: Owl-Listener/ai-design-skills (github.com/Owl-Listener/ai-design-skills) · Parte del plugin prompt-architecture",
-    "description": "Gestiona iteraciones de un prompt en el tiempo: qué cambió, qué se probó, qué funcionó.",
-    "example": "Un prompt con varias versiones sin ningún registro de por qué se cambió cada vez"
+    "description": "Lleva un registro de cómo ha ido cambiando la instrucción de fondo de una IA a lo largo del tiempo: qué se cambió, por qué, y si funcionó — para no perder ese historial ni repetir cambios que ya se probaron y no sirvieron.",
+    "example": "Si alguien pregunta '¿por qué el prompt está escrito así?', tener el registro evita tener que adivinarlo o repetir un experimento ya hecho antes."
   },
   {
     "name": "context-engineering",
     "category": "Diseñar con IA",
     "tipo": "skill",
     "notes": "Fuente: Owl-Listener/ai-design-skills (github.com/Owl-Listener/ai-design-skills) · Parte del plugin prompt-architecture",
-    "description": "Decide qué información entra en la ventana de contexto de un prompt y en qué orden, para que la IA priorice lo relevante.",
-    "example": "Una función de IA con acceso a mucho historial de cuenta, sin criterio de qué incluir"
+    "description": "Decide qué información se le da a la IA antes de responder, y en qué orden — porque no toda la información disponible ayuda, y el orden en que se presenta cambia qué prioriza.",
+    "example": "Si a la IA se le da el historial completo de un cliente antes de la pregunta actual, puede 'perderse' entre tanto dato — poner lo más importante justo antes de la pregunta suele ayudar."
   },
   {
     "name": "design-prompt",
     "category": "Diseñar con IA",
     "tipo": "skill",
     "notes": "Fuente: Owl-Listener/ai-design-skills (github.com/Owl-Listener/ai-design-skills) · Comando del plugin prompt-architecture",
-    "description": "Crea un system prompt estructurado para una función de IA nueva, combinando rol, contexto, restricciones y formato.",
-    "example": "/design-prompt un asistente que resume por qué una campaña tuvo el rendimiento que tuvo"
+    "description": "Comando que escribe la instrucción de fondo completa (system prompt) para una función de IA nueva, ya con sus 4 partes bien definidas.",
+    "example": "'/design-prompt un asistente que resume por qué una campaña tuvo el rendimiento que tuvo' → devuelve la instrucción completa, incluyendo qué no debe hacer (ej. no inventar causas que no estén en los datos)."
   },
   {
     "name": "build-chain",
     "category": "Diseñar con IA",
     "tipo": "skill",
     "notes": "Fuente: Owl-Listener/ai-design-skills (github.com/Owl-Listener/ai-design-skills) · Comando del plugin prompt-architecture",
-    "description": "Diseña una cadena de prompts de varios pasos para una tarea compleja que un solo prompt no resuelve bien de una vez.",
-    "example": "/build-chain generar el resumen de rendimiento de campaña — falla en algo distinto cada vez"
+    "description": "Comando que divide una tarea complicada de IA en varios pasos encadenados (por ejemplo: sacar los datos → analizarlos → redactar el resultado), en vez de pedirlo todo de una vez en una sola instrucción.",
+    "example": "Un asistente que a veces 'dice cosas que no cuadran con los números' — dividir la tarea en pasos permite ver en cuál de ellos está fallando."
   },
   {
     "name": "audit-prompt",
     "category": "Diseñar con IA",
     "tipo": "skill",
     "notes": "Fuente: Owl-Listener/ai-design-skills (github.com/Owl-Listener/ai-design-skills) · Comando del plugin prompt-architecture",
-    "description": "Evalúa un prompt ya existente por claridad, efectividad y edge cases, en vez de iterar a ciegas por prueba y error.",
-    "example": "/audit-prompt este prompt a veces dice 'excelente rendimiento' cuando los datos son mediocres"
+    "description": "Comando que revisa una instrucción de IA ya en uso y dice por qué falla en ciertos casos, en vez de ir cambiando frases a ciegas hasta que funcione.",
+    "example": "Un prompt que a veces dice 'excelente rendimiento' con datos mediocres — el comando detecta que falta una instrucción explícita de que el tono debe reflejar los números reales."
   },
   {
     "name": "model-interaction-design",
     "category": "Diseñar con IA",
     "tipo": "plugin",
     "notes": "Fuente: Owl-Listener/ai-design-skills (github.com/Owl-Listener/ai-design-skills)",
-    "description": "Plugin de 8 skills + 3 comandos sobre cómo se comportan las interacciones humano-IA: quién lidera en cada momento, cómo se revela la capacidad de la IA, qué pasa ante un malentendido, cómo se detecta frustración. Incluye conversation-patterns, mixed-initiative-flow, progressive-disclosure, multimodal-orchestration, context-window-design, generative-ui, feedback-loops, frustration-detection, y los comandos design-conversation, audit-interaction, map-initiative.",
-    "example": "claude plugin install model-interaction-design@ai-design-skills"
+    "description": "Un conjunto de 8 skills y 3 comandos sobre cómo debería comportarse una conversación entre una persona y una IA: quién habla primero, cuánto le cuentas de lo que sabe hacer, qué pasa si te malinterpreta, y cómo notar que alguien se está frustrando. Es la base para que un asistente de IA no se sienta 'roto' o inconsistente.",
+    "example": "claude plugin install model-interaction-design@ai-design-skills — o, sueltas: conversation-patterns, mixed-initiative-flow, progressive-disclosure... y los comandos design-conversation, audit-interaction, map-initiative."
   },
   {
     "name": "prompt-architecture",
     "category": "Diseñar con IA",
     "tipo": "plugin",
     "notes": "Fuente: Owl-Listener/ai-design-skills (github.com/Owl-Listener/ai-design-skills)",
-    "description": "Plugin de 7 skills + 3 comandos que trata los prompts como superficie de producto: estructura, plantillas, cadenas de razonamiento, restricciones, versionado. Incluye system-prompt-structure, template-design, chain-of-thought-design, few-shot-patterns, constraint-specification, prompt-versioning, context-engineering, y los comandos design-prompt, build-chain, audit-prompt.",
-    "example": "claude plugin install prompt-architecture@ai-design-skills"
+    "description": "Un conjunto de 7 skills y 3 comandos para tratar las instrucciones de fondo que se le dan a una IA (los 'prompts') con el mismo cuidado que un componente de diseño: con estructura, plantillas reutilizables, y un registro de qué cambió y por qué.",
+    "example": "claude plugin install prompt-architecture@ai-design-skills — o, sueltas: system-prompt-structure, few-shot-patterns, chain-of-thought-design... y los comandos design-prompt, build-chain, audit-prompt."
   }
 ]
