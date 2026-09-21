@@ -18,7 +18,8 @@ Input JSON schema:
   "content_md": "## De qué va\n...",   # body only, no images/original-link footer
   "image_urls": ["https://...jpg"],    # optional, absolute URLs
   "glossary": [{"term": "...", "definition": "..."}],  # optional, jargon explained in plain language
-  "date_added": "2026-07-12"       # optional, defaults to today
+  "date_added": "2026-07-12",      # optional, defaults to today
+  "important_note": "..."          # optional, shown as a static pinned post-it above the article body
 }
 
 What it does:
@@ -39,7 +40,7 @@ import unicodedata
 import urllib.request
 from datetime import date
 
-VALID_SECTIONS = {"design-2-0", "claude", "figma", "engineering", "ai", "materials"}
+VALID_SECTIONS = {"teoria", "practica", "novedades"}
 USER_AGENT = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0 Safari/537.36"
 
 
@@ -104,6 +105,7 @@ def main():
     materials = data.get("materials", []) or []
     date_added = data.get("date_added") or date.today().isoformat()
     dictionary = bool(data.get("dictionary", False))
+    important_note = (data.get("important_note") or "").strip()
 
     if section not in VALID_SECTIONS:
         print(f"Sección desconocida '{section}'. Debe ser una de: {sorted(VALID_SECTIONS)}", file=sys.stderr)
@@ -152,7 +154,7 @@ def main():
         f"date_added: {date_added}\n"
         "---\n\n"
     )
-    md_body = full_content_md
+    md_body = (f"**Nota importante:** {important_note}\n\n" if important_note else "") + full_content_md
     if materials:
         md_body += "\n\n## Materiales incluidos\n" + "\n".join(
             f"- **{m.get('name','')}**"
@@ -187,9 +189,17 @@ def main():
         "materials": materials,
         "date_added": date_added,
         "dictionary": dictionary,
+        "important_note": important_note,
     }
     existing_idx = next((i for i, a in enumerate(articles) if a.get("id") == article_id), None)
     if existing_idx is not None:
+        old = articles[existing_idx]
+        # save_article.py no es dueño de estos campos (los gestionan add_annotation.py /
+        # add_reflection.py) — preservarlos evita que un re-guardado del artículo los borre.
+        entry["annotations"] = old.get("annotations", [])
+        entry["reflections"] = old.get("reflections", [])
+        if not image_urls and not image_paths:
+            entry["images"] = old.get("images", [])
         articles[existing_idx] = entry
         action = "actualizado"
     else:
